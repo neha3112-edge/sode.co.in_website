@@ -18,7 +18,7 @@ export function Hero() {
 
   return (
     <>
-      <section id="home" className="relative w-full  flex items-center pt-28 pb-16 lg:py-32 overflow-hidden min-h-162.5">
+      <section id="home" className="relative w-full flex items-center pt-28 pb-16 lg:py-32 overflow-hidden min-h-162.5">
         {/* Background Image Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
