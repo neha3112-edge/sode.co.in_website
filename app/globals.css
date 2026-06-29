@@ -1,0 +1,75 @@
+@import "tailwindcss" important;
+
+@theme {
+  --color-primary: #0970b8;
+  --color-secondary: #ffbb00;
+  --color-dark-blue: #1c3569;
+  --color-sky-blue: #f0f3fa;
+  --color-grey-bg: #f6f6f6;
+  --color-golden-light: #fcf59d;
+  --font-inter: var(--font-inter);
+}
+
+:root {
+  --background: #f9fafb;
+  --foreground: #1f2937;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ✅ header offset fix (more safe) */
+section {
+  scroll-margin-top: 80px;
+}
+
+/* ✅ extra safety for all anchor targets */
+[id] {
+  scroll-margin-top: 80px;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-poppins), system-ui, sans-serif;
+}
+/* Custom utility for golden gradient text */
+@utility text-gradient-golden {
+  background: linear-gradient(
+    90deg,
+    var(--color-secondary),
+    var(--color-golden-light)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes glass-shine {
+  0% {
+    left: -120%;
+  }
+  100% {
+    left: 120%;
+  }
+}
+
+.animate-glass-shine {
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 8%; /* 👈 aur thin (pro look) */
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
+  transform: skewX(-25deg); /* 👈 sharper angle */
+  animation: glass-shine 4.5s linear infinite; /* 👈 aur smooth */
+  pointer-events: none;
+}
