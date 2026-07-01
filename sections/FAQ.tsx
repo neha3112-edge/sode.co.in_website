@@ -5,74 +5,94 @@ import { Container } from "@/components/ui/Container";
 
 const faqs = [
   {
-    q: "Is 1 year online MBA have the same relevance as a traditional MBA?",
-    a: "Yes, It is a fast-track MBA online learning program that is beneficial for working professionals and graduates "
+    q: "Are the degrees and certificates from these programs globally recognised?",
+    a: "Yes. All programs of Top International Global Universities that are offered through SODE are from accredited institutions such as WES-recognised, AACSB-accredited, or approved by British/Swiss/US agencies, ensuring global validity."
   },
   {
-    q: "What are the top 5 in demand 1 year MBA program online specializations?",
-    a: "There are many in-demand specializations of 1 year online MBA course, yet the top 5 are: AI in Business, Finance, Marketing, Digital Finance and Strategy and Leadership."
+    q: "What documents are typically required during the application process?",
+    a: "Professionals are required to have a structured document set of 10th and 12th marksheets, Bachelors degree certificate/marksheets, and Master's degree certificate/marksheets. Also, they need to have valid identity proofs, such as an Aadhaar Card and a PAN Card, for verification purposes. Candidates applying for programmes with work experience criteria must also provide an experience letter. A recent passport-size photograph is required to complete the application and enrollment process."
   },
   {
-    q: "Is a 1 year online MBA valid and recognised?",
-    a: "Yes, MBA online learning course in one year is valid as it is UGC approved and world wide recognised, having QS World Rankings and AACSB accreditation."
+    q: "Is there an entrance exam required to enrol in any executive educational programs?",
+    a: "No, there is no entrance exam required for executive educational programs . Applicants can enrol easily having bachelors and masters degree, and some programs require prior work experience."
   },
   {
-    q: "What is the eligibility criteria needed for Masters in Business Administration online degree programs?",
-    a: "The applicants should have a graduation degree from a recognised university, with a preferred score of 50% marks"
+    q: "Are there any scholarships available for programs listed on SODE?",
+    a: "Yes, SODE offers flexible financing options where aspirants can enrol with NO cost EMI. As per the course duration, they can easily balance and divide it per month."
   },
   {
-    q: "Is MBA online learning approved and advantageous?",
-    a: "Yes, a 1 year MBA online learning is UGC approved and quite focused on experiential learning. Students are taught through projects and several case studies."
+    q: "Are these degrees valid in India and internationally?",
+    a: "Yes. All university partners listed on SODE include international universities like Golden Gate University, which is WES & AACSB accredited, Rushford Business School is QS 5-star rated, and Edgewood, which holds ACBSP accreditation, making them globally excellent. Indian institutions like IIMs and IITs are government-recognised under UGC norms."
+  },
+  {
+    q: "What is the minimum work experience required to enrol in Executive Management Programs & Certification Courses?",
+    a: "SODE offers a diverse portfolio of executive management programmes and certifications designed to equip professionals with technological skills powered by Data science, AI, and ML needed for upskilling. Most Executive Management Programs and Certification Courses require candidates to have a minimum of 3 years of professional work experience, although eligibility criteria may vary depending on the programme and partnering university."
   }
 ];
 
 export function FAQ() {
-  const [openIdx, setOpenIdx] = useState<number | null>(0);
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   const toggle = (idx: number) => {
     setOpenIdx(openIdx === idx ? null : idx);
   };
 
   return (
-    <section id="faq" className="py-20 md:py-28 bg-white overflow-hidden">
-      <Container className="max-w-5xl">
-        <div className="text-center mb-16 px-4">
-          <h2 className="text-2xl md:text-5xl font-bold text-[#0970B8]">FAQ-Frequently Asked Question</h2>
-        </div>
+    <section id="faq" className="py-16 scroll-mt-10 md:py-24 bg-white overflow-hidden">
+      <Container className="max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+          
+          {/* Left Column: Heading and description */}
+          <div className="lg:col-span-5 flex flex-col items-start">
+            <h2 className="text-5xl md:text-[64px] font-extrabold text-[#1d3557] tracking-tight leading-none">
+              FAQs
+            </h2>
+            <h3 className="text-xl md:text-[22px] font-bold text-[#1d3557] mt-4 leading-tight">
+              Frequently Asked Question
+            </h3>
+            <p className="text-gray-500 font-medium mt-3 text-sm md:text-[14px] leading-relaxed max-w-sm">
+              Still deciding? Book a no-pressure call and we'll map the right path with you.
+            </p>
+          </div>
 
-        <div className="space-y-4 px-4">
-          {faqs.map((faq, idx) => {
-            const isOpen = openIdx === idx;
-            return (
-              <div
-                key={idx}
-                className={`border border-gray-100  rounded-2xl overflow-hidden transition-all duration-300 ${isOpen ? 'bg-[#F0F0F0] shadow-sm' : 'bg-white shadow-sm border-gray-200'}`}
-              >
-                <button
-
-                  className="w-full   px-8 py-5 flex items-center space-x-6 focus:outline-none text-left"
-                  onClick={() => toggle(idx)}
-                >
-                  <div className={`md:w-10 md:h-10 w-8 h-8  rounded-lg flex items-center justify-center shrink-0 transition-colors bg-[#0970B8] text-white shadow-md`}>
-                    {isOpen ? (
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /></svg>
-                    ) : (
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="M12 5v14" /></svg>
-                    )}
-                  </div>
-                  <h4 className={`font-bold text-sm md:text-xl transition-colors ${isOpen ? 'text-[#005691]' : 'text-gray-900 font-semibold'}`}>{faq.q}</h4>
-                </button>
-
+          {/* Right Column: Dynamic FAQ accordion list */}
+          <div className="lg:col-span-7 space-y-4 w-full">
+            {faqs.map((faq, idx) => {
+              const isOpen = openIdx === idx;
+              return (
                 <div
-                  className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-125 opacity-100' : 'max-h-0 opacity-0'}`}
+                  key={idx}
+                  className={`border rounded-xl transition-all duration-300 bg-white ${
+                    isOpen ? "border-slate-300 shadow-sm" : "border-slate-200"
+                  }`}
                 >
-                  <div className="px-8 pb-8 pl-22 text-gray-500 text-sm md:text-base font-medium leading-relaxed max-w-4xl">
-                    {faq.a}
+                  <button
+                    className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none cursor-pointer group"
+                    onClick={() => toggle(idx)}
+                  >
+                    <span className="font-semibold text-slate-800 text-[12px] md:text-[14px] leading-snug pr-4">
+                      <span className="font-extrabold text-slate-800 mr-1.5">Q{idx + 1}.</span>
+                      {faq.q}
+                    </span>
+                    <span className="text-[#A66E38] text-[20px] font-light shrink-0 transition-transform duration-300 select-none">
+                      {isOpen ? "−" : "+"}
+                    </span>
+                  </button>
+
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      isOpen ? "max-h-75 opacity-100" : "max-h-0 opacity-0"
+                    }`}
+                  >
+                    <div className="px-6 pb-5 text-gray-600 text-xs md:text-[13px] leading-relaxed font-medium border-t border-slate-50 pt-4">
+                      {faq.a}
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+
         </div>
       </Container>
     </section>

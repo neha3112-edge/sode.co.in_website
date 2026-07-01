@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
+import { getAssetPath } from "@/lib/utils";
 import FormWrapper from "@/components/ui/FormWrapper";
 import { useState } from "react";
 
@@ -92,7 +93,7 @@ export function Enrollment() {
                       {/* Image */}
                       <div className="mb-3 w-8 h-8 md:w-10 md:h-10 relative">
                         <Image
-                          src={step.img}
+                          src={getAssetPath(step.img)}
                           alt={step.title}
                           fill
                           sizes="40px"

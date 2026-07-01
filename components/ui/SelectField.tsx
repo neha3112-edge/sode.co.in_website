@@ -11,17 +11,32 @@ export default function SelectField({
     <select
       value={value || ""} // ✅ CONTROLLED
       onChange={(e) => onChange(e.target.value)} // ✅ IMPORTANT
-      className="w-full px-4 py-3 rounded-md border border-gray-300 bg-[#F9FAFB]"
+      className="w-full px-4 py-3 rounded-md border border-gray-300 bg-[#F9FAFB] text-gray-700 font-medium"
     >
-      <option value="" disabled>
+      <option value="" disabled hidden>
         {placeholder}
       </option>
 
-      {options.map((opt: any, i: number) => (
-        <option key={i} value={opt}>
-          {opt}
-        </option>
-      ))}
+      {options.map((opt: any, i: number) => {
+        if (typeof opt === "string") {
+          return (
+            <option key={i} value={opt}>
+              {opt}
+            </option>
+          );
+        } else {
+          return (
+            <option
+              key={i}
+              value={opt.value}
+              disabled={opt.disabled}
+              hidden={opt.hidden}
+            >
+              {opt.label}
+            </option>
+          );
+        }
+      })}
     </select>
   );
 }

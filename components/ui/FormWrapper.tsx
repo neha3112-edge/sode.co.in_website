@@ -9,6 +9,7 @@ import SelectField from "./SelectField";
 import { Button } from "./Button";
 import { useRouter } from "next/navigation";
 import { X } from "lucide-react";
+import { getAssetPath } from "@/lib/utils";
 
 export default function FormWrapper({
     title,
@@ -58,7 +59,7 @@ export default function FormWrapper({
 
         return {
             utm_source: params.get("utm_source") || parsed.utm_source || "Organic",
-            utm_medium: params.get("utm_medium") || parsed.utm_medium || "MBA_Organic",
+            utm_medium: params.get("utm_medium") || parsed.utm_medium || "SODE CO IN Organic",
             utm_term: params.get("utm_term") || parsed.utm_term || "",
             utm_campaign: params.get("utm_campaign") || parsed.utm_campaign || "",
             utm_content: params.get("utm_content") || parsed.utm_content || "",
@@ -94,7 +95,7 @@ export default function FormWrapper({
         setLoading(true);
 
         try {
-            const res = await fetch("/1-year-mba/api/lead", {
+            const res = await fetch(getAssetPath("/api/lead"), {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -219,28 +220,27 @@ export default function FormWrapper({
                 />
 
                 <SelectField
-                    placeholder="Select Specialization"
+                    placeholder="Select Course"
                     options={[
-                        "MBA – AI for Business",
-                        "MBA – Digital Finance",
-                        "MBA – Strategy & Leadership",
-                        "MBA – Finance Management",
-                        "MBA – Marketing Management",
-                        "MBA – Human Resource Management",
-                        "MBA – Operations Management",
-                        "MBA – Information Technology",
-                        "MBA – Healthcare and Hospital Management",
-                        "MBA – Data Analytics",
-                        "MBA – Business Analytics",
-                        "MBA – International Business",
-                        "MBA – Project Management",
-                        "MBA – Hospitality Management",
-                        "MBA – International Finance",
-                        "MBA – Retail Management",
-                        "MBA – Logistics and Supply Chain Management",
-                        "MBA – Fintech Management",
-                        "MBA – Banking and Finance",
-                        "MBA – General Management"
+                        { value: "", label: "Doctorate ━━", disabled: true },
+                        { value: "DBA", label: "DBA" },
+                        { value: "MBA+DBA", label: "MBA + DBA" },
+                        { value: "", label: "Master ━━", disabled: true },
+                        { value: "MBA", label: "MBA" },
+                        { value: "MSC", label: "M.Sc. Data Science" },
+                        { value: "MSC", label: "M.Sc. Machine Learning & AI" },
+                        { value: "DIPLOMA", label: "Executive Diploma in Machine Learning & AI" },
+                        { value: "", label: "Certification ━━", disabled: true },
+                        { value: "CERTIFICATE", label: "Professional Certificate Programme in HR Management and Analytics" },
+                        { value: "CERTIFICATE", label: "Professional Certificate Programme in Data Science with Generative AI" },
+                        { value: "CERTIFICATE", label: "Executive Post Graduate Certificate Programme in Data Science & AI" },
+                        { value: "CERTIFICATE", label: "Executive Post Graduate Certificate in Generative AI & Agentic AI" },
+                        { value: "CERTIFICATE", label: "Advanced Certificate in Digital Marketing & Communication" },
+                        { value: "CERTIFICATE", label: "Advanced Certificate in Digital Brand Communication Strategy" },
+                        { value: "", label: "Executive Programs ━━", disabled: true },
+                        { value: "PG PROGRAMS", label: "Executive Programme in Generative AI for Leaders" },
+                        { value: "PG PROGRAMS", label: "Executive Post Graduate Programme in Applied AI and Agentic AI" },
+                        { value: "PG PROGRAMS", label: "Chief Technology Officer & AI Leadership Programme" }
                     ]}
                     value={course}
                     onChange={(val: string) => setCourse(val)}

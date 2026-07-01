@@ -1,180 +1,140 @@
 "use client";
-
+ 
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import "react-phone-input-2/lib/style.css";
 import { useState } from "react";
 import Image from "next/image";
+import { getAssetPath } from "@/lib/utils";
 import FormWrapper from "@/components/ui/FormWrapper";
-
+ 
 export function Hero() {
-  const [donwloadOpen, setDonwloadOpen] = useState(false);
-
+  const [downloadOpen, setDownloadOpen] = useState(false);
+ 
   const onClick = () => {
-    setDonwloadOpen(true);
+    setDownloadOpen(true);
   };
-
-
+ 
   return (
     <>
-      <section id="home" className="relative w-full flex items-center pt-28 pb-16 lg:py-32 overflow-hidden min-h-162.5">
-        {/* Background Image Overlay */}
-        <div className="absolute inset-0 z-0">
+      <section id="home" className="relative w-full overflow-hidden bg-[#102441]">
+        {/* Desktop Widescreen Background Image Overlay */}
+        <div className="absolute inset-0 z-0 hidden lg:block">
           <Image
-            src="/1-year-mba/assets/images/desk-quality-img.webp"
+            src={getAssetPath("/assets/images/desktop_banner.jpg")}
             alt="Hero background"
             fill
             priority
             sizes="100vw"
-            className="hidden md:block object-cover object-center"
+            className="object-cover object-center"
           />
-
-          <Image
-            src="/1-year-mba/assets/images/mobile-image-.webp"
-            alt="Hero mobile background"
-            fill
-            priority
-            sizes="100vw"
-            className="block md:hidden object-cover object-center mt-17.5"
-          />
-          {/* Gradient overlay to ensure text readability */}
-          <div className="absolute"></div>
         </div>
-        <Container className="relative z-10 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left side content */}
-            <div className="flex flex-col space-y-6 text-white max-w-2xl px-4 lg:px-0">
-              <h2 className="text-sm md:text-2xl uppercase text-white/95">
-                FAST TRACK YOUR CAREER WITH
-              </h2>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl leading-tight -mt-6">
-                <span className="font-extrabold bg-linear-to-r from-[#FFC107] to-[#FFF3A3] bg-clip-text text-transparent">
-                  1-Year Online MBA*
-                </span>
+ 
+        <Container className="relative z-10 w-full pt-24 pb-12 lg:pt-28 lg:pb-16 lg:flex lg:items-center px-0">
+          <div className="w-full flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            
+            {/* Text side content */}
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 text-white max-w-2xl px-4 lg:py-4">
+              {/* Badge Sub-header */}
+              <p className="text-base md:text-lg lg:text-xl text-[#f7ebc7] font-serif italic mb-3">
+                #1 School of Online & Distance Education
+              </p>
+ 
+              {/* Main Heading */}
+              <h1 className="text-[22px] md:text-4xl lg:text-3xl font-extrabold leading-tight text-white">
+                Certifications & Online Degree Courses from{" "}
+                <span className="text-[#f7ebc7]">IITs, IIMs &</span> Leading Global B-Schools
               </h1>
-
-              <div>
-                <div className="flex items-center">
-                  {/* LEFT BLOCK */}
-                  <div className="flex flex-col items-start">
-                    {/* FROM */}
-                    {/* 1 + brackets */}
-                    <div className="relative">
-                      {/* FROM */}
-                      <span className="absolute left-1 text-[11px] tracking-wide text-white">
-                        FROM
-                      </span>
-
-                      {/* 1 */}
-                      <span className="text-9xl font-semibold leading-none bg-linear-to-l from-[#FFF3A3] to-[#FFC107] bg-clip-text text-transparent">
-                        1
-                      </span>
-
-                      {/* LEFT */}
-                      <div className="absolute bottom-2 left-1.5 flex flex-col justify-between h-8">
-                        <div className="w-2 h-1/2 border-l border-t border-[#FFC107]"></div>
-                        <div className="w-2 h-1/2 border-l border-b border-[#FFC107]"></div>
-                      </div>
-
-                      {/* RIGHT */}
-                      <div className="absolute bottom-2 right-0 flex flex-col justify-between h-8">
-                        <div className="w-2 h-1/2 border-r border-t border-[#FFC107]"></div>
-                        <div className="w-2 h-1/2 border-r border-b border-[#FFC107]"></div>
-                      </div>
-                    </div>
-                  </div>
-                  {/* RIGHT TEXT */}
-                  <div className="flex flex-col leading-tight">
-                    <span className="text-[#FFC107] text-xl md:text-2xl font-semibold uppercase">
-                      INDIA&apos;S <span className="text-white">MOST</span>
+ 
+              {/* Subtitle */}
+              <p className="text-sm md:text-base text-white/90 max-w-xl font-medium">
+                Your Gateway to Strategic Leadership Program Learning from Leading Institutions.
+              </p>
+ 
+              {/* Pills/Tags Grid (Desktop Only) */}
+              <div className="hidden lg:flex flex-col space-y-3 pt-2">
+                {/* Row 1 */}
+                <div className="flex flex-wrap gap-3">
+                  <span className="px-4 py-2 border border-white/30 rounded-md text-sm font-semibold bg-white/5">
+                    Doctorate
+                  </span>
+                  <span className="px-4 py-2 border border-white/30 rounded-md text-sm font-semibold bg-white/5">
+                    Certification
+                  </span>
+                  <span className="px-4 py-2 border border-white/30 rounded-md text-sm font-semibold bg-white/5">
+                    Executive Programs
+                  </span>
+                </div>
+                {/* Row 2 */}
+                <div className="flex flex-wrap gap-3">
+                  <span className="px-4 py-2 border border-white/30 rounded-md text-sm font-semibold bg-white/5">
+                    Banking
                     </span>
-
-                    <span className="text-white text-xl  md:text-2xl uppercase font-medium">
-                      TRUSTED UGC APPROVED
-                    </span>
-
-                    <span className="text-white text-xl md:text-2xl uppercase font-medium">
-                      UNIVERSITIES
-                    </span>
-                  </div>
+                  <span className="px-4 py-2 border border-white/30 rounded-md text-sm font-semibold bg-white/5">
+                    Finance
+                  </span>
+                  <span className="px-4 py-2 border border-white/30 rounded-md text-sm font-semibold bg-white/5">
+                    Leadership
+                  </span>
                 </div>
               </div>
-
-              <div className="flex flex-col items-start gap-6">
+ 
+              {/* Action Button (Desktop Only) */}
+              <div className="hidden lg:block pt-4">
                 <Button
-                  size="sm"
+                  size="lg"
                   onClick={onClick}
-                  className="
-    bg-[#FFC107] hover:bg-[#e6a800] text-black rounded-full 
-    px-3 py-3 text-sm
-    md:px-14 md:py-6 md:text-md
-    shadow-[0_15px_30px_rgba(255,193,7,0.3)] 
-    transition-all flex items-center font-bold gap-2 md:gap-2 group cursor-pointer
-  "
+                  className="bg-linear-to-r from-[#EEC471] via-[#F3CD73] to-[#FADA9A] text-[#102441] rounded-md px-8 py-5 text-base font-bold shadow-lg transition-all transform hover:scale-[1.02] cursor-pointer duration-200"
                 >
-                  DOWNLOAD BROCHURE
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    className="md:w-7 md:h-7 group-hover:translate-y-1 transition-transform"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                    <polyline points="7 10 12 15 17 10" />
-                    <line x1="12" x2="12" y1="15" y2="3" />
-                  </svg>
+                  Book 1:1 Personalised Counselling
                 </Button>
-                <div className="italic font-medium text-white/95 ml-2 tracking-wide">
-                  Admission Deadline:{" "}
-                  <div className="text-[#FFC107] font-extrabold italic">
-                    &quot;30th March 2026&quot;
-                  </div>
-                </div>
               </div>
             </div>
-            {/* Right side form */}
-            <div className="lg:ml-auto w-full max-w-sm mt-30 lg:mt-0">
-              <Card className="bg-white shadow-2xl rounded-2xl border-0 relative overflow-hidden">
-                {/* glow effect */}
-                <div className="absolute -top-4 -right-4 w-20 h-20 bg-primary/10 rounded-full blur-xl z-0"></div>
-                {/* FORM */}
-                <div className="relative z-10 p-6">
+ 
+            {/* Mobile Content Block / Hidden on Desktop */}
+            <div className="w-full flex flex-col items-center lg:hidden">
+              {/* Man Image (Mobile only) */}
+              <div className="relative w-full -mt-37.5 flex justify-center overflow-hidden">
+                <Image
+                  src={getAssetPath("/assets/images/mobile-banner-img.png")}
+                  alt="Professional Counselor"
+                  width={623}
+                  height={773}
+                  priority
+                  className="max-w-full h-auto object-contain"
+                />
+              </div>
+ 
+              {/* Form Card (Mobile only, overlaps bottom of the image) */}
+              <div className="w-full max-w-md z-10 -mt-14 md:-mt-24 px-4">
+                <Card className="bg-white shadow-2xl rounded-2xl border-0 overflow-hidden p-6 text-black">
                   <FormWrapper
-                    title="
-
-Fast Track Your MBA Journey"
-                    subtitle="Academic Experts Are Here to Assist!"
+                    title="Apply Now"
+                    subtitle="Start your application journey today"
                   />
-                </div>
-
-              </Card>
+                </Card>
+              </div>
             </div>
+ 
           </div>
         </Container>
       </section>
-      {donwloadOpen && (
+ 
+      {/* Modal for Desktop Counselling Button */}
+      {downloadOpen && (
         <div
-          onClick={() => setDonwloadOpen(false)}
+          onClick={() => setDownloadOpen(false)}
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
         >
-          {/* BOX */}
           <div
             onClick={(e) => e.stopPropagation()}
             className="bg-white w-full max-w-sm rounded-xl shadow-2xl relative p-6 animate-[scaleIn_0.2s_ease]"
           >
-
             <FormWrapper
-              title="Download Brochure"
-              subtitle="Get complete program details instantly"
-              isBrochure={true} // ✅ IMPORTANT
-              onClose={() => setDonwloadOpen(false)}
+              title="Book 1:1 Counselling"
+              subtitle="Academic Experts Are Here to Assist!"
+              onClose={() => setDownloadOpen(false)}
             />
           </div>
         </div>

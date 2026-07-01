@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import Image from "next/image";
+import { getAssetPath } from "@/lib/utils";
 
 const stats = [
   {
@@ -39,7 +40,7 @@ export function Stats() {
               {/* ICON */}
               <div className="w-10 h-10 md:w-12 md:h-12 relative shrink-0">
                 <Image
-                  src={stat.icon}
+                  src={getAssetPath(stat.icon)}
                   alt={stat.label}
                   fill
                   sizes="48px"

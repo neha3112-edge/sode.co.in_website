@@ -10,7 +10,7 @@ export default function PhoneField({
   error,
 }: any) {
   return (
-    <div>
+    <div className="w-full max-w-full overflow-hidden">
       <PhoneInput
         country={"in"}
         value={value || ""}

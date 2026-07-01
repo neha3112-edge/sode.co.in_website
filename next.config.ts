@@ -1,19 +1,19 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  basePath: '/1-year-mba',
-  assetPrefix: '/1-year-mba',
+  basePath: '/sode',
+  assetPrefix: '/sode',
   images: {
     unoptimized: true,
   },
   env: {
-    NEXT_PUBLIC_BASE_PATH: '/1-year-mba',
+    NEXT_PUBLIC_BASE_PATH: '/sode',
   },
   async redirects() {
     return [
       {
         source: '/',
-        destination: '/1-year-mba',
+        destination: '/sode',
         permanent: true,
         basePath: false,
       },

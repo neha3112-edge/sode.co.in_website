@@ -12,6 +12,8 @@ import Image from "next/image";
 import successAnimation from "@/public/assets/animations/check.json";
 
 import { useEffect, useState } from "react";
+import { getAssetPath } from "@/lib/utils";
+
 
 export default function ThankYouClient() {
     const [progress, setProgress] = useState(0);
@@ -32,18 +34,19 @@ export default function ThankYouClient() {
             if (value <= 100) {
                 setProgress(value);
             }
-        }, 30);
+        }, 10); // 10ms * 100 = 1000ms (1 second)
 
         const timer = setTimeout(() => {
-            const newTab = window.open("/brochure.pdf", "_blank");
+            const brochureUrl = sessionStorage.getItem("brochureUrl") || getAssetPath("/assets/pdf/brochure.pdf");
+            const newTab = window.open(brochureUrl, "_blank");
 
             if (!newTab) {
                 alert("Please allow popups to view the brochure.");
             }
 
             sessionStorage.removeItem("isBrochureFlow");
-
-        }, 3000);
+            sessionStorage.removeItem("brochureUrl");
+        }, 1000); // 1 second
 
         return () => {
             clearInterval(interval);
@@ -153,29 +156,6 @@ export default function ThankYouClient() {
                                 <ArrowRight size={18} />
                             </Link> */}
 
-                        </div>
-
-                        {/* Social Section */}
-                        <div className="mt-10">
-                            <p className="text-gray-400 text-[10px] md:text-xs mb-4 tracking-[0.2em] font-bold uppercase">
-                                Join Our Academic Community
-                            </p>
-
-                            <div className="flex justify-center gap-6">
-
-                                <Link href="https://www.instagram.com/distanceeducationschool/" target="_blank" className="bg-[#F1F5F9] hover:bg-[#1C3569] p-3 rounded-full transition-all">
-                                    <Image src="/1-year-mba/assets/images/instagram-logo-69c8b47a8e07d.webp" alt="Instagram" width={22} height={22} />
-                                </Link>
-
-                                <Link href="https://www.youtube.com/channel/UCw9KLsERm_EzL2js_s7GbLQ" target="_blank" className="bg-[#F1F5F9] hover:bg-[#1C3569] p-3 rounded-full transition-all">
-                                    <Image src="/1-year-mba/assets/images/youtube-logo-69c8b47a31313.webp" alt="Facebook" width={22} height={22} />
-                                </Link>
-
-                                <Link href="https://www.linkedin.com/company/13269886/admin/dashboard/" target="_blank" className="bg-[#F1F5F9] hover:bg-[#1C3569] p-3 rounded-full transition-all">
-                                    <Image src="/1-year-mba/assets/images/linkdin-logo-69c8b47a3131e.webp" alt="LinkedIn" width={22} height={22} />
-                                </Link>
-
-                            </div>
                         </div>
 
                     </div>

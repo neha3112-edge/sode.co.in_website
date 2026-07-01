@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
+import { getAssetPath } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, Clock } from "lucide-react";
 import FormWrapper from "@/components/ui/FormWrapper";
 import { Button } from "@/components/ui/Button";
@@ -282,7 +283,7 @@ export function Specialisations() {
                   {/* IMAGE */}
                   <div className="relative h-44 w-full">
                     <Image
-                      src={item.img}
+                      src={getAssetPath(item.img)}
                       alt={item.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 340px"

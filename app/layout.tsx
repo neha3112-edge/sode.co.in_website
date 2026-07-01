@@ -13,13 +13,13 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "1 Year Online MBA | Advance Your Career",
+  title: "Certifications & Online Degree Courses from IITs, IIMs | DBA MBA – SODE",
   description:
-    "Accelerate your career with a 1-year online MBA. Fast-track your path to success with our recognized program.",
+    "Certifications & Online Degree Courses from top IITs, IIMs & global universities via SODE. Enroll in our MBA, DBA & executive leadership programs.",
   openGraph: {
-    title: "1 Year Online MBA | Advance Your Career",
+    title: "Certifications & Online Degree Courses from IITs, IIMs | DBA MBA – SODE",
     description:
-      "Accelerate your career with a 1-year online MBA. Fast-track your path to success with our recognized program.",
+      "Certifications & Online Degree Courses from top IITs, IIMs & global universities via SODE. Enroll in our MBA, DBA & executive leadership programs.",
     type: "website",
   },
 };
@@ -30,8 +30,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={poppins.className}>
-      <body className="min-h-full flex flex-col">
+    <html lang="en" className={poppins.className} suppressHydrationWarning>
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
 
         {/* HEADER */}
         <Header />
@@ -46,9 +46,9 @@ export default function RootLayout({
           <FloatingButton />
         </div>
         {/* GLOBAL CTA */}
-        <div className="z-40">
+        {/* <div className="z-40">
           <GlobalCTA />
-        </div>
+        </div> */}
         {/* ✅ FOOTER (FIXED POSITION) */}
         <Footer />
       </body>

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
+import { getAssetPath } from "@/lib/utils";
 import FormWrapper from "@/components/ui/FormWrapper";
 import { useState, useEffect } from "react";
 import confetti from "canvas-confetti";
@@ -98,7 +99,7 @@ export function TargetAudience() {
               >
                 <div className="relative h-44 sm:h-52 w-full mb-6">
                   <Image
-                    src={item.img}
+                    src={getAssetPath(item.img)}
                     alt={item.title}
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
@@ -135,7 +136,7 @@ export function TargetAudience() {
               </span>
 
               <Image
-                src="/1-year-mba/assets/images/unnamed (1).gif"
+                src={getAssetPath("/assets/images/unnamed (1).gif")}
                 alt="loading"
                 width={40}
                 height={40}

@@ -86,7 +86,7 @@ export async function POST(req: Request) {
 
     // Prioritize URL-extracted parameters over request body fallbacks
     const finalUtmSource = urlParams["utm_source"] || utm_source || "Organic";
-    const finalUtmMedium = urlParams["utm_medium"] || utm_medium || "1 Year MBA Organic";
+    const finalUtmMedium = urlParams["utm_medium"] || utm_medium || "SODE CO IN Organic";
     const finalUtmCampaign = urlParams["utm_campaign"] || utm_campaign || "";
     const finalUtmTerm = urlParams["utm_term"] || utm_term || "";
     const finalUtmContent = urlParams["utm_content"] || utm_content || "";
@@ -96,12 +96,12 @@ export async function POST(req: Request) {
       name: name,
       email: email,
       phone: cleanPhone,
-      course: "MBA",
+      course: course,
       state,
       // ✅ dynamic form name
       form_name: form_name || "Default Form",
       // ✅ source (priority: utm > fallback)
-      source: "1-Year MBA LP",
+      source: "SODE",
       utm_source: finalUtmSource,
       utm_medium: finalUtmMedium,
       utm_term: finalUtmTerm,
@@ -142,7 +142,37 @@ export async function POST(req: Request) {
       console.warn("Primary CRM settings are not configured in environment variables.");
     }
 
-    // 2. Submit to Gallabox Webhook API
+    // 2. Submit to Secondary CRM API (mysode CRM)
+    const secondaryCrmUrl = process.env.SECONDARY_CRM_URL;
+    const secondaryCrmApiKey = process.env.SECONDARY_CRM_API_KEY;
+
+    if (secondaryCrmUrl) {
+      try {
+        console.log("Submitting lead to Secondary CRM...");
+        const secondaryCrmResponse = await fetch(
+          secondaryCrmUrl,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              ...(secondaryCrmApiKey ? { "x-api-key": secondaryCrmApiKey } : {}),
+            },
+            body: JSON.stringify(finalPayload),
+          }
+        );
+        if (!secondaryCrmResponse.ok) {
+          console.error("Secondary CRM API error response:", await secondaryCrmResponse.text());
+        } else {
+          console.log("Lead successfully submitted to Secondary CRM");
+        }
+      } catch (secondaryCrmErr) {
+        console.error("Failed to send lead to Secondary CRM:", secondaryCrmErr);
+      }
+    } else {
+      console.warn("Secondary CRM settings are not configured.");
+    }
+
+    // 3. Submit to Gallabox Webhook API
     const gallaboxWebhookUrl = process.env.GALLABOX_WEBHOOK_URL;
 
     if (gallaboxWebhookUrl && gallaboxWebhookUrl !== "your_gallabox_webhook_url_here") {
@@ -159,9 +189,9 @@ export async function POST(req: Request) {
               name,
               phone: phoneWithPlus,
               email: email || "",
-              course: "MBA",
+              course: course || "MBA",
               state: state || "",
-              source: "DIOY MBA",
+              source: "SODE",
               tags: ["Success"],
               utm_source: finalUtmSource,
               utm_medium: finalUtmMedium,
@@ -185,14 +215,14 @@ export async function POST(req: Request) {
       console.log("Gallabox Webhook URL is not configured. Skipping Gallabox API submission.");
     }
 
-    // 3. Submit to Brevo API
+    // 4. Submit to Brevo API
     const brevoApiKey = process.env.BREVO_API_KEY;
     const brevoListIdStr = process.env.BREVO_LIST_ID;
 
     if (brevoApiKey && brevoApiKey !== "your_brevo_api_key_here") {
       try {
         console.log("Submitting lead to Brevo...");
-        const brevoListId = parseInt(brevoListIdStr || "212", 10) || 212;
+        const brevoListId = parseInt(brevoListIdStr || "217", 10) || 217;
 
         const brevoResponse = await fetch(
           "https://api.brevo.com/v3/contacts",
@@ -209,13 +239,13 @@ export async function POST(req: Request) {
                 FULLNAME: name,
                 SMS: phoneWithPlus,
                 MOBILE: phoneWithPlus,
-                COURSES: "MBA",
+                COURSES: course || "MBA",
                 STATES: state || "",
                 UTM_SOURCE: finalUtmSource,
                 UTM_CAMPAIGN: finalUtmCampaign,
                 UTM_MEDIUM: finalUtmMedium,
                 UTM_TERM: finalUtmTerm,
-                SOURCE: "DIOY MBA",
+                SOURCE: "SODE",
               },
               updateEnabled: true,
             }),

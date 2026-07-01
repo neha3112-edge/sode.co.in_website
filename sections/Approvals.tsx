@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
+import { getAssetPath } from "@/lib/utils";
 
 const recognitions = [
   {
@@ -63,7 +64,7 @@ export function Approvals() {
               {/* ===== IMAGE ===== */}
               <div className="h-17.5 flex items-center justify-center">
                 <Image
-                  src={item.src}
+                  src={getAssetPath(item.src)}
                   alt={item.name}
                   width={1250}
                   height={60}

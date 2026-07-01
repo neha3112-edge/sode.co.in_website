@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { getAssetPath } from "@/lib/utils";
 import FormWrapper from "@/components/ui/FormWrapper";
 import confetti from "canvas-confetti";
 
@@ -41,10 +42,10 @@ export default function FloatingButton() {
             {/* FLOAT BUTTON */}
             <button
                 onClick={handleClick}
-                className="fixed bottom-20 right-6 z-50 bg-[#1C3569] hover:bg-[#162a54] rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 cursor-pointer"
+                className="fixed bottom-6 right-6 z-50 bg-[#1C3569] hover:bg-[#162a54] rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 cursor-pointer"
             >
                 <Image
-                    src="/1-year-mba/assets/images/unnamed (1).gif"
+                    src={getAssetPath("/assets/images/unnamed (1).gif")}
                     alt="Open Form"
                     width={50}
                     height={50}

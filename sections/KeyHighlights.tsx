@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
+import { getAssetPath } from "@/lib/utils";
 import FormWrapper from "@/components/ui/FormWrapper";
 import { useState } from "react";
 
@@ -53,7 +54,7 @@ export function KeyHighlights() {
 
         {/* Background */}
         <Image
-          src="/1-year-mba/assets/images/key-highlights-bg-image-69c28585775f9.webp"
+          src={getAssetPath("/assets/images/key-highlights-bg-image-69c28585775f9.webp")}
           alt="Key Highlights Person"
           fill
           priority
@@ -61,7 +62,7 @@ export function KeyHighlights() {
         />
 
         <Image
-          src="/1-year-mba/assets/images/oooo-69c7b5034fa79 (1).webp"
+          src={getAssetPath("/assets/images/oooo-69c7b5034fa79 (1).webp")}
           alt="Hero mobile background"
           fill
           priority
@@ -103,7 +104,7 @@ export function KeyHighlights() {
                     >
                       <div className="w-14 h-14 flex items-center justify-center rounded-full mb-3">
                         <Image
-                          src={item.icon}
+                          src={getAssetPath(item.icon)}
                           alt={item.title}
                           width={32}
                           height={32}

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
+import { getAssetPath } from "@/lib/utils";
 
 const reasons = [
   {
@@ -56,7 +57,7 @@ export function WhyChoose() {
             >
               <div className="shrink-0 mb-3 md:mb-0 md:mr-6">
                 <Image
-                  src={reason.iconSrc}
+                  src={getAssetPath(reason.iconSrc)}
                   alt={reason.title}
                   width={50}
                   height={45}

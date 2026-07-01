@@ -4,17 +4,17 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import { getAssetPath } from "@/lib/utils";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { label: "Home", href: "#home" },
-    { label: "Approvals", href: "#approvals" },
-    { label: "Specializations", href: "#specialization" },
-    { label: "About", href: "#about" },
-    { label: "Why Choose?", href: "#why" },
-    { label: "FAQ", href: "#faq" },
+    { label: "C-Suite Programs", href: "#premium-programs" },
+    { label: "Universities", href: "#prestigious-institutions" },
+    { label: "About SODE", href: "#about-sode" },
+    { label: "Alumni Voices", href: "#alumni-voices" },
+    { label: "FAQs", href: "#faq" },
   ];
 
   return (
@@ -24,42 +24,51 @@ export function Header() {
         {/* LOGO */}
         <Link href="/" className="flex items-center">
           <Image
-            src="/1-year-mba/assets/images/LOGO for AD (1) (1).png"
+            src={getAssetPath("/assets/images/new_sode_tm_logo.png")}
             alt="Company Logo"
-            width={70}
-            height={70}
+            width={50}
+            height={50}
             priority
             className="object-contain cursor-pointer"
           />
         </Link>
 
         {/* ✅ Desktop Navigation */}
-        <nav className="hidden lg:flex items-center text-sm font-medium text-black">
-          {navItems.map((item, index) => (
-            <div key={item.label} className="flex items-center">
+        <nav className="hidden lg:flex items-center text-[13px] text-black gap-1">
+          {navItems.map((item, index) => {
+            const isExecutive = item.label === "C-Suite Programs";
+            return (
+              <div key={item.label} className="flex items-center">
+                {isExecutive ? (
+                  <a
+                    href={item.href}
+                    className="mr-3 px-4 py-2 bg-linear-to-r from-[#EEC471] via-[#F3CD73] to-[#FADA9A] text-[#102441] rounded-sm flex items-center gap-2 transition-all duration-200 shadow-xs"
+                  >
+                    <Image
+            src={getAssetPath("/assets/images/premium-icon.png")}
+            alt="Company Logo"
+            width={16}
+            height={16}
+            priority
+            className="object-contain cursor-pointer"
+          />
+                    <span>{item.label}</span>
+                  </a>
+                ) : (
+                  <a
+                    href={item.href}
+                    className="px-3"
+                  >
+                    {item.label}
+                  </a>
+                )}
 
-              {/* Home = Link, Others = anchor */}
-              {item.href === "/" ? (
-                <Link
-                  href="/"
-                  className="px-3 hover:text-black transition-colors duration-200"
-                >
-                  {item.label}
-                </Link>
-              ) : (
-                <a
-                  href={item.href}
-                  className="px-3 hover:text-black transition-colors duration-200"
-                >
-                  {item.label}
-                </a>
-              )}
-
-              {index !== navItems.length - 1 && (
-                <span className="text-gray-500">|</span>
-              )}
-            </div>
-          ))}
+                {index !== navItems.length - 1 && (
+                  <span className="text-gray-300">|</span>
+                )}
+              </div>
+            );
+          })}
         </nav>
 
         {/* Mobile Toggle */}
@@ -76,28 +85,19 @@ export function Header() {
         className={`lg:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? "max-h-96 border-t border-gray-200" : "max-h-0"
           } bg-white`}
       >
-        <div className="flex flex-col px-6 py-4 space-y-4 text-sm font-medium text-gray-700">
-          {navItems.map((item) =>
-            item.href === "/" ? (
-              <Link
-                key={item.label}
-                href="/"
-                onClick={() => setIsMenuOpen(false)}
-                className="hover:text-black transition-colors"
-              >
-                {item.label}
-              </Link>
-            ) : (
+        <div className="flex flex-col px-6 py-4 space-y-4 text-sm font-semibold text-gray-700">
+          {navItems.map((item) => {
+            return (
               <a
                 key={item.label}
                 href={item.href}
                 onClick={() => setIsMenuOpen(false)}
-                className="hover:text-black transition-colors"
+                className="hover:text-black transition-colors py-1 text-center"
               >
                 {item.label}
               </a>
-            )
-          )}
+            );
+          })}
         </div>
       </div>
     </header>
