@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   title: "Certifications & Online Degree Courses from IITs, IIMs | DBA MBA – SODE",
   description:
     "Certifications & Online Degree Courses from top IITs, IIMs & global universities via SODE. Enroll in our MBA, DBA & executive leadership programs.",
+  keywords: [
+    "Certifications and Online Degree Courses"
+  ],
   openGraph: {
     title: "Certifications & Online Degree Courses from IITs, IIMs | DBA MBA – SODE",
     description:
