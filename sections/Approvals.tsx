@@ -7,35 +7,36 @@ import { getAssetPath } from "@/lib/utils";
 const recognitions = [
   {
     name: "AACSB",
-    src: "/1-year-mba/assets/images/aacsb-69c2858098c79.webp",
+    src: "/assets/images/aacsb-69c2858098c79.webp",
     description: "Association to Advance Collegiate Schools of Business.",
   },
   {
     name: "UGC Entitled",
-    src: "/1-year-mba/assets/images/ugc-69c2857f70d9f.webp",
+    src: "/assets/images/ugc-69c2857f70d9f.webp",
     description:
       "Recognised by the University Grants Commission of India (UGC).",
   },
   {
     name: "NIRF Ranked",
-    src: "/1-year-mba/assets/images/nirf-69c2857f23104.webp",
+    src: "/assets/images/nirf-69c2857f23104.webp",
     description: "Ranked by National Institutional Ranking Framework.",
   },
   {
     name: "QS Ranking",
-    src: "/1-year-mba/assets/images/qs-69c2857ff0fb7.webp",
+    src: "/assets/images/qs-69c2857ff0fb7.webp",
     description: "Globally ranked by QS World University Rankings.",
   },
   {
     name: "THE Ranking",
-    src: "/1-year-mba/assets/images/the-69c2857fee8ce.webp",
+    src: "/assets/images/the-69c2857fee8ce.webp",
     description:
       "Ranked by the Times Higher Education Asia University Rankings.",
   },
   {
     name: "IoE Recognised",
-    src: "/1-year-mba/assets/images/institute.webp",
-    description: "Institute of Eminence recognised by the Ministry of Education for excellence.",
+    src: "/assets/images/institute.webp",
+    description:
+      "Institute of Eminence recognised by the Ministry of Education for excellence.",
   },
 ];
 

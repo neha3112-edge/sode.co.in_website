@@ -11,31 +11,31 @@ const steps = [
     num: "01",
     title: "SUBMIT QUERY FORM",
     desc: "Begin the journey by submitting your details. Then individuals can explore the right one year MBA programs suited to their career goals.",
-    img: "/1-year-mba/assets/images/step-01-69c77e77ed4fd.webp",
+    img: "/assets/images/step-01-69c77e77ed4fd.webp",
   },
   {
     num: "02",
     title: "GET FREE COUNSELING",
     desc: " Connect with experts to understand the 1 year MBA programs and choose the right specialization of MBA degree in one year based on your profile.",
-    img: "/1-year-mba/assets/images/step-02-69c77e785e629.webp",
+    img: "/assets/images/step-02-69c77e785e629.webp",
   },
   {
     num: "03",
     title: "CHOOSE UNIVERSITY",
     desc: " Select from the top 1 year MBA schools offering flexible and industry-relevant MBA one year course options tailored to your specialization and interest.",
-    img: "/1-year-mba/assets/images/step-03-69c77e77ecd47.webp",
+    img: "/assets/images/step-03-69c77e77ecd47.webp",
   },
   {
     num: "04",
     title: "FEES PAYMENT",
     desc: " Secure your seat in a 1 year program MBA by completing the fee process. Get access to a flexible and career-focused learning experience.",
-    img: "/1-year-mba/assets/images/step-04-69c77e7798970.webp",
+    img: "/assets/images/step-04-69c77e7798970.webp",
   },
   {
     num: "05",
     title: "CONFIRMATION",
     desc: " Receive your admission confirmation and begin your one year executive MBA or chosen specialization with full academic support.",
-    img: "/1-year-mba/assets/images/step-05-69c77e7797f53.webp",
+    img: "/assets/images/step-05-69c77e7797f53.webp",
   },
 ];
 
@@ -46,12 +46,11 @@ export function Enrollment() {
     <>
       <section className="py-12 md:py-14 bg-[#f4f6f9]">
         <Container>
-
           {/* Heading */}
           <div className="text-center mb-6 md:mb-8">
             <h2 className="text-2xl md:text-5xl font-bold text-gray-900 leading-snug">
-
-              How to Enroll in a 1 Year Online MBA?            </h2>
+              How to Enroll in a 1 Year Online MBA?{" "}
+            </h2>
             <p className="text-black text-base md:text-2xl">
               Admission Process
             </p>
@@ -59,7 +58,6 @@ export function Enrollment() {
 
           {/* Steps */}
           <div className="relative">
-
             {/* Connector Line */}
             <div
               className="hidden lg:block absolute left-0 right-0 border-t-2 border-dashed border-[#00AEEF] z-0"
@@ -73,7 +71,6 @@ export function Enrollment() {
                   key={idx}
                   className="relative flex flex-col items-center h-full"
                 >
-
                   {/* Hexagon */}
                   <div
                     className="w-10 h-9 md:w-12 md:h-10 bg-[#00AEEF] text-white font-bold flex items-center justify-center text-xs md:text-base shadow-md z-10 relative top-4"
@@ -89,7 +86,6 @@ export function Enrollment() {
                   <div className="w-full h-full bg-white shadow-md md:shadow-lg rounded-2xl pt-10 md:pt-12 pb-5 md:pb-6 px-3 md:px-5 flex flex-col text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                     {/* Top */}
                     <div className="flex flex-col items-center grow">
-
                       {/* Image */}
                       <div className="mb-3 w-8 h-8 md:w-10 md:h-10 relative">
                         <Image
@@ -105,7 +101,6 @@ export function Enrollment() {
                       <h4 className="text-[11px] md:text-[14px] font-bold text-gray-800 uppercase leading-tight min-h-8 flex items-center justify-center px-1">
                         {step.title}
                       </h4>
-
                     </div>
 
                     {/* Bottom Description */}
@@ -116,11 +111,9 @@ export function Enrollment() {
                         </p>
                       </div>
                     </div>
-
                   </div>
                 </div>
               ))}
-
             </div>
           </div>
 
@@ -148,7 +141,6 @@ export function Enrollment() {
               </svg>
             </button>
           </div>
-
         </Container>
       </section>
 

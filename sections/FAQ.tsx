@@ -51,7 +51,7 @@ export function FAQ() {
               Frequently Asked Question
             </h3>
             <p className="text-gray-500 font-medium mt-3 text-sm md:text-[14px] leading-relaxed max-w-sm">
-              Still deciding? Book a no-pressure call and we'll map the right path with you.
+              Still deciding? Book a no-pressure call and we&apos;ll map the right path with you.
             </p>
           </div>
 

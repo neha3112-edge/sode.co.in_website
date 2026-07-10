@@ -3,31 +3,32 @@ import fs from "fs";
 import path from "path";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://sode.co.in/sode";
-  
+  const baseUrl = "https://sode.co.in";
+
   // Base routes to start with
   const routes = [""];
-  
+
   try {
     const appDirectory = path.join(process.cwd(), "app");
-    
+
     const scanDir = (dir: string, currentRoute = "") => {
       const items = fs.readdirSync(dir);
-      
+
       for (const item of items) {
         const fullPath = path.join(dir, item);
         const stat = fs.statSync(fullPath);
-        
+
         if (stat.isDirectory()) {
           // Skip API folders, special next folders (_components, etc.), or dot folders
           if (item === "api" || item.startsWith("_") || item.startsWith(".")) {
             continue;
           }
           // Route groups (e.g. "(marketing)") are traversed, but their names are not added to URL
-          const nextRoute = item.startsWith("(") && item.endsWith(")") 
-            ? currentRoute 
-            : `${currentRoute}/${item}`;
-            
+          const nextRoute =
+            item.startsWith("(") && item.endsWith(")")
+              ? currentRoute
+              : `${currentRoute}/${item}`;
+
           scanDir(fullPath, nextRoute);
         } else if (item.startsWith("page.")) {
           // If we find a page file inside a subfolder, add it to routes
@@ -40,7 +41,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         }
       }
     };
-    
+
     scanDir(appDirectory);
   } catch (error) {
     console.error("Error reading app directory for sitemap:", error);

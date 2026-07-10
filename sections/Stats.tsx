@@ -6,22 +6,22 @@ const stats = [
   {
     value: "50K+",
     label: "Student Enrolled",
-    icon: "/1-year-mba/assets/images/student-enrolled-69c77be215a67.webp",
+    icon: "/assets/images/student-enrolled-69c77be215a67.webp",
   },
   {
     value: "20+",
     label: "Specialization",
-    icon: "/1-year-mba/assets/images/speciisation-69c77be218663.webp",
+    icon: "/assets/images/speciisation-69c77be218663.webp",
   },
   {
     value: "15+",
     label: "Top Universities",
-    icon: "/1-year-mba/assets/images/university-69c77be26e228.webp",
+    icon: "/assets/images/university-69c77be26e228.webp",
   },
   {
     value: "100%",
     label: "Placements Assistance",
-    icon: "/1-year-mba/assets/images/placement-assistance-69c77be272285.webp",
+    icon: "/assets/images/placement-assistance-69c77be272285.webp",
   },
 ];
 
@@ -31,12 +31,8 @@ export function Stats() {
       <Container>
         {/* ✅ GRID FIX */}
         <div className="grid grid-cols-2 md:grid-cols-4 max-w-6xl mx-auto">
-
           {stats.map((stat, idx) => (
-            <div
-              key={idx}
-              className="flex items-start gap-3 py-4 px-2"
-            >
+            <div key={idx} className="flex items-start gap-3 py-4 px-2">
               {/* ICON */}
               <div className="w-10 h-10 md:w-12 md:h-12 relative shrink-0">
                 <Image
@@ -56,11 +52,9 @@ export function Stats() {
                 <span className="text-[11px] md:text-sm font-medium text-gray-500">
                   {stat.label}
                 </span>
-
               </div>
             </div>
           ))}
-
         </div>
       </Container>
     </section>

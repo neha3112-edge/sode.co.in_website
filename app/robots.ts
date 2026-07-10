@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://sode.co.in/sode/sitemap.xml",
+    sitemap: "https://sode.co.in/sitemap.xml",
   };
 }

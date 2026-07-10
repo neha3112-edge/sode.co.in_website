@@ -9,17 +9,17 @@ import confetti from "canvas-confetti";
 
 const audiences = [
   {
-    img: "/1-year-mba/assets/images/fresh-graduate-69c2858302fb4.webp",
+    img: "/assets/images/fresh-graduate-69c2858302fb4.webp",
     title: "FRESH GRADUATES",
     desc: "Graduates are getting an opportunity to start careers quickly with a 1 year online MBA, gaining essential business skills and exposure.",
   },
   {
-    img: "/1-year-mba/assets/images/working-professional-69c285821c9b2.webp",
+    img: "/assets/images/working-professional-69c285821c9b2.webp",
     title: "WORKING PROFESSIONALS",
     desc: "Professionals can now advance their careers without breaks through a flexible one year online MBA, which extends growth in their careers.",
   },
   {
-    img: "/1-year-mba/assets/images/career-switchers-69c28581e81e6.webp",
+    img: "/assets/images/career-switchers-69c28581e81e6.webp",
     title: "CAREER SWITCHERS",
     desc: "Individuals planning a transition can switch into new roles confidently with an online MBA degree in one year and industry-ready skills.",
   },
@@ -131,9 +131,7 @@ export function TargetAudience() {
             >
               <span className="animate-glass-shine" />
 
-              <span className="relative z-10">
-                Get scholarship coupon code
-              </span>
+              <span className="relative z-10">Get scholarship coupon code</span>
 
               <Image
                 src={getAssetPath("/assets/images/unnamed (1).gif")}

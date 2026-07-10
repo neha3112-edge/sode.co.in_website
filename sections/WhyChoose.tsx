@@ -4,34 +4,34 @@ import { getAssetPath } from "@/lib/utils";
 
 const reasons = [
   {
-    iconSrc: "/1-year-mba/assets/images/why-choose-01-69c28580993bb.webp",
+    iconSrc: "/assets/images/why-choose-01-69c28580993bb.webp",
     title: "Accelerated Career Growth",
-    desc: "Fast-track success with a flexible one year MBA format."
+    desc: "Fast-track success with a flexible one year MBA format.",
   },
   {
-    iconSrc: "/1-year-mba/assets/images/why-choose-01-69c28580993bb.webp",
+    iconSrc: "/assets/images/why-choose-01-69c28580993bb.webp",
     title: "Industry-Aligned Specializations",
-    desc: "Choose relevant domains within the top 1 year MBA programs."
+    desc: "Choose relevant domains within the top 1 year MBA programs.",
   },
   {
-    iconSrc: "/1-year-mba/assets/images/why-choose-02-69c285814da05.webp",
+    iconSrc: "/assets/images/why-choose-02-69c285814da05.webp",
     title: "Flexible Learning Experience",
-    desc: "Balance work easily through a practical one year MBA."
+    desc: "Balance work easily through a practical one year MBA.",
   },
   {
-    iconSrc: "/1-year-mba/assets/images/why-choose-02-69c285814da05.webp",
+    iconSrc: "/assets/images/why-choose-02-69c285814da05.webp",
     title: "Leadership & Strategy Skills",
-    desc: "Build decision-making expertise in a MBA 1 year course."
+    desc: "Build decision-making expertise in a MBA 1 year course.",
   },
   {
-    iconSrc: "/1-year-mba/assets/images/why-choose-03-69c285814b9f8.webp",
+    iconSrc: "/assets/images/why-choose-03-69c285814b9f8.webp",
     title: "Hands-On Industry Projects",
-    desc: "Solve real challenges in a 1 year program MBA."
+    desc: "Solve real challenges in a 1 year program MBA.",
   },
   {
-    iconSrc: "/1-year-mba/assets/images/why-choose-03-69c285814b9f8.webp",
+    iconSrc: "/assets/images/why-choose-03-69c285814b9f8.webp",
     title: "Global Exposure & Networking",
-    desc: "Connect worldwide through advanced 1 year executive MBA."
+    desc: "Connect worldwide through advanced 1 year executive MBA.",
   },
 ];
 
