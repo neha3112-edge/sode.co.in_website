@@ -6,6 +6,7 @@ import { Header } from "@/components/ui/Header";
 import { Footer } from "@/sections/Footer";
 import FloatingButton from "@/components/ui/FloatingButton";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -52,6 +53,7 @@ export default function RootLayout({
         {/* ✅ FOOTER (FIXED POSITION) */}
         <Footer />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
