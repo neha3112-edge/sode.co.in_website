@@ -37,6 +37,10 @@ export interface UniversityData {
   stats?: StatItem[];
   faq?: FaqItem[];
   layoutOrder: string[];
+  
+  // UI Template configuration variants
+  heroVariant: "standard" | "split-form" | "centered";
+  highlightsVariant: "grid" | "timeline";
 }
 
 export const universitiesData: Record<string, UniversityData> = {
@@ -82,7 +86,9 @@ export const universitiesData: Record<string, UniversityData> = {
       { question: "Is this program suitable for working professionals?", answer: "Yes, the program is designed specifically for working professionals with flexible schedules, self-paced learning, and live classes on weekends." },
       { question: "What is the eligibility criteria?", answer: "A Bachelor's degree in Science, Engineering, Mathematics, or a related field with basic mathematics/programming knowledge." }
     ],
-    layoutOrder: ["hero", "stats", "highlights", "lead-form", "faq"]
+    layoutOrder: ["hero", "stats", "highlights", "lead-form", "faq"],
+    heroVariant: "standard",
+    highlightsVariant: "grid"
   },
   edgewood: {
     id: "edgewood",
@@ -110,7 +116,7 @@ export const universitiesData: Record<string, UniversityData> = {
     highlights: [
       { title: "Strategic DBA", desc: "Gain critical problem-solving and business research skills suitable for executive leadership roles.", icon: "♛" },
       { title: "Dual Master + Doctorate", desc: "Save time and cost with a combined MBA + DBA program track.", icon: "⚡" },
-      { title: "Accredited Program", desc: "Accredited degrees highly valued in international markets and universities.", icon: "✔" },
+      { title: "Accredited Degree", desc: "Accredited degrees highly valued in international markets and universities.", icon: "✔" },
       { title: "Global Peer Cohort", desc: "Interact with senior managers and business heads from different sectors.", icon: "🌐" }
     ],
     stats: [
@@ -122,7 +128,9 @@ export const universitiesData: Record<string, UniversityData> = {
       { question: "What is the dual MBA + DBA degree program?", answer: "This program enables you to complete both a Master of Business Administration and a Doctor of Business Administration sequentially, accelerating your academic goals." },
       { question: "Is the degree valid internationally?", answer: "Yes, Edgewood degrees are recognized internationally for corporate leadership and academic pathways." }
     ],
-    layoutOrder: ["hero", "stats", "highlights", "lead-form", "faq"]
+    layoutOrder: ["hero", "stats", "highlights", "faq"], // Lead form is embedded in Hero Split, so we don't render it separately!
+    heroVariant: "split-form",
+    highlightsVariant: "grid"
   },
   esgci: {
     id: "esgci",
@@ -156,7 +164,9 @@ export const universitiesData: Record<string, UniversityData> = {
       { value: "State Recognized", label: "European Quality" },
       { value: "100% Online", label: "Self-Paced Format" }
     ],
-    layoutOrder: ["hero", "stats", "highlights", "lead-form"]
+    layoutOrder: ["hero", "stats", "highlights", "lead-form"],
+    heroVariant: "standard",
+    highlightsVariant: "timeline"
   },
   rushford: {
     id: "rushford",
@@ -190,7 +200,9 @@ export const universitiesData: Record<string, UniversityData> = {
       { value: "Swiss Quality", label: "EduQua Certified" },
       { value: "100%", label: "Online Thesis Defense" }
     ],
-    layoutOrder: ["hero", "stats", "highlights", "lead-form"]
+    layoutOrder: ["hero", "stats", "highlights"], // Lead form is embedded inside the Hero banner
+    heroVariant: "split-form",
+    highlightsVariant: "grid"
   },
   ggu: {
     id: "ggu",
@@ -226,7 +238,9 @@ export const universitiesData: Record<string, UniversityData> = {
       { value: "WASC", label: "US Accreditation" },
       { value: "13-27 Months", label: "Accelerated Tracks" }
     ],
-    layoutOrder: ["hero", "stats", "highlights", "lead-form"]
+    layoutOrder: ["hero", "stats", "highlights", "lead-form"],
+    heroVariant: "centered",
+    highlightsVariant: "grid"
   },
   ssbm: {
     id: "ssbm",
@@ -262,7 +276,9 @@ export const universitiesData: Record<string, UniversityData> = {
       { value: "Swiss Quality", label: "LMS and Exams" },
       { value: "18-36 Months", label: "Program Format" }
     ],
-    layoutOrder: ["hero", "stats", "highlights", "lead-form"]
+    layoutOrder: ["hero", "stats", "highlights", "lead-form"],
+    heroVariant: "centered",
+    highlightsVariant: "timeline"
   },
   liverpool: {
     id: "liverpool",
@@ -296,7 +312,9 @@ export const universitiesData: Record<string, UniversityData> = {
       { value: "WES Evaluated", label: "Global Status" },
       { value: "UK MBA", label: "British Credential" }
     ],
-    layoutOrder: ["hero", "stats", "highlights", "lead-form"]
+    layoutOrder: ["hero", "stats", "highlights", "lead-form"],
+    heroVariant: "standard",
+    highlightsVariant: "grid"
   },
   iimk: {
     id: "iimk",
@@ -330,8 +348,10 @@ export const universitiesData: Record<string, UniversityData> = {
       { value: "NIRF Top 3", label: "IIM Excellence" },
       { value: "3+ Years Exp", label: "Target Audience Eligibility" }
     ],
-    layoutOrder: ["hero", "stats", "highlights", "lead-form"]
-  },
+    layoutOrder: ["hero", "stats", "highlights"], // Lead form is embedded inside the Hero split format
+    heroVariant: "split-form",
+    highlightsVariant: "grid"
+  }
 };
 
 export const universityIds = Object.keys(universitiesData);

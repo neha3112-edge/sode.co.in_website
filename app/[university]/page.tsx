@@ -26,6 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
+    metadataBase: new URL("https://sode.co.in"),
     title: data.metaTitle,
     description: data.metaDesc,
     alternates: {
@@ -35,6 +36,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: data.metaTitle,
       description: data.metaDesc,
       type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: data.metaTitle,
+      description: data.metaDesc,
+      images: [data.image],
     },
   };
 }
@@ -47,8 +54,30 @@ export default async function UniversityPage({ params }: PageProps) {
     notFound();
   }
 
+  // Course structured schema for search snippet enhancement
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": `${data.name} Online Programs`,
+    "description": data.metaDesc,
+    "provider": {
+      "@type": "EducationalOrganization",
+      "name": "SODE",
+      "sameAs": "https://sode.co.in"
+    },
+    "hasCourseInstance": data.coursesBullets.map((courseName) => ({
+      "@type": "CourseInstance",
+      "courseMode": "Online",
+      "name": courseName
+    }))
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {data.layoutOrder.map((section) => {
         switch (section) {
           case "hero":
