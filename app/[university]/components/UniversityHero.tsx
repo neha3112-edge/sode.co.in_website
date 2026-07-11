@@ -17,10 +17,20 @@ export default function UniversityHero({ data }: { data: UniversityData }) {
   // 1. Centered Hero Variant
   if (data.heroVariant === "centered") {
     return (
-      <section className="uni-hero uni-hero-centered" style={{ backgroundImage: `url(${getAssetPath(data.image)})` }}>
-        <div className="uni-hero-overlay"></div>
-        <div className="uni-hero-container uni-hero-centered-content">
-          <div className="uni-hero-content items-center text-center max-w-3xl mx-auto z-10">
+      <section className="uni-hero uni-hero-centered relative overflow-hidden">
+        {/* Next.js Optimized Background Image for LCP speedboost */}
+        <Image
+          src={getAssetPath(data.image)}
+          alt={`${data.name} Campus Background`}
+          fill
+          priority
+          sizes="100vw"
+          style={{ objectFit: "cover" }}
+          className="pointer-events-none"
+        />
+        <div className="uni-hero-overlay z-10"></div>
+        <div className="uni-hero-container uni-hero-centered-content z-20">
+          <div className="uni-hero-content items-center text-center max-w-3xl mx-auto">
             <div className="uni-badge">{data.badge}</div>
             <h1 className="uni-hero-title text-center">{data.bannerTitle}</h1>
             <p className="uni-hero-subtitle text-center text-gray-100 max-w-2xl">
