@@ -11,7 +11,10 @@
   "dependencies": {
     "@tailwindcss/line-clamp": "^0.4.4",
     "@vercel/analytics": "^2.0.1",
+<<<<<<< HEAD
     "@vercel/speed-insights": "^2.0.0",
+=======
+>>>>>>> 05c5ea6 (adf)
     "canvas-confetti": "^1.9.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
