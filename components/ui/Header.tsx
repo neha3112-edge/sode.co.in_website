@@ -78,8 +78,9 @@ export function Header() {
 
       {/* ✅ Mobile Navigation */}
       <div
-        className={`lg:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? "max-h-96 border-t border-gray-200" : "max-h-0"
-          } bg-white`}
+        className={`lg:hidden transition-all duration-300 overflow-hidden ${
+          isMenuOpen ? "max-h-96 border-t border-gray-200" : "max-h-0"
+        } bg-white`}
       >
         <div className="flex flex-col px-6 py-4 space-y-4 text-sm font-semibold text-gray-700">
           {navItems.map((item) => {

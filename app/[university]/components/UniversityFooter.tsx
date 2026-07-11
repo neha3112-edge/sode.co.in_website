@@ -7,48 +7,49 @@ import GlobalDialog from "@/components/layout/GlobalDialog";
 import DisclaimerContent from "@/components/legal/DisclaimerContent";
 import PrivacyContent from "@/components/legal/PrivacyContent";
 import TermsContent from "@/components/legal/TermsContent";
+import { UniversityData } from "@/lib/universities-data";
 
-export default function IIITBFooter() {
+export default function UniversityFooter({ data }: { data: UniversityData }) {
   const [activeDialog, setActiveDialog] = useState<null | "disclaimer" | "terms" | "privacy">(null);
 
   return (
-    <footer className="iiitb-footer">
-      <div className="iiitb-footer-container">
+    <footer className="uni-footer">
+      <div className="uni-footer-container">
         {/* Info */}
-        <div className="iiitb-footer-logo-desc">
+        <div className="uni-footer-logo-desc">
           <Image
-            src={getAssetPath("/assets/images/iiitb-logo.jpg")}
-            alt="IIIT Bangalore Logo"
+            src={getAssetPath(data.logo)}
+            alt={`${data.name} Logo`}
             width={150}
             height={50}
             style={{ height: "auto" }}
-            className="iiitb-footer-logo-img"
+            className="uni-footer-logo-img"
           />
-          <p className="iiitb-footer-tagline">
+          <p className="uni-footer-tagline">
             SODE Counseling Services LLP is an educational counseling partner assisting
             aspirants in enrollment processes for online programs offered by top-tier universities.
           </p>
         </div>
 
         {/* Legal Links */}
-        <div className="iiitb-footer-legal-links">
+        <div className="uni-footer-legal-links">
           <button
             onClick={() => setActiveDialog("disclaimer")}
-            className="iiitb-footer-legal-link bg-transparent border-none cursor-pointer"
+            className="uni-footer-legal-link"
           >
             Disclaimer
           </button>
           <span className="text-gray-600">|</span>
           <button
             onClick={() => setActiveDialog("privacy")}
-            className="iiitb-footer-legal-link bg-transparent border-none cursor-pointer"
+            className="uni-footer-legal-link"
           >
             Privacy Policy
           </button>
           <span className="text-gray-600">|</span>
           <button
             onClick={() => setActiveDialog("terms")}
-            className="iiitb-footer-legal-link bg-transparent border-none cursor-pointer"
+            className="uni-footer-legal-link"
           >
             Terms &amp; Conditions
           </button>
@@ -56,7 +57,7 @@ export default function IIITBFooter() {
       </div>
 
       {/* Copyright */}
-      <div className="iiitb-footer-copyright">
+      <div className="uni-footer-copyright">
         Copyright © 2026 SODE Counseling Services LLP | All Rights Reserved
       </div>
 

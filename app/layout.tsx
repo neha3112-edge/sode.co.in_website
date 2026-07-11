@@ -31,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={poppins.className} suppressHydrationWarning>
+    <html lang="en" className={poppins.className} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         {children}
         <Analytics />

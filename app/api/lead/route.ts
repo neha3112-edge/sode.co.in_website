@@ -23,7 +23,7 @@ function extractUTMParams(urlStr: string): Record<string, string> {
     // 2. Extract using standard URL parser as a fallback/additional source
     const absoluteUrlStr = urlStr.startsWith('http') ? urlStr : `http://localhost${urlStr}`;
     const url = new URL(absoluteUrlStr);
-    
+
     url.searchParams.forEach((value, key) => {
       if (key.startsWith('utm_') && !params[key]) {
         params[key] = value;
@@ -77,8 +77,8 @@ export async function POST(req: Request) {
 
     // Extract IP address from request headers
     const userIp = req.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
-                   req.headers.get("x-real-ip")?.trim() ||
-                   "";
+      req.headers.get("x-real-ip")?.trim() ||
+      "";
 
     // Extract UTM parameters from the page_url
     const urlParams = page_url ? extractUTMParams(page_url) : {};

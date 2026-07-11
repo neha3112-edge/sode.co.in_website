@@ -1,12 +1,13 @@
 import { MetadataRoute } from "next";
 import fs from "fs";
 import path from "path";
+import { universityIds } from "@/lib/universities-data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://sode.co.in";
 
   // Base routes to start with
-  const routes = [""];
+  const routes = ["", ...universityIds.map((id) => `/${id}`)];
 
   try {
     const appDirectory = path.join(process.cwd(), "app");
