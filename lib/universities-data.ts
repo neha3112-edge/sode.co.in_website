@@ -286,7 +286,7 @@ export const universitiesData: Record<string, UniversityData> = {
       darkBg: "#0f172a"
     },
     highlights: [
-      { title: "Top UK Business School", desc: "Liverpool Business School is recognized as a leader in business studies in the UK.", icon: "🇬🇧" },
+      { title: "Top UK Business School", desc: "Liverpool Business School is recognized as a leader in business studies.", icon: "🇬🇧" },
       { title: "WES Evaluated", desc: "WES evaluation status, easing global immigration and qualification equivalencies.", icon: "🛡" },
       { title: "British Degree", desc: "Graduate with an authentic UK Master of Business Administration.", icon: "🎓" },
       { title: "Managerial Skills", desc: "Develop advanced skills in finance, marketing, strategy, and change management.", icon: "📈" }
