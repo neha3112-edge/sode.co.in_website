@@ -94,7 +94,7 @@ export const universitiesData: Record<string, UniversityData> = {
     heroVariant: "standard",
     highlightsVariant: "grid",
     formName: "IIIT Bangalore Form",
-    crmSource: "IIITB",
+    crmSource: "IIITB LP",
     utmSourceFallback: "Organic-iiitb",
     utmMediumFallback: "SODE-iiitb-landing-page"
   },
@@ -140,7 +140,7 @@ export const universitiesData: Record<string, UniversityData> = {
     heroVariant: "split-form",
     highlightsVariant: "grid",
     formName: "Edgewood University Form",
-    crmSource: "Edgewood",
+    crmSource: "Edgewood LP",
     utmSourceFallback: "Organic-edgewood",
     utmMediumFallback: "SODE-edgewood-landing-page"
   },
@@ -180,7 +180,7 @@ export const universitiesData: Record<string, UniversityData> = {
     heroVariant: "standard",
     highlightsVariant: "timeline",
     formName: "ESGCI Paris Form",
-    crmSource: "ESGCI",
+    crmSource: "ESGCI LP",
     utmSourceFallback: "Organic-esgci",
     utmMediumFallback: "SODE-esgci-landing-page"
   },
@@ -220,7 +220,7 @@ export const universitiesData: Record<string, UniversityData> = {
     heroVariant: "split-form",
     highlightsVariant: "grid",
     formName: "Rushford University Form",
-    crmSource: "Rushford",
+    crmSource: "Rushford LP",
     utmSourceFallback: "Organic-rushford",
     utmMediumFallback: "SODE-rushford-landing-page"
   },
@@ -262,7 +262,7 @@ export const universitiesData: Record<string, UniversityData> = {
     heroVariant: "centered",
     highlightsVariant: "grid",
     formName: "Golden Gate University Form",
-    crmSource: "GGU",
+    crmSource: "GGU LP",
     utmSourceFallback: "Organic-ggu",
     utmMediumFallback: "SODE-ggu-landing-page"
   },
@@ -304,7 +304,7 @@ export const universitiesData: Record<string, UniversityData> = {
     heroVariant: "centered",
     highlightsVariant: "timeline",
     formName: "SSBM Geneva Form",
-    crmSource: "SSBM",
+    crmSource: "SSBM LP",
     utmSourceFallback: "Organic-ssbm",
     utmMediumFallback: "SODE-ssbm-landing-page"
   },
@@ -344,7 +344,7 @@ export const universitiesData: Record<string, UniversityData> = {
     heroVariant: "standard",
     highlightsVariant: "grid",
     formName: "Liverpool Business School Form",
-    crmSource: "Liverpool",
+    crmSource: "Liverpool LP",
     utmSourceFallback: "Organic-liverpool",
     utmMediumFallback: "SODE-liverpool-landing-page"
   },
@@ -384,7 +384,7 @@ export const universitiesData: Record<string, UniversityData> = {
     heroVariant: "split-form",
     highlightsVariant: "grid",
     formName: "IIM Kozhikode Form",
-    crmSource: "IIMK",
+    crmSource: "IIMK LP",
     utmSourceFallback: "Organic-iimk",
     utmMediumFallback: "SODE-iimk-landing-page"
   }
