@@ -331,7 +331,7 @@ export const universitiesData: Record<string, UniversityData> = {
       { value: "3+ Years Exp", label: "Target Audience Eligibility" }
     ],
     layoutOrder: ["hero", "stats", "highlights", "lead-form"]
-  }
+  },
 };
 
 export const universityIds = Object.keys(universitiesData);
