@@ -86,6 +86,10 @@ export default function UniversityHero({ data }: { data: UniversityData }) {
               title="Apply for Admission"
               subtitle="Get eligibility check & syllabus PDF"
               courseOptions={data.coursesOptions}
+              formNameOverride={data.formName}
+              utmSourceFallback={data.utmSourceFallback}
+              utmMediumFallback={data.utmMediumFallback}
+              sourceOverride={data.crmSource}
             />
           </div>
         </div>

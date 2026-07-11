@@ -16,12 +16,20 @@ export default function FormWrapper({
     subtitle,
     onClose,
     courseOptions,
+    formNameOverride,
+    utmSourceFallback,
+    utmMediumFallback,
+    sourceOverride,
 }: {
     title?: string;
     subtitle?: string;
     onClose?: () => void;
     isBrochure?: boolean;
     courseOptions?: { value: string; label: string; disabled?: boolean; hidden?: boolean }[] | string[];
+    formNameOverride?: string;
+    utmSourceFallback?: string;
+    utmMediumFallback?: string;
+    sourceOverride?: string;
 }) {
     const [phone, setPhone] = useState("");
     const [phoneError, setPhoneError] = useState("");
@@ -60,8 +68,8 @@ export default function FormWrapper({
         const parsed = stored ? JSON.parse(stored) : {};
 
         return {
-            utm_source: params.get("utm_source") || parsed.utm_source || "Organic",
-            utm_medium: params.get("utm_medium") || parsed.utm_medium || "SODE CO IN Organic",
+            utm_source: params.get("utm_source") || parsed.utm_source || utmSourceFallback || "Organic",
+            utm_medium: params.get("utm_medium") || parsed.utm_medium || utmMediumFallback || "SODE CO IN Organic",
             utm_term: params.get("utm_term") || parsed.utm_term || "",
             utm_campaign: params.get("utm_campaign") || parsed.utm_campaign || "",
             utm_content: params.get("utm_content") || parsed.utm_content || "",
@@ -106,7 +114,8 @@ export default function FormWrapper({
                     phone,
                     course,
                     state,
-                    form_name: title?.trim() || "Website Form",
+                    form_name: formNameOverride || title?.trim() || "Website Form",
+                    source: sourceOverride || "SODE",
                     ...getUTMParams(),
                 }),
             });

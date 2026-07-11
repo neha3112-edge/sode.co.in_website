@@ -57,6 +57,7 @@ export async function POST(req: Request) {
       course,
       state,
       form_name,
+      source,
       utm_source,
       utm_medium,
       utm_term,
@@ -100,8 +101,8 @@ export async function POST(req: Request) {
       state,
       // ✅ dynamic form name
       form_name: form_name || "Default Form",
-      // ✅ source (priority: utm > fallback)
-      source: "SODE",
+      // ✅ dynamic source
+      source: source || "SODE",
       utm_source: finalUtmSource,
       utm_medium: finalUtmMedium,
       utm_term: finalUtmTerm,
@@ -191,7 +192,7 @@ export async function POST(req: Request) {
               email: email || "",
               course: course || "MBA",
               state: state || "",
-              source: "SODE",
+              source: source || "SODE",
               tags: ["Success"],
               utm_source: finalUtmSource,
               utm_medium: finalUtmMedium,
@@ -245,7 +246,7 @@ export async function POST(req: Request) {
                 UTM_CAMPAIGN: finalUtmCampaign,
                 UTM_MEDIUM: finalUtmMedium,
                 UTM_TERM: finalUtmTerm,
-                SOURCE: "SODE",
+                SOURCE: source || "SODE",
               },
               updateEnabled: true,
             }),

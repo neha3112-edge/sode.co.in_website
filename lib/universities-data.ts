@@ -37,10 +37,14 @@ export interface UniversityData {
   stats?: StatItem[];
   faq?: FaqItem[];
   layoutOrder: string[];
-  
-  // UI Template configuration variants
   heroVariant: "standard" | "split-form" | "centered";
   highlightsVariant: "grid" | "timeline";
+  
+  // Custom Dynamic CRM & UTM fallback tags
+  formName: string;
+  crmSource: string; // The dynamic brand source parameter (e.g. Edgewood, IIITB)
+  utmSourceFallback: string;
+  utmMediumFallback: string;
 }
 
 export const universitiesData: Record<string, UniversityData> = {
@@ -59,10 +63,10 @@ export const universitiesData: Record<string, UniversityData> = {
       "EPGP in Applied AI & Agentic AI (30 Weeks)"
     ],
     coursesOptions: [
-      { value: "MSC", label: "M.Sc. in Data Science" },
-      { value: "MSC", label: "M.Sc. in Machine Learning & AI" },
-      { value: "PG PROGRAMS", label: "Executive Programme in Generative AI for Leaders" },
-      { value: "PG PROGRAMS", label: "Executive Post Graduate Programme in Applied AI and Agentic AI" }
+      { value: "M.Sc. in Data Science", label: "M.Sc. in Data Science" },
+      { value: "M.Sc. in Machine Learning & AI", label: "M.Sc. in Machine Learning & AI" },
+      { value: "Executive Programme in Generative AI for Leaders", label: "Executive Programme in Generative AI for Leaders" },
+      { value: "Executive Post Graduate Programme in Applied AI and Agentic AI", label: "Executive Post Graduate Programme in Applied AI and Agentic AI" }
     ],
     metaTitle: "Online Master of Science & Executive Programs | IIIT Bangalore – SODE",
     metaDesc: "Accelerate your career in tech with Master of Science and Executive programs in Data Science, Machine Learning, Applied AI, and Agentic AI from IIIT Bangalore.",
@@ -88,7 +92,11 @@ export const universitiesData: Record<string, UniversityData> = {
     ],
     layoutOrder: ["hero", "stats", "highlights", "lead-form", "faq"],
     heroVariant: "standard",
-    highlightsVariant: "grid"
+    highlightsVariant: "grid",
+    formName: "IIIT Bangalore Form",
+    crmSource: "IIITB",
+    utmSourceFallback: "Organic-iiitb",
+    utmMediumFallback: "SODE-iiitb-landing-page"
   },
   edgewood: {
     id: "edgewood",
@@ -103,8 +111,8 @@ export const universitiesData: Record<string, UniversityData> = {
       "MBA + DBA Dual Degree (30 Months)"
     ],
     coursesOptions: [
-      { value: "DBA", label: "Doctor of Business Administration" },
-      { value: "MBA+DBA", label: "MBA + DBA" }
+      { value: "Doctor of Business Administration", label: "Doctor of Business Administration" },
+      { value: "MBA + DBA", label: "MBA + DBA" }
     ],
     metaTitle: "Online DBA & Dual MBA + DBA | Edgewood University – SODE",
     metaDesc: "Elevate your corporate leadership and management skills with an online DBA or Dual MBA + DBA from Edgewood University.",
@@ -128,9 +136,13 @@ export const universitiesData: Record<string, UniversityData> = {
       { question: "What is the dual MBA + DBA degree program?", answer: "This program enables you to complete both a Master of Business Administration and a Doctor of Business Administration sequentially, accelerating your academic goals." },
       { question: "Is the degree valid internationally?", answer: "Yes, Edgewood degrees are recognized internationally for corporate leadership and academic pathways." }
     ],
-    layoutOrder: ["hero", "stats", "highlights", "faq"], // Lead form is embedded in Hero Split, so we don't render it separately!
+    layoutOrder: ["hero", "stats", "highlights", "faq"],
     heroVariant: "split-form",
-    highlightsVariant: "grid"
+    highlightsVariant: "grid",
+    formName: "Edgewood University Form",
+    crmSource: "Edgewood",
+    utmSourceFallback: "Organic-edgewood",
+    utmMediumFallback: "SODE-edgewood-landing-page"
   },
   esgci: {
     id: "esgci",
@@ -144,7 +156,7 @@ export const universitiesData: Record<string, UniversityData> = {
       "Doctor of Business Administration (24 Months)"
     ],
     coursesOptions: [
-      { value: "DBA", label: "Doctor of Business Administration" }
+      { value: "Doctor of Business Administration", label: "Doctor of Business Administration" }
     ],
     metaTitle: "Online Doctor of Business Administration | ESGCI Paris – SODE",
     metaDesc: "Earn a globally recognized Doctor of Business Administration (DBA) from ESGCI Paris and boost your executive career.",
@@ -166,7 +178,11 @@ export const universitiesData: Record<string, UniversityData> = {
     ],
     layoutOrder: ["hero", "stats", "highlights", "lead-form"],
     heroVariant: "standard",
-    highlightsVariant: "timeline"
+    highlightsVariant: "timeline",
+    formName: "ESGCI Paris Form",
+    crmSource: "ESGCI",
+    utmSourceFallback: "Organic-esgci",
+    utmMediumFallback: "SODE-esgci-landing-page"
   },
   rushford: {
     id: "rushford",
@@ -180,7 +196,7 @@ export const universitiesData: Record<string, UniversityData> = {
       "Doctor of Business Administration (36 Months)"
     ],
     coursesOptions: [
-      { value: "DBA", label: "Doctor of Business Administration" }
+      { value: "Doctor of Business Administration", label: "Doctor of Business Administration" }
     ],
     metaTitle: "Online Doctor of Business Administration | Rushford University – SODE",
     metaDesc: "Build research-driven strategy capabilities with an online Doctor of Business Administration (DBA) from Rushford University.",
@@ -200,9 +216,13 @@ export const universitiesData: Record<string, UniversityData> = {
       { value: "Swiss Quality", label: "EduQua Certified" },
       { value: "100%", label: "Online Thesis Defense" }
     ],
-    layoutOrder: ["hero", "stats", "highlights"], // Lead form is embedded inside the Hero banner
+    layoutOrder: ["hero", "stats", "highlights"],
     heroVariant: "split-form",
-    highlightsVariant: "grid"
+    highlightsVariant: "grid",
+    formName: "Rushford University Form",
+    crmSource: "Rushford",
+    utmSourceFallback: "Organic-rushford",
+    utmMediumFallback: "SODE-rushford-landing-page"
   },
   ggu: {
     id: "ggu",
@@ -217,8 +237,8 @@ export const universitiesData: Record<string, UniversityData> = {
       "Master of Business Administration (13 Months)"
     ],
     coursesOptions: [
-      { value: "DBA", label: "Doctor of Business Administration" },
-      { value: "MBA", label: "Master of Business Administration" }
+      { value: "Doctor of Business Administration", label: "Doctor of Business Administration" },
+      { value: "Master of Business Administration", label: "Master of Business Administration" }
     ],
     metaTitle: "Online MBA & Doctor of Business Administration | GGU San Francisco – SODE",
     metaDesc: "Scale your career in leadership and business management with an online MBA or DBA from Golden Gate University, San Francisco.",
@@ -240,7 +260,11 @@ export const universitiesData: Record<string, UniversityData> = {
     ],
     layoutOrder: ["hero", "stats", "highlights", "lead-form"],
     heroVariant: "centered",
-    highlightsVariant: "grid"
+    highlightsVariant: "grid",
+    formName: "Golden Gate University Form",
+    crmSource: "GGU",
+    utmSourceFallback: "Organic-ggu",
+    utmMediumFallback: "SODE-ggu-landing-page"
   },
   ssbm: {
     id: "ssbm",
@@ -255,8 +279,8 @@ export const universitiesData: Record<string, UniversityData> = {
       "Master of Business Administration (18 Months)"
     ],
     coursesOptions: [
-      { value: "DBA", label: "Doctor of Business Administration" },
-      { value: "MBA", label: "Master of Business Administration" }
+      { value: "Doctor of Business Administration", label: "Doctor of Business Administration" },
+      { value: "Master of Business Administration", label: "Master of Business Administration" }
     ],
     metaTitle: "Online MBA & Doctor of Business Administration | SSBM Geneva – SODE",
     metaDesc: "Advance your career with a world-class online Swiss MBA or Doctor of Business Administration (DBA) from SSBM Geneva.",
@@ -278,7 +302,11 @@ export const universitiesData: Record<string, UniversityData> = {
     ],
     layoutOrder: ["hero", "stats", "highlights", "lead-form"],
     heroVariant: "centered",
-    highlightsVariant: "timeline"
+    highlightsVariant: "timeline",
+    formName: "SSBM Geneva Form",
+    crmSource: "SSBM",
+    utmSourceFallback: "Organic-ssbm",
+    utmMediumFallback: "SODE-ssbm-landing-page"
   },
   liverpool: {
     id: "liverpool",
@@ -292,7 +320,7 @@ export const universitiesData: Record<string, UniversityData> = {
       "Master of Business Administration (18 Months)"
     ],
     coursesOptions: [
-      { value: "MBA", label: "Master of Business Administration" }
+      { value: "Master of Business Administration", label: "Master of Business Administration" }
     ],
     metaTitle: "Online British MBA | Liverpool Business School – SODE",
     metaDesc: "Accelerate your growth into leadership roles with an online MBA degree from Liverpool Business School, United Kingdom.",
@@ -314,7 +342,11 @@ export const universitiesData: Record<string, UniversityData> = {
     ],
     layoutOrder: ["hero", "stats", "highlights", "lead-form"],
     heroVariant: "standard",
-    highlightsVariant: "grid"
+    highlightsVariant: "grid",
+    formName: "Liverpool Business School Form",
+    crmSource: "Liverpool",
+    utmSourceFallback: "Organic-liverpool",
+    utmMediumFallback: "SODE-liverpool-landing-page"
   },
   iimk: {
     id: "iimk",
@@ -328,7 +360,7 @@ export const universitiesData: Record<string, UniversityData> = {
       "Professional Certificate Programme in HR Management & Analytics (6 Months)"
     ],
     coursesOptions: [
-      { value: "CERTIFICATE", label: "Professional Certificate Programme in HR Management and Analytics" }
+      { value: "Professional Certificate Programme in HR Management and Analytics", label: "Professional Certificate Programme in HR Management and Analytics" }
     ],
     metaTitle: "IIM Kozhikode HR Management & Analytics Certification | SODE",
     metaDesc: "Drive data-driven HR strategies with the professional certificate program in HR Management and Analytics from IIM Kozhikode.",
@@ -348,9 +380,13 @@ export const universitiesData: Record<string, UniversityData> = {
       { value: "NIRF Top 3", label: "IIM Excellence" },
       { value: "3+ Years Exp", label: "Target Audience Eligibility" }
     ],
-    layoutOrder: ["hero", "stats", "highlights"], // Lead form is embedded inside the Hero split format
+    layoutOrder: ["hero", "stats", "highlights"],
     heroVariant: "split-form",
-    highlightsVariant: "grid"
+    highlightsVariant: "grid",
+    formName: "IIM Kozhikode Form",
+    crmSource: "IIMK",
+    utmSourceFallback: "Organic-iimk",
+    utmMediumFallback: "SODE-iimk-landing-page"
   }
 };
 

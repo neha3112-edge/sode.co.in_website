@@ -38,6 +38,10 @@ export default function UniversityLeadForm({ data }: { data: UniversityData }) {
             title="Request Program Information"
             subtitle="Fill in your details below"
             courseOptions={data.coursesOptions}
+            formNameOverride={data.formName}
+            utmSourceFallback={data.utmSourceFallback}
+            utmMediumFallback={data.utmMediumFallback}
+            sourceOverride={data.crmSource}
           />
         </div>
       </div>
