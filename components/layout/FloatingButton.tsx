@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { getAssetPath } from "@/lib/utils";
-import FormWrapper from "@/components/ui/FormWrapper";
+import FormWrapper from "@/components/forms/FormWrapper";
 import confetti from "canvas-confetti";
 
 export default function FloatingButton() {

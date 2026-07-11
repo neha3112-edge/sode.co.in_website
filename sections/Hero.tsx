@@ -7,7 +7,7 @@ import "react-phone-input-2/lib/style.css";
 import { useState } from "react";
 import Image from "next/image";
 import { getAssetPath } from "@/lib/utils";
-import FormWrapper from "@/components/ui/FormWrapper";
+import FormWrapper from "@/components/forms/FormWrapper";
  
 export function Hero() {
   const [downloadOpen, setDownloadOpen] = useState(false);

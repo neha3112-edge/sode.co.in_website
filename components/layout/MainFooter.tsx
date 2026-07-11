@@ -1,17 +1,15 @@
 "use client";
 
-import { Container } from "@/components/ui/Container";
-import { Button } from "@/components/ui/Button";
-import FormWrapper from "@/components/ui/FormWrapper";
+import FormWrapper from "@/components/forms/FormWrapper";
 import { useState } from "react";
-import GlobalDialog from "@/components/ui/GlobalDialog";
-import DisclaimerContent from "@/components/ui/DisclaimerContent";
-import PrivacyContent from "@/components/ui/PrivacyContent";
-import TermsContent from "@/components/ui/TermsContent";
+import GlobalDialog from "@/components/layout/GlobalDialog";
+import DisclaimerContent from "@/components/legal/DisclaimerContent";
+import PrivacyContent from "@/components/legal/PrivacyContent";
+import TermsContent from "@/components/legal/TermsContent";
 import Image from "next/image";
 import { getAssetPath } from "@/lib/utils";
 
-export function Footer() {
+export function MainFooter() {
   const [expertOpen, setExpertOpen] = useState(false)
 
   const [activeDialog, setActiveDialog] = useState<

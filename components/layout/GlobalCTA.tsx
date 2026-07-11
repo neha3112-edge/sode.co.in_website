@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import BottomCTA from "./BottomCTA";
-import FormWrapper from "./FormWrapper";
+import FormWrapper from "@/components/forms/FormWrapper";
 
 export default function GlobalCTA() {
     const [applyOpen, setApplyOpen] = useState(false);

@@ -4,11 +4,9 @@ import {
     Mail,
     Headphones,
     Home,
-    ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
 import Lottie from "lottie-react";
-import Image from "next/image";
 import successAnimation from "@/public/assets/animations/check.json";
 
 import { useEffect, useState } from "react";

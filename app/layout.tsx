@@ -2,9 +2,6 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 
-import { Header } from "@/components/ui/Header";
-import { Footer } from "@/sections/Footer";
-import FloatingButton from "@/components/ui/FloatingButton";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -36,22 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={poppins.className} suppressHydrationWarning>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        {/* HEADER */}
-        <Header />
-
-        {/* PAGE CONTENT */}
-        <main className="flex-1">{children}</main>
-
-        {/* FLOAT BUTTON */}
-        <div className="z-50">
-          <FloatingButton />
-        </div>
-        {/* GLOBAL CTA */}
-        {/* <div className="z-40">
-          <GlobalCTA />
-        </div> */}
-        {/* ✅ FOOTER (FIXED POSITION) */}
-        <Footer />
+        {children}
         <Analytics />
         <SpeedInsights />
       </body>

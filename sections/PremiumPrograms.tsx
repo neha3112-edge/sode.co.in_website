@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
-import FormWrapper from "@/components/ui/FormWrapper";
+import FormWrapper from "@/components/forms/FormWrapper";
 import { getAssetPath } from "@/lib/utils";
 
 const tabs = [

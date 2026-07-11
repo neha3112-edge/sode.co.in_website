@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { getAssetPath } from "@/lib/utils";
-import FormWrapper from "@/components/ui/FormWrapper";
+import FormWrapper from "@/components/forms/FormWrapper";
 import { useState } from "react";
 
 const highlights = [

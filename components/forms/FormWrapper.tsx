@@ -3,10 +3,10 @@
 
 import { useState, useEffect } from "react";
 import { isValidPhoneNumber } from "libphonenumber-js";
-import Input from "./Input";
+import Input from "@/components/ui/Input";
 import PhoneField from "./PhoneField";
-import SelectField from "./SelectField";
-import { Button } from "./Button";
+import SelectField from "@/components/ui/SelectField";
+import { Button } from "@/components/ui/Button";
 import { useRouter } from "next/navigation";
 import { X } from "lucide-react";
 import { getAssetPath } from "@/lib/utils";
@@ -15,11 +15,13 @@ export default function FormWrapper({
     title,
     subtitle,
     onClose,
+    courseOptions,
 }: {
     title?: string;
     subtitle?: string;
     onClose?: () => void;
     isBrochure?: boolean;
+    courseOptions?: { value: string; label: string; disabled?: boolean; hidden?: boolean }[] | string[];
 }) {
     const [phone, setPhone] = useState("");
     const [phoneError, setPhoneError] = useState("");
@@ -221,7 +223,7 @@ export default function FormWrapper({
 
                 <SelectField
                     placeholder="Select Course"
-                    options={[
+                    options={courseOptions || [
                         { value: "", label: "Doctorate ━━", disabled: true },
                         { value: "DBA", label: "DBA" },
                         { value: "MBA+DBA", label: "MBA + DBA" },

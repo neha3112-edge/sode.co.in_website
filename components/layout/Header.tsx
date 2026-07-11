@@ -20,7 +20,6 @@ export function Header() {
   return (
     <header className="fixed top-0 w-full z-50 bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between h-18">
-
         {/* LOGO */}
         <Link href="/" className="flex items-center">
           <Image
@@ -45,20 +44,17 @@ export function Header() {
                     className="mr-3 px-4 py-2 bg-linear-to-r from-[#EEC471] via-[#F3CD73] to-[#FADA9A] text-[#102441] rounded-sm flex items-center gap-2 transition-all duration-200 shadow-xs"
                   >
                     <Image
-            src={getAssetPath("/assets/images/premium-icon.png")}
-            alt="Company Logo"
-            width={16}
-            height={16}
-            priority
-            className="object-contain cursor-pointer"
-          />
+                      src={getAssetPath("/assets/images/premium-icon.png")}
+                      alt="Company Logo"
+                      width={16}
+                      height={16}
+                      priority
+                      className="object-contain cursor-pointer"
+                    />
                     <span>{item.label}</span>
                   </a>
                 ) : (
-                  <a
-                    href={item.href}
-                    className="px-3"
-                  >
+                  <a href={item.href} className="px-3">
                     {item.label}
                   </a>
                 )}
@@ -82,8 +78,9 @@ export function Header() {
 
       {/* ✅ Mobile Navigation */}
       <div
-        className={`lg:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? "max-h-96 border-t border-gray-200" : "max-h-0"
-          } bg-white`}
+        className={`lg:hidden transition-all duration-300 overflow-hidden ${
+          isMenuOpen ? "max-h-96 border-t border-gray-200" : "max-h-0"
+        } bg-white`}
       >
         <div className="flex flex-col px-6 py-4 space-y-4 text-sm font-semibold text-gray-700">
           {navItems.map((item) => {

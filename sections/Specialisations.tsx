@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { getAssetPath } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, Clock } from "lucide-react";
-import FormWrapper from "@/components/ui/FormWrapper";
+import FormWrapper from "@/components/forms/FormWrapper";
 import { Button } from "@/components/ui/Button";
 
 const specialisations = [

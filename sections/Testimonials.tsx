@@ -44,11 +44,19 @@ export function Testimonials() {
   useEffect(() => {
     if (!api) return;
 
-    setCurrent(api.selectedScrollSnap() % count);
+    const snap = api.selectedScrollSnap() % count;
+    setTimeout(() => {
+      setCurrent(snap);
+    }, 0);
 
-    api.on("select", () => {
+    const onSelect = () => {
       setCurrent(api.selectedScrollSnap() % count);
-    });
+    };
+
+    api.on("select", onSelect);
+    return () => {
+      api.off("select", onSelect);
+    };
   }, [api, count]);
 
   // Autoplay (Auto Scroll) Effect: slides every 3 seconds
@@ -75,7 +83,7 @@ export function Testimonials() {
             Voices of Success
           </h2>
           <p className="text-slate-500 font-medium text-sm md:text-base mt-2 md:mt-3">
-            Leaders who didn't wait for permission.
+            Leaders who didn&apos;t wait for permission.
           </p>
         </div>
 

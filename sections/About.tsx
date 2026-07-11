@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import FormWrapper from "@/components/ui/FormWrapper";
+import FormWrapper from "@/components/forms/FormWrapper";
 import { useState } from "react";
 
 export function About() {
