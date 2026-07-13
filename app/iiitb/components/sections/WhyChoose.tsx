@@ -1,0 +1,106 @@
+import Image from "next/image";
+
+import { getAssetPath } from "@/lib/utils";
+
+type Reason = {
+  iconSrc: string;
+  title: string;
+  desc: string;
+  backgroundClass: string;
+};
+
+const reasons: Reason[] = [
+  {
+    iconSrc: "/assets/img/why-premier-credibility.webp",
+    title: "Premier institute credibility",
+    desc: "With strong academic standards and industry trust, IIIT Bangalore online courses deliver learning that carries real value in hiring and career growth.",
+    backgroundClass: "bg-[#203e6b]",
+  },
+  {
+    iconSrc: "/assets/img/why-ai-learning.webp",
+    title: "Future-ready AI learning",
+    desc: "The curriculum is built around practical outcomes in IIIT Bangalore artificial intelligence, helping professionals work confidently with real AI tools and use cases.",
+    backgroundClass: "bg-[#2c9dcc]",
+  },
+  {
+    iconSrc: "/assets/img/why-data-science.webp",
+    title: "Strong Data Science foundation",
+    desc: "Programs at IIIT Bangalore focus on statistics, ML models, business insights, and projects that build job-ready skills.",
+    backgroundClass: "bg-[#203e6b]",
+  },
+  {
+    iconSrc: "/assets/img/why-certification.webp",
+    title: "Certification advantage",
+    desc: "These are structured IIIT Bangalore certification courses designed for professionals who want credible credentials with applied training, not just theory.",
+    backgroundClass: "bg-[#2c9dcc]",
+  },
+  {
+    iconSrc: "/assets/img/why-leadership.webp",
+    title: "Leadership edge with partner institute",
+    desc: "The CTO leadership track includes IIM Udaipur artificial intelligence coverage, combining tech strategy and AI decision-making for senior roles.",
+    backgroundClass: "bg-[#203e6b]",
+  },
+  {
+    iconSrc: "/assets/img/why-hands-on-learning.webp",
+    title: "Hands-on learning approach",
+    desc: "Across multiple tracks, IIIT Bangalore online courses include projects, labs, and capstones, and all online IIIT Bangalore courses are integrated and career-focused.",
+    backgroundClass: "bg-[#2c9dcc]",
+  },
+];
+
+export function WhyChoose() {
+  return (
+    <section id="why-choose" className="w-full overflow-hidden bg-white">
+      {/* Heading Area */}
+      <div className="px-4 py-12 text-center sm:py-14 lg:py-16">
+        <h2 className="text-3xl font-black uppercase leading-tight tracking-tight text-black sm:text-4xl">
+          Why Choose?
+        </h2>
+
+        <p className="mt-3 text-sm tracking-[0.08em] text-gray-600 sm:text-base">
+          IIIT Bangalore Online Courses
+        </p>
+      </div>
+
+      {/* Checkerboard Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {reasons.map((reason) => (
+          <ReasonCard key={reason.title} reason={reason} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+type ReasonCardProps = {
+  reason: Reason;
+};
+
+function ReasonCard({ reason }: ReasonCardProps) {
+  return (
+    <article
+      className={`${reason.backgroundClass} flex min-h-[315px] flex-col items-center justify-center px-6 py-10 text-center text-white sm:px-8 lg:min-h-[316px] lg:px-10`}
+    >
+      {/* Icon */}
+      <div className="relative h-[100px] w-[100px] sm:h-[110px] sm:w-[110px]">
+        <Image
+          src={getAssetPath(reason.iconSrc)}
+          alt={reason.title}
+          fill
+          sizes="110px"
+          className="object-contain"
+        />
+      </div>
+
+      {/* Title */}
+      <h3 className="mt-7 text-lg font-extrabold leading-tight text-white sm:text-xl">
+        {reason.title}
+      </h3>
+
+      {/* Description */}
+      <p className="mt-4 max-w-[560px] text-sm leading-6 text-white/95 sm:text-[15px]">
+        {reason.desc}
+      </p>
+    </article>
+  );
+}

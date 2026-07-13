@@ -1,280 +1,517 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { isValidPhoneNumber } from "libphonenumber-js";
+import { X } from "lucide-react";
+
 import Input from "@/components/ui/Input";
 import PhoneField from "./PhoneField";
 import SelectField from "@/components/ui/SelectField";
 import { Button } from "@/components/ui/Button";
-import { useRouter } from "next/navigation";
-import { X } from "lucide-react";
 import { getAssetPath } from "@/lib/utils";
 
+export type FormCourseOption = {
+  value: string;
+  label: string;
+  disabled?: boolean;
+  hidden?: boolean;
+};
+
+type FormWrapperProps = {
+  title?: string;
+  subtitle?: string;
+
+  onClose?: () => void;
+  onSuccess?: () => void;
+
+  // Header ko hide karne ke liye
+  hideHeader?: boolean;
+
+  // Page-wise course configuration
+  courseOptions?: FormCourseOption[] | string[];
+
+  // Single-course page ke liye
+  defaultCourse?: string;
+  hideCourseField?: boolean;
+
+  // Page-wise lead information
+  formNameOverride?: string;
+  sourceOverride?: string;
+
+  // Optional UTM defaults
+  utmSourceFallback?: string;
+  utmMediumFallback?: string;
+
+  // Other options
+  showPhoneCallLink?: boolean;
+  submitButtonText?: string;
+  submitButtonClassName?: string;
+  redirectUrl?: string;
+};
+
+const STATE_OPTIONS = [
+  "Andhra Pradesh",
+  "Arunachal Pradesh",
+  "Assam",
+  "Bihar",
+  "Chhattisgarh",
+  "Goa",
+  "Gujarat",
+  "Haryana",
+  "Himachal Pradesh",
+  "Jharkhand",
+  "Karnataka",
+  "Kerala",
+  "Madhya Pradesh",
+  "Maharashtra",
+  "Manipur",
+  "Meghalaya",
+  "Mizoram",
+  "Nagaland",
+  "Odisha",
+  "Punjab",
+  "Rajasthan",
+  "Sikkim",
+  "Tamil Nadu",
+  "Telangana",
+  "Tripura",
+  "Uttar Pradesh",
+  "Uttarakhand",
+  "West Bengal",
+  "Andaman and Nicobar Islands",
+  "Chandigarh",
+  "Dadra and Nagar Haveli and Daman and Diu",
+  "Delhi",
+  "Jammu and Kashmir",
+  "Ladakh",
+  "Lakshadweep",
+  "Puducherry",
+];
+
+const DEFAULT_COURSE_OPTIONS: FormCourseOption[] = [
+  {
+    value: "DBA",
+    label: "DBA",
+  },
+  {
+    value: "MBA+DBA",
+    label: "MBA + DBA",
+  },
+  {
+    value: "MBA",
+    label: "MBA",
+  },
+  {
+    value: "MSC_DATA_SCIENCE",
+    label: "M.Sc. Data Science",
+  },
+  {
+    value: "MSC_MACHINE_LEARNING_AI",
+    label: "M.Sc. Machine Learning & AI",
+  },
+  {
+    value: "EXECUTIVE_DIPLOMA_ML_AI",
+    label: "Executive Diploma in Machine Learning & AI",
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Certificate Programme",
+  },
+  {
+    value: "PG_PROGRAM",
+    label: "Executive Programme",
+  },
+];
+
 export default function FormWrapper({
-    title,
-    subtitle,
-    onClose,
-    courseOptions,
-    formNameOverride,
-    utmSourceFallback,
-    utmMediumFallback,
-    sourceOverride,
-    onSuccess,
-    showPhoneCallLink,
-}: {
-    title?: string;
-    subtitle?: string;
-    onClose?: () => void;
-    isBrochure?: boolean;
-    courseOptions?: { value: string; label: string; disabled?: boolean; hidden?: boolean }[] | string[];
-    formNameOverride?: string;
-    utmSourceFallback?: string;
-    utmMediumFallback?: string;
-    sourceOverride?: string;
-    onSuccess?: () => void;
-    showPhoneCallLink?: boolean;
-}) {
-    const [phone, setPhone] = useState("");
-    const [phoneError, setPhoneError] = useState("");
-    const [formError, setFormError] = useState("");
+  title,
+  subtitle,
 
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [state, setState] = useState("");
-    const [course, setCourse] = useState("");
+  onClose,
+  onSuccess,
 
-    const [loading, setLoading] = useState(false);
-    const [closing, setClosing] = useState(false);
+  hideHeader = false,
 
-    const router = useRouter();
+  courseOptions,
+  defaultCourse = "",
+  hideCourseField = false,
 
-    useEffect(() => {
-        if (typeof window === "undefined") return;
+  formNameOverride,
+  sourceOverride,
 
-        const params = new URLSearchParams(window.location.search);
+  utmSourceFallback,
+  utmMediumFallback,
 
-        const utmData = {
-            utm_source: params.get("utm_source"),
-            utm_medium: params.get("utm_medium"),
-            utm_term: params.get("utm_term"),
-            utm_campaign: params.get("utm_campaign"),
-            utm_content: params.get("utm_content"),
-        };
-        localStorage.setItem("utm_data", JSON.stringify(utmData));
-    }, []);
+  showPhoneCallLink = false,
+  submitButtonText = "Submit",
+  submitButtonClassName = "",
+  redirectUrl = "/thank-you",
+}: FormWrapperProps) {
+  const router = useRouter();
 
-    const getUTMParams = () => {
-        if (typeof window === "undefined") return {};
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [state, setState] = useState("");
+  const [course, setCourse] = useState(defaultCourse);
 
-        const stored = localStorage.getItem("utm_data");
-        const params = new URLSearchParams(window.location.search);
-        const parsed = stored ? JSON.parse(stored) : {};
+  const [phoneError, setPhoneError] = useState("");
+  const [formError, setFormError] = useState("");
 
-        return {
-            utm_source: params.get("utm_source") || parsed.utm_source || utmSourceFallback || "Organic",
-            utm_medium: params.get("utm_medium") || parsed.utm_medium || utmMediumFallback || "SODE CO IN Organic",
-            utm_term: params.get("utm_term") || parsed.utm_term || "",
-            utm_campaign: params.get("utm_campaign") || parsed.utm_campaign || "",
-            utm_content: params.get("utm_content") || parsed.utm_content || "",
-            page_url: window.location.href,
-        };
+  const [loading, setLoading] = useState(false);
+  const [closing, setClosing] = useState(false);
+
+  const finalCourseOptions = useMemo(() => {
+    if (!courseOptions || courseOptions.length === 0) {
+      return DEFAULT_COURSE_OPTIONS;
+    }
+
+    return courseOptions;
+  }, [courseOptions]);
+
+  useEffect(() => {
+    setCourse(defaultCourse);
+  }, [defaultCourse]);
+
+  /*
+  |--------------------------------------------------------------------------
+  | Current URL ke UTM parameters save karna
+  |--------------------------------------------------------------------------
+  */
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const params = new URLSearchParams(window.location.search);
+    const existingStoredData = localStorage.getItem("utm_data");
+
+    let existingUtmData: Record<string, string | null> = {};
+
+    try {
+      existingUtmData = existingStoredData
+        ? JSON.parse(existingStoredData)
+        : {};
+    } catch {
+      existingUtmData = {};
+    }
+
+    const utmData = {
+      utm_source:
+        params.get("utm_source") || existingUtmData.utm_source || null,
+
+      utm_medium:
+        params.get("utm_medium") || existingUtmData.utm_medium || null,
+
+      utm_term: params.get("utm_term") || existingUtmData.utm_term || null,
+
+      utm_campaign:
+        params.get("utm_campaign") || existingUtmData.utm_campaign || null,
+
+      utm_content:
+        params.get("utm_content") || existingUtmData.utm_content || null,
     };
 
-    const handlePhone = (value: string) => {
-        setPhone(value);
+    localStorage.setItem("utm_data", JSON.stringify(utmData));
+  }, []);
 
-        try {
-            if (!value || !isValidPhoneNumber(value)) {
-                setPhoneError("Invalid phone number");
-            } else {
-                setPhoneError("");
-            }
-        } catch {
-            setPhoneError("Invalid phone number");
-        }
+  /*
+  |--------------------------------------------------------------------------
+  | Get UTM data
+  |--------------------------------------------------------------------------
+  */
+
+  const getUTMParams = () => {
+    if (typeof window === "undefined") {
+      return {
+        utm_source: utmSourceFallback || "Organic",
+        utm_medium: utmMediumFallback || "SODE CO IN Organic",
+        utm_term: "",
+        utm_campaign: "",
+        utm_content: "",
+        page_url: "",
+      };
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const storedData = localStorage.getItem("utm_data");
+
+    let parsedData: Record<string, string | null> = {};
+
+    try {
+      parsedData = storedData ? JSON.parse(storedData) : {};
+    } catch {
+      parsedData = {};
+    }
+
+    return {
+      utm_source:
+        params.get("utm_source") ||
+        parsedData.utm_source ||
+        utmSourceFallback ||
+        "Organic",
+
+      utm_medium:
+        params.get("utm_medium") ||
+        parsedData.utm_medium ||
+        utmMediumFallback ||
+        "SODE CO IN Organic",
+
+      utm_term: params.get("utm_term") || parsedData.utm_term || "",
+
+      utm_campaign: params.get("utm_campaign") || parsedData.utm_campaign || "",
+
+      utm_content: params.get("utm_content") || parsedData.utm_content || "",
+
+      page_url: window.location.href,
     };
+  };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setFormError("");
+  /*
+  |--------------------------------------------------------------------------
+  | Phone validation
+  |--------------------------------------------------------------------------
+  */
 
-        if (!name || !email || !phone || !state || !course) {
-            setFormError("All fields are required");
-            return;
-        }
+  const handlePhone = (value: string) => {
+    setPhone(value);
 
-        if (phoneError) return;
+    if (!value) {
+      setPhoneError("Phone number is required");
+      return;
+    }
 
-        setLoading(true);
+    try {
+      if (!isValidPhoneNumber(value)) {
+        setPhoneError("Invalid phone number");
+      } else {
+        setPhoneError("");
+      }
+    } catch {
+      setPhoneError("Invalid phone number");
+    }
+  };
 
-        try {
-            const res = await fetch(getAssetPath("/api/lead"), {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    name,
-                    email,
-                    phone,
-                    course,
-                    state,
-                    form_name: formNameOverride || title?.trim() || "Website Form",
-                    source: sourceOverride || "SODE",
-                    ...getUTMParams(),
-                }),
-            });
+  /*
+  |--------------------------------------------------------------------------
+  | Reset form
+  |--------------------------------------------------------------------------
+  */
 
-            const data = await res.json();
+  const resetForm = () => {
+    setName("");
+    setPhone("");
+    setEmail("");
+    setState("");
+    setCourse(defaultCourse);
+    setPhoneError("");
+    setFormError("");
+  };
 
-            if (res.ok && data?.success) {
-                setClosing(true);
+  /*
+  |--------------------------------------------------------------------------
+  | Form submit
+  |--------------------------------------------------------------------------
+  */
 
-                setTimeout(() => {
-                    onClose?.();
-                    onSuccess?.();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-                    // ✅ IMPORTANT: SAVE BASED ON FORM NAME
-                    if (title?.trim() === "Download Brochure") {
-                        sessionStorage.setItem("isBrochureFlow", "true");
-                    } else {
-                        sessionStorage.removeItem("isBrochureFlow");
-                    }
+    setFormError("");
 
-                    router.push("/thank-you");
-                }, 300);
-            } else {
-                setFormError(data?.message || "Something went wrong");
-            }
-        } catch (err) {
-            console.error("Submit Error:", err);
-            setFormError("Network error. Please try again.");
-        } finally {
-            setLoading(false);
-        }
-    };
+    const finalCourse = hideCourseField ? defaultCourse : course;
 
-    return (
-        <div
-            className={`transition-all duration-300 ${closing
-                ? "opacity-0 scale-95 translate-y-2"
-                : "opacity-100 scale-100 translate-y-0"
-                }`}
-        >
-            {(title || subtitle) && (
-                <div className="relative mb-6">
-                    <div className="text-center">
-                        {title && (
-                            <h2 className="text-xl font-bold text-[#1C3569]">
-                                {title}
-                            </h2>
-                        )}
-                        {subtitle && (
-                            <p className="text-gray-600 text-sm">
-                                {subtitle}
-                            </p>
-                        )}
-                        {showPhoneCallLink && (
-                            <div className="call_fix_text_section mt-2 mb-1">
-                                <a className="call_fix_text" href="tel:07065777755">
-                                    <i className="fa fa-phone"></i> +91 7065 7777 55
-                                </a>
-                            </div>
-                        )}
-                    </div>
+    if (!name.trim()) {
+      setFormError("Name is required");
+      return;
+    }
 
-                    {onClose && (
-                        <button
-                            onClick={onClose}
-                            className="absolute top-2 right-0 text-gray-400 hover:text-black"
-                        >
-                            <X className="text-red-500" />
-                        </button>
-                    )}
-                </div>
+    if (!phone) {
+      setFormError("Phone number is required");
+      return;
+    }
+
+    if (phoneError) {
+      setFormError(phoneError);
+      return;
+    }
+
+    if (!email.trim()) {
+      setFormError("Email is required");
+      return;
+    }
+
+    if (!state) {
+      setFormError("State is required");
+      return;
+    }
+
+    if (!finalCourse) {
+      setFormError("Course is required");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const payload = {
+        name: name.trim(),
+        email: email.trim(),
+        phone,
+        state,
+
+        course: finalCourse,
+
+        form_name: formNameOverride || title?.trim() || "Website Form",
+
+        source: sourceOverride || "SODE",
+
+        ...getUTMParams(),
+      };
+
+      console.log("Lead payload:", payload);
+
+      const response = await fetch(getAssetPath("/api/lead"), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data?.success) {
+        throw new Error(data?.message || "Unable to submit form");
+      }
+
+      resetForm();
+      setClosing(true);
+
+      if (title?.trim().toLowerCase() === "download brochure") {
+        sessionStorage.setItem("isBrochureFlow", "true");
+      } else {
+        sessionStorage.removeItem("isBrochureFlow");
+      }
+
+      setTimeout(() => {
+        onSuccess?.();
+        onClose?.();
+        router.push(redirectUrl);
+      }, 300);
+    } catch (error) {
+      console.error("Form submit error:", error);
+
+      setFormError(
+        error instanceof Error
+          ? error.message
+          : "Network error. Please try again.",
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div
+      className={`transition-all duration-300 ${
+        closing
+          ? "translate-y-2 scale-95 opacity-0"
+          : "translate-y-0 scale-100 opacity-100"
+      }`}
+    >
+      {/* Form Header */}
+      {!hideHeader && (title || subtitle || onClose) && (
+        <div className="relative mb-5">
+          <div className="text-center">
+            {title && (
+              <h2 className="text-xl font-bold text-[#c9232c]">{title}</h2>
             )}
 
-            <form className="space-y-4" onSubmit={handleSubmit}>
-                <Input placeholder="Enter Your Name" value={name} onChange={(e: any) => setName(e.target.value)} />
-                <PhoneField value={phone} onChange={handlePhone} error={phoneError} />
-                <Input type="email" placeholder="Enter Your Email" value={email} onChange={(e: any) => setEmail(e.target.value)} />
+            {subtitle && (
+              <p className="mt-1 text-sm text-gray-600">{subtitle}</p>
+            )}
 
-                <SelectField
-                    placeholder="Select State"
-                    options={[
-                        "Andhra Pradesh",
-                        "Arunachal Pradesh",
-                        "Assam",
-                        "Bihar",
-                        "Chhattisgarh",
-                        "Goa",
-                        "Gujarat",
-                        "Haryana",
-                        "Himachal Pradesh",
-                        "Jharkhand",
-                        "Karnataka",
-                        "Kerala",
-                        "Madhya Pradesh",
-                        "Maharashtra",
-                        "Manipur",
-                        "Meghalaya",
-                        "Mizoram",
-                        "Nagaland",
-                        "Odisha",
-                        "Punjab",
-                        "Rajasthan",
-                        "Sikkim",
-                        "Tamil Nadu",
-                        "Telangana",
-                        "Tripura",
-                        "Uttar Pradesh",
-                        "Uttarakhand",
-                        "West Bengal",
-                        "Andaman and Nicobar Islands",
-                        "Chandigarh",
-                        "Dadra and Nagar Haveli and Daman and Diu",
-                        "Delhi",
-                        "Jammu and Kashmir",
-                        "Ladakh",
-                        "Lakshadweep",
-                        "Puducherry"
-                    ]}
-                    value={state}
-                    onChange={(val: string) => setState(val)}
-                />
+            {showPhoneCallLink && (
+              <div className="mt-2">
+                <a
+                  href="tel:+917065777755"
+                  className="inline-flex rounded-full bg-[#c9232c] px-5 py-1 text-sm font-semibold text-white transition hover:bg-[#aa1c25]"
+                >
+                  +91 7065 7777 55
+                </a>
+              </div>
+            )}
+          </div>
 
-                <SelectField
-                    placeholder="Select Course"
-                    options={courseOptions || [
-                        { value: "", label: "Doctorate ━━", disabled: true },
-                        { value: "DBA", label: "DBA" },
-                        { value: "MBA+DBA", label: "MBA + DBA" },
-                        { value: "", label: "Master ━━", disabled: true },
-                        { value: "MBA", label: "MBA" },
-                        { value: "MSC", label: "M.Sc. Data Science" },
-                        { value: "MSC", label: "M.Sc. Machine Learning & AI" },
-                        { value: "DIPLOMA", label: "Executive Diploma in Machine Learning & AI" },
-                        { value: "", label: "Certification ━━", disabled: true },
-                        { value: "CERTIFICATE", label: "Professional Certificate Programme in HR Management and Analytics" },
-                        { value: "CERTIFICATE", label: "Professional Certificate Programme in Data Science with Generative AI" },
-                        { value: "CERTIFICATE", label: "Executive Post Graduate Certificate Programme in Data Science & AI" },
-                        { value: "CERTIFICATE", label: "Executive Post Graduate Certificate in Generative AI & Agentic AI" },
-                        { value: "CERTIFICATE", label: "Advanced Certificate in Digital Marketing & Communication" },
-                        { value: "CERTIFICATE", label: "Advanced Certificate in Digital Brand Communication Strategy" },
-                        { value: "", label: "Executive Programs ━━", disabled: true },
-                        { value: "PG PROGRAMS", label: "Executive Programme in Generative AI for Leaders" },
-                        { value: "PG PROGRAMS", label: "Executive Post Graduate Programme in Applied AI and Agentic AI" },
-                        { value: "PG PROGRAMS", label: "Chief Technology Officer & AI Leadership Programme" }
-                    ]}
-                    value={course}
-                    onChange={(val: string) => setCourse(val)}
-                />
-
-                {formError && <p className="text-red-500 text-sm">{formError}</p>}
-
-                <Button type="submit" disabled={loading} className="w-full bg-[#1C3569] text-white h-12">
-                    {loading ? "Submitting..." : "Submit"}
-                </Button>
-            </form>
+          {onClose && (
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Close form"
+              className="absolute right-0 top-0 flex h-8 w-8 items-center justify-center rounded-full text-red-500 transition hover:bg-red-50"
+            >
+              <X size={20} />
+            </button>
+          )}
         </div>
-    );
+      )}
+
+      <form onSubmit={handleSubmit} className="space-y-3">
+        <Input
+          type="text"
+          placeholder="Enter Your Name"
+          value={name}
+          onChange={(event: any) => setName(event.target.value)}
+          disabled={loading}
+        />
+
+        <Input
+          type="email"
+          placeholder="Enter Your Email"
+          value={email}
+          onChange={(event: any) => setEmail(event.target.value)}
+          disabled={loading}
+        />
+
+        <PhoneField value={phone} onChange={handlePhone} error={phoneError} />
+
+        {!hideCourseField && (
+          <SelectField
+            placeholder="Select Course"
+            options={finalCourseOptions}
+            value={course}
+            onChange={(value: string) => setCourse(value)}
+          />
+        )}
+
+        <SelectField
+          placeholder="Select Your State"
+          options={STATE_OPTIONS}
+          value={state}
+          onChange={(value: string) => setState(value)}
+        />
+
+        {hideCourseField && defaultCourse && (
+          <div className="border border-gray-200 bg-gray-50 px-3 py-3 text-sm text-gray-700">
+            Selected Course:{" "}
+            <span className="font-semibold">{defaultCourse}</span>
+          </div>
+        )}
+
+        {formError && (
+          <p className="text-sm font-medium text-red-500">{formError}</p>
+        )}
+
+        <Button
+          type="submit"
+          disabled={loading}
+          className={`h-11 w-full bg-[#c9232c] font-semibold text-white hover:bg-[#aa1c25] ${submitButtonClassName}`}
+        >
+          {loading ? "Submitting..." : submitButtonText}
+        </Button>
+      </form>
+    </div>
+  );
 }
