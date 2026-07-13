@@ -58,6 +58,7 @@ export async function POST(req: Request) {
       state,
       form_name,
       source,
+      sub_source,
       utm_source,
       utm_medium,
       utm_term,
@@ -103,6 +104,7 @@ export async function POST(req: Request) {
       form_name: form_name || "Default Form",
       // ✅ dynamic source
       source: source || "SODE",
+      sub_source: sub_source || "",
       utm_source: finalUtmSource,
       utm_medium: finalUtmMedium,
       utm_term: finalUtmTerm,
@@ -264,6 +266,30 @@ export async function POST(req: Request) {
       }
     } else {
       console.log("Brevo API Key is not configured. Skipping Brevo API submission.");
+    }
+
+    // 5. Submit to Google Sheets (specifically for IIITB Leads)
+    if (finalPayload.source === "IIITB LP" || finalPayload.form_name?.includes("IIITB") || finalPayload.form_name?.includes("Coupon Form") || finalPayload.form_name?.includes("Compare University Form")) {
+      try {
+        console.log("Submitting lead to IIITB Google Sheets Script...");
+        const gsheetResponse = await fetch(
+          "https://script.google.com/macros/s/AKfycbwCXWFhWQAxt0tR-JOK-6cGBK4MjkiDGSYsxUlcVWjlpJeqJKv5V6a0fm7i9EZFeTV7hw/exec",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(finalPayload),
+          }
+        );
+        if (!gsheetResponse.ok) {
+          console.error("IIITB Google Sheets error response:", await gsheetResponse.text());
+        } else {
+          console.log("Lead successfully submitted to IIITB Google Sheets Script");
+        }
+      } catch (gsheetErr) {
+        console.error("Failed to send lead to IIITB Google Sheets Script:", gsheetErr);
+      }
     }
 
     return NextResponse.json({

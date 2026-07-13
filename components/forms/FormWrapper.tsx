@@ -20,6 +20,7 @@ export default function FormWrapper({
     utmSourceFallback,
     utmMediumFallback,
     sourceOverride,
+    onSuccess,
 }: {
     title?: string;
     subtitle?: string;
@@ -30,6 +31,7 @@ export default function FormWrapper({
     utmSourceFallback?: string;
     utmMediumFallback?: string;
     sourceOverride?: string;
+    onSuccess?: () => void;
 }) {
     const [phone, setPhone] = useState("");
     const [phoneError, setPhoneError] = useState("");
@@ -127,6 +129,7 @@ export default function FormWrapper({
 
                 setTimeout(() => {
                     onClose?.();
+                    onSuccess?.();
 
                     // ✅ IMPORTANT: SAVE BASED ON FORM NAME
                     if (title?.trim() === "Download Brochure") {
