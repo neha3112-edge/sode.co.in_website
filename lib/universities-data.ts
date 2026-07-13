@@ -280,6 +280,7 @@ export const universitiesData: Record<string, UniversityData> = {
     image: "/edgewood/assets/img/edgewood_mobile_new_img.png",
     badge: "UGC DEB Recognized partner",
     bannerTitle: "Learn Business Leadership Skills With",
+    bannerSubtitle: "Earn a globally recognized Online DBA or Dual MBA + DBA from Edgewood University with HLC accreditation and no GMAT required.",
     heroTitleHtml: "<h1 class=\"univ_heading\">EdgeWood <br> Online University</h1><div class=\"main_dba_section\"><span class=\"online_heading\">Online</span><h1><span class=\"dba_heading\">DBA</span> MBA + DBA</h1></div>",
     bannerPartner: "By <span class=\"underline_text\">Edgewood University</span> via <span class=\"underline_text\">upGrad</span>",
     heroBullets: [
