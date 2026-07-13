@@ -26,13 +26,21 @@ export default function UniversityHero({ data, onOpenBrochure }: UniversityHeroP
               </a>
             </div>
             <h2 className="whitespace-pre-line">{data.bannerTitle}</h2>
-            <h1>{data.name} <br />Online Programs</h1>
-            <div className="new_banner_heading">
-              Online Programs via <span className="underline_text">SODE</span>
-            </div>
+            {data.heroTitleHtml ? (
+              <div dangerouslySetInnerHTML={{ __html: data.heroTitleHtml }}></div>
+            ) : (
+              <h1>{data.name} <br />Online Programs</h1>
+            )}
+            {data.bannerPartner ? (
+              <div className="new_banner_heading" dangerouslySetInnerHTML={{ __html: data.bannerPartner }}></div>
+            ) : (
+              <div className="new_banner_heading">
+                Online Programs via <span className="underline_text">SODE</span>
+              </div>
+            )}
             <div className="banner_lists">
               <ul>
-                {data.coursesBullets.slice(0, 4).map((bullet, idx) => (
+                {(data.heroBullets || data.coursesBullets).slice(0, 4).map((bullet, idx) => (
                   <li key={idx}>
                     <i className="fa fa-check-square-o"></i> {bullet}
                   </li>
@@ -62,6 +70,7 @@ export default function UniversityHero({ data, onOpenBrochure }: UniversityHeroP
                 utmSourceFallback={data.utmSourceFallback}
                 utmMediumFallback={data.utmMediumFallback}
                 sourceOverride={data.crmSource}
+                showPhoneCallLink={data.id === "edgewood"}
               />
             </div>
           </div>

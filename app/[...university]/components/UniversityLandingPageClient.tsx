@@ -109,8 +109,11 @@ export default function UniversityLandingPageClient({ data }: { data: EnrichedUn
         onOpenBrochure={handleOpenBrochure}
       />
 
-      {/* Accreditations & Approvals */}
-      <UniversityApprovals data={data} />
+      {/* Stats (renders immediately below hero for Edgewood) */}
+      {data.id === "edgewood" && <UniversityStats data={data} />}
+
+      {/* Accreditations & Approvals (for other universities) */}
+      {data.id !== "edgewood" && <UniversityApprovals data={data} />}
 
       {/* Courses Offered */}
       <UniversityCourses
@@ -120,13 +123,13 @@ export default function UniversityLandingPageClient({ data }: { data: EnrichedUn
       />
 
       {/* Why Choose Section */}
-      <UniversityWhyChoose data={data} />
+      {data.id !== "edgewood" && <UniversityWhyChoose data={data} />}
 
       {/* Midscroll Trigger for Gift Popup */}
       <div id="midScrollTrigger" ref={midScrollRef} style={{ height: "1px" }}></div>
 
-      {/* Achievements / Stats banner */}
-      <UniversityStats data={data} />
+      {/* Achievements / Stats banner (for other universities) */}
+      {data.id !== "edgewood" && <UniversityStats data={data} />}
 
       {/* About Section */}
       <UniversityAbout
@@ -134,6 +137,60 @@ export default function UniversityLandingPageClient({ data }: { data: EnrichedUn
         onOpenBrochure={handleOpenBrochure}
         onOpenEnquire={() => setIsEnquireOpen(true)}
       />
+
+      {/* Accreditations & Approvals (for Edgewood, approvals is after About) */}
+      {data.id === "edgewood" && <UniversityApprovals data={data} />}
+
+      {/* Specialisations */}
+      {data.specialisations && (
+        <section className="specialisation-section" id="specializations">
+          <div className="header">
+            <h2>Specializations of {data.name}</h2>
+          </div>
+          <div className="spec-container">
+            {data.specialisations.map((spec, idx) => (
+              <div className="spec-card" key={idx}>
+                <div
+                  className="card-image"
+                  style={{ backgroundImage: `url('${spec.image}')` }}
+                ></div>
+                <div className="card-content">
+                  <h3>{spec.title}</h3>
+                  <p className="description">{spec.desc}</p>
+                  <button className="apply-btn-border enquireNowBtn" onClick={() => setIsEnquireOpen(true)}>
+                    Apply Now
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Learning Outcomes */}
+      {data.outcomesList && (
+        <section id="learning-section" className="learning-outcomes">
+          <div className="outcomes-header">
+            <h2>LEARNING OUTCOMES OF</h2>
+            <div className="line-title">
+              <span>{data.name}</span>
+            </div>
+          </div>
+          <div className="outcomes-grid">
+            {data.outcomesList.map((outcome, idx) => (
+              <div className="outcome-item" key={idx}>
+                <div className="icon-circle">
+                  <img src={outcome.image || "/edgewood/assets/img/learning-outcome-edgewood-icon.webp"} alt="Icon" />
+                </div>
+                <div className="outcome-text">
+                  <h3>{outcome.title}</h3>
+                  <p>{outcome.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Certificate Showcase */}
       <UniversityCertificate

@@ -12,7 +12,12 @@ export default function UniversityCompare({ data, onOpenCompare }: UniversityCom
     <div className="compare_Section">
       <div className="compare_box">
         <h2>Still Confused?</h2>
-        <h4>Compare {data.name} with Top UGC-DEB Approved Universities</h4>
+        <h4>
+          Compare {data.name} with{" "}
+          {data.id === "edgewood"
+            ? "Top World Renowned Universities"
+            : "Top UGC-DEB Approved Universities"}
+        </h4>
         <a
           href="javascript:void(0);"
           className="compare_btn"

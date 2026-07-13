@@ -4,6 +4,7 @@ import UniversityFooter from "./components/UniversityFooter";
 import { getEnrichedUniversityData } from "@/lib/universities-data";
 import { notFound } from "next/navigation";
 import "./iiitb.css";
+import "./edgewood.css";
 
 interface LayoutProps {
   children: ReactNode;
@@ -25,8 +26,10 @@ export default async function UniversityLayout({ children, params }: LayoutProps
     "--dark-bg": data.theme.darkBg,
   } as React.CSSProperties;
 
+  const scopeClass = universitySlug === "edgewood" ? "edgewood-scope" : "iiitb-scope";
+
   return (
-    <div className="uni-page iiitb-scope" style={themeStyles}>
+    <div className={`uni-page ${scopeClass}`} style={themeStyles}>
       <UniversityHeader data={data} />
       <main className="flex-1">{children}</main>
       <UniversityFooter data={data} />

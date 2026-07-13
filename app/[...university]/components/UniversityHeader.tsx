@@ -20,7 +20,7 @@ export default function UniversityHeader({ data }: { data: EnrichedUniversityDat
         <div className="header_menu">
           <ul className="header_menu_list">
             <li><a href="#main-courses">Courses</a></li>
-            <li><a href="#approvals">Approvals</a></li>
+            <li><a href={data.id.toLowerCase() === "edgewood" ? "#c-offered" : "#approvals"}>Approvals</a></li>
             <li><a href="#about-section">About</a></li>
             <li><a href="#faqs">FAQ</a></li>
           </ul>
@@ -55,10 +55,11 @@ export default function UniversityHeader({ data }: { data: EnrichedUniversityDat
           </li>
           <li>
             <a
-              href="#approvals"
+              href={data.id.toLowerCase() === "edgewood" ? "#c-offered" : "#approvals"}
               onClick={() => {
                 setMobileMenuOpen(false);
-                document.getElementById("approvals")?.scrollIntoView({ behavior: "smooth" });
+                const targetId = data.id.toLowerCase() === "edgewood" ? "c-offered" : "approvals";
+                document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth" });
               }}
             >
               Approvals

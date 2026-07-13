@@ -89,6 +89,11 @@ export interface UniversityData {
   applyStepsList?: ApplyStep[];
   heroBgDesktop?: string;
   heroBgMobile?: string;
+  specialisations?: { title: string; desc: string; image: string }[];
+  outcomesList?: { title: string; desc: string; image?: string }[];
+  heroTitleHtml?: string;
+  bannerPartner?: string;
+  heroBullets?: string[];
 }
 
 export const universitiesData: Record<string, UniversityData> = {
@@ -271,14 +276,19 @@ export const universitiesData: Record<string, UniversityData> = {
   edgewood: {
     id: "edgewood",
     name: "Edgewood University",
-    logo: "/assets/images/edgewood-logo.jpg",
-    image: "/assets/images/edgewood-image.png",
+    logo: "/edgewood/assets/img/edgewood-university-black.png",
+    image: "/edgewood/assets/img/edgewood_mobile_new_img.png",
     badge: "UGC DEB Recognized partner",
-    bannerTitle: "Elevate Your Leadership with Edgewood University",
-    bannerSubtitle: "Earn a globally recognized Online Doctor of Business Administration or Dual MBA + DBA degree.",
+    bannerTitle: "Learn Business Leadership Skills With",
+    heroTitleHtml: "<h1 class=\"univ_heading\">EdgeWood <br> Online University</h1><div class=\"main_dba_section\"><span class=\"online_heading\">Online</span><h1><span class=\"dba_heading\">DBA</span> MBA + DBA</h1></div>",
+    bannerPartner: "By <span class=\"underline_text\">Edgewood University</span> via <span class=\"underline_text\">upGrad</span>",
+    heroBullets: [
+      "Globally recognised U.S. accreditation (HLC)",
+      "No GMAT/GRE + flexible pay-per-month model"
+    ],
     coursesBullets: [
       "Doctor of Business Administration (24 Months)",
-      "MBA + DBA Dual Degree (30 Months)"
+      "MBA + DBA (24 Months)"
     ],
     coursesOptions: [
       { value: "Doctor of Business Administration", label: "Doctor of Business Administration" },
@@ -287,9 +297,9 @@ export const universitiesData: Record<string, UniversityData> = {
     metaTitle: "Online DBA & Dual MBA + DBA | Edgewood University – SODE",
     metaDesc: "Elevate your corporate leadership and management skills with an online DBA or Dual MBA + DBA from Edgewood University.",
     theme: {
-      primary: "#14532d",
-      secondary: "#fbbf24",
-      darkBg: "#1c1917"
+      primary: "#ba0000",
+      secondary: "#fdc75e",
+      darkBg: "#111111"
     },
     highlights: [
       { title: "Strategic DBA", desc: "Gain critical problem-solving and business research skills suitable for executive leadership roles.", icon: "♛" },
@@ -298,13 +308,17 @@ export const universitiesData: Record<string, UniversityData> = {
       { title: "Global Peer Cohort", desc: "Interact with senior managers and business heads from different sectors.", icon: "🌐" }
     ],
     stats: [
-      { value: "24-30 Months", label: "Flexible Timeline" },
-      { value: "UGC DEB Partner", label: "Recognized Format" },
-      { value: "No Entrance Exam", label: "Easy Admission Track" }
+      { value: "95+", label: "Years of legacy" },
+      { value: "5 lakh+", label: "Enrollments" },
+      { value: "PwC", label: "Certificate" },
+      { value: "Dual", label: "Degree" }
     ],
     faq: [
-      { question: "What is the dual MBA + DBA degree program?", answer: "This program enables you to complete both a Master of Business Administration and a Doctor of Business Administration sequentially, accelerating your academic goals." },
-      { question: "Is the degree valid internationally?", answer: "Yes, Edgewood degrees are recognized internationally for corporate leadership and academic pathways." }
+      { question: "What is the duration of the Edgewood University Online DBA?", answer: "The Edgewood University Online DBA can be completed in as little as 24 months, depending on your pace." },
+      { question: "Is the Edgewood University Online DBA accredited?", answer: "The Edgewood University Online DBA is HLC-accredited, which supports its academic credibility in the U.S." },
+      { question: "How long does the Edgewood University Online MBA+DBA take to complete?", answer: "The Edgewood University Online MBA+DBA can be completed in around 2.5 years, combining both degrees in one structured path." },
+      { question: "Does the MBA part of Edgewood University's Online MBA+DBA have business accreditation?", answer: "Yes. The MBA included in the Edgewood University Online MBA+DBA is ACBSP-accredited, which reflects quality standards in business education." },
+      { question: "Which is better: Edgewood University Online MBA or MBA+DBA?", answer: "Choose Edgewood University Online MBA for leadership and career growth. Choose MBA+DBA if you want advanced expertise, applied research skills, and the “Dr.” title." }
     ],
     layoutOrder: ["hero", "stats", "highlights", "faq"],
     heroVariant: "split-form",
@@ -312,7 +326,83 @@ export const universitiesData: Record<string, UniversityData> = {
     formName: "Edgewood University Form",
     crmSource: "Edgewood LP",
     utmSourceFallback: "Organic-edgewood",
-    utmMediumFallback: "SODE-edgewood-landing-page"
+    utmMediumFallback: "SODE-edgewood-landing-page",
+    aboutTitle: "About Edgewood University Online",
+    aboutDesc: "Edgewood University Online is a US-based university that was established in 1927, and the university is located in Madison. With 95+ years of excellence, the university is one that offers career-focused learning. The university has the approval of ACBSP, HLC, which make sure the education provided by Edgewood University Online is globally competitive. The university offers a dual program in Edgewood University Online MBA + DBA, and the university also provides a management degree, which is called Edgewood University Online MBA. Through their flexible programs, students can get an industry-relevant curriculum, faculty support, and a learning model built for working professionals.",
+    aboutImage: "/edgewood/assets/img/edegewood-about-image.webp",
+    certificateTitle: "Sample Certification",
+    certificateDesc: "Edgewood University Online offers two certifications after completion of their degree: PwC and the certificate of Edgewood University. These two certificates help students prepare for top-board level roles. In the partnership of PwC India, it teaches strategic thinking, handling stakeholders, governance, and compliance through live lectures which teaches students a real-world expertise guidance, which builds confidence to succeed in a business career with Edgewood University Online MBA + DBA and MBA.",
+    certificateImage: "/edgewood/assets/img/sample-certficate-edgewood.webp",
+    coursesList: [
+      {
+        title: "Edgewood University Online DBA",
+        duration: "24 Months",
+        desc: "The Online DBA accredited by HLC introduces learners to board dynamics, strategic finance, decision-making, and digital transformation. This 24-month program prepares professionals for the Dr. title, with real-time project exposure and top faculty, following a 5-day campus immersion and the Online Networking Gala for Network and Career Growth.",
+        img: "/edgewood/assets/img/online-dba-edgewood.webp",
+        pdf: "/edgewood/assets/img/edgewood_dba.pdf"
+      },
+      {
+        title: "Edgewood University Online MBA + DBA",
+        duration: "24 Months",
+        desc: "The Dual degree is in demand nowadays. Many students plan to study an online MBA + DBA as their career pathway. The student can complete the degree in 2.5 years, which combines executive skills an MBA student needs with applied research and the respected “Dr” title.",
+        img: "/edgewood/assets/img/dbamba-edgewood.webp",
+        pdf: "/edgewood/assets/img/edgewood_mba_dba.pdf"
+      }
+    ],
+    specialisations: [
+      {
+        title: "DBA Leadership",
+        desc: "Edgewood University Online DBA leadership builds leadership skills that enable students to learn management and strategic decision-making skills, using applied research to solve real organisational challenges in senior roles, and to gain skilled knowledge.",
+        image: "/edgewood/assets/img/leadership-edgewood.webp"
+      },
+      {
+        title: "DBA Finance",
+        desc: "Finance Specializations in Edgewood University's Online DBA develop advanced expertise in financial strategy, risk management, and corporate decision-making. This curriculum helps students use research-led frameworks to manage complex financial problems.",
+        image: "/edgewood/assets/img/finanance-edgewood.webp"
+      },
+      {
+        title: "MBA + DBA Leadership",
+        desc: "Edgewood University Online DBA Learning in MBA + DBA Leadership combines MBA leadership skills with doctoral-level applied research, preparing professionals for senior management, consulting, and enterprise growth roles.",
+        image: "/edgewood/assets/img/leadership-edgewood-2.webp"
+      },
+      {
+        title: "MBA + DBA Finance",
+        desc: "Edgewood University Online DBA Learning in MBA + DBA Finance blends MBA finance fundamentals with advanced doctoral research, supporting strategic investment, risk control, and high-level corporate finance decisions.",
+        image: "/edgewood/assets/img/Finance.webp"
+      }
+    ],
+    outcomesList: [
+      {
+        title: "Optional On-Campus Immersion",
+        desc: "Experience U.S. campus learning through optional immersion, workshops, faculty meets, and academic resources onsite support.",
+        image: "/edgewood/assets/img/learning-outcome-edgewood-icon.webp"
+      },
+      {
+        title: "Online Networking Gala",
+        desc: "Join online networking galas to meet peers, alumni, mentors, and industry leaders worldwide and expand your professional network.",
+        image: "/edgewood/assets/img/learning-outcome-edgewood-icon.webp"
+      },
+      {
+        title: "Stakeholder Influence",
+        desc: "Build stakeholder influence by negotiating confidently, managing expectations, presenting data, and leading change initiatives effectively.",
+        image: "/edgewood/assets/img/learning-outcome-edgewood-icon.webp"
+      },
+      {
+        title: "Conduct Applied Doctoral Research",
+        desc: "Conduct applied doctoral research using evidence-based methods, solving business problems with measurable outcomes for organisations.",
+        image: "/edgewood/assets/img/learning-outcome-edgewood-icon.webp"
+      },
+      {
+        title: "Expert Faculty",
+        desc: "Learn from expert faculty who guide projects, share industry insights, and support academic progress personally to help learners gain the skills they need.",
+        image: "/edgewood/assets/img/learning-outcome-edgewood-icon.webp"
+      },
+      {
+        title: "Nationally Recognized",
+        desc: "Earn a nationally recognized U.S. qualification that enhances credibility, promotion prospects, and global mobility faster.",
+        image: "/edgewood/assets/img/learning-outcome-edgewood-icon.webp"
+      }
+    ]
   },
   esgci: {
     id: "esgci",
@@ -977,6 +1067,11 @@ export interface EnrichedUniversityData extends UniversityData {
   applyStepsList: ApplyStep[];
   heroBgDesktop: string;
   heroBgMobile: string;
+  specialisations?: { title: string; desc: string; image: string }[];
+  outcomesList?: { title: string; desc: string; image?: string }[];
+  heroTitleHtml?: string;
+  bannerPartner?: string;
+  heroBullets?: string[];
 }
 
 export function getEnrichedUniversityData(id: string): EnrichedUniversityData | undefined {
@@ -1208,6 +1303,11 @@ export function getEnrichedUniversityData(id: string): EnrichedUniversityData | 
       { number: 5, title: "Document Submit", desc: "You need to upload all the required verified documents.", colorClass: "purple" },
       { number: 6, title: "Admission Confirm", desc: "Get Confirmation on your Email & Whatsapp", colorClass: "orange" }
     ],
+    specialisations: base.specialisations,
+    outcomesList: base.outcomesList,
+    heroTitleHtml: base.heroTitleHtml,
+    bannerPartner: base.bannerPartner,
+    heroBullets: base.heroBullets,
     heroBgDesktop,
     heroBgMobile
   };

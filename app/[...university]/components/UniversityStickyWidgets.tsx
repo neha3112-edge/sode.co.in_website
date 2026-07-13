@@ -52,8 +52,15 @@ export default function UniversityStickyWidgets({
 
       {/* Floating Gift Box Button */}
       <button type="button" className="coupon-btn animate-bounce" onClick={triggerCouponConfetti}>
-        <img src="/iiitb/assets/img/gift.gif" alt="Gift Coupon Button" />
+        <img src={`/${data.id}/assets/img/gift.gif`} alt="Gift Coupon Button" />
       </button>
+
+      {/* Floating Call Button */}
+      {data.id === "edgewood" && (
+        <a className="call_fix_image" href="tel:07065777755">
+          <img src="/edgewood/assets/img/call_icon.gif" alt="Call Now" />
+        </a>
+      )}
 
       {/* MODAL 1: Enquire Now Popup */}
       {isEnquireOpen && (
@@ -72,6 +79,7 @@ export default function UniversityStickyWidgets({
               utmSourceFallback={data.utmSourceFallback}
               utmMediumFallback={data.utmMediumFallback}
               sourceOverride={data.crmSource}
+              showPhoneCallLink={data.id === "edgewood"}
             />
           </div>
         </div>

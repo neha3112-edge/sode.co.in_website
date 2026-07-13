@@ -40,11 +40,17 @@ export default function UniversityFooter({ data }: { data: EnrichedUniversityDat
               Disclaimer
             </span>{" "}
             |{" "}
-            <span className="cursor-pointer hover:text-white" onClick={() => setActiveDialog("terms")}>
+            <span
+              className="disclaimer_popup cursor-pointer hover:text-white"
+              onClick={() => setActiveDialog("terms")}
+            >
               Terms &amp; Conditions
             </span>{" "}
             |{" "}
-            <span className="cursor-pointer hover:text-white" onClick={() => setActiveDialog("privacy")}>
+            <span
+              className="disclaimer_popup cursor-pointer hover:text-white"
+              onClick={() => setActiveDialog("privacy")}
+            >
               Privacy Policy
             </span>
           </p>

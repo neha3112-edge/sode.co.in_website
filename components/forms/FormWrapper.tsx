@@ -21,6 +21,7 @@ export default function FormWrapper({
     utmMediumFallback,
     sourceOverride,
     onSuccess,
+    showPhoneCallLink,
 }: {
     title?: string;
     subtitle?: string;
@@ -32,6 +33,7 @@ export default function FormWrapper({
     utmMediumFallback?: string;
     sourceOverride?: string;
     onSuccess?: () => void;
+    showPhoneCallLink?: boolean;
 }) {
     const [phone, setPhone] = useState("");
     const [phoneError, setPhoneError] = useState("");
@@ -170,6 +172,13 @@ export default function FormWrapper({
                             <p className="text-gray-600 text-sm">
                                 {subtitle}
                             </p>
+                        )}
+                        {showPhoneCallLink && (
+                            <div className="call_fix_text_section mt-2 mb-1">
+                                <a className="call_fix_text" href="tel:07065777755">
+                                    <i className="fa fa-phone"></i> +91 7065 7777 55
+                                </a>
+                            </div>
                         )}
                     </div>
 
