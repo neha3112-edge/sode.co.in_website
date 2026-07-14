@@ -27,7 +27,7 @@ const courses: Course[] = [
     duration: "20 weeks",
     description:
       "IIIT Bangalore online courses help leaders learn GenAI strategy and adoption using the A.D.A.P.T. Framework, with real business use cases, a capstone, and executive-level outcomes.",
-    image: "/assets/img/generative-ai-leaders.webp",
+    image: "/iiitb/img/course-1.webp",
   },
   {
     id: 2,
@@ -35,7 +35,7 @@ const courses: Course[] = [
     duration: "25 weeks",
     description:
       "IIIT Bangalore online courses build skills in data science and artificial intelligence through statistics, machine learning, deep learning, industry projects, and expert mentorship.",
-    image: "/assets/img/data-science-ai.webp",
+    image: "/iiitb/img/course-2.webp",
   },
   {
     id: 3,
@@ -44,7 +44,7 @@ const courses: Course[] = [
     duration: "24 weeks",
     description:
       "IIIT Bangalore online courses deliver practical learning in analytics, ML pipelines, and GenAI, with labs, real datasets, hands-on projects, and portfolio support.",
-    image: "/assets/img/data-science-generative-ai.webp",
+    image: "/iiitb/img/course-3.webp",
   },
   {
     id: 4,
@@ -52,7 +52,7 @@ const courses: Course[] = [
     duration: "12 months",
     description:
       "Learn applied artificial intelligence, generative AI, autonomous agents, machine learning models, and real-world AI deployment through practical projects and industry use cases.",
-    image: "/assets/img/applied-ai-agentic-ai.webp",
+    image: "/iiitb/img/course-4.webp",
   },
   {
     id: 5,
@@ -60,7 +60,7 @@ const courses: Course[] = [
     duration: "12 months",
     description:
       "Build strong foundations in machine learning, deep learning, natural language processing, and artificial intelligence with practical assignments and capstone projects.",
-    image: "/assets/img/machine-learning-ai.webp",
+    image: "/iiitb/img/course-5.webp",
   },
   {
     id: 6,
@@ -68,7 +68,7 @@ const courses: Course[] = [
     duration: "7 months",
     description:
       "Designed for technology leaders who want to develop strategic capabilities in AI transformation, product innovation, digital leadership, and enterprise technology management.",
-    image: "/assets/img/cto-ai-leadership.webp",
+    image: "/iiitb/img/course-6.webp",
   },
   {
     id: 7,
@@ -76,7 +76,7 @@ const courses: Course[] = [
     duration: "20 months",
     description:
       "Develop advanced capabilities in machine learning, artificial intelligence, deep learning, NLP, computer vision, and production-level AI systems.",
-    image: "/assets/img/msc-machine-learning-ai.webp",
+    image: "/iiitb/img/new-image1.webp",
   },
   {
     id: 8,
@@ -84,7 +84,7 @@ const courses: Course[] = [
     duration: "20 months",
     description:
       "Gain advanced knowledge of data science, analytics, statistical modelling, machine learning, generative AI, and business-focused data-driven decision-making.",
-    image: "/assets/img/msc-data-science-generative-ai.webp",
+    image: "/iiitb/img/new-image2.webp",
   },
 ];
 
@@ -198,7 +198,7 @@ function CourseCard({ course, onApply, onDownload }: CourseCardProps) {
   return (
     <Card className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_14px_40px_rgba(0,0,0,0.14)]">
       {/* Course Image */}
-      <div className="relative h-47.5 w-full overflow-hidden">
+      <div className="relative h-36 w-full overflow-hidden">
         <Image
           src={getAssetPath(course.image)}
           alt={course.title}
@@ -234,14 +234,14 @@ function CourseCard({ course, onApply, onDownload }: CourseCardProps) {
         </p>
 
         {/* Buttons */}
-        <div className="mt-auto grid grid-cols-1 gap-3 pt-5 min-[420px]:grid-cols-2">
+        <div className="mt-auto grid gap-2 pt-5 grid-cols-2">
           <Button
             size={"lg"}
             type="button"
             onClick={onDownload}
-            className="flex min-h-1 w-full items-center justify-center gap-2 rounded-lg bg-[#0757a4] px-3 py-3 text-center text-xs font-bold leading-tight text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#064987] hover:shadow-md active:translate-y-0 sm:px-4 sm:text-xs cursor-pointer"
+            className="flex min-h-1 w-full items-center justify-center gap-2 rounded-lg bg-[#0757a4] px-5 py-3 text-center text-xs font-bold leading-tight text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#064987] hover:shadow-md active:translate-y-0 sm:px-4 sm:text-xs cursor-pointer"
           >
-            <span className="whitespace-nowrap">Download Brochure</span>
+            <span className="whitespace-nowrap">Get Brochure</span>
             <Download size={15} strokeWidth={2.5} className="shrink-0" />
           </Button>
 
@@ -249,7 +249,7 @@ function CourseCard({ course, onApply, onDownload }: CourseCardProps) {
             size={"lg"}
             type="button"
             onClick={onApply}
-            className="flex max-h-40 w-full items-center justify-center rounded-lg bg-[#064779] px-4 py-3 text-xs font-bold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#043a64] hover:shadow-md active:translate-y-0 sm:text-xs cursor-pointer"
+            className="flex max-h-40 w-full items-center justify-center rounded-lg bg-[#064779] px-5 py-3 text-xs font-bold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#043a64] hover:shadow-md active:translate-y-0 sm:text-xs cursor-pointer"
           >
             Apply Now
           </Button>

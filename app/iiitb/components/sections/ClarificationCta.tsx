@@ -72,7 +72,7 @@ export function ClarificationCta() {
               size="lg"
               type="button"
               onClick={() => setFormOpen(true)}
-              className="inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-bold text-black shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-gray-100 hover:shadow-md md:w-auto"
+              className="inline-flex min-h-12 w-fit items-center justify-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-bold text-black shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-gray-100 hover:shadow-md md:w-auto"
             >
               <Phone size={16} fill="currentColor" strokeWidth={2} />
               Talk to Experts
@@ -86,7 +86,7 @@ export function ClarificationCta() {
         <div
           role="presentation"
           onClick={closeForm}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm"
+          className="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm"
         >
           <div
             role="dialog"

@@ -60,7 +60,7 @@ export default function Footer() {
                 alt="Scroll down"
                 width={48}
                 height={48}
-                className="h-14 w-14 object-contain"
+                className="h-18 w-18 rounded-full object-contain"
                 unoptimized
               />
             </button>

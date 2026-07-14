@@ -10,6 +10,7 @@ import FormWrapper, {
 } from "@/components/forms/FormWrapper";
 
 import IIITBImg from "../../assets/img/iiitb_desktop_new_bg.png";
+import logo from "../../assets/img/iiitb_new_logo_main.png";
 
 /*
 |--------------------------------------------------------------------------
@@ -61,10 +62,10 @@ export function Hero() {
     <>
       <section
         id="home"
-        className="relative overflow-hidden bg-[#eef4fd] pt-[72px]"
+        className="relative overflow-hidden bg-[#eef4fd] pt-18"
       >
         {/* Desktop Background */}
-        <div className="absolute inset-x-0 bottom-0 top-[72px] z-0 hidden lg:block">
+        <div className="absolute inset-x-0 bottom-0 top-18 z-0 hidden lg:block">
           <Image
             src={IIITBImg}
             alt="IIIT Bangalore campus"
@@ -77,34 +78,16 @@ export function Hero() {
           <div className="absolute inset-0 bg-white/5" />
         </div>
 
-        <Container className="relative z-10">
-          <div className="grid min-h-[460px] grid-cols-1 items-center gap-8 py-10 lg:grid-cols-[1fr_0.75fr] lg:gap-16 lg:py-5">
+        <Container className="relative z-10 px-0">
+          <div className="grid min-h-115 grid-cols-1 items-center pt-8 gap-8 lg:grid-cols-[1fr_0.75fr] lg:gap-16 lg:py-5 z-999">
             {/* Left Content */}
-            <div className="max-w-[560px] text-center lg:text-left">
+            <div className="text-center lg:text-left flex flex-col items-center justify-center md:items-baseline md:justify-left  px-4">
               {/* Logos */}
-              <div className="mb-4 flex items-center justify-center gap-4 lg:justify-start">
-                <div className="flex items-center gap-2">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#1a5a9f] text-xs font-black text-white">
-                    iiit
-                  </div>
-
-                  <div className="text-left">
-                    <p className="text-[11px] font-bold leading-tight text-[#34506c]">
-                      International Institute of
-                    </p>
-
-                    <p className="text-[11px] leading-tight text-[#34506c]">
-                      Information Technology Bangalore
-                    </p>
-                  </div>
-                </div>
-
-                <div className="h-8 w-px bg-gray-300" />
-
-                <span className="text-xl font-black text-[#ef3340]">
-                  upGrad
-                </span>
-              </div>
+              <Image
+                    src={logo}
+                    alt="IIIT Bangalore Logo"
+                    className="w-70 pb-5 text-center md:text-left"
+                  />
 
               {/* Small Heading */}
               <p className="text-lg font-bold leading-tight text-black sm:text-xl">
@@ -126,11 +109,11 @@ export function Hero() {
 
               {/* Provider */}
               <p className="mt-5 text-base font-semibold text-black sm:text-lg">
-                By <span className="underline">IIIT Bangalore via upGrad</span>
+                By <span className="underline">IIIT Bangalore</span> via <span className="underline">upGrad</span>
               </p>
 
               {/* Features */}
-              <div className="mx-auto mt-5 w-fit space-y-2 text-left lg:mx-0">
+              <div className="mx-auto mt-5 space-y-2 text-left md:text-center lg:mx-0">
                 <FeatureItem text="NAAC A+ accredited" />
                 <FeatureItem text="6+ Certification courses" />
                 <FeatureItem text="Partnership of IIIT & IIM Udaipur" />
@@ -148,9 +131,13 @@ export function Hero() {
               </button>
             </div>
 
+            <div className="mobile_banner_img md:hidden">
+              <img src="../iiitb/img/iiitb_mobile_new_img.png"></img>
+            </div>
+
             {/* Desktop Form */}
             <div className="hidden justify-end lg:flex">
-              <div className="w-full max-w-[390px] rounded-xl bg-white px-5 py-5 shadow-2xl">
+              <div className="w-full max-w-97.5 rounded-xl bg-white px-5 py-5 shadow-2xl">
                 <FormWrapper
                   title="Enquire Now"
                   subtitle="Academic Experts will assist you!"
@@ -166,7 +153,7 @@ export function Hero() {
           </div>
 
           {/* Mobile Form */}
-          <div className="pb-10 lg:hidden">
+          <div className="pb-10 lg:hidden -mt-4 z-9999 px-4">
             <div className="mx-auto w-full max-w-md rounded-2xl bg-white p-5 shadow-2xl">
               <FormWrapper
                 title="Enquire Now"
@@ -188,7 +175,7 @@ export function Hero() {
         <div
           role="presentation"
           onClick={() => setDownloadOpen(false)}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm"
+          className="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm"
         >
           <div
             role="dialog"
@@ -221,8 +208,8 @@ type FeatureItemProps = {
 
 function FeatureItem({ text }: FeatureItemProps) {
   return (
-    <div className="flex items-center gap-2 text-sm font-semibold italic text-black sm:text-base">
-      <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-sm bg-[#20d83d] text-white">
+    <div className="w-full flex items-center justify-left gap-2 text-sm font-semibold italic text-black sm:text-base">
+      <span className="flex h-4 w-4 shrink-0 items-center justify-left rounded-sm bg-[#20d83d] text-white">
         <Check size={13} strokeWidth={4} />
       </span>
 
