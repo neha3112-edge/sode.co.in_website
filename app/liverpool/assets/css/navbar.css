@@ -1,0 +1,287 @@
+/* .topnav {
+    overflow: hidden;
+    background-color: #fff;
+  }
+  
+  .topnav a {
+    float: right;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .topnav a.active {
+    background-color: #04AA6D;
+    color: white;
+  }
+  
+  .topnav .icon {
+    display: none;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .topnav a:not(:first-child) {display: none;}
+    .topnav a.icon {
+      float: right;
+      display: block;
+    }
+  }
+  
+  @media screen and (max-width: 600px) {
+    .topnav.responsive {position: relative;}
+    .topnav.responsive .icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .topnav.responsive a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+  } */
+
+  dl, ol, ul {
+    margin-top: 0;
+  margin-bottom: 0px!important; 
+}
+
+
+  /* ========== FIXED NAVBAR (your original structure) ========== */
+    .navbar {
+      position: fixed !important;
+      top: 0px !important;
+      width: 100%;
+      z-index: 1049;
+      background: #fff;
+      box-shadow: 0px 5px 20px #00000025;
+      padding-right: 10px !important;
+    }
+
+    .top-navbar {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      height: 55px;
+      padding: 1em;
+      
+      max-width: 1150px;
+      margin: auto;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    /* Logo area - from your design */
+    .logo {
+      display: flex;
+      align-items: center;
+      width: auto;
+    }
+
+    .des_logo {
+      width: auto;
+      display: flex;
+      align-items: end;
+    }
+
+    .des_logo img {
+      width: 60px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Desktop menu (horizontal) - FIXED & WORKING */
+    .header_menu {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .header_menu_list {
+      display: flex;
+      list-style: none;
+      gap: 2.2rem;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header_menu_list li a {
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #1e293b;
+      padding: 0.5rem 0;
+      transition: color 0.2s, border-bottom 0.2s;
+      letter-spacing: 0.3px;
+      position: relative;
+    }
+
+    .header_menu_list li a:hover {
+      color: #17479E;
+      text-decoration: none;
+    }
+
+    /* Mobile toggle button (hidden on desktop) */
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      transition: background 0.2s;
+      z-index: 1010;
+    }
+
+    .hamburger-icon {
+      width: 20px;
+      height: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .hamburger-icon span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background-color: #fff;
+      border-radius: 6px;
+      transition: all 0.25s ease-in-out;
+    }
+
+    /* Animated X for active state */
+    .mobile-toggle.active .hamburger-icon span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .mobile-toggle.active .hamburger-icon span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-toggle.active .hamburger-icon span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* ===== MOBILE DROPDOWN (SMOOTH EASE IN/OUT) ===== */
+    .mobile-dropdown {
+      display: block !important;
+      max-height: 0;
+      opacity: 0;
+      visibility: hidden;
+      overflow: hidden;
+      background: white;
+      border-top: 1px solid #e2e8f0;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+      transition: max-height 0.45s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.25s ease, visibility 0.2s;
+      width: 100%;
+    }
+
+    .mobile-dropdown.open {
+      max-height: 450px;
+      opacity: 1;
+      visibility: visible;
+      transition: max-height 0.45s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.3s ease, visibility 0s;
+    }
+
+    .mobile-menu-list {
+      list-style: none;
+      padding: 1.2rem 1.8rem;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .mobile-menu-list li a {
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #0f172a;
+      display: block;
+      padding: 0.5rem 0;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+    }
+
+    .mobile-menu-list li a:hover {
+      color: #17479E;
+      padding-left: 0.75rem;
+      border-left-color: #17479E;
+    }
+
+    /* ========== RESPONSIVE: MOBILE & TABLET ========== */
+    @media (max-width: 768px) {
+      .top-navbar {
+        padding: 0.75rem;
+        height: 50px;
+      }
+
+      .des_logo img {
+        width: 50px;
+      }
+
+      /* Hide desktop menu on mobile */
+      .header_menu {
+        display: none;
+      }
+
+      /* Show hamburger button */
+      .mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #08417b !important;
+    background: #08417b;
+}
+    }
+
+    @media (max-width: 480px) {
+      .mobile-menu-list li a {
+        font-size: 1rem;
+      }
+      .mobile-menu-list {
+        padding: 1rem 1.5rem;
+        gap: 1rem;
+      }
+      .des_logo img {
+        width: 50px;
+      }
+    }
+
+    /* Fix for any conflict with your existing classes */
+    .navbar .top-navbar .menu, 
+    .navbar .top-navbar .menu-button-container {
+      display: none;
+    }
+
+    /* Ensure header menu is always horizontal on desktop */
+    @media (min-width: 769px) {
+      .header_menu {
+        display: flex !important;
+      }
+      .mobile-toggle {
+        display: none !important;
+      }
+      .mobile-dropdown {
+        display: none !important;
+      }
+    }
+
+    /* Additional smoothness for page scroll when navbar fixed */
+    html {
+      scroll-padding-top: 85px;
+    }
