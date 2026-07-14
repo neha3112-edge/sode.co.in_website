@@ -215,21 +215,14 @@ function CourseCard({ course, onApply, onDownload }: CourseCardProps) {
         </h3>
 
         {/* Duration */}
-        <div className="mt-4 flex items-center gap-2 text-sm text-black">
-          <Clock
-            size={17}
-            fill="currentColor"
-            strokeWidth={2}
-            className="shrink-0"
-          />
-
+        <div className="mt-4 flex items-center gap-1.5 text-sm">
+          <Clock size={16} strokeWidth={2} className="shrink-0" />
           <span className="font-bold">Duration:</span>
-
           <span>{course.duration}</span>
         </div>
 
         {/* Description */}
-        <p className="mt-4 text-sm leading-6 text-gray-600 sm:text-[15px]">
+        <p className="mt-4 text-sm leading-5.5 text-gray-600 sm:text-[15px]">
           {course.description}
         </p>
 

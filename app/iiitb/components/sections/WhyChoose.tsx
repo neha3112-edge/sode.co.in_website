@@ -57,7 +57,7 @@ export function WhyChoose() {
           Why Choose?
         </h2>
 
-        <p className="mt-3 text-sm tracking-[0.08em] text-gray-600 sm:text-base">
+        <p className="mt-1 text-sm text-gray-600 sm:text-base">
           IIIT Bangalore Online Courses
         </p>
       </div>
@@ -98,7 +98,7 @@ function ReasonCard({ reason }: ReasonCardProps) {
       </h3>
 
       {/* Description */}
-      <p className="mt-4 max-w-140 text-sm leading-6 text-white/95 sm:text-[15px]">
+      <p className="mt-4 max-w-140 text-sm leading-5.5 text-white/95 sm:text-[15px]">
         {reason.desc}
       </p>
     </article>

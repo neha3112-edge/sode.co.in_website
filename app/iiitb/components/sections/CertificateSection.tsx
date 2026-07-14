@@ -93,7 +93,7 @@ export function CertificateSection() {
     <>
       <section id="sample-certificate" className="w-full bg-grey-bg">
         {/* Stats Bar */}
-        <div className="w-full bg-[#292929]">
+        <div className="w-full bg-[#292929] pl-3">
           <Container>
             <div className="grid grid-cols-2 gap-x-5 gap-y-5 py-5 sm:grid-cols-4 sm:py-6">
               {stats.map((stat) => (
@@ -128,7 +128,7 @@ export function CertificateSection() {
                   Graduate Certificate
                 </h2>
 
-                <p className="mt-5 max-w-180 text-sm leading-6 text-gray-700 sm:text-base sm:leading-7">
+                <p className="mt-5 max-w-180 text-sm leading-5.5 text-gray-700 sm:text-base sm:leading-7">
                   Learners who successfully complete the IIIT Bangalore online
                   courses receive recognised course credentials. Depending on
                   the selected programme, students may also gain exposure to
@@ -136,7 +136,7 @@ export function CertificateSection() {
                   assignments that strengthen their professional profile.
                 </p>
 
-                <p className="mt-3 max-w-180 text-sm leading-6 text-gray-700 sm:text-base sm:leading-7">
+                <p className="mt-3 max-w-180 text-sm leading-5.5 text-gray-700 sm:text-base sm:leading-7">
                   These credentials help learners demonstrate specialised
                   knowledge in data science, artificial intelligence, machine
                   learning, leadership, and other emerging technology domains.
@@ -184,16 +184,15 @@ type StatCardProps = {
 function StatCard({ stat }: StatCardProps) {
   return (
     <div className="flex items-center justify-center gap-3 text-white">
-      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-[#075b91]">
-        <GraduationCap size={18} />
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-[#075b91]">
+        <GraduationCap size={28} />
       </span>
-
       <div>
         <p className="text-lg md:text-4xl font-extrabold leading-none">
           {stat.value}
         </p>
 
-        <p className="mt-1 text-[12px] leading-tight text-white/90 sm:text-[12px]">
+        <p className="mt-1 text-sm leading-tight text-white/90 sm:text-sm">
           {stat.label}
         </p>
       </div>

@@ -11,6 +11,7 @@ import FormWrapper, {
 
 import IIITBImg from "../../assets/img/iiitb_desktop_new_bg.png";
 import logo from "../../assets/img/iiitb_new_logo_main.png";
+import MobileImg from "../../assets/img/iiitb_mobile_new_img.png";
 
 /*
 |--------------------------------------------------------------------------
@@ -84,10 +85,10 @@ export function Hero() {
             <div className="text-center lg:text-left flex flex-col items-center justify-center md:items-baseline md:justify-left  px-4">
               {/* Logos */}
               <Image
-                    src={logo}
-                    alt="IIIT Bangalore Logo"
-                    className="w-70 pb-5 text-center md:text-left"
-                  />
+                src={logo}
+                alt="IIIT Bangalore Logo"
+                className="w-70 pb-5 text-center md:text-left hidden md:block"
+              />
 
               {/* Small Heading */}
               <p className="text-lg font-bold leading-tight text-black sm:text-xl">
@@ -97,19 +98,19 @@ export function Hero() {
               </p>
 
               {/* Main Heading */}
-              <h1 className="mt-2 font-black leading-[0.95] text-[#0757a4]">
+              <h1 className="mt-2 leading-[0.95] text-[#0757a4] font-semibold font-anton">
                 <span className="block text-[44px] sm:text-[56px] lg:text-[58px]">
                   IIIT Bangalore
                 </span>
-
                 <span className="mt-2 block text-[42px] sm:text-[54px] lg:text-[56px]">
                   Online Courses
                 </span>
               </h1>
 
               {/* Provider */}
-              <p className="mt-5 text-base font-semibold text-black sm:text-lg">
-                By <span className="underline">IIIT Bangalore</span> via <span className="underline">upGrad</span>
+              <p className="mt-5 text-base font-medium text-black sm:text-lg">
+                By <span className="underline font-bold">IIIT Bangalore</span>{" "}
+                via <span className="underline font-bold">upGrad</span>
               </p>
 
               {/* Features */}
@@ -132,7 +133,13 @@ export function Hero() {
             </div>
 
             <div className="mobile_banner_img md:hidden">
-              <img src="../iiitb/img/iiitb_mobile_new_img.png"></img>
+              <Image
+                src={MobileImg}
+                alt="IIIT Bangalore mobile banner"
+                width={420}
+                height={360}
+                className="w-full h-auto"
+              />
             </div>
 
             {/* Desktop Form */}

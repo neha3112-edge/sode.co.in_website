@@ -42,7 +42,7 @@ const approvalItems: ApprovalItem[] = [
 
 export function Approvals() {
   return (
-    <section id="approvals" className="bg-[#292929] py-6 text-white">
+    <section id="approvals" className="bg-[#292929] py-8 text-white">
       <Container>
         <div className="grid items-center gap-10 lg:grid-cols-[320px_1px_1fr] lg:gap-10">
           {/* Left Block */}
@@ -99,7 +99,7 @@ function ApprovalCard({ item }: ApprovalCardProps) {
       <div>
         <h3 className="text-xl font-bold text-white">{item.title}</h3>
 
-        <p className="mt-1 max-w-sm text-sm leading-6 text-white/85">
+        <p className="mt-1 max-w-sm text-sm leading-5.5 text-white/85">
           {item.description}
         </p>
       </div>

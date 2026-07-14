@@ -426,7 +426,7 @@ export default function FormWrapper({
         <div className="relative mb-5">
           <div className="text-center">
             {title && (
-              <h2 className="text-xl font-bold text-[#c9232c]">{title}</h2>
+              <h2 className="text-xl font-bold text-[#005382]">{title}</h2>
             )}
 
             {subtitle && (
@@ -507,7 +507,7 @@ export default function FormWrapper({
         <Button
           type="submit"
           disabled={loading}
-          className={`h-11 w-full bg-[#c9232c] font-semibold text-white hover:bg-[#aa1c25] ${submitButtonClassName}`}
+          className={`h-11 w-full bg-[#005382] cursor-pointer font-semibold text-white ${submitButtonClassName}`}
         >
           {loading ? "Submitting..." : submitButtonText}
         </Button>

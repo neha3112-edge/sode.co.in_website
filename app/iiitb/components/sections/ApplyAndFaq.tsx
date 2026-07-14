@@ -114,10 +114,10 @@ export function ApplyAndFaq() {
         <Container className="max-w-370">
           <div className="text-center">
             <h2 className="text-2xl font-bold leading-tight text-[#1d3d82] sm:text-3xl lg:text-[34px]">
-              How To Apply For IIIT Bangalore University Online Courses
+              How To Apply For IIIT Bangalore Online Courses
             </h2>
 
-            <p className="mx-auto mt-3 max-w-4xl text-sm leading-6 text-gray-600 sm:text-base">
+            <p className="mx-auto mt-3 max-w-4xl text-sm leading-5.5 text-gray-600 sm:text-base">
               Students can easily enroll in IIIT Bangalore University Online
               courses. Candidates can conveniently apply by selecting their
               desired program. Follow these steps to secure admission in the
@@ -231,7 +231,7 @@ function FaqAccordionItem({ faq, isOpen, onToggle }: FaqAccordionItemProps) {
         }`}
       >
         <div className="overflow-hidden">
-          <p className="px-5 pb-6 pl-14 text-sm leading-6 text-gray-600 sm:px-6 sm:pb-7 sm:pl-16 sm:text-base">
+          <p className="px-5 pb-6 pl-14 text-sm leading-5.5 text-gray-600 sm:px-6 sm:pb-7 sm:pl-16 sm:text-base">
             {faq.answer}
           </p>
         </div>
