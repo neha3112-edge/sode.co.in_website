@@ -12,12 +12,18 @@ import { ClarificationCta } from "./components/sections/ClarificationCta";
 import { FloatingWidgets } from "./components/sections/FloatingWidgets";
 
 export const metadata: Metadata = {
-  title: "IIM Kozhikode HRM Course | IIM Kozhikode HR Analytics & Online HR Courses",
+  title:
+    "IIM Kozhikode HRM Course | IIM Kozhikode HR Analytics & Online HR Courses",
   description:
     "IIM Kozhikode HRM program and IIM Kozhikode HRM course in HR Analytics. Explore IIM Kozhikode online HR courses, IIM Kozhikode HR analytics fees, eligibility, certification details, and IIM Kozhikode HRM program admission process.",
-  keywords: ["IIM Kozhikode", "hr analytics course", "hr analytics certification"],
+  keywords: [
+    "IIM Kozhikode",
+    "hr analytics course",
+    "hr analytics certification",
+  ],
   openGraph: {
-    title: "IIM Kozhikode HRM Course | IIM Kozhikode HR Analytics & Online HR Courses",
+    title:
+      "IIM Kozhikode HRM Course | IIM Kozhikode HR Analytics & Online HR Courses",
     description:
       "IIM Kozhikode HRM program and IIM Kozhikode HRM course in HR Analytics. Explore IIM Kozhikode online HR courses, IIM Kozhikode HR analytics fees, eligibility, certification details, and IIM Kozhikode HRM program admission process.",
     type: "website",
@@ -36,7 +42,6 @@ export default function IIMKPage() {
         <Eligibility />
         <CertificateSection />
         <ApplyAndFaq />
-        <ClarificationCta />
       </main>
 
       <Footer />
