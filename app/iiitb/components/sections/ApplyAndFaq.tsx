@@ -111,7 +111,7 @@ export function ApplyAndFaq() {
     <>
       {/* How To Apply Section */}
       <section id="how-to-apply" className="bg-white py-14 sm:py-16 lg:py-20">
-        <Container className="max-w-[1480px]">
+        <Container className="max-w-370">
           <div className="text-center">
             <h2 className="text-2xl font-bold leading-tight text-[#1d3d82] sm:text-3xl lg:text-[34px]">
               How To Apply For IIIT Bangalore University Online Courses

@@ -91,7 +91,7 @@ export function CertificateSection() {
 
   return (
     <>
-      <section id="sample-certificate" className="w-full bg-[#f6f6f6]">
+      <section id="sample-certificate" className="w-full bg-grey-bg">
         {/* Stats Bar */}
         <div className="w-full bg-[#292929]">
           <Container>
@@ -108,10 +108,10 @@ export function CertificateSection() {
           <Container>
             <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
               {/* Left Certificate Image */}
-              <div className="relative mx-auto w-full max-w-[830px]">
+              <div className="relative mx-auto w-full max-w-207.5">
                 <div className="relative aspect-[1.36/1] w-full overflow-hidden">
                   <Image
-                    src={CertificateImage}
+                    src="../iiitb/img/sample-certificate.webp"
                     alt="IIIT Bangalore sample certificate"
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
@@ -122,13 +122,13 @@ export function CertificateSection() {
 
               {/* Right Content */}
               <div className="text-center lg:text-left">
-                <h2 className="text-3xl font-medium leading-tight text-[#075b91] sm:text-4xl">
+                <h2 className="text-3xl font-bold leading-tight text-[#075b91] sm:text-4xl">
                   Sample Post
                   <br />
                   Graduate Certificate
                 </h2>
 
-                <p className="mt-5 max-w-[720px] text-sm leading-6 text-gray-700 sm:text-base sm:leading-7">
+                <p className="mt-5 max-w-180 text-sm leading-6 text-gray-700 sm:text-base sm:leading-7">
                   Learners who successfully complete the IIIT Bangalore online
                   courses receive recognised course credentials. Depending on
                   the selected programme, students may also gain exposure to
@@ -136,7 +136,7 @@ export function CertificateSection() {
                   assignments that strengthen their professional profile.
                 </p>
 
-                <p className="mt-3 max-w-[720px] text-sm leading-6 text-gray-700 sm:text-base sm:leading-7">
+                <p className="mt-3 max-w-180 text-sm leading-6 text-gray-700 sm:text-base sm:leading-7">
                   These credentials help learners demonstrate specialised
                   knowledge in data science, artificial intelligence, machine
                   learning, leadership, and other emerging technology domains.
@@ -146,7 +146,7 @@ export function CertificateSection() {
                   size="lg"
                   type="button"
                   onClick={() => setFormOpen(true)}
-                  className="mt-6 inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full bg-[#075b91] px-6 py-3 text-sm font-bold text-white transition-colors duration-200 hover:bg-[#064b79]"
+                  className="mt-6 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#075b91] px-6 py-3 text-sm font-bold text-white transition-colors duration-200 hover:bg-[#064b79]"
                 >
                   Get Degree
                   <ArrowRight size={16} />
@@ -189,11 +189,11 @@ function StatCard({ stat }: StatCardProps) {
       </span>
 
       <div>
-        <p className="text-lg font-extrabold leading-none sm:text-xl">
+        <p className="text-lg md:text-4xl font-extrabold leading-none">
           {stat.value}
         </p>
 
-        <p className="mt-1 text-[9px] leading-tight text-white/90 sm:text-[10px]">
+        <p className="mt-1 text-[12px] leading-tight text-white/90 sm:text-[12px]">
           {stat.label}
         </p>
       </div>
@@ -216,7 +216,7 @@ function CertificateFormModal({
     <div
       role="presentation"
       onClick={onClose}
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm"
+      className="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm"
     >
       <div
         role="dialog"

@@ -85,7 +85,7 @@ export function MainFooter() {
             <div className="lg:col-span-2">
               <h4 className="text-gray-900 font-extrabold text-[14px] uppercase tracking-wider mb-6">GET STARTED</h4>
               <ul className="space-y-3.5 text-[14px] font-medium text-gray-700">
-                <li><a href="#why-choose" className="hover:text-gray-900 transition-colors">About Us</a></li>
+                <li><a href="#about-sode" className="hover:text-gray-900 transition-colors">About Us</a></li>
                 <li><a href="javascript:void(0)" onClick={() => setExpertOpen(true)} className="hover:text-gray-900 transition-colors">Contact Us</a></li>
                 <li><a href="javascript:void(0)" onClick={() => setExpertOpen(true)} className="hover:text-gray-900 transition-colors">Book Free Counseling</a></li>
                 <li><a href="#alumni-voices" className="hover:text-gray-900 transition-colors">Alumni Voices</a></li>

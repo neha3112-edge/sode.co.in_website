@@ -106,12 +106,12 @@ export function About() {
               </p>
 
               {/* Buttons */}
-              <div className="mt-7 flex flex-col gap-2 sm:flex-row sm:items-center">
+              <div className="mt-7 grid gap-2 grid-cols-2 sm:items-center w-full md:w-120">
                 <Button
                   size="lg"
                   type="button"
                   onClick={() => setActiveForm("callback")}
-                  className="inline-flex min-h-10.5 w-full items-center justify-center gap-2 rounded-md bg-[#d9250b] px-5 py-2.5 text-sm font-bold text-white transition-colors duration-200 hover:bg-[#bd1f08] sm:w-auto"
+                  className="inline-flex min-h-10.5 items-center justify-center gap-2 rounded-md bg-[#d9250b] px-5 py-2.5 text-xs md:text-sm font-bold text-white transition-colors duration-200 hover:bg-[#bd1f08] sm:w-auto"
                 >
                   <Phone size={15} fill="currentColor" strokeWidth={2} />
                   Request Call Back
@@ -121,7 +121,7 @@ export function About() {
                   size="lg"
                   type="button"
                   onClick={() => setActiveForm("counselling")}
-                  className="inline-flex min-h-10.5 w-full items-center justify-center rounded-md border border-white bg-transparent px-6 py-2.5 text-sm font-bold text-white transition-colors duration-200 hover:bg-white hover:text-[#076493] sm:w-auto"
+                  className="inline-flex min-h-10.5 items-center justify-center rounded-md border border-white bg-transparent px-6 py-2.5 text-xs md:text-sm font-bold text-white transition-colors duration-200 hover:bg-white hover:text-[#076493] sm:w-auto"
                 >
                   Get 1:1 FREE Counselling
                 </Button>
