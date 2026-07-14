@@ -1,50 +1,89 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { NextResponse } from "next/server";
 
-// Helper function to extract UTM parameters from a URL string (including query params after hashes)
+/*
+|--------------------------------------------------------------------------
+| Extract UTM parameters
+|--------------------------------------------------------------------------
+*/
+
 function extractUTMParams(urlStr: string): Record<string, string> {
   const params: Record<string, string> = {};
-  if (!urlStr) return params;
+
+  if (!urlStr) {
+    return params;
+  }
 
   try {
-    // 1. Extract using regex (highly robust for query params inside hash/fragments)
+    /*
+    |--------------------------------------------------------------------------
+    | Extract query parameters using regex
+    |--------------------------------------------------------------------------
+    */
+
     const regex = /[?&](utm_[a-zA-Z0-9_-]+)=([^&#\s]*)/g;
-    let match;
+
+    let match: RegExpExecArray | null;
+
     while ((match = regex.exec(urlStr)) !== null) {
       try {
         const key = decodeURIComponent(match[1]);
-        const val = decodeURIComponent(match[2]);
-        params[key] = val;
-      } catch (e) {
+        const value = decodeURIComponent(match[2]);
+
+        params[key] = value;
+      } catch {
         params[match[1]] = match[2];
       }
     }
 
-    // 2. Extract using standard URL parser as a fallback/additional source
-    const absoluteUrlStr = urlStr.startsWith('http') ? urlStr : `http://localhost${urlStr}`;
-    const url = new URL(absoluteUrlStr);
+    /*
+    |--------------------------------------------------------------------------
+    | Extract standard URL query parameters
+    |--------------------------------------------------------------------------
+    */
 
-    url.searchParams.forEach((value, key) => {
-      if (key.startsWith('utm_') && !params[key]) {
+    const absoluteUrl = urlStr.startsWith("http")
+      ? urlStr
+      : `http://localhost${urlStr}`;
+
+    const parsedUrl = new URL(absoluteUrl);
+
+    parsedUrl.searchParams.forEach((value, key) => {
+      if (key.startsWith("utm_") && !params[key]) {
         params[key] = value;
       }
     });
 
-    if (url.hash && url.hash.includes('?')) {
-      const hashQueryPart = url.hash.split('?')[1];
+    /*
+    |--------------------------------------------------------------------------
+    | Extract UTM parameters present after hash
+    |--------------------------------------------------------------------------
+    */
+
+    if (parsedUrl.hash && parsedUrl.hash.includes("?")) {
+      const hashQueryPart = parsedUrl.hash.split("?")[1];
+
       const hashSearchParams = new URLSearchParams(hashQueryPart);
+
       hashSearchParams.forEach((value, key) => {
-        if (key.startsWith('utm_') && !params[key]) {
+        if (key.startsWith("utm_") && !params[key]) {
           params[key] = value;
         }
       });
     }
   } catch (error) {
-    console.error("Error parsing URL params:", error);
+    console.error("Error parsing URL parameters:", error);
   }
 
   return params;
 }
+
+/*
+|--------------------------------------------------------------------------
+| Lead API
+|--------------------------------------------------------------------------
+*/
 
 export async function POST(req: Request) {
   try {
@@ -67,242 +106,416 @@ export async function POST(req: Request) {
       page_url,
     } = body;
 
-    const cleanPhone = phone.replace(/\D/g, "");
+    /*
+    |--------------------------------------------------------------------------
+    | Basic validation
+    |--------------------------------------------------------------------------
+    */
 
-    // Format phone with '+' prefix (e.g., +91XXXXXXXXXX)
-    let phoneWithPlus = cleanPhone;
-    if (cleanPhone.length === 10) {
-      phoneWithPlus = `+91${cleanPhone}`;
-    } else if (!phoneWithPlus.startsWith("+")) {
-      phoneWithPlus = `+${phoneWithPlus}`;
+    if (!name || !phone) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Name and phone number are required",
+        },
+        {
+          status: 400,
+        },
+      );
     }
 
-    // Extract IP address from request headers
-    const userIp = req.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
+    /*
+    |--------------------------------------------------------------------------
+    | Clean phone number
+    |--------------------------------------------------------------------------
+    */
+
+    const cleanPhone = String(phone).replace(/\D/g, "");
+
+    if (cleanPhone.length < 10) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Please enter a valid phone number",
+        },
+        {
+          status: 400,
+        },
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Phone number with country code for Gallabox and Brevo
+    |--------------------------------------------------------------------------
+    */
+
+    let phoneWithPlus = cleanPhone;
+
+    if (cleanPhone.length === 10) {
+      phoneWithPlus = `+91${cleanPhone}`;
+    } else {
+      phoneWithPlus = `+${cleanPhone}`;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Extract user IP address
+    |--------------------------------------------------------------------------
+    */
+
+    const userIp =
+      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
       req.headers.get("x-real-ip")?.trim() ||
       "";
 
-    // Extract UTM parameters from the page_url
-    const urlParams = page_url ? extractUTMParams(page_url) : {};
-    console.log("Extracted UTM parameters from page_url:", urlParams);
+    /*
+    |--------------------------------------------------------------------------
+    | Extract UTM values from page URL
+    |--------------------------------------------------------------------------
+    */
 
-    // Prioritize URL-extracted parameters over request body fallbacks
-    const finalUtmSource = urlParams["utm_source"] || utm_source || "Organic";
-    const finalUtmMedium = urlParams["utm_medium"] || utm_medium || "SODE CO IN Organic";
-    const finalUtmCampaign = urlParams["utm_campaign"] || utm_campaign || "";
-    const finalUtmTerm = urlParams["utm_term"] || utm_term || "";
-    const finalUtmContent = urlParams["utm_content"] || utm_content || "";
+    const urlParams = page_url ? extractUTMParams(String(page_url)) : {};
+
+    console.log("Extracted UTM parameters:", urlParams);
+
+    const finalUtmSource = urlParams.utm_source || utm_source || "Organic";
+
+    const finalUtmMedium =
+      urlParams.utm_medium || utm_medium || "SODE CO IN Organic";
+
+    const finalUtmCampaign = urlParams.utm_campaign || utm_campaign || "";
+
+    const finalUtmTerm = urlParams.utm_term || utm_term || "";
+
+    const finalUtmContent = urlParams.utm_content || utm_content || "";
+
+    /*
+    |--------------------------------------------------------------------------
+    | Final lead payload
+    |--------------------------------------------------------------------------
+    */
 
     const finalPayload = {
-      full_name: name,
-      name: name,
-      email: email,
+      full_name: String(name).trim(),
+      name: String(name).trim(),
+
+      email: email ? String(email).trim() : "",
+
       phone: cleanPhone,
-      course: course,
-      state,
-      // ✅ dynamic form name
+
+      course: course || "",
+
+      state: state || "",
+
       form_name: form_name || "Default Form",
-      // ✅ dynamic source
+
       source: source || "SODE",
+
       sub_source: sub_source || "",
+
       utm_source: finalUtmSource,
+
       utm_medium: finalUtmMedium,
+
       utm_term: finalUtmTerm,
+
       utm_campaign: finalUtmCampaign,
+
       utm_content: finalUtmContent,
-      // ✅ page tracking
+
       page_url: page_url || "Unknown",
+
       ip_address: userIp,
     };
 
-    // 1. Submit to Primary CRM API
-    const primaryCrmUrl = process.env.PRIMARY_CRM_URL;
-    const primaryCrmApiKey = process.env.PRIMARY_CRM_API_KEY;
+    console.log("Final lead payload:", finalPayload);
 
-    if (primaryCrmUrl && primaryCrmApiKey) {
-      try {
-        console.log("Submitting lead to Primary CRM...");
-        const crmResponse = await fetch(
-          primaryCrmUrl,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "x-api-key": primaryCrmApiKey,
-            },
-            body: JSON.stringify(finalPayload),
-          }
-        );
-        if (!crmResponse.ok) {
-          console.error("Primary CRM API error response:", await crmResponse.text());
-        } else {
-          console.log("Lead successfully submitted to Primary CRM");
-        }
-      } catch (crmErr) {
-        console.error("Failed to send lead to Primary CRM:", crmErr);
-      }
-    } else {
-      console.warn("Primary CRM settings are not configured in environment variables.");
-    }
+    /*
+    |--------------------------------------------------------------------------
+    | 1. Submit only to Secondary CRM
+    |--------------------------------------------------------------------------
+    */
 
-    // 2. Submit to Secondary CRM API (mysode CRM)
     const secondaryCrmUrl = process.env.SECONDARY_CRM_URL;
+
     const secondaryCrmApiKey = process.env.SECONDARY_CRM_API_KEY;
 
-    if (secondaryCrmUrl) {
-      try {
-        console.log("Submitting lead to Secondary CRM...");
-        const secondaryCrmResponse = await fetch(
-          secondaryCrmUrl,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              ...(secondaryCrmApiKey ? { "x-api-key": secondaryCrmApiKey } : {}),
-            },
-            body: JSON.stringify(finalPayload),
-          }
-        );
-        if (!secondaryCrmResponse.ok) {
-          console.error("Secondary CRM API error response:", await secondaryCrmResponse.text());
-        } else {
-          console.log("Lead successfully submitted to Secondary CRM");
-        }
-      } catch (secondaryCrmErr) {
-        console.error("Failed to send lead to Secondary CRM:", secondaryCrmErr);
-      }
-    } else {
-      console.warn("Secondary CRM settings are not configured.");
+    if (!secondaryCrmUrl || !secondaryCrmApiKey) {
+      console.error("SECONDARY_CRM_URL or SECONDARY_CRM_API_KEY is missing");
+
+      return NextResponse.json(
+        {
+          success: false,
+          message: "CRM configuration is missing",
+        },
+        {
+          status: 500,
+        },
+      );
     }
 
-    // 3. Submit to Gallabox Webhook API
+    try {
+      console.log("Submitting lead to Secondary CRM...");
+
+      const secondaryCrmResponse = await fetch(secondaryCrmUrl, {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": secondaryCrmApiKey,
+        },
+
+        body: JSON.stringify(finalPayload),
+
+        cache: "no-store",
+      });
+
+      const secondaryCrmResponseText = await secondaryCrmResponse.text();
+
+      if (!secondaryCrmResponse.ok) {
+        console.error(
+          "Secondary CRM API error:",
+          secondaryCrmResponse.status,
+          secondaryCrmResponseText,
+        );
+
+        return NextResponse.json(
+          {
+            success: false,
+            message: "Unable to submit lead to CRM",
+          },
+          {
+            status: secondaryCrmResponse.status,
+          },
+        );
+      }
+
+      console.log(
+        "Lead successfully submitted to Secondary CRM:",
+        secondaryCrmResponseText,
+      );
+    } catch (secondaryCrmError) {
+      console.error("Failed to send lead to Secondary CRM:", secondaryCrmError);
+
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Unable to connect with CRM",
+        },
+        {
+          status: 502,
+        },
+      );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | 2. Submit to Gallabox Webhook
+    |--------------------------------------------------------------------------
+    */
+
     const gallaboxWebhookUrl = process.env.GALLABOX_WEBHOOK_URL;
 
-    if (gallaboxWebhookUrl && gallaboxWebhookUrl !== "your_gallabox_webhook_url_here") {
+    if (
+      gallaboxWebhookUrl &&
+      gallaboxWebhookUrl !== "your_gallabox_webhook_url_here"
+    ) {
       try {
         console.log("Submitting lead to Gallabox Webhook...");
-        const gallaboxResponse = await fetch(
-          gallaboxWebhookUrl,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              name,
-              phone: phoneWithPlus,
-              email: email || "",
-              course: course || "MBA",
-              state: state || "",
-              source: source || "SODE",
-              tags: ["Success"],
-              utm_source: finalUtmSource,
-              utm_medium: finalUtmMedium,
-              utm_campaign: finalUtmCampaign,
-              utm_term: finalUtmTerm,
-              utm_content: finalUtmContent,
-            }),
-          }
-        );
+
+        const gallaboxResponse = await fetch(gallaboxWebhookUrl, {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify({
+            name: String(name).trim(),
+
+            phone: phoneWithPlus,
+
+            email: email || "",
+
+            course: course || "MBA",
+
+            state: state || "",
+
+            source: source || "SODE",
+
+            tags: ["Success"],
+
+            utm_source: finalUtmSource,
+
+            utm_medium: finalUtmMedium,
+
+            utm_campaign: finalUtmCampaign,
+
+            utm_term: finalUtmTerm,
+
+            utm_content: finalUtmContent,
+          }),
+
+          cache: "no-store",
+        });
 
         if (!gallaboxResponse.ok) {
-          const errMsg = await gallaboxResponse.text();
-          console.error("Gallabox Webhook API Error Response:", errMsg);
+          const gallaboxError = await gallaboxResponse.text();
+
+          console.error("Gallabox Webhook error:", gallaboxError);
         } else {
-          console.log("Lead successfully submitted to Gallabox Webhook");
+          console.log("Lead successfully submitted to Gallabox");
         }
-      } catch (gallaErr) {
-        console.error("Failed to send lead to Gallabox Webhook:", gallaErr);
+      } catch (gallaboxError) {
+        console.error("Failed to send lead to Gallabox:", gallaboxError);
       }
     } else {
-      console.log("Gallabox Webhook URL is not configured. Skipping Gallabox API submission.");
+      console.log("Gallabox webhook is not configured. Skipping.");
     }
 
-    // 4. Submit to Brevo API
+    /*
+    |--------------------------------------------------------------------------
+    | 3. Submit to Brevo
+    |--------------------------------------------------------------------------
+    */
+
     const brevoApiKey = process.env.BREVO_API_KEY;
-    const brevoListIdStr = process.env.BREVO_LIST_ID;
+
+    const brevoListId = Number(process.env.BREVO_LIST_ID) || 217;
 
     if (brevoApiKey && brevoApiKey !== "your_brevo_api_key_here") {
       try {
         console.log("Submitting lead to Brevo...");
-        const brevoListId = parseInt(brevoListIdStr || "217", 10) || 217;
 
-        const brevoResponse = await fetch(
-          "https://api.brevo.com/v3/contacts",
-          {
-            method: "POST",
-            headers: {
-              "api-key": brevoApiKey,
-              "Content-Type": "application/json",
+        const brevoResponse = await fetch("https://api.brevo.com/v3/contacts", {
+          method: "POST",
+
+          headers: {
+            "api-key": brevoApiKey,
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify({
+            email: email || undefined,
+
+            listIds: [brevoListId],
+
+            attributes: {
+              FULLNAME: String(name).trim(),
+
+              SMS: phoneWithPlus,
+
+              MOBILE: phoneWithPlus,
+
+              COURSES: course || "MBA",
+
+              STATES: state || "",
+
+              UTM_SOURCE: finalUtmSource,
+
+              UTM_CAMPAIGN: finalUtmCampaign,
+
+              UTM_MEDIUM: finalUtmMedium,
+
+              UTM_TERM: finalUtmTerm,
+
+              SOURCE: source || "SODE",
             },
-            body: JSON.stringify({
-              email: email || undefined,
-              listIds: [brevoListId],
-              attributes: {
-                FULLNAME: name,
-                SMS: phoneWithPlus,
-                MOBILE: phoneWithPlus,
-                COURSES: course || "MBA",
-                STATES: state || "",
-                UTM_SOURCE: finalUtmSource,
-                UTM_CAMPAIGN: finalUtmCampaign,
-                UTM_MEDIUM: finalUtmMedium,
-                UTM_TERM: finalUtmTerm,
-                SOURCE: source || "SODE",
-              },
-              updateEnabled: true,
-            }),
-          }
-        );
+
+            updateEnabled: true,
+          }),
+
+          cache: "no-store",
+        });
 
         if (!brevoResponse.ok) {
-          const errMsg = await brevoResponse.text();
-          console.error("Brevo API Error Response:", errMsg);
+          const brevoError = await brevoResponse.text();
+
+          console.error("Brevo API error:", brevoError);
         } else {
           console.log("Lead successfully submitted to Brevo");
         }
-      } catch (brevoErr) {
-        console.error("Failed to send lead to Brevo:", brevoErr);
+      } catch (brevoError) {
+        console.error("Failed to send lead to Brevo:", brevoError);
       }
     } else {
-      console.log("Brevo API Key is not configured. Skipping Brevo API submission.");
+      console.log("Brevo is not configured. Skipping.");
     }
 
-    // 5. Submit to Google Sheets (specifically for IIITB Leads)
-    if (finalPayload.source === "IIITB LP" || finalPayload.form_name?.includes("IIITB") || finalPayload.form_name?.includes("Coupon Form") || finalPayload.form_name?.includes("Compare University Form")) {
+    /*
+    |--------------------------------------------------------------------------
+    | 4. Submit selected leads to Google Sheets
+    |--------------------------------------------------------------------------
+    */
+
+    const shouldSubmitToGoogleSheets =
+      finalPayload.source === "IIITB LP" ||
+      finalPayload.form_name.includes("IIITB") ||
+      finalPayload.form_name.includes("Coupon Form") ||
+      finalPayload.form_name.includes("Compare University Form");
+
+    if (shouldSubmitToGoogleSheets) {
       try {
-        console.log("Submitting lead to IIITB Google Sheets Script...");
-        const gsheetResponse = await fetch(
+        console.log("Submitting lead to IIITB Google Sheets...");
+
+        const googleSheetsResponse = await fetch(
           "https://script.google.com/macros/s/AKfycbwCXWFhWQAxt0tR-JOK-6cGBK4MjkiDGSYsxUlcVWjlpJeqJKv5V6a0fm7i9EZFeTV7hw/exec",
           {
             method: "POST",
+
             headers: {
               "Content-Type": "application/json",
             },
+
             body: JSON.stringify(finalPayload),
-          }
+
+            cache: "no-store",
+          },
         );
-        if (!gsheetResponse.ok) {
-          console.error("IIITB Google Sheets error response:", await gsheetResponse.text());
+
+        if (!googleSheetsResponse.ok) {
+          console.error(
+            "Google Sheets error:",
+            await googleSheetsResponse.text(),
+          );
         } else {
-          console.log("Lead successfully submitted to IIITB Google Sheets Script");
+          console.log("Lead successfully submitted to Google Sheets");
         }
-      } catch (gsheetErr) {
-        console.error("Failed to send lead to IIITB Google Sheets Script:", gsheetErr);
+      } catch (googleSheetsError) {
+        console.error(
+          "Failed to send lead to Google Sheets:",
+          googleSheetsError,
+        );
       }
     }
 
-    return NextResponse.json({
-      success: true,
-      message: "Data submitted successfully",
-    });
-
-  } catch (error) {
-    console.error(error);
+    /*
+    |--------------------------------------------------------------------------
+    | Success response
+    |--------------------------------------------------------------------------
+    */
 
     return NextResponse.json(
-      { success: false, message: "Submission failed" },
-      { status: 500 }
+      {
+        success: true,
+        message: "Lead submitted successfully to CRM",
+      },
+      {
+        status: 200,
+      },
+    );
+  } catch (error) {
+    console.error("Lead submission error:", error);
+
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Submission failed",
+      },
+      {
+        status: 500,
+      },
     );
   }
 }
