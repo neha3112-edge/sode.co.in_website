@@ -9,6 +9,13 @@ import FormWrapper, {
   type FormCourseOption,
 } from "@/components/forms/FormWrapper";
 import { getAssetPath } from "@/lib/utils";
+import { Anton } from "next/font/google";
+
+const anton = Anton({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
 
 const IIMK_COURSE_OPTIONS: FormCourseOption[] = [
   {
@@ -69,12 +76,15 @@ export function Hero() {
 
               {/* Subheading/Provider */}
               <p className="mt-3 text-lg font-bold text-gray-800">
-                By <span className="underline">IIM Kozhikode</span> via <span className="underline">Upgrade</span>
+                By <span className="underline">IIM Kozhikode</span> via{" "}
+                <span className="underline">Upgrade</span>
               </p>
 
               {/* Description */}
               <p className="mt-4 text-[13px] text-gray-700 max-w-md leading-relaxed">
-                Earn a 6-month professional certificate from IIM Kozhikode. This HR Analytics course covers recruitment, job posting, and workforce management via case studies &amp; real-world projects.
+                Earn a 6-month professional certificate from IIM Kozhikode. This
+                HR Analytics course covers recruitment, job posting, and
+                workforce management via case studies &amp; real-world projects.
               </p>
 
               {/* Duration Tag */}
@@ -99,8 +109,12 @@ export function Hero() {
               <div className="w-full max-w-md rounded-2xl bg-white px-6 py-6 shadow-2xl border border-gray-100">
                 {/* Form Header */}
                 <div className="text-center mb-4">
-                  <h2 className="text-[25px] font-extrabold text-[#0f3b8c]">Admission Open</h2>
-                  <p className="text-xs text-gray-500 mt-0.5">Academic Experts will assist you!</p>
+                  <h2 className="text-[25px] font-extrabold text-[#0f3b8c]">
+                    Admission Open
+                  </h2>
+                  <p className="text-xs text-gray-500 mt-0.5">
+                    Academic Experts will assist you!
+                  </p>
 
                   {/* Phone Button */}
                   <div className="mt-2.5 flex justify-center">
@@ -152,12 +166,15 @@ export function Hero() {
 
           {/* 2. Subheading */}
           <p className="mt-3 text-base sm:text-lg font-bold text-gray-800 text-center">
-            By <span className="underline">IIM Kozhikode</span> via <span className="underline">Upgrade</span>
+            By <span className="underline">IIM Kozhikode</span> via{" "}
+            <span className="underline">Upgrade</span>
           </p>
 
           {/* 3. Description */}
           <p className="mt-4 text-sm sm:text-base text-gray-600 text-center max-w-md leading-relaxed px-4 md:px-0">
-            Earn a 6-month professional certificate from IIM Kozhikode. This HR Analytics course covers recruitment, job posting, and workforce management via case studies &amp; real-world projects.
+            Earn a 6-month professional certificate from IIM Kozhikode. This HR
+            Analytics course covers recruitment, job posting, and workforce
+            management via case studies &amp; real-world projects.
           </p>
 
           {/* 4. Duration Tag */}
@@ -192,8 +209,12 @@ export function Hero() {
           <div className="w-[90%] -mt-5 max-w-md rounded-2xl bg-white p-5 shadow-xl border border-gray-100">
             {/* Form Header */}
             <div className="text-center mb-4">
-              <h2 className="text-[22px] font-extrabold text-[#0f3b8c]">Admission Open</h2>
-              <p className="text-xs text-gray-500 mt-0.5">Academic Experts will assist you!</p>
+              <h2 className="text-[22px] font-extrabold text-[#0f3b8c]">
+                Admission Open
+              </h2>
+              <p className="text-xs text-gray-500 mt-0.5">
+                Academic Experts will assist you!
+              </p>
 
               {/* Phone Button */}
               <div className="mt-2.5 flex justify-center">

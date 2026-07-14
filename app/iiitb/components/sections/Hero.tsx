@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { Check, Download } from "lucide-react";
-
+import { Anton } from "next/font/google";
 import { Container } from "@/components/ui/Container";
 import FormWrapper, {
   type FormCourseOption,
@@ -13,6 +13,11 @@ import IIITBImg from "../../assets/img/iiitb_desktop_new_bg.png";
 import logo from "../../assets/img/iiitb_new_logo_main.png";
 import MobileImg from "../../assets/img/iiitb_mobile_new_img.png";
 
+const anton = Anton({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
 /*
 |--------------------------------------------------------------------------
 | IIITB Page Courses
@@ -98,11 +103,13 @@ export function Hero() {
               </p>
 
               {/* Main Heading */}
-              <h1 className="mt-2 leading-[0.95] text-[#0757a4] font-semibold">
-                <span className="block text-[44px] sm:text-[56px] lg:text-[58px]">
+              <h1
+                className={`${anton.className} mt-2 leading-[0.95] text-[#0757a4]`}
+              >
+                <span className="block text-[42px] sm:text-[52px] lg:text-[52px]">
                   IIIT Bangalore
                 </span>
-                <span className="mt-2 block text-[42px] sm:text-[54px] lg:text-[56px]">
+                <span className="block text-[42px] sm:text-[52px] lg:text-[52px] mt-2">
                   Online Courses
                 </span>
               </h1>

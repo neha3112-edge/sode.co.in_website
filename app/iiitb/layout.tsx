@@ -3,7 +3,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Montserrat } from "next/font/google";
-
+import "./iiitb.css";
 /* =========================================================
    IIIT BANGALORE PAGE CONFIGURATION
 ========================================================= */
