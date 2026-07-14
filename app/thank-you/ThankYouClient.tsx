@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Lottie from "lottie-react";
 import { Headphones, Home, Mail } from "lucide-react";
@@ -8,33 +8,179 @@ import { Headphones, Home, Mail } from "lucide-react";
 import successAnimation from "@/public/assets/animations/check.json";
 import { getAssetPath } from "@/lib/utils";
 
+type ConversionSource = "iimk" | "iiitb";
+
+type GoogleTagArguments = [
+  command: "event" | "config" | "js",
+  action: string | Date,
+  parameters?: Record<string, unknown>,
+];
+
+declare global {
+  interface Window {
+    dataLayer: unknown[];
+    gtag?: (...args: GoogleTagArguments) => void;
+  }
+}
+
+/* =========================================================
+   GOOGLE ADS CONVERSION LABELS
+========================================================= */
+
+const GOOGLE_ADS_CONVERSION_LABELS: Record<ConversionSource, string> = {
+  iimk: "AW-17946162864/M_ZICKbCrNAcELDtsu1C",
+  iiitb: "AW-17946162864/j5BSCL-P3sgcELDtsu1C",
+};
+
+/* =========================================================
+   VALIDATE CONVERSION SOURCE
+========================================================= */
+
+function isConversionSource(source: string | null): source is ConversionSource {
+  return source === "iimk" || source === "iiitb";
+}
+
 export default function ThankYouClient() {
   const [progress, setProgress] = useState(0);
-  const [isBrochure, setIsBrochure] = useState(() => {
-    try {
-      return sessionStorage.getItem("isBrochureFlow") === "true";
-    } catch {
-      return false;
-    }
-  });
+  const [isBrochure, setIsBrochure] = useState(false);
   const [brochureOpened, setBrochureOpened] = useState(false);
+  const [isClientReady, setIsClientReady] = useState(false);
 
   /*
-   * React Strict Mode mein effect development ke andar
-   * do baar run ho sakta hai. Ye ref duplicate brochure
-   * opening ko prevent karta hai.
+   * React Strict Mode development me effects ko dobara run kar sakta hai.
+   * Ye refs duplicate brochure opening aur duplicate conversion ko rokte hain.
    */
   const brochureProcessStarted = useRef(false);
+  const conversionSent = useRef(false);
 
-  /* CHECK BROCHURE FLOW is initialized from sessionStorage synchronously
-      to avoid a synchronous setState inside an effect. */
+  /* =========================================================
+     INITIALIZE CLIENT-SIDE VALUES
+  ========================================================= */
+
+  useEffect(() => {
+    try {
+      const brochureFlow = sessionStorage.getItem("isBrochureFlow") === "true";
+
+      setIsBrochure(brochureFlow);
+    } catch (error) {
+      console.error("Unable to read brochure session:", error);
+      setIsBrochure(false);
+    } finally {
+      setIsClientReady(true);
+    }
+  }, []);
+
+  /* =========================================================
+     GOOGLE ADS CONVERSION TRACKING
+  ========================================================= */
+
+  useEffect(() => {
+    if (conversionSent.current) {
+      return;
+    }
+
+    /*
+     * Example URLs:
+     *
+     * /thank-you?source=iimk
+     * /thank-you?source=iiitb
+     */
+    const searchParams = new URLSearchParams(window.location.search);
+
+    const querySource = searchParams.get("source")?.toLowerCase() ?? null;
+
+    /*
+     * Query parameter na mile to sessionStorage fallback use hoga.
+     */
+    let storedSource: string | null = null;
+
+    try {
+      storedSource =
+        sessionStorage.getItem("conversionSource")?.toLowerCase() ?? null;
+    } catch (error) {
+      console.error("Unable to read conversion source:", error);
+    }
+
+    const source = isConversionSource(querySource)
+      ? querySource
+      : isConversionSource(storedSource)
+        ? storedSource
+        : null;
+
+    if (!source) {
+      console.warn(
+        "Google Ads conversion was not sent because conversion source is missing.",
+      );
+
+      return;
+    }
+
+    const sendTo = GOOGLE_ADS_CONVERSION_LABELS[source];
+
+    /*
+     * Conversion dobara fire na ho, iske liye session key.
+     * Current tab/session me same conversion repeat nahi hogi.
+     */
+    const conversionSessionKey = `googleAdsConversionSent:${source}`;
+
+    try {
+      const alreadySent =
+        sessionStorage.getItem(conversionSessionKey) === "true";
+
+      if (alreadySent) {
+        conversionSent.current = true;
+        return;
+      }
+    } catch (error) {
+      console.error("Unable to check conversion state:", error);
+    }
+
+    conversionSent.current = true;
+
+    window.dataLayer = window.dataLayer || [];
+
+    window.gtag =
+      window.gtag ||
+      function gtag(...args: GoogleTagArguments) {
+        window.dataLayer.push(args);
+      };
+
+    window.gtag("event", "conversion", {
+      send_to: sendTo,
+    });
+
+    try {
+      sessionStorage.setItem(conversionSessionKey, "true");
+      sessionStorage.removeItem("conversionSource");
+    } catch (error) {
+      console.error("Unable to store conversion state:", error);
+    }
+
+    console.info(`Google Ads ${source} conversion event sent.`);
+  }, []);
+
+  /* =========================================================
+     GET BROCHURE URL
+  ========================================================= */
+
+  const getBrochureUrl = useCallback(() => {
+    try {
+      const storedBrochureUrl = sessionStorage.getItem("brochureUrl");
+
+      return (
+        storedBrochureUrl?.trim() || getAssetPath("/assets/pdf/brochure.pdf")
+      );
+    } catch {
+      return getAssetPath("/assets/pdf/brochure.pdf");
+    }
+  }, []);
 
   /* =========================================================
      BROCHURE PROGRESS AND AUTO OPEN
   ========================================================= */
 
   useEffect(() => {
-    if (!isBrochure) {
+    if (!isClientReady || !isBrochure) {
       return;
     }
 
@@ -59,47 +205,60 @@ export default function ThankYouClient() {
     }, 10);
 
     const brochureTimer = window.setTimeout(() => {
-      const storedBrochureUrl = sessionStorage.getItem("brochureUrl");
-
-      const brochureUrl =
-        storedBrochureUrl?.trim() || getAssetPath("/assets/pdf/brochure.pdf");
+      const brochureUrl = getBrochureUrl();
 
       /*
-       * New tab open karne ki koshish.
+       * Browser popup blockers asynchronous window.open ko block
+       * kar sakte hain. Pehle new tab open karne ki koshish hogi.
        */
       const newTab = window.open(brochureUrl, "_blank", "noopener,noreferrer");
 
-      /*
-       * Browser popup block kare to same tab mein brochure khulega.
-       */
       if (!newTab) {
-        window.location.href = brochureUrl;
+        /*
+         * Popup block hone par same tab me brochure open hoga.
+         */
+        window.location.assign(brochureUrl);
         return;
       }
 
       setBrochureOpened(true);
 
-      sessionStorage.removeItem("isBrochureFlow");
-      sessionStorage.removeItem("brochureUrl");
+      try {
+        sessionStorage.removeItem("isBrochureFlow");
+        sessionStorage.removeItem("brochureUrl");
+      } catch (error) {
+        console.error("Unable to clear brochure session:", error);
+      }
     }, 1000);
 
     return () => {
       window.clearInterval(progressInterval);
       window.clearTimeout(brochureTimer);
     };
-  }, [isBrochure]);
+  }, [getBrochureUrl, isBrochure, isClientReady]);
 
   /* =========================================================
      MANUAL BROCHURE OPEN
   ========================================================= */
 
   const handleOpenBrochure = () => {
-    const storedBrochureUrl = sessionStorage.getItem("brochureUrl");
+    const brochureUrl = getBrochureUrl();
 
-    const brochureUrl =
-      storedBrochureUrl?.trim() || getAssetPath("/assets/pdf/brochure.pdf");
+    const newTab = window.open(brochureUrl, "_blank", "noopener,noreferrer");
 
-    window.open(brochureUrl, "_blank", "noopener,noreferrer");
+    if (!newTab) {
+      window.location.assign(brochureUrl);
+      return;
+    }
+
+    setBrochureOpened(true);
+
+    try {
+      sessionStorage.removeItem("isBrochureFlow");
+      sessionStorage.removeItem("brochureUrl");
+    } catch (error) {
+      console.error("Unable to clear brochure session:", error);
+    }
   };
 
   return (
@@ -132,7 +291,7 @@ export default function ThankYouClient() {
                 BROCHURE DOWNLOAD PROGRESS
             ============================================== */}
 
-            {isBrochure && (
+            {isClientReady && isBrochure && (
               <div className="mx-auto mb-5 w-full max-w-lg">
                 <p className="text-sm leading-relaxed text-gray-600 md:text-base">
                   {brochureOpened
@@ -178,7 +337,6 @@ export default function ThankYouClient() {
           ================================================== */}
 
           <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-            {/* Check Inbox */}
             <div className="rounded-2xl border border-transparent bg-[#F1F5F9] p-5 text-left transition-all hover:border-[#FFC107]">
               <div className="flex items-start gap-4">
                 <div className="shrink-0 rounded-lg bg-white p-2 shadow-sm">
@@ -202,7 +360,6 @@ export default function ThankYouClient() {
               </div>
             </div>
 
-            {/* Expert Guidance */}
             <div className="rounded-2xl border border-transparent bg-[#F1F5F9] p-5 text-left transition-all hover:border-[#FFC107]">
               <div className="flex items-start gap-4">
                 <div className="shrink-0 rounded-lg bg-white p-2 shadow-sm">

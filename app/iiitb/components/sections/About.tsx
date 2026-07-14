@@ -1,55 +1,85 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Phone } from "lucide-react";
 
-import FormWrapper from "@/components/forms/FormWrapper";
+import FormWrapper, {
+  type FormCourseOption,
+} from "@/components/forms/FormWrapper";
+import { Button } from "@/components/ui/Button";
 
 import AboutIIITBImage from "../../assets/img/iiit-b-about-image.webp";
-import { Button } from "@/components/ui/Button";
+
+/* =========================================================
+   TYPES
+========================================================= */
 
 type AboutFormType = "callback" | "counselling" | null;
 
-const IIITB_COURSES = [
+type AboutFormModalProps = {
+  title: string;
+  children: ReactNode;
+  onClose: () => void;
+};
+
+/* =========================================================
+   IIIT BANGALORE COURSE OPTIONS
+
+   label:
+   User ko dropdown me full course name dikhega.
+
+   value:
+   Form submit hone par API payload me CERTIFICATE ya MSC jayega.
+========================================================= */
+
+const IIITB_COURSE_OPTIONS: FormCourseOption[] = [
   {
-    value: "Executive Programme in Generative AI for Leaders",
+    value: "CERTIFICATE",
     label: "Executive Programme in Generative AI for Leaders",
   },
   {
-    value: "Executive Post Graduate Certificate Programme in Data Science & AI",
+    value: "CERTIFICATE",
     label: "Executive Post Graduate Certificate Programme in Data Science & AI",
   },
   {
-    value:
-      "Professional Certificate Programme in Data Science with Generative AI",
+    value: "CERTIFICATE",
     label:
       "Professional Certificate Programme in Data Science with Generative AI",
   },
   {
-    value: "Executive Post Graduate Programme in Applied AI and Agentic AI",
+    value: "CERTIFICATE",
     label: "Executive Post Graduate Programme in Applied AI and Agentic AI",
   },
   {
-    value: "Executive Diploma in Machine Learning & Artificial Intelligence",
+    value: "CERTIFICATE",
     label: "Executive Diploma in Machine Learning & Artificial Intelligence",
   },
   {
-    value: "Chief Technology Officer & AI Leadership Programme",
+    value: "CERTIFICATE",
     label: "Chief Technology Officer & AI Leadership Programme",
   },
   {
-    value: "Master of Science in Machine Learning & Artificial Intelligence",
+    value: "MSC",
     label: "Master of Science in Machine Learning & Artificial Intelligence",
   },
   {
-    value: "Master of Science in Data Science with Generative AI",
-    label: "Master of Science in Data Science with Generative AI",
+    value: "MSC",
+    label:
+      "Master of Science in Data Science Now integrated with Generative AI",
   },
 ];
 
+/* =========================================================
+   ABOUT COMPONENT
+========================================================= */
+
 export function About() {
   const [activeForm, setActiveForm] = useState<AboutFormType>(null);
+
+  /* =========================================================
+     LOCK BODY SCROLL WHEN MODAL IS OPEN
+  ========================================================= */
 
   useEffect(() => {
     if (activeForm) {
@@ -63,6 +93,28 @@ export function About() {
     };
   }, [activeForm]);
 
+  /* =========================================================
+     CLOSE MODAL ON ESCAPE KEY
+  ========================================================= */
+
+  useEffect(() => {
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setActiveForm(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscapeKey);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, []);
+
+  /* =========================================================
+     CLOSE FORM
+  ========================================================= */
+
   const closeForm = () => {
     setActiveForm(null);
   };
@@ -71,7 +123,10 @@ export function About() {
     <>
       <section id="about-sode" className="w-full overflow-hidden bg-[#076493]">
         <div className="grid w-full grid-cols-1 lg:grid-cols-[465px_minmax(0,1fr)]">
-          {/* Left Campus Image */}
+          {/* =================================================
+              LEFT CAMPUS IMAGE
+          ================================================== */}
+
           <div className="relative min-h-80 w-full sm:min-h-105 lg:min-h-125">
             <Image
               src={AboutIIITBImage}
@@ -82,7 +137,10 @@ export function About() {
             />
           </div>
 
-          {/* Right Content */}
+          {/* =================================================
+              RIGHT CONTENT
+          ================================================== */}
+
           <div className="flex min-h-125 items-center bg-[#076493] px-5 py-10 text-white sm:px-8 sm:py-12 lg:px-10 lg:py-10 xl:px-20">
             <div className="w-full max-w-175">
               <h2 className="text-3xl font-extrabold leading-[1.15] text-white sm:text-4xl lg:text-[38px]">
@@ -105,23 +163,32 @@ export function About() {
                 that align skills with current business and technology needs.
               </p>
 
-              {/* Buttons */}
-              <div className="mt-7 grid gap-2 grid-cols-2 sm:items-center w-full md:w-120">
+              {/* =================================================
+                  BUTTONS
+              ================================================== */}
+
+              <div className="mt-7 grid w-full grid-cols-2 gap-2 sm:items-center md:w-120">
                 <Button
                   size="lg"
                   type="button"
                   onClick={() => setActiveForm("callback")}
-                  className="inline-flex min-h-10.5 items-center justify-center gap-2 rounded-md bg-[#d9250b] px-5 py-2.5 text-xs md:text-sm font-bold text-white transition-colors duration-200 hover:bg-[#bd1f08] sm:w-auto"
+                  className="inline-flex min-h-10.5 items-center justify-center gap-2 rounded-md bg-[#d9250b] px-5 py-2.5 text-xs font-bold text-white cursor-pointer transition-colors duration-200 hover:bg-[#bd1f08] sm:w-auto md:text-sm"
                 >
-                  <Phone size={15} fill="currentColor" strokeWidth={2} />
-                  Request Call Back
+                  <Phone
+                    size={15}
+                    fill="currentColor"
+                    strokeWidth={2}
+                    aria-hidden="true"
+                  />
+
+                  <span>Request Call Back</span>
                 </Button>
 
                 <Button
                   size="lg"
                   type="button"
                   onClick={() => setActiveForm("counselling")}
-                  className="inline-flex min-h-10.5 items-center justify-center rounded-md border border-white bg-transparent px-6 py-2.5 text-xs md:text-sm font-bold text-white transition-colors duration-200 hover:bg-white hover:text-[#076493] sm:w-auto"
+                  className="inline-flex cursor-pointer min-h-10.5 items-center justify-center rounded-md border border-white bg-transparent px-6 py-2.5 text-xs font-bold text-white transition-colors duration-200 hover:bg-white hover:text-[#076493] sm:w-auto md:text-sm"
                 >
                   Get 1:1 FREE Counselling
                 </Button>
@@ -131,36 +198,44 @@ export function About() {
         </div>
       </section>
 
-      {/* Request Call Back Popup */}
+      {/* =====================================================
+          REQUEST CALL BACK POPUP
+      ====================================================== */}
+
       {activeForm === "callback" && (
         <AboutFormModal title="Request Call Back" onClose={closeForm}>
           <FormWrapper
             title="Request Call Back"
             subtitle="Share your details and our academic expert will contact you"
             onClose={closeForm}
-            courseOptions={IIITB_COURSES}
+            courseOptions={IIITB_COURSE_OPTIONS}
+            defaultCourse=""
             formNameOverride="IIITB About Request Call Back Form"
-            sourceOverride="IIITB About Call Back"
-            utmSourceFallback="IIITB Organic"
-            utmMediumFallback="IIITB About Call Back Button"
+            sourceOverride="IIITB LP"
+            utmSourceFallback="Organic"
+            utmMediumFallback="IIITB_Organic"
             submitButtonText="Request Call Back"
             showPhoneCallLink
           />
         </AboutFormModal>
       )}
 
-      {/* Counselling Popup */}
+      {/* =====================================================
+          FREE COUNSELLING POPUP
+      ====================================================== */}
+
       {activeForm === "counselling" && (
         <AboutFormModal title="Get Free Counselling" onClose={closeForm}>
           <FormWrapper
             title="Get 1:1 FREE Counselling"
             subtitle="Our academic experts will guide you step by step"
             onClose={closeForm}
-            courseOptions={IIITB_COURSES}
+            courseOptions={IIITB_COURSE_OPTIONS}
+            defaultCourse=""
             formNameOverride="IIITB About Free Counselling Form"
-            sourceOverride="IIITB About Counselling"
-            utmSourceFallback="IIITB Organic"
-            utmMediumFallback="IIITB About Counselling Button"
+            sourceOverride="IIITB LP"
+            utmSourceFallback="Organic"
+            utmMediumFallback="IIITB_Organic"
             submitButtonText="Get Free Counselling"
           />
         </AboutFormModal>
@@ -169,18 +244,16 @@ export function About() {
   );
 }
 
-type AboutFormModalProps = {
-  title: string;
-  children: React.ReactNode;
-  onClose: () => void;
-};
+/* =========================================================
+   ABOUT FORM MODAL
+========================================================= */
 
 function AboutFormModal({ title, children, onClose }: AboutFormModalProps) {
   return (
     <div
       role="presentation"
       onClick={onClose}
-      className="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm"
     >
       <div
         role="dialog"

@@ -35,8 +35,8 @@ export function Header() {
       <Container>
         <div className="flex h-18 items-center justify-between">
           {/* Logo */}
-          <Link
-            href="/"
+          <a
+            href="/iiitb"
             aria-label="Go to home page"
             className="flex shrink-0 items-center"
           >
@@ -48,7 +48,7 @@ export function Header() {
               priority
               className="h-16 w-16 cursor-pointer object-contain"
             />
-          </Link>
+          </a>
 
           {/* Desktop Navigation */}
           <nav

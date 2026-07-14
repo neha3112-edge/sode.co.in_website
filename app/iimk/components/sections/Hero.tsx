@@ -33,7 +33,7 @@ export function Hero() {
           DESKTOP VIEW (Visible on lg and above)
           ========================================== */}
       <section
-        id="home-desktop"
+        id="home"
         className="relative hidden lg:block overflow-hidden min-h-[580px] pt-18"
       >
         {/* Background Image */}
@@ -49,7 +49,7 @@ export function Hero() {
         </div>
 
         <Container className="relative z-10 p-0">
-          <div className="grid min-h-[520px] grid-cols-[1.1fr_0.9fr] gap-8 py-8 items-center">
+          <div className="grid min-h-130 grid-cols-[1.1fr_0.9fr] gap-8 py-8 items-center">
             {/* Left Content Column (placed directly on light bg sky/fade area) */}
             <div className="flex flex-col items-start pr-4">
               {/* Logos */}
@@ -65,7 +65,9 @@ export function Hero() {
               </div>
 
               {/* Main Heading */}
-              <h1 className="font-extrabold leading-[1.05] text-[#0f3b8c] tracking-tight">
+              <h1
+                className={`${anton.className} leading-[1.05] text-[#0f3b8c]`}
+              >
                 <span className="block text-[44px] xl:text-[40px]">
                   HRM Analytics
                 </span>

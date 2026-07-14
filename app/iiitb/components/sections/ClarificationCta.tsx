@@ -1,51 +1,97 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Phone } from "lucide-react";
-import { useState } from "react";
 
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import FormWrapper from "@/components/forms/FormWrapper";
+import FormWrapper, {
+  type FormCourseOption,
+} from "@/components/forms/FormWrapper";
 
-const IIITB_COURSES = [
+/* =========================================================
+   IIIT BANGALORE COURSE OPTIONS
+
+   label:
+   User ko dropdown me full course name dikhega.
+
+   value:
+   API payload me CERTIFICATE ya MSC jayega.
+========================================================= */
+
+const IIITB_COURSE_OPTIONS: FormCourseOption[] = [
   {
-    value: "Executive Programme in Generative AI for Leaders",
+    value: "CERTIFICATE",
     label: "Executive Programme in Generative AI for Leaders",
   },
   {
-    value: "Executive Post Graduate Certificate Programme in Data Science & AI",
+    value: "CERTIFICATE",
     label: "Executive Post Graduate Certificate Programme in Data Science & AI",
   },
   {
-    value:
-      "Professional Certificate Programme in Data Science with Generative AI",
+    value: "CERTIFICATE",
     label:
       "Professional Certificate Programme in Data Science with Generative AI",
   },
   {
-    value: "Executive Post Graduate Programme in Applied AI and Agentic AI",
+    value: "CERTIFICATE",
     label: "Executive Post Graduate Programme in Applied AI and Agentic AI",
   },
   {
-    value: "Executive Diploma in Machine Learning & Artificial Intelligence",
+    value: "CERTIFICATE",
     label: "Executive Diploma in Machine Learning & Artificial Intelligence",
   },
   {
-    value: "Chief Technology Officer & AI Leadership Programme",
+    value: "CERTIFICATE",
     label: "Chief Technology Officer & AI Leadership Programme",
   },
   {
-    value: "Master of Science in Machine Learning & Artificial Intelligence",
+    value: "MSC",
     label: "Master of Science in Machine Learning & Artificial Intelligence",
   },
   {
-    value: "Master of Science in Data Science with Generative AI",
-    label: "Master of Science in Data Science with Generative AI",
+    value: "MSC",
+    label:
+      "Master of Science in Data Science Now integrated with Generative AI",
   },
 ];
 
 export function ClarificationCta() {
   const [formOpen, setFormOpen] = useState(false);
+
+  /* =========================================================
+     LOCK BODY SCROLL WHEN MODAL IS OPEN
+  ========================================================= */
+
+  useEffect(() => {
+    if (formOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [formOpen]);
+
+  /* =========================================================
+     CLOSE MODAL ON ESCAPE KEY
+  ========================================================= */
+
+  useEffect(() => {
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setFormOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscapeKey);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, []);
 
   const closeForm = () => {
     setFormOpen(false);
@@ -63,7 +109,7 @@ export function ClarificationCta() {
               </h2>
 
               <p className="mt-1 text-lg font-semibold text-white/90 sm:text-xl">
-                Interact with experts, Get free consultation.
+                Interact with experts, get a free consultation.
               </p>
             </div>
 
@@ -74,19 +120,28 @@ export function ClarificationCta() {
               onClick={() => setFormOpen(true)}
               className="inline-flex min-h-12 w-fit items-center justify-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-bold text-black shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-gray-100 hover:shadow-md md:w-auto"
             >
-              <Phone size={16} fill="currentColor" strokeWidth={2} />
-              Talk to Experts
+              <Phone
+                size={16}
+                fill="currentColor"
+                strokeWidth={2}
+                aria-hidden="true"
+              />
+
+              <span>Talk to Experts</span>
             </Button>
           </div>
         </Container>
       </section>
 
-      {/* Popup Form */}
+      {/* =====================================================
+          TALK TO EXPERTS POPUP FORM
+      ====================================================== */}
+
       {formOpen && (
         <div
           role="presentation"
           onClick={closeForm}
-          className="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm"
         >
           <div
             role="dialog"
@@ -97,13 +152,14 @@ export function ClarificationCta() {
           >
             <FormWrapper
               title="Talk to Experts"
-              subtitle="Share your details and our academic expert will contact you"
+              subtitle="Select your preferred course and our academic expert will contact you"
               onClose={closeForm}
-              courseOptions={IIITB_COURSES}
+              defaultCourse=""
+              courseOptions={IIITB_COURSE_OPTIONS}
               formNameOverride="IIITB Clarification CTA Form"
-              sourceOverride="IIITB Clarification Section"
-              utmSourceFallback="IIITB Organic"
-              utmMediumFallback="IIITB Talk to Experts Button"
+              sourceOverride="IIITB LP"
+              utmSourceFallback="Organic"
+              utmMediumFallback="IIITB_Organic"
               submitButtonText="Talk to Experts"
               showPhoneCallLink
             />

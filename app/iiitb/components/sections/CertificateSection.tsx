@@ -1,17 +1,25 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { ArrowRight, GraduationCap } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import FormWrapper from "@/components/forms/FormWrapper";
-import CertificateImage from "../../assets/img/iiitb_new_logo_main.png";
+import FormWrapper, {
+  type FormCourseOption,
+} from "@/components/forms/FormWrapper";
+import { getAssetPath } from "@/lib/utils";
 
 type StatItem = {
   value: string;
   label: string;
+};
+
+type CertificateFormModalProps = {
+  title: string;
+  children: ReactNode;
+  onClose: () => void;
 };
 
 const stats: StatItem[] = [
@@ -33,45 +41,59 @@ const stats: StatItem[] = [
   },
 ];
 
-const IIITB_COURSE_OPTIONS = [
+/* =========================================================
+   IIIT BANGALORE COURSE OPTIONS
+
+   label:
+   User ko dropdown me full course name dikhega.
+
+   value:
+   API payload me CERTIFICATE ya MSC jayega.
+========================================================= */
+
+const IIITB_COURSE_OPTIONS: FormCourseOption[] = [
   {
-    value: "Executive Programme in Generative AI for Leaders",
+    value: "CERTIFICATE",
     label: "Executive Programme in Generative AI for Leaders",
   },
   {
-    value: "Executive Post Graduate Certificate Programme in Data Science & AI",
+    value: "CERTIFICATE",
     label: "Executive Post Graduate Certificate Programme in Data Science & AI",
   },
   {
-    value:
-      "Professional Certificate Programme in Data Science with Generative AI",
+    value: "CERTIFICATE",
     label:
       "Professional Certificate Programme in Data Science with Generative AI",
   },
   {
-    value: "Executive Post Graduate Programme in Applied AI and Agentic AI",
+    value: "CERTIFICATE",
     label: "Executive Post Graduate Programme in Applied AI and Agentic AI",
   },
   {
-    value: "Executive Diploma in Machine Learning & Artificial Intelligence",
+    value: "CERTIFICATE",
     label: "Executive Diploma in Machine Learning & Artificial Intelligence",
   },
   {
-    value: "Chief Technology Officer & AI Leadership Programme",
+    value: "CERTIFICATE",
     label: "Chief Technology Officer & AI Leadership Programme",
   },
   {
-    value: "Master of Science in Machine Learning & Artificial Intelligence",
+    value: "MSC",
     label: "Master of Science in Machine Learning & Artificial Intelligence",
   },
   {
-    value: "Master of Science in Data Science with Generative AI",
-    label: "Master of Science in Data Science with Generative AI",
+    value: "MSC",
+    label:
+      "Master of Science in Data Science Now integrated with Generative AI",
   },
 ];
 
 export function CertificateSection() {
   const [formOpen, setFormOpen] = useState(false);
+
+  /* =========================================================
+     LOCK BODY SCROLL WHEN MODAL IS OPEN
+  ========================================================= */
 
   useEffect(() => {
     if (formOpen) {
@@ -85,6 +107,24 @@ export function CertificateSection() {
     };
   }, [formOpen]);
 
+  /* =========================================================
+     CLOSE MODAL ON ESCAPE KEY
+  ========================================================= */
+
+  useEffect(() => {
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setFormOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscapeKey);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, []);
+
   const closeForm = () => {
     setFormOpen(false);
   };
@@ -92,7 +132,10 @@ export function CertificateSection() {
   return (
     <>
       <section id="sample-certificate" className="w-full bg-grey-bg">
-        {/* Stats Bar */}
+        {/* =================================================
+            STATS BAR
+        ================================================== */}
+
         <div className="w-full bg-[#292929] pl-3">
           <Container>
             <div className="grid grid-cols-2 gap-x-5 gap-y-5 py-5 sm:grid-cols-4 sm:py-6">
@@ -103,15 +146,19 @@ export function CertificateSection() {
           </Container>
         </div>
 
-        {/* Certificate Content */}
+        {/* =================================================
+            CERTIFICATE CONTENT
+        ================================================== */}
+
         <div className="py-10 sm:py-12 lg:py-16">
           <Container>
             <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
               {/* Left Certificate Image */}
+
               <div className="relative mx-auto w-full max-w-207.5">
                 <div className="relative aspect-[1.36/1] w-full overflow-hidden">
                   <Image
-                    src="../iiitb/img/sample-certificate.webp"
+                    src={getAssetPath("/iiitb/img/sample-certificate.webp")}
                     alt="IIIT Bangalore sample certificate"
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
@@ -121,6 +168,7 @@ export function CertificateSection() {
               </div>
 
               {/* Right Content */}
+
               <div className="text-center lg:text-left">
                 <h2 className="text-3xl font-bold leading-tight text-[#075b91] sm:text-4xl">
                   Sample Post
@@ -146,10 +194,10 @@ export function CertificateSection() {
                   size="lg"
                   type="button"
                   onClick={() => setFormOpen(true)}
-                  className="mt-6 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#075b91] px-6 py-3 text-sm font-bold text-white transition-colors duration-200 hover:bg-[#064b79]"
+                  className="mt-6 cursor-pointer inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#075b91] px-6 py-3 text-sm font-bold text-white transition-colors duration-200 hover:bg-[#064b79]"
                 >
                   Get Degree
-                  <ArrowRight size={16} />
+                  <ArrowRight size={16} aria-hidden="true" />
                 </Button>
               </div>
             </div>
@@ -157,18 +205,22 @@ export function CertificateSection() {
         </div>
       </section>
 
-      {/* Popup Form */}
+      {/* =====================================================
+          GET DEGREE POPUP FORM
+      ====================================================== */}
+
       {formOpen && (
         <CertificateFormModal title="Get Degree" onClose={closeForm}>
           <FormWrapper
             title="Get Degree"
-            subtitle="Share your details and our academic experts will guide you"
+            subtitle="Select your preferred course and our academic experts will guide you"
             onClose={closeForm}
+            defaultCourse=""
             courseOptions={IIITB_COURSE_OPTIONS}
             formNameOverride="IIITB Sample Certificate Form"
-            sourceOverride="IIITB Certificate Section"
-            utmSourceFallback="IIITB Organic"
-            utmMediumFallback="IIITB Certificate Get Degree Button"
+            sourceOverride="IIITB LP"
+            utmSourceFallback="Organic"
+            utmMediumFallback="IIITB_Organic"
             submitButtonText="Get Degree"
           />
         </CertificateFormModal>
@@ -185,10 +237,11 @@ function StatCard({ stat }: StatCardProps) {
   return (
     <div className="flex items-center justify-center gap-3 text-white">
       <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-[#075b91]">
-        <GraduationCap size={28} />
+        <GraduationCap size={28} aria-hidden="true" />
       </span>
+
       <div>
-        <p className="text-lg md:text-4xl font-extrabold leading-none">
+        <p className="text-lg font-extrabold leading-none md:text-4xl">
           {stat.value}
         </p>
 
@@ -200,12 +253,6 @@ function StatCard({ stat }: StatCardProps) {
   );
 }
 
-type CertificateFormModalProps = {
-  title: string;
-  children: React.ReactNode;
-  onClose: () => void;
-};
-
 function CertificateFormModal({
   title,
   children,
@@ -215,7 +262,7 @@ function CertificateFormModal({
     <div
       role="presentation"
       onClick={onClose}
-      className="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm"
     >
       <div
         role="dialog"

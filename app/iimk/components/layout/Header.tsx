@@ -35,25 +35,25 @@ export function Header() {
       <Container>
         <div className="flex h-18 items-center justify-between">
           {/* Logo */}
-          <Link
-            href="/"
+          <a
+            href="/iimk"
             aria-label="Go to home page"
             className="flex shrink-0 items-center"
           >
             <Image
               src={getAssetPath("/assets/images/new_sode_tm_logo.png")}
               alt="SODE logo"
-              width={50}
-              height={50}
+              width={74}
+              height={74}
               priority
-              className="h-12.5 w-12.5 cursor-pointer object-contain"
+              className="cursor-pointer object-contain"
             />
-          </Link>
+          </a>
 
           {/* Desktop Navigation */}
           <nav
             aria-label="Main navigation"
-            className="hidden items-center gap-1 text-[13px] text-black lg:flex"
+            className="hidden items-center gap-1 text-[13px] text-gray-800 font-semibold lg:flex"
           >
             {navItems.map((item, index) => (
               <div key={item.label} className="flex items-center">
