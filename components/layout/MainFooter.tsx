@@ -3,7 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 
-import FormWrapper from "@/components/forms/FormWrapper";
+import FormWrapper, {
+  type FormCourseOption,
+} from "@/components/forms/FormWrapper";
 import GlobalDialog from "@/components/layout/GlobalDialog";
 import DisclaimerContent from "@/components/legal/DisclaimerContent";
 import PrivacyContent from "@/components/legal/PrivacyContent";
@@ -11,6 +13,67 @@ import TermsContent from "@/components/legal/TermsContent";
 import { getAssetPath } from "@/lib/utils";
 
 type LegalDialogType = "disclaimer" | "privacy" | "terms" | null;
+
+/* =========================================================
+   SODE COURSE OPTIONS
+========================================================= */
+
+const SODE_COURSE_OPTIONS: FormCourseOption[] = [
+  { value: "__DOCTORATE__", label: "Doctorate ━━", disabled: true },
+  { value: "DBA", label: "DBA" },
+  { value: "MBA+DBA", label: "MBA + DBA" },
+
+  { value: "__MASTER__", label: "Master ━━", disabled: true },
+  { value: "MBA", label: "MBA" },
+  { value: "MSC", label: "M.Sc. Data Science" },
+  { value: "MSC", label: "M.Sc. Machine Learning & AI" },
+  { value: "DIPLOMA", label: "Executive Diploma in Machine Learning & AI" },
+
+  { value: "__CERTIFICATION__", label: "Certification ━━", disabled: true },
+  {
+    value: "CERTIFICATE",
+    label: "Professional Certificate Programme in HR Management and Analytics",
+  },
+  {
+    value: "CERTIFICATE",
+    label:
+      "Professional Certificate Programme in Data Science with Generative AI",
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Executive Post Graduate Certificate Programme in Data Science & AI",
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Executive Post Graduate Certificate in Generative AI & Agentic AI",
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Advanced Certificate in Digital Marketing & Communication",
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Advanced Certificate in Digital Brand Communication Strategy",
+  },
+
+  {
+    value: "__EXECUTIVE_PROGRAMS__",
+    label: "Executive Programs ━━",
+    disabled: true,
+  },
+  {
+    value: "PG PROGRAMS",
+    label: "Executive Programme in Generative AI for Leaders",
+  },
+  {
+    value: "PG PROGRAMS",
+    label: "Executive Post Graduate Programme in Applied AI and Agentic AI",
+  },
+  {
+    value: "PG PROGRAMS",
+    label: "Chief Technology Officer & AI Leadership Programme",
+  },
+];
 
 const UNIVERSITIES = [
   "Golden Gate University",
@@ -423,8 +486,17 @@ export function MainFooter() {
             >
               <FormWrapper
                 title="Talk to Our Experts"
-                subtitle="Get personalized guidance from our specialists"
+                subtitle="Select your course and get personalized guidance from our specialists"
                 onClose={closeExpertForm}
+                defaultCourse=""
+                courseOptions={SODE_COURSE_OPTIONS}
+                formNameOverride="SODE Footer Talk to Experts Form"
+                sourceOverride="SODE"
+                utmSourceFallback="Organic"
+                utmMediumFallback="SODE_Organic"
+                submitButtonText="Talk to Experts"
+                submitButtonClassName="bg-[#1d3557] hover:bg-[#142943]"
+                redirectUrl="/thank-you?source=lp"
               />
             </div>
           </div>
@@ -456,26 +528,6 @@ export function MainFooter() {
           </div>
         </GlobalDialog>
       </footer>
-
-      {/* =====================================================
-          FLOATING GIFT BUTTON
-      ====================================================== */}
-      <button
-        type="button"
-        onClick={openExpertForm}
-        aria-label="Get scholarship coupon"
-        title="Get scholarship coupon"
-        className="fixed bottom-5 right-2 z-[1000] cursor-pointer rounded-full transition duration-300 hover:scale-110 md:right-5"
-      >
-        <Image
-          src={getAssetPath("/assets/images/gift.gif")}
-          alt="Get scholarship coupon"
-          width={50}
-          height={50}
-          unoptimized
-          className="h-[40px] w-[40px] rounded-full object-contain drop-shadow-[0_10px_15px_rgba(0,0,0,0.3)] md:h-[50px] md:w-[50px]"
-        />
-      </button>
     </>
   );
 }

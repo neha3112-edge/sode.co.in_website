@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+
 import { Container } from "@/components/ui/Container";
 import {
   Carousel,
@@ -9,8 +10,121 @@ import {
   CarouselItem,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import FormWrapper from "@/components/forms/FormWrapper";
+import FormWrapper, {
+  type FormCourseOption,
+} from "@/components/forms/FormWrapper";
 import { getAssetPath } from "@/lib/utils";
+
+/* =========================================================
+   SODE COURSE OPTIONS
+========================================================= */
+
+const SODE_COURSE_OPTIONS: FormCourseOption[] = [
+  /* =========================
+     DOCTORATE
+  ========================== */
+
+  {
+    value: "__DOCTORATE__",
+    label: "Doctorate ━━",
+    disabled: true,
+  },
+  {
+    value: "DBA",
+    label: "DBA",
+  },
+  {
+    value: "MBA+DBA",
+    label: "MBA + DBA",
+  },
+
+  /* =========================
+     MASTER
+  ========================== */
+
+  {
+    value: "__MASTER__",
+    label: "Master ━━",
+    disabled: true,
+  },
+  {
+    value: "MBA",
+    label: "MBA",
+  },
+  {
+    value: "MSC",
+    label: "M.Sc. Data Science",
+  },
+  {
+    value: "MSC",
+    label: "M.Sc. Machine Learning & AI",
+  },
+  {
+    value: "DIPLOMA",
+    label: "Executive Diploma in Machine Learning & AI",
+  },
+
+  /* =========================
+     CERTIFICATION
+  ========================== */
+
+  {
+    value: "__CERTIFICATION__",
+    label: "Certification ━━",
+    disabled: true,
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Professional Certificate Programme in HR Management and Analytics",
+  },
+  {
+    value: "CERTIFICATE",
+    label:
+      "Professional Certificate Programme in Data Science with Generative AI",
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Executive Post Graduate Certificate Programme in Data Science & AI",
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Executive Post Graduate Certificate in Generative AI & Agentic AI",
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Advanced Certificate in Digital Marketing & Communication",
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Advanced Certificate in Digital Brand Communication Strategy",
+  },
+
+  /* =========================
+     EXECUTIVE PROGRAMS
+  ========================== */
+
+  {
+    value: "__EXECUTIVE_PROGRAMS__",
+    label: "Executive Programs ━━",
+    disabled: true,
+  },
+  {
+    value: "PG PROGRAMS",
+    label: "Executive Programme in Generative AI for Leaders",
+  },
+  {
+    value: "PG PROGRAMS",
+    label: "Executive Post Graduate Programme in Applied AI and Agentic AI",
+  },
+  {
+    value: "PG PROGRAMS",
+    label: "Chief Technology Officer & AI Leadership Programme",
+  },
+];
+
+/* =========================================================
+   UNIVERSITIES
+========================================================= */
 
 const universities = [
   {
@@ -100,7 +214,7 @@ const universities = [
     brochureUrl: "/assets/pdf/iiitb_main_brochure.pdf",
     paragraphs: [
       "IIIT Bangalore is a premier institute in India that is known for its executive management certification course. It is a technology-focused institution holding NAAC accreditation and is widely respected for its industry-aligned executive education.",
-      "The institute offers a range of programs and  IIIT Certification, including the Executive Programme in Generative AI for Leaders, Executive Post Graduate Certificate Programme in Data Science & AI, and AI leadership programs. The IIIT Bangalore Online programs combine technical expertise with leadership development. It guides professionals in building capabilities in AI, machine learning, agentic AI, and digital transformation for future leadership roles.",
+      "The institute offers a range of programs and IIIT Certification, including the Executive Programme in Generative AI for Leaders, Executive Post Graduate Certificate Programme in Data Science & AI, and AI leadership programs. The IIIT Bangalore Online programs combine technical expertise with leadership development. It guides professionals in building capabilities in AI, machine learning, agentic AI, and digital transformation for future leadership roles.",
     ],
   },
   {
@@ -113,7 +227,7 @@ const universities = [
     brochureUrl: "/assets/pdf/iim_main_brochure.pdf",
     paragraphs: [
       "IIM Kozhikode is located in Kerala. It is one of India's leading management institutes and is widely recognised for its academic excellence and executive education initiatives. The institute offers the Professional Certificate Programme in HR Management and Analytics, combining people management with data-driven decision-making capabilities.",
-      "This IIM Executive Program is highly relevant for HR professionals searching for, IIM Executive Education opportunities to enhance their abilities for workforce management. Profess through  IIM Kozhikode Online, gain expertise in workforce analytics, talent strategy, and organisational effectiveness, preparing them for modern HR leadership roles in digitally transforming organisations.",
+      "This IIM Executive Program is highly relevant for HR professionals searching for, IIM Executive Education opportunities to enhance their abilities for workforce management. Profess through IIM Kozhikode Online, gain expertise in workforce analytics, talent strategy, and organisational effectiveness, preparing them for modern HR leadership roles in digitally transforming organisations.",
     ],
   },
   {
@@ -140,46 +254,66 @@ const universities = [
     brochureUrl: "/assets/pdf/mica_main_brochure.pdf",
     paragraphs: [
       "MICA is one of India's premier institutions, established in 1991 at Ahmedabad, Gujarat . The institute specialises in strategic marketing, branding, and communications educational programs and certifications.",
-      "The institute offers the Advanced Certificate in Digital Marketing & Communication and the Advanced Certificate in Digital Brand Communication Strategy. Through  MICA Admissions, Professionals learn MICA Digital Marketing Programs. The executive management programs are tailored to consumer behaviour, performance marketing, brand strategy, and digital communication. This enables learners to build expertise in modern marketing leadership and customer engagement strategies in a digital-first economy.",
+      "The institute offers the Advanced Certificate in Digital Marketing & Communication and the Advanced Certificate in Digital Brand Communication Strategy. Through MICA Admissions, Professionals learn MICA Digital Marketing Programs. The executive management programs are tailored to consumer behaviour, performance marketing, brand strategy, and digital communication. This enables learners to build expertise in modern marketing leadership and customer engagement strategies in a digital-first economy.",
     ],
   },
 ];
 
+/* =========================================================
+   UNIVERSITIES COMPONENT
+========================================================= */
+
 export function Universities() {
   const [api, setApi] = useState<CarouselApi>();
   const [activeUni, setActiveUni] = useState(0);
+
   const [activeModal, setActiveModal] = useState<"brochure" | "apply" | null>(
     null,
   );
+
   const [selectedModalUni, setSelectedModalUni] = useState<
     (typeof universities)[0] | null
   >(null);
 
   useEffect(() => {
-    if (!api) return;
+    if (!api) {
+      return;
+    }
 
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setActiveUni(api.selectedScrollSnap());
 
-    api.on("select", () => {
+    const handleSelect = () => {
       setActiveUni(api.selectedScrollSnap());
-    });
+    };
+
+    api.on("select", handleSelect);
+
+    return () => {
+      api.off("select", handleSelect);
+    };
   }, [api]);
 
-  const selectUniversity = (idx: number) => {
-    api?.scrollTo(idx);
-    setActiveUni(idx);
+  const selectUniversity = (index: number) => {
+    api?.scrollTo(index);
+    setActiveUni(index);
   };
 
-  const handleGetBrochure = (uni: (typeof universities)[0]) => {
-    sessionStorage.setItem("brochureUrl", getAssetPath(uni.brochureUrl));
-    setSelectedModalUni(uni);
+  const handleGetBrochure = (university: (typeof universities)[0]) => {
+    sessionStorage.setItem("brochureUrl", getAssetPath(university.brochureUrl));
+
+    setSelectedModalUni(university);
     setActiveModal("brochure");
   };
 
-  const handleApplyNow = (uni: (typeof universities)[0]) => {
-    setSelectedModalUni(uni);
+  const handleApplyNow = (university: (typeof universities)[0]) => {
+    setSelectedModalUni(university);
     setActiveModal("apply");
+  };
+
+  const closeModal = () => {
+    setActiveModal(null);
+    setSelectedModalUni(null);
   };
 
   return (
@@ -191,18 +325,19 @@ export function Universities() {
         {/* Section Heading */}
         <div className="text-center mb-10 md:mb-12">
           <h2 className="text-2xl md:text-[32px] font-extrabold text-[#1d3557] tracking-tight leading-snug">
-            Learn from Global & India&apos;s Most Prestigious Institutions
+            Learn from Global &amp; India&apos;s Most Prestigious Institutions
           </h2>
         </div>
 
         {/* Logos Selector Flex */}
         <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 max-w-6xl mx-auto mb-10">
-          {universities.map((uni, idx) => {
-            const isActive = activeUni === idx;
+          {universities.map((university, index) => {
+            const isActive = activeUni === index;
+
             return (
               <div
-                key={idx}
-                onClick={() => selectUniversity(idx)}
+                key={index}
+                onClick={() => selectUniversity(index)}
                 className={`p-1 h-16 md:h-20 w-[calc(50%-8px)] sm:w-[calc(33.33%-12px)] md:w-[calc(20%-16px)] flex items-center justify-center bg-white rounded-xl border cursor-pointer hover:shadow-xs transition-all duration-300 select-none ${
                   isActive
                     ? "border-[#1d3557] border shadow-xs ring-1 ring-[#1d3557]/10"
@@ -211,8 +346,8 @@ export function Universities() {
               >
                 <div className="relative w-full h-full">
                   <Image
-                    src={getAssetPath(uni.logoSrc)}
-                    alt={uni.name}
+                    src={getAssetPath(university.logoSrc)}
+                    alt={university.name}
                     fill
                     className="object-contain rounded-xl"
                   />
@@ -232,15 +367,14 @@ export function Universities() {
           className="w-full max-w-6xl mx-auto relative animate-fade-in"
         >
           <CarouselContent>
-            {universities.map((uni, idx) => (
-              <CarouselItem key={idx} className="basis-full">
+            {universities.map((university, index) => (
+              <CarouselItem key={index} className="basis-full">
                 <div className="bg-[#F8FAFC] rounded-4xl overflow-hidden border border-slate-100/50 shadow-xs flex flex-col lg:flex-row max-w-7xl mx-auto min-h-[450px]">
                   {/* Left Column: Building Image & Overlay Logo */}
                   <div className="relative w-full md:w-[42%] h-87.5 md:h-auto shrink-0">
-                    {/* Building Image */}
                     <Image
-                      src={getAssetPath(uni.imageSrc)}
-                      alt={`${uni.name} Campus`}
+                      src={getAssetPath(university.imageSrc)}
+                      alt={`${university.name} Campus`}
                       fill
                       className="object-cover"
                     />
@@ -251,21 +385,23 @@ export function Universities() {
                     <div>
                       {/* Title */}
                       <h3 className="font-extrabold text-[#1d3557] text-2xl md:text-3xl leading-snug">
-                        {uni.name}
+                        {university.name}
                       </h3>
 
                       {/* Paragraphs */}
                       <div className="text-slate-600 font-medium text-[11px] md:text-[12px] leading-relaxed mt-5 space-y-3.5">
-                        {uni.paragraphs.map((p, pIdx) => (
-                          <p key={pIdx}>{p}</p>
-                        ))}
+                        {university.paragraphs.map(
+                          (paragraph, paragraphIndex) => (
+                            <p key={paragraphIndex}>{paragraph}</p>
+                          ),
+                        )}
                       </div>
 
                       {/* Dynamic Courses Badge List */}
                       <div className="flex flex-wrap gap-2 mt-6">
-                        {uni.courses.map((course, cIdx) => (
+                        {university.courses.map((course, courseIndex) => (
                           <span
-                            key={cIdx}
+                            key={courseIndex}
                             className="bg-[#cccccc] text-gray-700 text-[11px] font-semibold px-3.5 py-1.5 rounded-full select-none"
                           >
                             {course}
@@ -278,7 +414,8 @@ export function Universities() {
                     <div className="flex flex-wrap items-center gap-4 pt-8 border-slate-200/50">
                       {/* Get Brochure Button */}
                       <button
-                        onClick={() => handleGetBrochure(uni)}
+                        type="button"
+                        onClick={() => handleGetBrochure(university)}
                         className="flex items-center gap-2 px-4 py-3 md:px-6 md:py-3.5 rounded-xl border border-slate-300 hover:border-slate-400 text-slate-700 hover:text-slate-900 font-bold text-sm transition duration-300 cursor-pointer"
                       >
                         Get Brochure
@@ -288,6 +425,7 @@ export function Universities() {
                           stroke="currentColor"
                           viewBox="0 0 24 24"
                           strokeWidth="2.5"
+                          aria-hidden="true"
                         >
                           <path
                             strokeLinecap="round"
@@ -299,7 +437,8 @@ export function Universities() {
 
                       {/* Apply Now Button */}
                       <button
-                        onClick={() => handleApplyNow(uni)}
+                        type="button"
+                        onClick={() => handleApplyNow(university)}
                         className="flex items-center gap-2 px-4 py-3 md:px-8 md:py-3.5 rounded-xl bg-[#1d3557] hover:bg-[#152a47] text-white font-bold text-sm transition duration-300 cursor-pointer shadow-md"
                       >
                         Apply Now
@@ -309,6 +448,7 @@ export function Universities() {
                           stroke="currentColor"
                           viewBox="0 0 24 24"
                           strokeWidth="2.5"
+                          aria-hidden="true"
                         >
                           <path
                             strokeLinecap="round"
@@ -327,9 +467,10 @@ export function Universities() {
 
         {/* Slide indicators / pagination dots */}
         <div className="flex justify-center gap-2 mt-5">
-          {universities.map((_, index) => (
+          {universities.map((university, index) => (
             <button
-              key={index}
+              key={university.name}
+              type="button"
               onClick={() => selectUniversity(index)}
               className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
                 index === activeUni ? "bg-[#1d3557] scale-110" : "bg-slate-300"
@@ -340,13 +481,17 @@ export function Universities() {
         </div>
       </Container>
 
-      {/* Modal Popup for FormWrapper */}
+      {/* =====================================================
+          FORM MODAL
+      ====================================================== */}
+
       {activeModal && selectedModalUni && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-xs transition-opacity duration-300">
           {/* Modal Overlay to close on outside click */}
           <div
+            role="presentation"
             className="absolute inset-0 animate-fade-in"
-            onClick={() => setActiveModal(null)}
+            onClick={closeModal}
           />
 
           {/* Modal Body */}
@@ -357,10 +502,30 @@ export function Universities() {
               }
               subtitle={
                 activeModal === "brochure"
-                  ? `Enter your details to download the brochure`
-                  : `Enter your details to apply for admission`
+                  ? "Enter your details to download the brochure"
+                  : "Enter your details to apply for admission"
               }
-              onClose={() => setActiveModal(null)}
+              onClose={closeModal}
+              defaultCourse=""
+              courseOptions={SODE_COURSE_OPTIONS}
+              formNameOverride={
+                activeModal === "brochure"
+                  ? `SODE University Brochure Form - ${selectedModalUni.name}`
+                  : `SODE University Apply Form - ${selectedModalUni.name}`
+              }
+              sourceOverride="SODE"
+              utmSourceFallback="Organic"
+              utmMediumFallback="SODE_Organic"
+              submitButtonText={
+                activeModal === "brochure" ? "Download Brochure" : "Apply Now"
+              }
+              isBrochureForm={activeModal === "brochure"}
+              brochureUrl={
+                activeModal === "brochure"
+                  ? getAssetPath(selectedModalUni.brochureUrl)
+                  : ""
+              }
+              redirectUrl="/thank-you?source=lp"
             />
           </div>
         </div>

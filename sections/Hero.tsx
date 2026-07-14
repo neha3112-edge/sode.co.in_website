@@ -1,20 +1,186 @@
 "use client";
 
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import "react-phone-input-2/lib/style.css";
+
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
-import "react-phone-input-2/lib/style.css";
-import { useState } from "react";
-import Image from "next/image";
+import FormWrapper, {
+  type FormCourseOption,
+} from "@/components/forms/FormWrapper";
 import { getAssetPath } from "@/lib/utils";
-import FormWrapper from "@/components/forms/FormWrapper";
+
+/* =========================================================
+   SODE COURSE OPTIONS
+========================================================= */
+
+const SODE_COURSE_OPTIONS: FormCourseOption[] = [
+  /* =========================
+     DOCTORATE
+  ========================== */
+
+  {
+    value: "__DOCTORATE__",
+    label: "Doctorate ━━",
+    disabled: true,
+  },
+  {
+    value: "DBA",
+    label: "DBA",
+  },
+  {
+    value: "MBA+DBA",
+    label: "MBA + DBA",
+  },
+
+  /* =========================
+     MASTER
+  ========================== */
+
+  {
+    value: "__MASTER__",
+    label: "Master ━━",
+    disabled: true,
+  },
+  {
+    value: "MBA",
+    label: "MBA",
+  },
+  {
+    value: "MSC",
+    label: "M.Sc. Data Science",
+  },
+  {
+    value: "MSC",
+    label: "M.Sc. Machine Learning & AI",
+  },
+  {
+    value: "DIPLOMA",
+    label: "Executive Diploma in Machine Learning & AI",
+  },
+
+  /* =========================
+     CERTIFICATION
+  ========================== */
+
+  {
+    value: "__CERTIFICATION__",
+    label: "Certification ━━",
+    disabled: true,
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Professional Certificate Programme in HR Management and Analytics",
+  },
+  {
+    value: "CERTIFICATE",
+    label:
+      "Professional Certificate Programme in Data Science with Generative AI",
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Executive Post Graduate Certificate Programme in Data Science & AI",
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Executive Post Graduate Certificate in Generative AI & Agentic AI",
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Advanced Certificate in Digital Marketing & Communication",
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Advanced Certificate in Digital Brand Communication Strategy",
+  },
+
+  /* =========================
+     EXECUTIVE PROGRAMS
+  ========================== */
+
+  {
+    value: "__EXECUTIVE_PROGRAMS__",
+    label: "Executive Programs ━━",
+    disabled: true,
+  },
+  {
+    value: "PG PROGRAMS",
+    label: "Executive Programme in Generative AI for Leaders",
+  },
+  {
+    value: "PG PROGRAMS",
+    label: "Executive Post Graduate Programme in Applied AI and Agentic AI",
+  },
+  {
+    value: "PG PROGRAMS",
+    label: "Chief Technology Officer & AI Leadership Programme",
+  },
+];
+
+/* =========================================================
+   HERO COMPONENT
+========================================================= */
 
 export function Hero() {
   const [downloadOpen, setDownloadOpen] = useState(false);
 
-  const onClick = () => {
+  /* =========================================================
+     OPEN MODAL
+  ========================================================= */
+
+  const openCounsellingForm = () => {
     setDownloadOpen(true);
   };
+
+  /* =========================================================
+     CLOSE MODAL
+  ========================================================= */
+
+  const closeCounsellingForm = () => {
+    setDownloadOpen(false);
+  };
+
+  /* =========================================================
+     LOCK BODY SCROLL WHEN MODAL IS OPEN
+  ========================================================= */
+
+  useEffect(() => {
+    if (!downloadOpen) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [downloadOpen]);
+
+  /* =========================================================
+     CLOSE MODAL ON ESCAPE KEY
+  ========================================================= */
+
+  useEffect(() => {
+    if (!downloadOpen) {
+      return;
+    }
+
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeCounsellingForm();
+      }
+    };
+
+    window.addEventListener("keydown", handleEscapeKey);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [downloadOpen]);
 
   return (
     <>
@@ -22,7 +188,10 @@ export function Hero() {
         id="home"
         className="relative w-full overflow-hidden bg-[#102441]"
       >
-        {/* Desktop Widescreen Background Image Overlay */}
+        {/* =================================================
+            DESKTOP BACKGROUND IMAGE
+        ================================================== */}
+
         <div className="absolute inset-0 z-0 hidden lg:block">
           <Image
             src={getAssetPath("/assets/images/desktop_banner.jpg")}
@@ -34,91 +203,119 @@ export function Hero() {
           />
         </div>
 
-        <Container className="relative z-10 w-full pt-24 pb-12 lg:pt-28 lg:pb-16 lg:flex lg:items-center px-0">
-          <div className="w-full flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            {/* Text side content */}
-            <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 text-white max-w-2xl px-4 lg:py-4">
-              {/* Badge Sub-header */}
-              <p className="text-base md:text-lg lg:text-lg text-[#dbeafe] font-serif italic mb-3 font-semibold">
-                <span className="font-medium text-[#f7ebc7] text-base md:text-lg lg:text-3xl">
+        <Container className="relative z-10 w-full px-0 pb-12 pt-24 lg:flex lg:items-center lg:pb-16 lg:pt-28">
+          <div className="flex w-full flex-col items-center gap-8 lg:grid lg:grid-cols-2 lg:gap-12">
+            {/* =================================================
+                TEXT CONTENT
+            ================================================== */}
+
+            <div className="flex max-w-2xl flex-col items-center space-y-6 px-4 text-center text-white lg:items-start lg:py-4 lg:text-left">
+              {/* Badge */}
+
+              <p className="mb-3 font-serif text-base font-semibold italic text-[#dbeafe] md:text-lg lg:text-lg">
+                <span className="text-base font-medium text-[#f7ebc7] md:text-lg lg:text-3xl">
                   #1
                 </span>{" "}
-                School of Online & Distance Education
+                School of Online &amp; Distance Education
               </p>
 
               {/* Main Heading */}
-              <h1 className="text-[22px] md:text-4xl lg:text-3xl font-extrabold leading-tight text-white">
-                Certifications & Online Degree Courses from{" "}
-                <span className="text-[#f7ebc7]">IITs, IIMs &</span> Leading
+
+              <h1 className="text-[22px] font-extrabold leading-tight text-white md:text-4xl lg:text-3xl">
+                Certifications &amp; Online Degree Courses from{" "}
+                <span className="text-[#f7ebc7]">IITs, IIMs &amp;</span> Leading
                 Global B-Schools
               </h1>
 
               {/* Subtitle */}
-              <p className="text-sm md:text-sm text-white/90 max-w-md font-medium">
+
+              <p className="max-w-md text-sm font-medium text-white/90 md:text-sm">
                 Your Gateway to Strategic Leadership Program Learning from
                 Leading Institutions.
               </p>
 
-              {/* Pills/Tags Grid (Desktop Only) */}
-              <div className="hidden lg:flex flex-col space-y-3 pt-2">
-                {/* Row 1 */}
+              {/* =================================================
+                  DESKTOP TAGS
+              ================================================== */}
+
+              <div className="hidden flex-col space-y-3 pt-2 lg:flex">
                 <div className="flex flex-wrap gap-3">
-                  <span className="px-4 py-2 border border-white/30 rounded-md text-sm font-semibold bg-white/5">
+                  <span className="rounded-md border border-white/30 bg-white/5 px-4 py-2 text-sm font-semibold">
                     Doctorate
                   </span>
-                  <span className="px-4 py-2 border border-white/30 rounded-md text-sm font-semibold bg-white/5">
+
+                  <span className="rounded-md border border-white/30 bg-white/5 px-4 py-2 text-sm font-semibold">
                     Certification
                   </span>
-                  <span className="px-4 py-2 border border-white/30 rounded-md text-sm font-semibold bg-white/5">
+
+                  <span className="rounded-md border border-white/30 bg-white/5 px-4 py-2 text-sm font-semibold">
                     Executive Programs
                   </span>
                 </div>
-                {/* Row 2 */}
+
                 <div className="flex flex-wrap gap-3">
-                  <span className="px-4 py-2 border border-white/30 rounded-md text-sm font-semibold bg-white/5">
+                  <span className="rounded-md border border-white/30 bg-white/5 px-4 py-2 text-sm font-semibold">
                     Banking
                   </span>
-                  <span className="px-4 py-2 border border-white/30 rounded-md text-sm font-semibold bg-white/5">
+
+                  <span className="rounded-md border border-white/30 bg-white/5 px-4 py-2 text-sm font-semibold">
                     Finance
                   </span>
-                  <span className="px-4 py-2 border border-white/30 rounded-md text-sm font-semibold bg-white/5">
+
+                  <span className="rounded-md border border-white/30 bg-white/5 px-4 py-2 text-sm font-semibold">
                     Leadership
                   </span>
                 </div>
               </div>
 
-              {/* Action Button (Desktop Only) */}
-              <div className="hidden lg:block pt-4">
+              {/* Desktop Action Button */}
+
+              <div className="hidden pt-4 lg:block">
                 <Button
                   size="lg"
-                  onClick={onClick}
-                  className="bg-linear-to-r from-[#EEC471] via-[#F3CD73] to-[#FADA9A] text-[#102441] rounded-md px-8 py-5 text-base font-bold shadow-lg transition-all transform hover:scale-[1.02] cursor-pointer duration-200"
+                  type="button"
+                  onClick={openCounsellingForm}
+                  className="cursor-pointer rounded-md bg-linear-to-r from-[#EEC471] via-[#F3CD73] to-[#FADA9A] px-8 py-5 text-base font-bold text-[#102441] shadow-lg transition-all duration-200 hover:scale-[1.02]"
                 >
                   Book 1:1 Personalised Counselling
                 </Button>
               </div>
             </div>
 
-            {/* Mobile Content Block / Hidden on Desktop */}
-            <div className="w-full flex flex-col items-center lg:hidden">
-              {/* Man Image (Mobile only) */}
-              <div className="relative w-full -mt-37.5 flex justify-center overflow-hidden">
+            {/* =================================================
+                MOBILE CONTENT
+            ================================================== */}
+
+            <div className="flex w-full flex-col items-center lg:hidden">
+              {/* Mobile Image */}
+
+              <div className="-mt-37.5 relative flex w-full justify-center overflow-hidden">
                 <Image
                   src={getAssetPath("/assets/images/mobile-banner-img.png")}
                   alt="Professional Counselor"
                   width={623}
                   height={773}
                   priority
-                  className="max-w-full h-auto object-contain"
+                  className="h-auto max-w-full object-contain"
                 />
               </div>
 
-              {/* Form Card (Mobile only, overlaps bottom of the image) */}
-              <div className="w-full max-w-md z-10 -mt-14 md:-mt-24 px-4">
-                <Card className="bg-white shadow-2xl rounded-2xl border-0 overflow-hidden p-6 text-black">
+              {/* Mobile Form */}
+
+              <div className="-mt-14 z-10 w-full max-w-md px-4 md:-mt-24">
+                <Card className="overflow-hidden rounded-2xl border-0 bg-white p-6 text-black shadow-2xl">
                   <FormWrapper
                     title="Apply Now"
-                    subtitle="Start your application journey today"
+                    subtitle="Select your course and start your application journey"
+                    defaultCourse=""
+                    courseOptions={SODE_COURSE_OPTIONS}
+                    formNameOverride="SODE Mobile Hero Apply Form"
+                    sourceOverride="SODE"
+                    utmSourceFallback="Organic"
+                    utmMediumFallback="SODE_Organic"
+                    submitButtonText="Apply Now"
+                    submitButtonClassName="bg-[#102441] hover:bg-[#0b1a30]"
+                    redirectUrl="/thank-you?source=lp"
                   />
                 </Card>
               </div>
@@ -127,20 +324,36 @@ export function Hero() {
         </Container>
       </section>
 
-      {/* Modal for Desktop Counselling Button */}
+      {/* =====================================================
+          DESKTOP COUNSELLING MODAL
+      ====================================================== */}
+
       {downloadOpen && (
         <div
-          onClick={() => setDownloadOpen(false)}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+          role="presentation"
+          onClick={closeCounsellingForm}
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm"
         >
           <div
-            onClick={(e) => e.stopPropagation()}
-            className="bg-white w-full max-w-sm rounded-xl shadow-2xl relative p-6 animate-[scaleIn_0.2s_ease]"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Book 1:1 Counselling"
+            onClick={(event) => event.stopPropagation()}
+            className="relative max-h-[92vh] w-full max-w-sm overflow-y-auto rounded-xl bg-white p-6 shadow-2xl animate-[scaleIn_0.2s_ease]"
           >
             <FormWrapper
               title="Book 1:1 Counselling"
-              subtitle="Academic Experts Are Here to Assist!"
-              onClose={() => setDownloadOpen(false)}
+              subtitle="Select your course and our academic experts will assist you"
+              onClose={closeCounsellingForm}
+              defaultCourse=""
+              courseOptions={SODE_COURSE_OPTIONS}
+              formNameOverride="SODE Hero Personalised Counselling Form"
+              sourceOverride="SODE"
+              utmSourceFallback="Organic"
+              utmMediumFallback="SODE_Organic"
+              submitButtonText="Book Counselling"
+              submitButtonClassName="bg-[#102441] hover:bg-[#0b1a30]"
+              redirectUrl="/thank-you?source=lp"
             />
           </div>
         </div>

@@ -2,9 +2,7 @@
 
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-
 import { Newsreader, Playfair_Display, Poppins } from "next/font/google";
-
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 

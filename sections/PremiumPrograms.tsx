@@ -2,20 +2,156 @@
 
 import { useState } from "react";
 import Image from "next/image";
+
 import { Container } from "@/components/ui/Container";
-import FormWrapper from "@/components/forms/FormWrapper";
+import FormWrapper, {
+  type FormCourseOption,
+} from "@/components/forms/FormWrapper";
 import { getAssetPath } from "@/lib/utils";
 
-const tabs = [
-  { id: "all", label: "All Programs" },
-  { id: "doctorate", label: "Doctorate" },
-  { id: "certification", label: "Certifications" },
-  { id: "executive", label: "Executive Programs" },
-  { id: "master", label: "Master" },
+/* =========================================================
+   SODE COURSE OPTIONS
+========================================================= */
+
+const SODE_COURSE_OPTIONS: FormCourseOption[] = [
+  /* =========================
+     DOCTORATE
+  ========================== */
+
+  {
+    value: "__DOCTORATE__",
+    label: "Doctorate ━━",
+    disabled: true,
+  },
+  {
+    value: "DBA",
+    label: "DBA",
+  },
+  {
+    value: "MBA+DBA",
+    label: "MBA + DBA",
+  },
+
+  /* =========================
+     MASTER
+  ========================== */
+
+  {
+    value: "__MASTER__",
+    label: "Master ━━",
+    disabled: true,
+  },
+  {
+    value: "MBA",
+    label: "MBA",
+  },
+  {
+    value: "MSC",
+    label: "M.Sc. Data Science",
+  },
+  {
+    value: "MSC",
+    label: "M.Sc. Machine Learning & AI",
+  },
+  {
+    value: "DIPLOMA",
+    label: "Executive Diploma in Machine Learning & AI",
+  },
+
+  /* =========================
+     CERTIFICATION
+  ========================== */
+
+  {
+    value: "__CERTIFICATION__",
+    label: "Certification ━━",
+    disabled: true,
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Professional Certificate Programme in HR Management and Analytics",
+  },
+  {
+    value: "CERTIFICATE",
+    label:
+      "Professional Certificate Programme in Data Science with Generative AI",
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Executive Post Graduate Certificate Programme in Data Science & AI",
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Executive Post Graduate Certificate in Generative AI & Agentic AI",
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Advanced Certificate in Digital Marketing & Communication",
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Advanced Certificate in Digital Brand Communication Strategy",
+  },
+
+  /* =========================
+     EXECUTIVE PROGRAMS
+  ========================== */
+
+  {
+    value: "__EXECUTIVE_PROGRAMS__",
+    label: "Executive Programs ━━",
+    disabled: true,
+  },
+  {
+    value: "PG PROGRAMS",
+    label: "Executive Programme in Generative AI for Leaders",
+  },
+  {
+    value: "PG PROGRAMS",
+    label: "Executive Post Graduate Programme in Applied AI and Agentic AI",
+  },
+  {
+    value: "PG PROGRAMS",
+    label: "Chief Technology Officer & AI Leadership Programme",
+  },
 ];
 
+/* =========================================================
+   TABS
+========================================================= */
+
+const tabs = [
+  {
+    id: "all",
+    label: "All Programs",
+  },
+  {
+    id: "doctorate",
+    label: "Doctorate",
+  },
+  {
+    id: "certification",
+    label: "Certifications",
+  },
+  {
+    id: "executive",
+    label: "Executive Programs",
+  },
+  {
+    id: "master",
+    label: "Master",
+  },
+];
+
+/* =========================================================
+   PROGRAMS
+========================================================= */
+
 const programs = [
-  // --- Doctorate Programs ---
+  /* =========================
+     DOCTORATE PROGRAMS
+  ========================== */
+
   {
     category: "doctorate",
     image: "/assets/images/docrorate-1.png",
@@ -93,7 +229,10 @@ const programs = [
     brochureUrl: "/assets/pdf/edgewood_dba_mba.pdf",
   },
 
-  // --- Certification Programs ---
+  /* =========================
+     CERTIFICATION PROGRAMS
+  ========================== */
+
   {
     category: "certification",
     image: "/assets/images/certification-1.webp",
@@ -168,7 +307,10 @@ const programs = [
     brochureUrl: "/assets/pdf/mica_digital_brand_communication_strategy.pdf",
   },
 
-  // --- Executive Programs ---
+  /* =========================
+     EXECUTIVE PROGRAMS
+  ========================== */
+
   {
     category: "executive",
     image: "/assets/images/executive-1.webp",
@@ -207,7 +349,10 @@ const programs = [
     brochureUrl: "/assets/pdf/IIITB_CTOAI_leadership_program.pdf",
   },
 
-  // --- Master Programs ---
+  /* =========================
+     MASTER PROGRAMS
+  ========================== */
+
   {
     category: "master",
     image: "/assets/images/master-1.webp",
@@ -270,11 +415,17 @@ const programs = [
   },
 ];
 
+/* =========================================================
+   PREMIUM PROGRAMS
+========================================================= */
+
 export function PremiumPrograms() {
   const [activeTab, setActiveTab] = useState("all");
+
   const [activeModal, setActiveModal] = useState<"brochure" | "apply" | null>(
     null,
   );
+
   const [selectedProgram, setSelectedProgram] = useState<
     (typeof programs)[0] | null
   >(null);
@@ -282,17 +433,35 @@ export function PremiumPrograms() {
   const filteredPrograms =
     activeTab === "all"
       ? programs
-      : programs.filter((prog) => prog.category === activeTab);
+      : programs.filter((program) => program.category === activeTab);
 
-  const handleGetBrochure = (prog: (typeof programs)[0]) => {
-    sessionStorage.setItem("brochureUrl", getAssetPath(prog.brochureUrl));
-    setSelectedProgram(prog);
+  /* =========================================================
+     GET BROCHURE
+  ========================================================= */
+
+  const handleGetBrochure = (program: (typeof programs)[0]) => {
+    sessionStorage.setItem("brochureUrl", getAssetPath(program.brochureUrl));
+
+    setSelectedProgram(program);
     setActiveModal("brochure");
   };
 
-  const handleApplyNow = (prog: (typeof programs)[0]) => {
-    setSelectedProgram(prog);
+  /* =========================================================
+     APPLY NOW
+  ========================================================= */
+
+  const handleApplyNow = (program: (typeof programs)[0]) => {
+    setSelectedProgram(program);
     setActiveModal("apply");
+  };
+
+  /* =========================================================
+     CLOSE MODAL
+  ========================================================= */
+
+  const closeModal = () => {
+    setActiveModal(null);
+    setSelectedProgram(null);
   };
 
   return (
@@ -302,22 +471,27 @@ export function PremiumPrograms() {
     >
       <Container className="max-w-7xl">
         {/* Title & Subtitle */}
+
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-[40px] font-extrabold text-[#1d3557] leading-tight mb-3">
-            Top Certification & Online Degree Courses
+            Top Certification &amp; Online Degree Courses
           </h2>
+
           <p className="text-gray-600 text-sm md:text-base font-semibold">
             Find the credential that moves your career
           </p>
         </div>
 
         {/* Tabs Buttons Flex container */}
+
         <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 mb-12 max-w-4xl mx-auto">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
+
             return (
               <button
                 key={tab.id}
+                type="button"
                 onClick={() => setActiveTab(tab.id)}
                 className={`px-5 py-2.5 rounded-full font-bold text-xs md:text-sm transition-all duration-300 cursor-pointer border select-none ${
                   isActive
@@ -332,16 +506,18 @@ export function PremiumPrograms() {
         </div>
 
         {/* Cards Grid */}
+
         <div
           key={activeTab}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto animate-fade-in"
         >
-          {filteredPrograms.map((item, idx) => (
+          {filteredPrograms.map((item, index) => (
             <div
-              key={idx}
+              key={`${item.title}-${item.university}-${index}`}
               className="bg-white rounded-3xl shadow-[0_15px_35px_rgba(0,0,0,0.02)] border border-gray-100 flex flex-col transform transition duration-300 hover:-translate-y-1.5 hover:shadow-xl overflow-hidden animate-fade-in"
             >
               {/* Card Image */}
+
               <div className="relative w-full h-40 shrink-0">
                 <Image
                   src={getAssetPath(item.image)}
@@ -353,6 +529,7 @@ export function PremiumPrograms() {
 
               <div className="pt-0 pb-6 px-6 flex flex-col grow text-left relative">
                 {/* Institution Logo overlay */}
+
                 <div className="mb-5 -mt-7.5 rounded-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.15)] w-[55%] p-2 bg-white relative z-10 flex items-center justify-center h-18 border border-slate-100">
                   <div className="relative w-full h-15">
                     <Image
@@ -365,13 +542,14 @@ export function PremiumPrograms() {
                 </div>
 
                 {/* Course Title */}
+
                 <h3 className="text-[14px] font-bold text-[#1d3557] leading-snug mb-3">
                   {item.title}
                 </h3>
 
                 {/* University Name */}
+
                 <div className="flex items-center gap-2 text-[#A66E38] text-[13px] font-bold mb-4 select-none">
-                  {/* University Cap Icon */}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 640 640"
@@ -380,34 +558,42 @@ export function PremiumPrograms() {
                   >
                     <path d="M335.9 84.2C326.1 78.6 314 78.6 304.1 84.2L80.1 212.2C67.5 219.4 61.3 234.2 65 248.2C68.7 262.2 81.5 272 96 272H128V480L76.8 518.4C68.7 524.4 64 533.9 64 544C64 561.7 78.3 576 96 576H544C561.7 576 576 561.7 576 544C576 533.9 571.3 524.4 563.2 518.4L512 480V272H544C558.5 272 571.2 262.2 574.9 248.2C578.6 234.2 572.4 219.4 559.8 212.2L335.9 84.2ZM464 272V480H400V272H464ZM352 272V480H288V272H352ZM240 272V480H176V272H240ZM320 160C337.7 160 352 174.3 352 192C352 209.7 337.7 224 320 224C302.3 224 288 209.7 288 192C288 174.3 302.3 160 320 160Z" />
                   </svg>
+
                   <span>{item.university}</span>
                 </div>
 
                 {/* Description */}
+
                 <p className="text-gray-500 text-[11px] leading-relaxed grow font-medium mb-4">
                   {item.description}
                 </p>
 
                 {/* Specs Section */}
+
                 <div className="border-t border-gray-100 pt-4 mb-6 space-y-1.5 mt-auto">
                   <div className="flex items-start text-[10px] text-gray-600 font-semibold">
                     <span className="text-[#A66E38] font-bold mr-2 text-[14px] leading-none">
                       |
                     </span>
+
                     <span className="text-gray-500 font-medium shrink-0">
                       Duration :
                     </span>
+
                     <span className="text-[#1C293F] font-bold ml-1">
                       {item.duration}
                     </span>
                   </div>
+
                   <div className="flex items-start text-[10px] text-gray-600 font-semibold leading-relaxed">
                     <span className="text-[#A66E38] font-bold mr-2 text-[14px] leading-none">
                       |
                     </span>
+
                     <span className="text-gray-500 font-medium shrink-0">
                       Eligibility :
                     </span>
+
                     <span className="text-[#1C293F] font-bold ml-1">
                       {item.eligibility}
                     </span>
@@ -415,8 +601,10 @@ export function PremiumPrograms() {
                 </div>
 
                 {/* Buttons Action Grid */}
+
                 <div className="grid grid-cols-2 gap-3 mt-auto">
                   <button
+                    type="button"
                     onClick={() => handleGetBrochure(item)}
                     className="flex items-center justify-center gap-1.5 border border-[#1d3557] text-[#1d3557] font-bold py-2.5 px-3 rounded-lg text-[12px] transition duration-300 hover:bg-[#1d3557] hover:text-white active:scale-[0.98] cursor-pointer"
                   >
@@ -427,6 +615,7 @@ export function PremiumPrograms() {
                       stroke="currentColor"
                       viewBox="0 0 24 24"
                       strokeWidth="2.2"
+                      aria-hidden="true"
                     >
                       <path
                         strokeLinecap="round"
@@ -437,6 +626,7 @@ export function PremiumPrograms() {
                   </button>
 
                   <button
+                    type="button"
                     onClick={() => handleApplyNow(item)}
                     className="flex items-center justify-center gap-1.5 bg-[#1d3557] text-white border border-[#1d3557] font-bold py-2.5 px-3 rounded-lg text-[12px] transition duration-300 hover:bg-[#14243c] active:scale-[0.98] cursor-pointer"
                   >
@@ -447,6 +637,7 @@ export function PremiumPrograms() {
                       stroke="currentColor"
                       viewBox="0 0 24 24"
                       strokeWidth="2.2"
+                      aria-hidden="true"
                     >
                       <path
                         strokeLinecap="round"
@@ -462,12 +653,16 @@ export function PremiumPrograms() {
         </div>
       </Container>
 
-      {/* Modal Popup for FormWrapper */}
+      {/* =====================================================
+          FORM MODAL
+      ====================================================== */}
+
       {activeModal && selectedProgram && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-xs transition-opacity duration-300">
           <div
+            role="presentation"
             className="absolute inset-0 animate-fade-in"
-            onClick={() => setActiveModal(null)}
+            onClick={closeModal}
           />
 
           <div className="bg-white rounded-3xl p-6 md:p-8 max-w-lg w-full relative shadow-2xl overflow-y-auto max-h-[90vh] z-10 transition-transform duration-300 scale-100 animate-scale-in">
@@ -479,10 +674,31 @@ export function PremiumPrograms() {
               }
               subtitle={
                 activeModal === "brochure"
-                  ? `Enter your details to download the brochure`
-                  : `Start your application journey today`
+                  ? "Enter your details to download the brochure"
+                  : "Start your application journey today"
               }
-              onClose={() => setActiveModal(null)}
+              onClose={closeModal}
+              defaultCourse=""
+              courseOptions={SODE_COURSE_OPTIONS}
+              formNameOverride={
+                activeModal === "brochure"
+                  ? `SODE Premium Program Brochure Form - ${selectedProgram.title}`
+                  : `SODE Premium Program Apply Form - ${selectedProgram.title}`
+              }
+              sourceOverride="SODE"
+              utmSourceFallback="Organic"
+              utmMediumFallback="SODE_Organic"
+              submitButtonText={
+                activeModal === "brochure" ? "Download Brochure" : "Apply Now"
+              }
+              submitButtonClassName="bg-[#1d3557] hover:bg-[#14243c]"
+              isBrochureForm={activeModal === "brochure"}
+              brochureUrl={
+                activeModal === "brochure"
+                  ? getAssetPath(selectedProgram.brochureUrl)
+                  : ""
+              }
+              redirectUrl="/thank-you?source=lp"
             />
           </div>
         </div>

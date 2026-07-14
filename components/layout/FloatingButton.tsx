@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import confetti from "canvas-confetti";
-import { X } from "lucide-react";
 
 import { getAssetPath } from "@/lib/utils";
 import FormWrapper, {
@@ -29,22 +28,21 @@ export type FloatingButtonProps = {
   submitButtonText?: string;
   submitButtonClassName?: string;
 
+  redirectUrl?: string;
+
   /*
-   * Page kitne percent scroll hone par form auto-open hoga.
-   * Example: 45
-   *
-   * null ya undefined dene par auto-open disable rahega.
+   * Page kitne percentage scroll hone par form auto-open hoga.
+   * null dene par auto-open disable rahega.
    */
   autoOpenAtScrollPercent?: number | null;
 
   /*
-   * Auto-open ko current browser tab/session me sirf ek baar
-   * chalane ke liye unique key.
+   * Har page ke liye unique sessionStorage key.
    */
   autoOpenSessionKey?: string;
 
   /*
-   * Auto-open hone par confetti chalani hai ya nahi.
+   * Auto-open ke samay confetti chalani hai ya nahi.
    */
   showConfettiOnAutoOpen?: boolean;
 };
@@ -73,7 +71,7 @@ function getPageScrollPercentage() {
 }
 
 /* =========================================================
-   FLOATING BUTTON COMPONENT
+   COMPONENT
 ========================================================= */
 
 export default function FloatingButton({
@@ -91,6 +89,8 @@ export default function FloatingButton({
   submitButtonText = "Get Coupon Code",
   submitButtonClassName = "bg-[#1C3569] hover:bg-[#162a54]",
 
+  redirectUrl = "/thank-you?source=sode",
+
   autoOpenAtScrollPercent = null,
   autoOpenSessionKey = "scholarship-floating-form-auto-opened",
   showConfettiOnAutoOpen = true,
@@ -98,13 +98,13 @@ export default function FloatingButton({
   const [open, setOpen] = useState(false);
 
   /*
-   * React Strict Mode aur repeated scroll events se duplicate
-   * auto-open prevent karega.
+   * Repeated scroll events aur React Strict Mode ki wajah se
+   * duplicate auto-open ko prevent karega.
    */
   const autoOpenTriggeredRef = useRef(false);
 
   /* =========================================================
-     CONFETTI EFFECT
+     CONFETTI
   ========================================================= */
 
   const runConfetti = useCallback(() => {
@@ -123,6 +123,7 @@ export default function FloatingButton({
         spread: 55,
         origin: {
           x: 0,
+          y: 0.65,
         },
       });
 
@@ -132,6 +133,7 @@ export default function FloatingButton({
         spread: 55,
         origin: {
           x: 1,
+          y: 0.65,
         },
       });
     }, 300);
@@ -164,12 +166,12 @@ export default function FloatingButton({
      CLOSE FORM
   ========================================================= */
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setOpen(false);
-  };
+  }, []);
 
   /* =========================================================
-     AUTO-OPEN FORM AFTER PAGE SCROLL
+     AUTO-OPEN AT SCROLL PERCENTAGE
   ========================================================= */
 
   useEffect(() => {
@@ -182,9 +184,6 @@ export default function FloatingButton({
 
     const requiredScrollPercentage = clampPercentage(autoOpenAtScrollPercent);
 
-    /*
-     * Current session me pehle auto-open ho chuka hai ya nahi.
-     */
     try {
       const alreadyOpened =
         sessionStorage.getItem(autoOpenSessionKey) === "true";
@@ -221,16 +220,13 @@ export default function FloatingButton({
       window.removeEventListener("scroll", handleScroll);
     };
 
-    /*
-     * Scroll listener performance ke liye passive rakha hai.
-     */
     window.addEventListener("scroll", handleScroll, {
       passive: true,
     });
 
     /*
-     * Agar user page refresh ke baad already 45% se neeche hai,
-     * to initial check form auto-open kar dega.
+     * Page refresh ke baad user already 45% se neeche ho,
+     * to initial scroll position bhi check hogi.
      */
     handleScroll();
 
@@ -283,12 +279,12 @@ export default function FloatingButton({
     return () => {
       window.removeEventListener("keydown", handleEscapeKey);
     };
-  }, [open]);
+  }, [handleClose, open]);
 
   return (
     <>
       {/* =====================================================
-          GIFT FLOATING BUTTON
+          FLOATING GIFT BUTTON
       ====================================================== */}
 
       <button
@@ -349,22 +345,11 @@ export default function FloatingButton({
               animate-[scaleIn_0.2s_ease]
             "
           >
-            <button
-              type="button"
-              onClick={handleClose}
-              aria-label="Close scholarship form"
-              className="
-                absolute right-4 top-4 z-20
-                flex h-9 w-9 cursor-pointer
-                items-center justify-center
-                rounded-full bg-gray-100
-                text-gray-700
-                transition-colors duration-200
-                hover:bg-gray-200 hover:text-black
-              "
-            >
-              <X size={20} aria-hidden="true" />
-            </button>
+            {/*
+              External X button remove kar diya hai.
+              FormWrapper ko onClose mil raha hai, isliye
+              FormWrapper apna single close button dikhayega.
+            */}
 
             <FormWrapper
               title={title}
@@ -378,7 +363,7 @@ export default function FloatingButton({
               utmMediumFallback={utmMediumFallback}
               submitButtonText={submitButtonText}
               submitButtonClassName={submitButtonClassName}
-              redirectUrl="/thank-you?source=iiitb"
+              redirectUrl={redirectUrl}
             />
           </div>
         </div>
