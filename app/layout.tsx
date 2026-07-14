@@ -281,27 +281,8 @@ const organizationSchema = {
     "https://x.com/distance_school",
     "https://www.instagram.com/distanceeducationschool/",
     "https://in.linkedin.com/company/distanceeducationschool",
-    "https://www.youtube.com/channel/UCw9KLsERm_EzL2js_s7GbLQ/",
+    "https://www.youtube.com/@distanceeducationschool",
     "https://in.pinterest.com/distanceeducationschoolportal/",
-  ],
-
-  provider: [
-    {
-      "@type": "EducationalOrganization",
-      name: "Rushford Business School",
-    },
-    {
-      "@type": "EducationalOrganization",
-      name: "Golden Gate University",
-    },
-    {
-      "@type": "EducationalOrganization",
-      name: "SSBM Geneva",
-    },
-    {
-      "@type": "EducationalOrganization",
-      name: "ESGCI",
-    },
   ],
 };
 
