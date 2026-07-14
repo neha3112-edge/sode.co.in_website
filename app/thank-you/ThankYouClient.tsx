@@ -8,13 +8,25 @@ import { Headphones, Home, Mail } from "lucide-react";
 import successAnimation from "@/public/assets/animations/check.json";
 import { getAssetPath } from "@/lib/utils";
 
-type ConversionSource = "iimk" | "iiitb";
+/* =========================================================
+   SUPPORTED GOOGLE ADS CONVERSION SOURCES
+========================================================= */
+
+type ConversionSource = "iimk" | "iiitb" | "lp";
+
+/* =========================================================
+   GOOGLE TAG ARGUMENT TYPES
+========================================================= */
 
 type GoogleTagArguments = [
   command: "event" | "config" | "js",
   action: string | Date,
   parameters?: Record<string, unknown>,
 ];
+
+/* =========================================================
+   WINDOW GLOBAL TYPES
+========================================================= */
 
 declare global {
   interface Window {
@@ -25,11 +37,21 @@ declare global {
 
 /* =========================================================
    GOOGLE ADS CONVERSION LABELS
+
+   iimk:
+   SODE IIM Kozhikode conversion
+
+   iiitb:
+   SODE IIIT Bangalore conversion
+
+   lp:
+   SODE main landing-page conversion
 ========================================================= */
 
 const GOOGLE_ADS_CONVERSION_LABELS: Record<ConversionSource, string> = {
   iimk: "AW-17946162864/M_ZICKbCrNAcELDtsu1C",
   iiitb: "AW-17946162864/j5BSCL-P3sgcELDtsu1C",
+  lp: "AW-17946162864/sLquCMiuu8YcELDtsu1C",
 };
 
 /* =========================================================
@@ -37,8 +59,12 @@ const GOOGLE_ADS_CONVERSION_LABELS: Record<ConversionSource, string> = {
 ========================================================= */
 
 function isConversionSource(source: string | null): source is ConversionSource {
-  return source === "iimk" || source === "iiitb";
+  return source === "iimk" || source === "iiitb" || source === "lp";
 }
+
+/* =========================================================
+   THANK YOU CLIENT COMPONENT
+========================================================= */
 
 export default function ThankYouClient() {
   const [progress, setProgress] = useState(0);
@@ -48,8 +74,14 @@ export default function ThankYouClient() {
 
   /*
    * React Strict Mode development me effects ko dobara run kar sakta hai.
-   * Ye refs duplicate brochure opening aur duplicate conversion ko rokte hain.
+   *
+   * brochureProcessStarted:
+   * Brochure ko duplicate open hone se rokta hai.
+   *
+   * conversionSent:
+   * Google Ads conversion ko duplicate fire hone se rokta hai.
    */
+
   const brochureProcessStarted = useRef(false);
   const conversionSent = useRef(false);
 
@@ -64,6 +96,7 @@ export default function ThankYouClient() {
       setIsBrochure(brochureFlow);
     } catch (error) {
       console.error("Unable to read brochure session:", error);
+
       setIsBrochure(false);
     } finally {
       setIsClientReady(true);
@@ -72,6 +105,12 @@ export default function ThankYouClient() {
 
   /* =========================================================
      GOOGLE ADS CONVERSION TRACKING
+
+     Supported URLs:
+
+     /thank-you?source=iimk
+     /thank-you?source=iiitb
+     /thank-you?source=lp
   ========================================================= */
 
   useEffect(() => {
@@ -79,27 +118,31 @@ export default function ThankYouClient() {
       return;
     }
 
-    /*
-     * Example URLs:
-     *
-     * /thank-you?source=iimk
-     * /thank-you?source=iiitb
-     */
     const searchParams = new URLSearchParams(window.location.search);
 
-    const querySource = searchParams.get("source")?.toLowerCase() ?? null;
+    const querySource =
+      searchParams.get("source")?.trim().toLowerCase() ?? null;
 
     /*
-     * Query parameter na mile to sessionStorage fallback use hoga.
+     * Query parameter missing ho to sessionStorage fallback use hoga.
      */
+
     let storedSource: string | null = null;
 
     try {
       storedSource =
-        sessionStorage.getItem("conversionSource")?.toLowerCase() ?? null;
+        sessionStorage.getItem("conversionSource")?.trim().toLowerCase() ??
+        null;
     } catch (error) {
       console.error("Unable to read conversion source:", error);
     }
+
+    /*
+     * Priority:
+     *
+     * 1. URL query parameter
+     * 2. sessionStorage conversionSource
+     */
 
     const source = isConversionSource(querySource)
       ? querySource
@@ -109,7 +152,7 @@ export default function ThankYouClient() {
 
     if (!source) {
       console.warn(
-        "Google Ads conversion was not sent because conversion source is missing.",
+        "Google Ads conversion was not sent because conversion source is missing or invalid.",
       );
 
       return;
@@ -118,9 +161,16 @@ export default function ThankYouClient() {
     const sendTo = GOOGLE_ADS_CONVERSION_LABELS[source];
 
     /*
-     * Conversion dobara fire na ho, iske liye session key.
-     * Current tab/session me same conversion repeat nahi hogi.
+     * Current browser tab/session me same source ki conversion
+     * dobara fire nahi hogi.
+     *
+     * Example keys:
+     *
+     * googleAdsConversionSent:iimk
+     * googleAdsConversionSent:iiitb
+     * googleAdsConversionSent:lp
      */
+
     const conversionSessionKey = `googleAdsConversionSent:${source}`;
 
     try {
@@ -129,13 +179,21 @@ export default function ThankYouClient() {
 
       if (alreadySent) {
         conversionSent.current = true;
+
         return;
       }
     } catch (error) {
-      console.error("Unable to check conversion state:", error);
+      console.error("Unable to check Google Ads conversion state:", error);
     }
 
     conversionSent.current = true;
+
+    /*
+     * Google tag script layout me load hona chahiye.
+     *
+     * Ye fallback ensure karta hai ki gtag function missing hone par
+     * event dataLayer me queue ho jaye.
+     */
 
     window.dataLayer = window.dataLayer || [];
 
@@ -145,18 +203,27 @@ export default function ThankYouClient() {
         window.dataLayer.push(args);
       };
 
+    /*
+     * Equivalent Google Ads event:
+     *
+     * gtag("event", "conversion", {
+     *   send_to: "AW-17946162864/CONVERSION_LABEL",
+     * });
+     */
+
     window.gtag("event", "conversion", {
       send_to: sendTo,
     });
 
     try {
       sessionStorage.setItem(conversionSessionKey, "true");
+
       sessionStorage.removeItem("conversionSource");
     } catch (error) {
-      console.error("Unable to store conversion state:", error);
+      console.error("Unable to store Google Ads conversion state:", error);
     }
 
-    console.info(`Google Ads ${source} conversion event sent.`);
+    console.info(`Google Ads conversion event sent for source: ${source}`);
   }, []);
 
   /* =========================================================
@@ -170,8 +237,23 @@ export default function ThankYouClient() {
       return (
         storedBrochureUrl?.trim() || getAssetPath("/assets/pdf/brochure.pdf")
       );
-    } catch {
+    } catch (error) {
+      console.error("Unable to read brochure URL from session:", error);
+
       return getAssetPath("/assets/pdf/brochure.pdf");
+    }
+  }, []);
+
+  /* =========================================================
+     CLEAR BROCHURE SESSION
+  ========================================================= */
+
+  const clearBrochureSession = useCallback(() => {
+    try {
+      sessionStorage.removeItem("isBrochureFlow");
+      sessionStorage.removeItem("brochureUrl");
+    } catch (error) {
+      console.error("Unable to clear brochure session:", error);
     }
   }, []);
 
@@ -208,34 +290,33 @@ export default function ThankYouClient() {
       const brochureUrl = getBrochureUrl();
 
       /*
-       * Browser popup blockers asynchronous window.open ko block
-       * kar sakte hain. Pehle new tab open karne ki koshish hogi.
+       * New tab me brochure open karne ki koshish.
        */
+
       const newTab = window.open(brochureUrl, "_blank", "noopener,noreferrer");
 
+      /*
+       * Browser popup block kare to same tab me brochure open hoga.
+       */
+
       if (!newTab) {
-        /*
-         * Popup block hone par same tab me brochure open hoga.
-         */
+        clearBrochureSession();
+
         window.location.assign(brochureUrl);
+
         return;
       }
 
       setBrochureOpened(true);
 
-      try {
-        sessionStorage.removeItem("isBrochureFlow");
-        sessionStorage.removeItem("brochureUrl");
-      } catch (error) {
-        console.error("Unable to clear brochure session:", error);
-      }
+      clearBrochureSession();
     }, 1000);
 
     return () => {
       window.clearInterval(progressInterval);
       window.clearTimeout(brochureTimer);
     };
-  }, [getBrochureUrl, isBrochure, isClientReady]);
+  }, [clearBrochureSession, getBrochureUrl, isBrochure, isClientReady]);
 
   /* =========================================================
      MANUAL BROCHURE OPEN
@@ -247,18 +328,16 @@ export default function ThankYouClient() {
     const newTab = window.open(brochureUrl, "_blank", "noopener,noreferrer");
 
     if (!newTab) {
+      clearBrochureSession();
+
       window.location.assign(brochureUrl);
+
       return;
     }
 
     setBrochureOpened(true);
 
-    try {
-      sessionStorage.removeItem("isBrochureFlow");
-      sessionStorage.removeItem("brochureUrl");
-    } catch (error) {
-      console.error("Unable to clear brochure session:", error);
-    }
+    clearBrochureSession();
   };
 
   return (
@@ -337,6 +416,8 @@ export default function ThankYouClient() {
           ================================================== */}
 
           <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2">
+            {/* Check Inbox */}
+
             <div className="rounded-2xl border border-transparent bg-[#F1F5F9] p-5 text-left transition-all hover:border-[#FFC107]">
               <div className="flex items-start gap-4">
                 <div className="shrink-0 rounded-lg bg-white p-2 shadow-sm">
@@ -359,6 +440,8 @@ export default function ThankYouClient() {
                 </div>
               </div>
             </div>
+
+            {/* Expert Guidance */}
 
             <div className="rounded-2xl border border-transparent bg-[#F1F5F9] p-5 text-left transition-all hover:border-[#FFC107]">
               <div className="flex items-start gap-4">
