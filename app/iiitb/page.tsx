@@ -101,7 +101,13 @@ export default function IIITBPage() {
 
       <Footer />
 
-      {/* Desktop floating buttons */}
+      {/* =====================================================
+          DESKTOP FLOATING BUTTONS
+
+          Floating scholarship form page ke 45% scroll par
+          automatically open hoga.
+      ====================================================== */}
+
       <div className="fixed bottom-6 right-6 z-[80] hidden flex-col items-center gap-2 lg:flex">
         <CallCTA />
 
@@ -115,10 +121,16 @@ export default function IIITBPage() {
           utmMediumFallback="IIITB_Organic"
           submitButtonText="Get Coupon Code"
           submitButtonClassName="bg-[#076493] hover:bg-[#05547c]"
+          autoOpenAtScrollPercent={45}
+          autoOpenSessionKey="iiitb-scholarship-form-auto-opened"
+          showConfettiOnAutoOpen
         />
       </div>
 
-      {/* Mobile bottom CTA */}
+      {/* =====================================================
+          MOBILE BOTTOM CTA
+      ====================================================== */}
+
       <div className="lg:hidden">
         <GlobalCTA />
       </div>

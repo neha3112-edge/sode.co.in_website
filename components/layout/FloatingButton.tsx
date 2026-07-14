@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import confetti from "canvas-confetti";
 import { X } from "lucide-react";
@@ -28,10 +28,52 @@ export type FloatingButtonProps = {
 
   submitButtonText?: string;
   submitButtonClassName?: string;
+
+  /*
+   * Page kitne percent scroll hone par form auto-open hoga.
+   * Example: 45
+   *
+   * null ya undefined dene par auto-open disable rahega.
+   */
+  autoOpenAtScrollPercent?: number | null;
+
+  /*
+   * Auto-open ko current browser tab/session me sirf ek baar
+   * chalane ke liye unique key.
+   */
+  autoOpenSessionKey?: string;
+
+  /*
+   * Auto-open hone par confetti chalani hai ya nahi.
+   */
+  showConfettiOnAutoOpen?: boolean;
 };
 
 /* =========================================================
-   FLOATING BUTTON
+   HELPERS
+========================================================= */
+
+function clampPercentage(value: number) {
+  return Math.min(100, Math.max(0, value));
+}
+
+function getPageScrollPercentage() {
+  const documentElement = document.documentElement;
+
+  const scrollTop =
+    window.scrollY || documentElement.scrollTop || document.body.scrollTop || 0;
+
+  const scrollableHeight = documentElement.scrollHeight - window.innerHeight;
+
+  if (scrollableHeight <= 0) {
+    return 100;
+  }
+
+  return (scrollTop / scrollableHeight) * 100;
+}
+
+/* =========================================================
+   FLOATING BUTTON COMPONENT
 ========================================================= */
 
 export default function FloatingButton({
@@ -48,16 +90,24 @@ export default function FloatingButton({
 
   submitButtonText = "Get Coupon Code",
   submitButtonClassName = "bg-[#1C3569] hover:bg-[#162a54]",
+
+  autoOpenAtScrollPercent = null,
+  autoOpenSessionKey = "scholarship-floating-form-auto-opened",
+  showConfettiOnAutoOpen = true,
 }: FloatingButtonProps) {
   const [open, setOpen] = useState(false);
 
+  /*
+   * React Strict Mode aur repeated scroll events se duplicate
+   * auto-open prevent karega.
+   */
+  const autoOpenTriggeredRef = useRef(false);
+
   /* =========================================================
-     OPEN FORM
+     CONFETTI EFFECT
   ========================================================= */
 
-  const handleClick = () => {
-    setOpen(true);
-
+  const runConfetti = useCallback(() => {
     confetti({
       particleCount: 120,
       spread: 80,
@@ -85,6 +135,29 @@ export default function FloatingButton({
         },
       });
     }, 300);
+  }, []);
+
+  /* =========================================================
+     OPEN FORM
+  ========================================================= */
+
+  const openForm = useCallback(
+    (withConfetti = true) => {
+      setOpen(true);
+
+      if (withConfetti) {
+        runConfetti();
+      }
+    },
+    [runConfetti],
+  );
+
+  /* =========================================================
+     MANUAL BUTTON CLICK
+  ========================================================= */
+
+  const handleClick = () => {
+    openForm(true);
   };
 
   /* =========================================================
@@ -96,18 +169,97 @@ export default function FloatingButton({
   };
 
   /* =========================================================
+     AUTO-OPEN FORM AFTER PAGE SCROLL
+  ========================================================= */
+
+  useEffect(() => {
+    if (
+      autoOpenAtScrollPercent === null ||
+      autoOpenAtScrollPercent === undefined
+    ) {
+      return;
+    }
+
+    const requiredScrollPercentage = clampPercentage(autoOpenAtScrollPercent);
+
+    /*
+     * Current session me pehle auto-open ho chuka hai ya nahi.
+     */
+    try {
+      const alreadyOpened =
+        sessionStorage.getItem(autoOpenSessionKey) === "true";
+
+      if (alreadyOpened) {
+        autoOpenTriggeredRef.current = true;
+        return;
+      }
+    } catch (error) {
+      console.error("Unable to read floating form auto-open session:", error);
+    }
+
+    const handleScroll = () => {
+      if (autoOpenTriggeredRef.current || open) {
+        return;
+      }
+
+      const currentScrollPercentage = getPageScrollPercentage();
+
+      if (currentScrollPercentage < requiredScrollPercentage) {
+        return;
+      }
+
+      autoOpenTriggeredRef.current = true;
+
+      try {
+        sessionStorage.setItem(autoOpenSessionKey, "true");
+      } catch (error) {
+        console.error("Unable to save floating form auto-open session:", error);
+      }
+
+      openForm(showConfettiOnAutoOpen);
+
+      window.removeEventListener("scroll", handleScroll);
+    };
+
+    /*
+     * Scroll listener performance ke liye passive rakha hai.
+     */
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    /*
+     * Agar user page refresh ke baad already 45% se neeche hai,
+     * to initial check form auto-open kar dega.
+     */
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [
+    autoOpenAtScrollPercent,
+    autoOpenSessionKey,
+    open,
+    openForm,
+    showConfettiOnAutoOpen,
+  ]);
+
+  /* =========================================================
      BODY SCROLL LOCK
   ========================================================= */
 
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
+    if (!open) {
+      return;
     }
 
+    const previousOverflow = document.body.style.overflow;
+
+    document.body.style.overflow = "hidden";
+
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
     };
   }, [open]);
 
@@ -116,15 +268,17 @@ export default function FloatingButton({
   ========================================================= */
 
   useEffect(() => {
+    if (!open) {
+      return;
+    }
+
     const handleEscapeKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         handleClose();
       }
     };
 
-    if (open) {
-      window.addEventListener("keydown", handleEscapeKey);
-    }
+    window.addEventListener("keydown", handleEscapeKey);
 
     return () => {
       window.removeEventListener("keydown", handleEscapeKey);
@@ -133,7 +287,10 @@ export default function FloatingButton({
 
   return (
     <>
-      {/* Gift button */}
+      {/* =====================================================
+          GIFT FLOATING BUTTON
+      ====================================================== */}
+
       <button
         type="button"
         onClick={handleClick}
@@ -163,7 +320,10 @@ export default function FloatingButton({
         />
       </button>
 
-      {/* Modal */}
+      {/* =====================================================
+          SCHOLARSHIP MODAL
+      ====================================================== */}
+
       {open && (
         <div
           role="presentation"
@@ -218,6 +378,7 @@ export default function FloatingButton({
               utmMediumFallback={utmMediumFallback}
               submitButtonText={submitButtonText}
               submitButtonClassName={submitButtonClassName}
+              redirectUrl="/thank-you?source=iiitb"
             />
           </div>
         </div>
