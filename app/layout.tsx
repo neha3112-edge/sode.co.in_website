@@ -15,18 +15,30 @@ import "./globals.css";
 ========================================================= */
 
 const SITE_NAME = "SODE";
+
 const SITE_URL = "https://sode.co.in";
 
 const SITE_TITLE =
-  "SODE: Certifications & Online Degree Courses from IITs, IIMs | DBA MBA";
+  "SODE | Certifications & Online Degree Courses from IITs, IIMs | DBA & MBA";
 
 const SITE_DESCRIPTION =
   "Certifications & Online Degree Courses from top IITs, IIMs & global universities via SODE. Enroll in our MBA, DBA & executive leadership programs.";
 
-const OG_IMAGE = `${SITE_URL}/assets/img/sode_header_logo.png`;
+const OG_IMAGE = `${SITE_URL}/assets/images/sode-homepage-og-card-image.png`;
 
+const ORGANIZATION_LOGO = `${SITE_URL}/assets/img/sode_header_logo.png`;
+
+const FAVICON_PATH = "/assets/img/favicon.ico";
+
+/*
+  Existing GTM ko preserve kiya gaya hai.
+*/
 const GTM_ID = "GTM-567GP8S9";
 
+/*
+  Existing dono Google Ads IDs preserve kiye hain.
+  User ke provided code ka AW-17946162864 bhi included hai.
+*/
 const GOOGLE_ADS_IDS = ["AW-17917271919", "AW-17946162864"];
 
 /* =========================================================
@@ -78,7 +90,10 @@ export const metadata: Metadata = {
   ],
 
   creator: "SODE",
+
   publisher: "SODE",
+
+  generator: "Next.js",
 
   keywords: [
     "Certifications and Online Degree Courses",
@@ -94,6 +109,9 @@ export const metadata: Metadata = {
     "DBA for Working Professionals",
     "Executive Leadership Programs",
     "Online Certification Courses",
+    "Online Courses from IITs",
+    "Online Courses from IIMs",
+    "Global Universities Online Courses",
     "SODE",
     "SODE Counseling Services",
     "School of Online and Distance Education",
@@ -106,6 +124,7 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    nocache: false,
 
     googleBot: {
       index: true,
@@ -120,31 +139,39 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/assets/img/favicon.ico",
+        url: FAVICON_PATH,
         type: "image/x-icon",
       },
     ],
-    shortcut: "/assets/img/favicon.ico",
+
+    shortcut: FAVICON_PATH,
+
+    apple: [
+      {
+        url: FAVICON_PATH,
+      },
+    ],
   },
 
   openGraph: {
     type: "website",
 
+    siteName: SITE_NAME,
+
     title:
       "Certifications & Online Degree Courses from IITs, IIMs | DBA MBA – SODE",
 
-    description:
-      "Certifications & Online Degree Courses from top IITs, IIMs & global universities via SODE. Enroll in our MBA, DBA & executive leadership programs.",
+    description: SITE_DESCRIPTION,
 
     url: `${SITE_URL}/`,
-
-    siteName: SITE_NAME,
 
     locale: "en_IN",
 
     images: [
       {
         url: OG_IMAGE,
+        width: 1200,
+        height: 630,
         alt: "SODE Certifications and Online Degree Courses",
       },
     ],
@@ -153,16 +180,19 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
 
-    title:
-      "Certifications & Online Degree Courses from IITs, IIMs | DBA MBA – SODE",
+    title: "SODE: Certifications & Online Degree Courses from IITs, IIMs",
 
     description:
-      "Certifications & Online Degree Courses from top IITs, IIMs & global universities via SODE. Enroll in our MBA, DBA & executive leadership programs.",
+      "Learn from Global & India's Most Prestigious Institutions. This institution offers flexible and accessible executive leadership education for working professionals.",
 
     images: [OG_IMAGE],
   },
 
   category: "education",
+
+  other: {
+    "content-language": "en-IN",
+  },
 };
 
 /* =========================================================
@@ -222,13 +252,12 @@ const organizationSchema = {
 
   logo: {
     "@type": "ImageObject",
-    url: `${SITE_URL}/assets/img/sode_header_logo.png`,
+    url: ORGANIZATION_LOGO,
   },
 
-  image: `${SITE_URL}/assets/img/sode_header_logo.png`,
+  image: OG_IMAGE,
 
-  description:
-    "Certifications & Online Degree Courses from top IITs, IIMs & global universities via SODE. Enroll in our MBA, DBA & executive leadership programs.",
+  description: SITE_DESCRIPTION,
 
   address: {
     "@type": "PostalAddress",
@@ -296,7 +325,7 @@ const faqSchema = {
       acceptedAnswer: {
         "@type": "Answer",
 
-        text: "Yes. All programs of Top International Global Universities that are offered through SODE are from accredited institutions such as WES-recognised, AACSB-accredited, or approved by British, Swiss, or US agencies, ensuring global validity.",
+        text: "Yes. All programs of Top International Global Universities that are offered through SODE are from accredited institutions such as WES-recognised, AACSB-accredited, or approved by British/Swiss/US agencies, ensuring global validity.",
       },
     },
 
@@ -308,7 +337,7 @@ const faqSchema = {
       acceptedAnswer: {
         "@type": "Answer",
 
-        text: "Professionals are required to have a structured document set of 10th and 12th marksheets, Bachelor's degree certificate or marksheets, and Master's degree certificate or marksheets. They also need valid identity proofs such as an Aadhaar Card and PAN Card for verification. Candidates applying for programmes with work experience criteria must also provide an experience letter. A recent passport-size photograph is required to complete the application and enrollment process.",
+        text: "Professionals are required to have a structured document set of 10th and 12th marksheets, Bachelors degree certificate/marksheets, and Master's degree certificate/marksheets. Also, they need to have valid identity proofs, such as an Aadhaar Card and a PAN Card, for verification purposes. Candidates applying for programmes with work experience criteria must also provide an experience letter. A recent passport-size photograph is required to complete the application and enrollment process.",
       },
     },
 
@@ -320,7 +349,7 @@ const faqSchema = {
       acceptedAnswer: {
         "@type": "Answer",
 
-        text: "No, there is no entrance exam required for executive educational programs. Applicants can enrol with bachelor's and master's degrees, and some programs may require prior work experience.",
+        text: "No, there is no entrance exam required for executive educational programs. Applicants can enrol easily having bachelors and masters degree, and some programs require prior work experience.",
       },
     },
 
@@ -332,7 +361,7 @@ const faqSchema = {
       acceptedAnswer: {
         "@type": "Answer",
 
-        text: "Yes, SODE offers flexible financing options where aspirants can enrol with no-cost EMI. Depending on the course duration, candidates can divide the program fee into manageable monthly payments.",
+        text: "Yes, SODE offers flexible financing options where aspirants can enrol with NO cost EMI. As per the course duration, they can easily balance and divide it per month.",
       },
     },
 
@@ -344,7 +373,7 @@ const faqSchema = {
       acceptedAnswer: {
         "@type": "Answer",
 
-        text: "Yes. University partners listed on SODE include international universities such as Golden Gate University, which is WES and AACSB accredited, Rushford Business School, which is QS 5-star rated, and Edgewood, which holds ACBSP accreditation. Indian institutions such as IIMs and IITs are government-recognised under applicable UGC norms.",
+        text: "Yes. All university partners listed on SODE include international universities like Golden Gate University, which is WES & AACSB accredited, Rushford Business School is QS 5-star rated, and Edgewood, which holds ACBSP accreditation, making them globally excellent. Indian institutions like IIMs and IITs are government-recognised under UGC norms.",
       },
     },
 
@@ -356,21 +385,25 @@ const faqSchema = {
       acceptedAnswer: {
         "@type": "Answer",
 
-        text: "SODE offers a diverse portfolio of executive management programmes and certifications designed to equip professionals with technological skills powered by Data Science, AI, and Machine Learning. Most Executive Management Programs and Certification Courses require candidates to have a minimum of 3 years of professional work experience, although eligibility criteria may vary depending on the programme and partnering university.",
+        text: "SODE offers a diverse portfolio of executive management programmes and certifications designed to equip professionals with technological skills powered by Data science, AI, and ML needed for upskilling. Most Executive Management Programs and Certification Courses require candidates to have a minimum of 3 years of professional work experience, although eligibility criteria may vary depending on the programme and partnering university.",
       },
     },
   ],
 };
 
 /* =========================================================
+   ROOT LAYOUT PROPS
+========================================================= */
+
+type RootLayoutProps = Readonly<{
+  children: React.ReactNode;
+}>;
+
+/* =========================================================
    ROOT LAYOUT
 ========================================================= */
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html
       lang="en-IN"
@@ -383,7 +416,9 @@ export default function RootLayout({
       `}
     >
       <head>
-        {/* Website schema */}
+        {/* =====================================================
+            WEBSITE SCHEMA
+        ====================================================== */}
 
         <script
           type="application/ld+json"
@@ -392,7 +427,9 @@ export default function RootLayout({
           }}
         />
 
-        {/* Educational Organization schema */}
+        {/* =====================================================
+            EDUCATIONAL ORGANIZATION SCHEMA
+        ====================================================== */}
 
         <script
           type="application/ld+json"
@@ -401,7 +438,9 @@ export default function RootLayout({
           }}
         />
 
-        {/* FAQ schema */}
+        {/* =====================================================
+            FAQ SCHEMA
+        ====================================================== */}
 
         <script
           type="application/ld+json"
@@ -410,21 +449,27 @@ export default function RootLayout({
           }}
         />
 
-        {/* Font Awesome */}
+        {/* =====================================================
+            FONT AWESOME
+        ====================================================== */}
 
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         />
 
-        {/* International telephone input CSS */}
+        {/* =====================================================
+            INTERNATIONAL TELEPHONE INPUT CSS
+        ====================================================== */}
 
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css"
         />
 
-        {/* Swiper CSS */}
+        {/* =====================================================
+            SWIPER CSS
+        ====================================================== */}
 
         <link
           rel="stylesheet"
@@ -441,7 +486,9 @@ export default function RootLayout({
         "
         suppressHydrationWarning
       >
-        {/* Google Tag Manager noscript fallback */}
+        {/* =====================================================
+            GOOGLE TAG MANAGER NOSCRIPT
+        ====================================================== */}
 
         <noscript>
           <iframe
@@ -456,7 +503,9 @@ export default function RootLayout({
           />
         </noscript>
 
-        {/* Application content */}
+        {/* =====================================================
+            APPLICATION CONTENT
+        ====================================================== */}
 
         {children}
 
@@ -495,14 +544,18 @@ export default function RootLayout({
         />
 
         {/* =====================================================
-            GOOGLE ADS
+            GOOGLE TAG / GOOGLE ADS LOADER
         ====================================================== */}
 
         <Script
           id="google-gtag-loader"
-          src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_IDS[0]}`}
+          src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_IDS[1]}`}
           strategy="afterInteractive"
         />
+
+        {/* =====================================================
+            GOOGLE ADS CONFIGURATION
+        ====================================================== */}
 
         <Script
           id="google-ads-config"
@@ -545,6 +598,16 @@ export default function RootLayout({
         />
 
         {/* =====================================================
+            INTERNATIONAL TELEPHONE INPUT UTILS
+        ====================================================== */}
+
+        <Script
+          id="intl-tel-input-utils"
+          src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js"
+          strategy="afterInteractive"
+        />
+
+        {/* =====================================================
             SWIPER
         ====================================================== */}
 
@@ -555,10 +618,14 @@ export default function RootLayout({
         />
 
         {/* =====================================================
-            VERCEL MONITORING
+            VERCEL ANALYTICS
         ====================================================== */}
 
         <Analytics />
+
+        {/* =====================================================
+            VERCEL SPEED INSIGHTS
+        ====================================================== */}
 
         <SpeedInsights />
       </body>
