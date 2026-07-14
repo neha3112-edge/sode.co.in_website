@@ -25,8 +25,8 @@ export function Header() {
           <Image
             src={getAssetPath("/assets/images/new_sode_tm_logo.png")}
             alt="Company Logo"
-            width={60}
-            height={60}
+            width={64}
+            height={64}
             priority
             className="object-contain cursor-pointer"
           />
