@@ -83,7 +83,7 @@ export function About() {
           </div>
 
           {/* Right Content */}
-          <div className="flex min-h-125 items-center bg-[#076493] px-5 py-10 text-white sm:px-8 sm:py-12 lg:px-10 lg:py-10 xl:px-10">
+          <div className="flex min-h-125 items-center bg-[#076493] px-5 py-10 text-white sm:px-8 sm:py-12 lg:px-10 lg:py-10 xl:px-20">
             <div className="w-full max-w-175">
               <h2 className="text-3xl font-extrabold leading-[1.15] text-white sm:text-4xl lg:text-[38px]">
                 About IIIT Bangalore
@@ -93,7 +93,7 @@ export function About() {
 
               <div className="mt-3 h-px w-full max-w-139.5 bg-white/80" />
 
-              <p className="mt-8 max-w-172.5 text-sm leading-6 text-white sm:text-[15px] sm:leading-[1.55]">
+              <p className="mt-8 max-w-172.5 text-sm leading-5.5 text-white sm:text-[15px] sm:leading-[1.55]">
                 IIIT Bangalore is a premier technology institute established in
                 1998, known for industry-focused education and strong academic
                 depth. Its IIIT Bangalore online courses are designed for

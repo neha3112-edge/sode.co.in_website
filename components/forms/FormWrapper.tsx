@@ -1,16 +1,27 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useState,
+  type ChangeEvent,
+  type FormEvent,
+} from "react";
+
 import { useRouter } from "next/navigation";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import { X } from "lucide-react";
 
 import Input from "@/components/ui/Input";
-import PhoneField from "./PhoneField";
 import SelectField from "@/components/ui/SelectField";
 import { Button } from "@/components/ui/Button";
 import { getAssetPath } from "@/lib/utils";
+
+import PhoneField from "./PhoneField";
+
+/* =========================================================
+   TYPES
+========================================================= */
 
 export type FormCourseOption = {
   value: string;
@@ -26,30 +37,62 @@ type FormWrapperProps = {
   onClose?: () => void;
   onSuccess?: () => void;
 
-  // Header ko hide karne ke liye
+  /*
+   * Form header hide karne ke liye.
+   */
   hideHeader?: boolean;
 
-  // Page-wise course configuration
+  /*
+   * Page-wise course options.
+   *
+   * FormCourseOption[] aur string[] dono supported hain.
+   */
   courseOptions?: FormCourseOption[] | string[];
 
-  // Single-course page ke liye
+  /*
+   * Single-course landing page ke liye.
+   */
   defaultCourse?: string;
   hideCourseField?: boolean;
 
-  // Page-wise lead information
+  /*
+   * Lead information.
+   */
   formNameOverride?: string;
   sourceOverride?: string;
 
-  // Optional UTM defaults
+  /*
+   * Optional UTM fallback values.
+   */
   utmSourceFallback?: string;
   utmMediumFallback?: string;
 
-  // Other options
+  /*
+   * Additional form configuration.
+   */
   showPhoneCallLink?: boolean;
   submitButtonText?: string;
   submitButtonClassName?: string;
   redirectUrl?: string;
+
+  /*
+   * Brochure flow ko explicitly control karne ke liye.
+   */
+  isBrochureForm?: boolean;
+  brochureUrl?: string;
 };
+
+type StoredUtmData = {
+  utm_source?: string | null;
+  utm_medium?: string | null;
+  utm_term?: string | null;
+  utm_campaign?: string | null;
+  utm_content?: string | null;
+};
+
+/* =========================================================
+   STATE OPTIONS
+========================================================= */
 
 const STATE_OPTIONS = [
   "Andhra Pradesh",
@@ -90,7 +133,19 @@ const STATE_OPTIONS = [
   "Puducherry",
 ];
 
+/* =========================================================
+   DEFAULT COURSE OPTIONS
+========================================================= */
+
 const DEFAULT_COURSE_OPTIONS: FormCourseOption[] = [
+  /* =========================
+     DOCTORATE
+  ========================== */
+  {
+    value: "__DOCTORATE__",
+    label: "Doctorate ━━",
+    disabled: true,
+  },
   {
     value: "DBA",
     label: "DBA",
@@ -99,31 +154,113 @@ const DEFAULT_COURSE_OPTIONS: FormCourseOption[] = [
     value: "MBA+DBA",
     label: "MBA + DBA",
   },
+
+  /* =========================
+     MASTER
+  ========================== */
+  {
+    value: "__MASTER__",
+    label: "Master ━━",
+    disabled: true,
+  },
   {
     value: "MBA",
     label: "MBA",
   },
   {
-    value: "MSC_DATA_SCIENCE",
+    value: "MSC",
     label: "M.Sc. Data Science",
   },
   {
-    value: "MSC_MACHINE_LEARNING_AI",
+    value: "MSC",
     label: "M.Sc. Machine Learning & AI",
   },
   {
-    value: "EXECUTIVE_DIPLOMA_ML_AI",
+    value: "DIPLOMA",
     label: "Executive Diploma in Machine Learning & AI",
+  },
+
+  /* =========================
+     CERTIFICATION
+  ========================== */
+  {
+    value: "__CERTIFICATION__",
+    label: "Certification ━━",
+    disabled: true,
   },
   {
     value: "CERTIFICATE",
-    label: "Certificate Programme",
+    label: "Professional Certificate Programme in HR Management and Analytics",
   },
   {
-    value: "PG_PROGRAM",
-    label: "Executive Programme",
+    value: "CERTIFICATE",
+    label:
+      "Professional Certificate Programme in Data Science with Generative AI",
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Executive Post Graduate Certificate Programme in Data Science & AI",
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Executive Post Graduate Certificate in Generative AI & Agentic AI",
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Advanced Certificate in Digital Marketing & Communication",
+  },
+  {
+    value: "CERTIFICATE",
+    label: "Advanced Certificate in Digital Brand Communication Strategy",
+  },
+
+  /* =========================
+     EXECUTIVE PROGRAMS
+  ========================== */
+  {
+    value: "__EXECUTIVE_PROGRAMS__",
+    label: "Executive Programs ━━",
+    disabled: true,
+  },
+  {
+    value: "PG PROGRAMS",
+    label: "Executive Programme in Generative AI for Leaders",
+  },
+  {
+    value: "PG PROGRAMS",
+    label: "Executive Post Graduate Programme in Applied AI and Agentic AI",
+  },
+  {
+    value: "PG PROGRAMS",
+    label: "Chief Technology Officer & AI Leadership Programme",
   },
 ];
+/* =========================================================
+   NORMALIZE COURSE OPTIONS
+========================================================= */
+
+function normalizeCourseOptions(
+  options?: FormCourseOption[] | string[],
+): FormCourseOption[] {
+  if (!options || options.length === 0) {
+    return DEFAULT_COURSE_OPTIONS;
+  }
+
+  return options.map((option) => {
+    if (typeof option === "string") {
+      return {
+        value: option,
+        label: option,
+      };
+    }
+
+    return option;
+  });
+}
+
+/* =========================================================
+   FORM COMPONENT
+========================================================= */
 
 export default function FormWrapper({
   title,
@@ -148,46 +285,64 @@ export default function FormWrapper({
   submitButtonText = "Submit",
   submitButtonClassName = "",
   redirectUrl = "/thank-you",
+
+  isBrochureForm = false,
+  brochureUrl = "",
 }: FormWrapperProps) {
   const router = useRouter();
 
+  /* =======================================================
+     FORM STATE
+  ======================================================== */
+
   const [name, setName] = useState("");
+
   const [phone, setPhone] = useState("");
+
   const [email, setEmail] = useState("");
+
   const [state, setState] = useState("");
+
   const [course, setCourse] = useState(defaultCourse);
 
   const [phoneError, setPhoneError] = useState("");
+
   const [formError, setFormError] = useState("");
 
   const [loading, setLoading] = useState(false);
+
   const [closing, setClosing] = useState(false);
 
-  const finalCourseOptions = useMemo(() => {
-    if (!courseOptions || courseOptions.length === 0) {
-      return DEFAULT_COURSE_OPTIONS;
-    }
+  /* =======================================================
+     FINAL COURSE OPTIONS
+  ======================================================== */
 
-    return courseOptions;
+  const finalCourseOptions = useMemo(() => {
+    return normalizeCourseOptions(courseOptions);
   }, [courseOptions]);
+
+  /* =======================================================
+     UPDATE DEFAULT COURSE
+  ======================================================== */
 
   useEffect(() => {
     setCourse(defaultCourse);
   }, [defaultCourse]);
 
-  /*
-  |--------------------------------------------------------------------------
-  | Current URL ke UTM parameters save karna
-  |--------------------------------------------------------------------------
-  */
+  /* =======================================================
+     SAVE CURRENT URL UTM PARAMETERS
+  ======================================================== */
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined") {
+      return;
+    }
 
     const params = new URLSearchParams(window.location.search);
+
     const existingStoredData = localStorage.getItem("utm_data");
 
-    let existingUtmData: Record<string, string | null> = {};
+    let existingUtmData: StoredUtmData = {};
 
     try {
       existingUtmData = existingStoredData
@@ -197,7 +352,7 @@ export default function FormWrapper({
       existingUtmData = {};
     }
 
-    const utmData = {
+    const utmData: StoredUtmData = {
       utm_source:
         params.get("utm_source") || existingUtmData.utm_source || null,
 
@@ -216,28 +371,32 @@ export default function FormWrapper({
     localStorage.setItem("utm_data", JSON.stringify(utmData));
   }, []);
 
-  /*
-  |--------------------------------------------------------------------------
-  | Get UTM data
-  |--------------------------------------------------------------------------
-  */
+  /* =======================================================
+     GET UTM PARAMETERS
+  ======================================================== */
 
   const getUTMParams = () => {
     if (typeof window === "undefined") {
       return {
         utm_source: utmSourceFallback || "Organic",
+
         utm_medium: utmMediumFallback || "SODE CO IN Organic",
+
         utm_term: "",
+
         utm_campaign: "",
+
         utm_content: "",
+
         page_url: "",
       };
     }
 
     const params = new URLSearchParams(window.location.search);
+
     const storedData = localStorage.getItem("utm_data");
 
-    let parsedData: Record<string, string | null> = {};
+    let parsedData: StoredUtmData = {};
 
     try {
       parsedData = storedData ? JSON.parse(storedData) : {};
@@ -268,17 +427,16 @@ export default function FormWrapper({
     };
   };
 
-  /*
-  |--------------------------------------------------------------------------
-  | Phone validation
-  |--------------------------------------------------------------------------
-  */
+  /* =======================================================
+     PHONE VALIDATION
+  ======================================================== */
 
   const handlePhone = (value: string) => {
     setPhone(value);
 
     if (!value) {
       setPhoneError("Phone number is required");
+
       return;
     }
 
@@ -293,29 +451,43 @@ export default function FormWrapper({
     }
   };
 
-  /*
-  |--------------------------------------------------------------------------
-  | Reset form
-  |--------------------------------------------------------------------------
-  */
+  /* =======================================================
+     RESET FORM
+  ======================================================== */
 
   const resetForm = () => {
     setName("");
+
     setPhone("");
+
     setEmail("");
+
     setState("");
+
     setCourse(defaultCourse);
+
     setPhoneError("");
+
     setFormError("");
   };
 
-  /*
-  |--------------------------------------------------------------------------
-  | Form submit
-  |--------------------------------------------------------------------------
-  */
+  /* =======================================================
+     CHECK BROCHURE FLOW
+  ======================================================== */
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const shouldStartBrochureFlow = () => {
+    if (isBrochureForm) {
+      return true;
+    }
+
+    return title?.trim().toLowerCase() === "download brochure";
+  };
+
+  /* =======================================================
+     FORM SUBMIT
+  ======================================================== */
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     setFormError("");
@@ -324,31 +496,47 @@ export default function FormWrapper({
 
     if (!name.trim()) {
       setFormError("Name is required");
+
       return;
     }
 
     if (!phone) {
       setFormError("Phone number is required");
+
       return;
     }
 
     if (phoneError) {
       setFormError(phoneError);
+
       return;
     }
 
     if (!email.trim()) {
       setFormError("Email is required");
+
       return;
     }
 
     if (!state) {
       setFormError("State is required");
+
       return;
     }
 
     if (!finalCourse) {
       setFormError("Course is required");
+
+      return;
+    }
+
+    /*
+     * Disabled section heading ko course ke roop mein
+     * submit hone se prevent karta hai.
+     */
+    if (finalCourse.startsWith("__")) {
+      setFormError("Please select a valid course");
+
       return;
     }
 
@@ -357,8 +545,11 @@ export default function FormWrapper({
     try {
       const payload = {
         name: name.trim(),
+
         email: email.trim(),
+
         phone,
+
         state,
 
         course: finalCourse,
@@ -374,30 +565,48 @@ export default function FormWrapper({
 
       const response = await fetch(getAssetPath("/api/lead"), {
         method: "POST",
+
         headers: {
           "Content-Type": "application/json",
         },
+
         body: JSON.stringify(payload),
       });
 
-      const data = await response.json();
+      const data: {
+        success?: boolean;
+        message?: string;
+      } = await response.json();
 
-      if (!response.ok || !data?.success) {
-        throw new Error(data?.message || "Unable to submit form");
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || "Unable to submit form");
+      }
+
+      const brochureFlow = shouldStartBrochureFlow();
+
+      if (brochureFlow) {
+        sessionStorage.setItem("isBrochureFlow", "true");
+
+        if (brochureUrl.trim()) {
+          sessionStorage.setItem("brochureUrl", brochureUrl.trim());
+        } else {
+          sessionStorage.removeItem("brochureUrl");
+        }
+      } else {
+        sessionStorage.removeItem("isBrochureFlow");
+
+        sessionStorage.removeItem("brochureUrl");
       }
 
       resetForm();
+
       setClosing(true);
 
-      if (title?.trim().toLowerCase() === "download brochure") {
-        sessionStorage.setItem("isBrochureFlow", "true");
-      } else {
-        sessionStorage.removeItem("isBrochureFlow");
-      }
-
-      setTimeout(() => {
+      window.setTimeout(() => {
         onSuccess?.();
+
         onClose?.();
+
         router.push(redirectUrl);
       }, 300);
     } catch (error) {
@@ -413,6 +622,10 @@ export default function FormWrapper({
     }
   };
 
+  /* =======================================================
+     COMPONENT UI
+  ======================================================== */
+
   return (
     <div
       className={`transition-all duration-300 ${
@@ -421,12 +634,15 @@ export default function FormWrapper({
           : "translate-y-0 scale-100 opacity-100"
       }`}
     >
-      {/* Form Header */}
-      {!hideHeader && (title || subtitle || onClose) && (
+      {/* ===================================================
+          FORM HEADER
+      ==================================================== */}
+
+      {!hideHeader && (title || subtitle || onClose || showPhoneCallLink) && (
         <div className="relative mb-5">
           <div className="text-center">
             {title && (
-              <h2 className="text-xl font-bold text-[#c9232c]">{title}</h2>
+              <h2 className="text-xl font-bold text-[#005382]">{title}</h2>
             )}
 
             {subtitle && (
@@ -450,64 +666,94 @@ export default function FormWrapper({
               type="button"
               onClick={onClose}
               aria-label="Close form"
-              className="absolute right-0 top-0 flex h-8 w-8 items-center justify-center rounded-full text-red-500 transition hover:bg-red-50"
+              className="absolute right-0 top-0 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-red-500 transition hover:bg-red-50"
             >
-              <X size={20} />
+              <X size={20} aria-hidden="true" />
             </button>
           )}
         </div>
       )}
 
+      {/* ===================================================
+          FORM
+      ==================================================== */}
+
       <form onSubmit={handleSubmit} className="space-y-3">
+        {/* Name */}
+
         <Input
           type="text"
           placeholder="Enter Your Name"
           value={name}
-          onChange={(event: any) => setName(event.target.value)}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => {
+            setName(event.target.value);
+          }}
           disabled={loading}
         />
+
+        {/* Email */}
 
         <Input
           type="email"
           placeholder="Enter Your Email"
           value={email}
-          onChange={(event: any) => setEmail(event.target.value)}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => {
+            setEmail(event.target.value);
+          }}
           disabled={loading}
         />
 
+        {/* Phone */}
+
         <PhoneField value={phone} onChange={handlePhone} error={phoneError} />
+
+        {/* Course */}
 
         {!hideCourseField && (
           <SelectField
             placeholder="Select Course"
             options={finalCourseOptions}
             value={course}
-            onChange={(value: string) => setCourse(value)}
+            onChange={(value: string) => {
+              setCourse(value);
+            }}
           />
         )}
+
+        {/* State */}
 
         <SelectField
           placeholder="Select Your State"
           options={STATE_OPTIONS}
           value={state}
-          onChange={(value: string) => setState(value)}
+          onChange={(value: string) => {
+            setState(value);
+          }}
         />
 
+        {/* Fixed course information */}
+
         {hideCourseField && defaultCourse && (
-          <div className="border border-gray-200 bg-gray-50 px-3 py-3 text-sm text-gray-700">
+          <div className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 text-sm text-gray-700">
             Selected Course:{" "}
             <span className="font-semibold">{defaultCourse}</span>
           </div>
         )}
 
+        {/* Form error */}
+
         {formError && (
-          <p className="text-sm font-medium text-red-500">{formError}</p>
+          <p role="alert" className="text-sm font-medium text-red-500">
+            {formError}
+          </p>
         )}
+
+        {/* Submit button */}
 
         <Button
           type="submit"
           disabled={loading}
-          className={`h-11 w-full bg-[#c9232c] font-semibold text-white hover:bg-[#aa1c25] ${submitButtonClassName}`}
+          className={`h-11 w-full cursor-pointer bg-[#005382] font-semibold text-white ${submitButtonClassName}`}
         >
           {loading ? "Submitting..." : submitButtonText}
         </Button>

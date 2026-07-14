@@ -43,7 +43,7 @@ export default function Footer() {
               Still Confused?
             </h2>
 
-            <p className="mx-auto mt-4 max-w-4xl text-sm font-semibold leading-6 sm:text-base lg:text-lg">
+            <p className="mx-auto mt-4 max-w-4xl text-sm font-semibold leading-6.6 sm:text-base lg:text-lg">
               Compare IIIT Bangalore University with Top UGC-DEB Approved
               Universities
             </p>
@@ -88,7 +88,7 @@ export default function Footer() {
         {/* Disclaimer Text */}
         <section className="px-4 pb-5 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-450 text-center">
-            <p className="text-xs font-normal leading-6 text-gray-700 sm:text-sm">
+            <p className="text-xs font-normal leading-5.5 text-gray-700 sm:text-sm">
               SODE Counselling Services LLP act as a marketing agency. All
               university names, logos, and trademarks mentioned are used for
               informational purposes only. We are not a university or an
@@ -96,7 +96,7 @@ export default function Footer() {
               the official website of the University before making decisions.
             </p>
 
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-sm text-gray-900 sm:text-sm">
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-sm text-gray-800 sm:text-sm font-medium">
               <button
                 type="button"
                 onClick={() => setActiveModal("disclaimer")}
@@ -354,7 +354,7 @@ function FooterModal({ title, children, onClose }: FooterModalProps) {
       aria-modal="true"
       aria-labelledby="footer-modal-title"
       onClick={onClose}
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 px-4 py-6"
+      className="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 px-4 py-6"
     >
       <div
         onClick={(event) => event.stopPropagation()}

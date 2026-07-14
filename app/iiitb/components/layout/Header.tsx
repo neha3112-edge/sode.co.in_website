@@ -46,7 +46,7 @@ export function Header() {
               width={50}
               height={50}
               priority
-              className="h-12.5 w-12.5 cursor-pointer object-contain"
+              className="h-16 w-16 cursor-pointer object-contain"
             />
           </Link>
 
@@ -78,7 +78,7 @@ export function Header() {
                   ) : (
                     <a
                       href={item.href}
-                      className="px-3 py-2 transition-colors duration-200 hover:text-[#056493]"
+                      className="px-3 py-2 transition-colors duration-200 hover:text-[#056493] font-medium text-sm"
                     >
                       {item.label}
                     </a>

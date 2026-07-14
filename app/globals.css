@@ -34,8 +34,9 @@ body {
   color: var(--foreground);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Poppins', system-ui, sans-serif;
+  font-family: "Poppins", system-ui, sans-serif;
 }
+
 /* Custom utility for golden gradient text */
 @utility text-gradient-golden {
   background: linear-gradient(

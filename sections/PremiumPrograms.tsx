@@ -215,7 +215,7 @@ const programs = [
     title: "Master of Business Administration",
     university: "Golden Gate University",
     description:
-      "Accelerate your career with a prestigious online MBA from Golden Gate University, tailored for global leadership and strategic management.",
+      "This elite educational program of Golden Gate University's online MBA advances careers for working professionals. This features fast track global MBA program with online flexibility and leadership focus development.",
     duration: "13 Months",
     eligibility: "Bachelor's Degree",
     brochureUrl: "/assets/pdf/ggu_mba.pdf",
@@ -223,11 +223,11 @@ const programs = [
   {
     category: "master",
     image: "/assets/images/master-2.webp",
-    logo: "/assets/images/ssbm-logo.jpg",
+    logo: "/assets/images/liverpool-logo.png",
     title: "Master of Business Administration",
-    university: "SSBM Geneva",
+    university: "Liverpool Business School",
     description:
-      "Gain a world-class Swiss MBA online from SSBM Geneva. Master corporate strategy, finance, and leadership with industry-focused modules.",
+      "Professionals can accelerate growth through Liverpool Business Schools online MBA, designed for working professionals. It helps in seeking one year executive MBA online with additional months for specialisations, equipping advancement globally.",
     duration: "18 Months",
     eligibility: "Bachelor's Degree",
     brochureUrl: "/assets/pdf/ssbm_main_brochure.pdf",
@@ -235,37 +235,37 @@ const programs = [
   {
     category: "master",
     image: "/assets/images/master-3.webp",
-    logo: "/assets/images/liverpool-logo.png",
-    title: "Master of Business Administration",
-    university: "Liverpool Business School",
+    logo: "/assets/images/liverpool-iiitb-logo.png",
+    title: "M.Sc. Data Science",
+    university: "LJMU + IIIT Bangalore",
     description:
-      "Earn a British MBA from Liverpool Business School. Build strategic capability, leadership skills, and global business perspectives.",
+      "This program transforms the expertise of learners with LJMU and IITB's Masters in data science. Overall, this MSc Data Science online learning offers industry-ready analytics skills.",
     duration: "18 Months",
-    eligibility: "Bachelor's Degree with 2+ years of experience",
+    eligibility: "Bachelor’s degree",
     brochureUrl: "/assets/pdf/liverpool_mba.pdf",
   },
   {
     category: "master",
     image: "/assets/images/master-4.webp",
-    logo: "/assets/images/iiitb-logo.jpg",
-    title: "Master of Science in Data Science",
-    university: "IIIT Bangalore",
+    logo: "/assets/images/liverpool-iiitb-logo.png",
+    title: "M.Sc. Machine Learning & AI",
+    university: "LJMU + IIIT Bangalore",
     description:
-      "Acquire advanced expertise in data analytics, machine learning, and big data with the online MSc in Data Science from IIIT Bangalore.",
+      "Professionals lead innovation through LJMU and IITB artificial intelligence masters program. This is a blended masters in AI and ML with an advanced skill set and global excellence.",
     duration: "18 Months",
-    eligibility: "Bachelor's Degree in Science/Engineering/Math",
+    eligibility: "Bachelor’s degree",
     brochureUrl: "/assets/pdf/iiitb_msc_ds.pdf",
   },
   {
     category: "master",
     image: "/assets/images/master-5.webp",
     logo: "/assets/images/iiitb-logo.jpg",
-    title: "Master of Science in Machine Learning & AI",
+    title: "Executive Diploma in Machine Learning & AI",
     university: "IIIT Bangalore",
     description:
-      "Prepare for high-growth tech roles with a Master of Science in ML & AI. Dive deep into deep learning, NLP, and computer vision.",
+      "This Master program is in emerging technologies and offers expertise in Machine learning through IIIT Bangalore. This artificial intelligence diploma integrates machine learning certification and deep learning course concepts for leadership roles.",
     duration: "18 Months",
-    eligibility: "Bachelor's Degree in Science/Engineering/Math",
+    eligibility: "Bachelors or Masters Degree",
     brochureUrl: "/assets/pdf/iiitb_msc_ml_ai.pdf",
   },
 ];
@@ -319,10 +319,11 @@ export function PremiumPrograms() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-5 py-2.5 rounded-full font-bold text-xs md:text-sm transition-all duration-300 cursor-pointer border select-none ${isActive
+                className={`px-5 py-2.5 rounded-full font-bold text-xs md:text-sm transition-all duration-300 cursor-pointer border select-none ${
+                  isActive
                     ? "bg-[#A66E38] text-white border-transparent shadow-[0_4px_12px_rgba(166,110,56,0.3)]"
                     : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
-                  }`}
+                }`}
               >
                 {tab.label}
               </button>
@@ -372,14 +373,12 @@ export function PremiumPrograms() {
                 <div className="flex items-center gap-2 text-[#A66E38] text-[13px] font-bold mb-4 select-none">
                   {/* University Cap Icon */}
                   <svg
-                    className="w-4 h-4 shrink-0"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    strokeWidth="2.5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 640 640"
+                    aria-hidden="true"
+                    className="h-4 w-4 shrink-0 fill-current"
                   >
-                    <path d="M12 14l9-5-9-5-9 5 9 5z" />
-                    <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479L12 20l-6.825-3.057a12.083 12.083 0 01.665-6.48L12 14z" />
+                    <path d="M335.9 84.2C326.1 78.6 314 78.6 304.1 84.2L80.1 212.2C67.5 219.4 61.3 234.2 65 248.2C68.7 262.2 81.5 272 96 272H128V480L76.8 518.4C68.7 524.4 64 533.9 64 544C64 561.7 78.3 576 96 576H544C561.7 576 576 561.7 576 544C576 533.9 571.3 524.4 563.2 518.4L512 480V272H544C558.5 272 571.2 262.2 574.9 248.2C578.6 234.2 572.4 219.4 559.8 212.2L335.9 84.2ZM464 272V480H400V272H464ZM352 272V480H288V272H352ZM240 272V480H176V272H240ZM320 160C337.7 160 352 174.3 352 192C352 209.7 337.7 224 320 224C302.3 224 288 209.7 288 192C288 174.3 302.3 160 320 160Z" />
                   </svg>
                   <span>{item.university}</span>
                 </div>
