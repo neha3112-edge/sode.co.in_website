@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
 
-type IIMKLayoutProps = {
+type IIITBLayoutProps = {
   children: ReactNode;
 };
 
-export default function IIMKLayout({ children }: IIMKLayoutProps) {
+export default function IIITBLayout({ children }: IIITBLayoutProps) {
   return <div>{children}</div>;
 }

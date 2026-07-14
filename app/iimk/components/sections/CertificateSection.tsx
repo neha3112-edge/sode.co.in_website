@@ -1,243 +1,158 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useState, type ReactNode } from "react";
-import {
-  ArrowRight,
-  BookOpen,
-  GraduationCap,
-  UserRound,
-  X,
-  type LucideIcon,
-} from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowRight } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
-import FormWrapper, {
-  type FormCourseOption,
-} from "@/components/forms/FormWrapper";
+import { Button } from "@/components/ui/Button";
+import FormWrapper from "@/components/forms/FormWrapper";
 import { getAssetPath } from "@/lib/utils";
 
-type FormType = "degree" | null;
-
-type StatisticItem = {
-  id: number;
-  value: string;
-  description: string;
-  icon: LucideIcon;
-};
-
-const IIT_KGP_COURSES: FormCourseOption[] = [
+const IIMK_COURSES = [
   {
-    value: "Executive Post Graduate Certificate in Generative AI & Agentic AI",
-    label: "Executive Post Graduate Certificate in Generative AI & Agentic AI",
+    value: "HRM Analytics Online Certification",
+    label: "HRM Analytics Online Certification",
   },
 ];
 
-const statistics: StatisticItem[] = [
-  {
-    id: 1,
-    value: "3000+",
-    description: "Students from India Abroad",
-    icon: BookOpen,
-  },
-  {
-    id: 2,
-    value: "100%",
-    description: "Live Online, Faculty-Led Sessions",
-    icon: UserRound,
-  },
-  {
-    id: 3,
-    value: "6000+",
-    description: "Succeed Alumni Trust Base",
-    icon: GraduationCap,
-  },
+const partners = [
+  { name: "Capco", src: "/iimk/assets/img/capco.webp" },
+  { name: "Cognizant", src: "/iimk/assets/img/Cognizant.webp" },
+  { name: "Delhivery", src: "/iimk/assets/img/Delhivery.webp" },
+  { name: "Capita", src: "/iimk/assets/img/capita.webp" },
+  { name: "Disney", src: "/iimk/assets/img/disnep.webp" },
+  { name: "Codeyoung", src: "/iimk/assets/img/codeyoung.webp" },
+  { name: "CBSPL", src: "/iimk/assets/img/cbspl.webp" },
 ];
 
 export function CertificateSection() {
-  const [activeForm, setActiveForm] = useState<FormType>(null);
-
-  const closeForm = useCallback(() => {
-    setActiveForm(null);
-  }, []);
+  const [formOpen, setFormOpen] = useState(false);
 
   useEffect(() => {
-    document.body.style.overflow = activeForm ? "hidden" : "";
+    if (formOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
 
     return () => {
       document.body.style.overflow = "";
     };
-  }, [activeForm]);
+  }, [formOpen]);
 
-  useEffect(() => {
-    if (!activeForm) return;
-
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        closeForm();
-      }
-    };
-
-    window.addEventListener("keydown", handleEscape);
-
-    return () => {
-      window.removeEventListener("keydown", handleEscape);
-    };
-  }, [activeForm, closeForm]);
+  const closeForm = () => {
+    setFormOpen(false);
+  };
 
   return (
     <>
-      <section
-        id="sample-certificate"
-        className="scroll-mt-[84px] bg-[#f8f8f8]"
-      >
+      <section id="sample-degree" className="w-full bg-[#f8fafc] py-12 sm:py-16">
         <Container>
-          <div className="grid min-h-[545px] grid-cols-1 items-center gap-10 py-12 lg:grid-cols-[1.03fr_1fr] lg:gap-[65px] lg:py-[45px]">
-            {/* Certificate Image */}
-            <div className="relative mx-auto w-full max-w-[600px]">
-              <div className="relative aspect-[1.33/1] w-full overflow-hidden">
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+            {/* Left Certificate Image */}
+            <div className="relative mx-auto w-full max-w-[500px]">
+              <div className="relative aspect-[1.414/1] w-full overflow-hidden rounded-lg shadow-xl border border-gray-200 bg-white p-2">
                 <Image
-                  src={getAssetPath(
-                    "/assets/images/iit-kgp-sample-certificate.webp",
-                  )}
-                  alt="IIT Kharagpur sample postgraduate certificate"
+                  src={getAssetPath("/iimk/assets/img/sample-certificate.webp")}
+                  alt="IIM Kozhikode Sample Degree Certificate"
                   fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 600px"
-                  className="object-contain object-center"
+                  sizes="(max-width: 1024px) 100vw, 500px"
+                  className="object-contain p-2"
                 />
               </div>
             </div>
 
-            {/* Content */}
+            {/* Right Content */}
             <div className="text-center lg:text-left">
-              <h2 className="text-[34px] font-black leading-[0.95] tracking-[-0.035em] text-[#342184] sm:text-[40px] lg:text-[44px]">
-                Sample Post
+              <h2 className="text-3xl font-extrabold leading-tight text-[#0f3b8c] sm:text-4xl">
+                IIM Kozhikode
                 <br />
-                Graduate Certificate
+                Sample Degree
               </h2>
+              <h3 className="mt-2 text-xl font-bold text-gray-700">
+                HR Analytics Certification Course
+              </h3>
 
-              <p className="mx-auto mt-5 max-w-[610px] text-[13px] font-normal leading-[1.18] text-[#222222] sm:text-[14px] lg:mx-0">
-                You will receive an Executive Postgraduate Certificate from IIT
-                Kharagpur, a well-known and trusted qualification. If you
-                perform really well, you can also get a Certificate with
-                Distinction. This is given to the top 10% students in each batch
-                and is clearly mentioned on the certificate. Overall, this IIT
-                certificate shows strong learning and also proves you are ready
-                for advanced AI jobs.
+              <p className="mt-5 text-sm leading-relaxed text-gray-600 sm:text-base">
+                Complete all course modules and earn a professional HR Management and Analytics certification from IIM Kozhikode. This course will help you develop important skills for the HR field. It will also boost your career and make you more competitive in the job market.
               </p>
 
-              <button
+              <Button
+                size="lg"
                 type="button"
-                onClick={() => setActiveForm("degree")}
-                className="mt-6 inline-flex min-h-[43px] items-center justify-center gap-4 rounded-full bg-[#ff5318] px-7 py-3 text-[14px] font-extrabold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#e8460e] hover:shadow-lg"
+                onClick={() => setFormOpen(true)}
+                className="mt-8 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#0f3b8c] px-6 py-3 text-sm font-bold text-white transition-colors duration-200 hover:bg-[#0c2e6f] cursor-pointer"
               >
                 Get Degree
-                <ArrowRight size={17} strokeWidth={2.7} />
-              </button>
+                <ArrowRight size={16} />
+              </Button>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* Statistics */}
-      <section className="bg-white py-11 sm:py-12">
+      {/* Placement Partners Section */}
+      <section id="placement" className="bg-white py-8 sm:py-12">
         <Container>
-          <div className="mx-auto grid max-w-[930px] grid-cols-1 gap-8 md:grid-cols-3 md:gap-6">
-            {statistics.map((item) => (
-              <StatisticCard key={item.id} item={item} />
-            ))}
+          <div className="bg-[#f2f2f2] px-6 py-10 sm:py-12 rounded-[32px] border border-gray-100 shadow-xs">
+            <h2 className="text-2xl sm:text-[26px] font-extrabold text-[#0f3b8c] text-center tracking-wide uppercase">
+              PLACEMENTS PARTNERS
+            </h2>
+
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4 sm:gap-5">
+              {partners.map((partner) => (
+                <div
+                  key={partner.name}
+                  className="bg-white px-5 py-3 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.03)] border border-gray-200/60 flex items-center justify-center h-14 sm:h-16 w-32 sm:w-36 shrink-0 transition-transform duration-200 hover:-translate-y-0.5"
+                >
+                  <div className="relative h-10 w-full">
+                    <Image
+                      src={getAssetPath(partner.src)}
+                      alt={partner.name}
+                      fill
+                      sizes="(max-width: 640px) 112px, 144px"
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </Container>
       </section>
 
-      {/* Degree Modal */}
-      {activeForm === "degree" && (
-        <CustomFormModal
-          title="Get IIT Kharagpur Certificate"
-          onClose={closeForm}
+      {/* Popup Form */}
+      {formOpen && (
+        <div
+          role="presentation"
+          onClick={closeForm}
+          className="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm"
         >
-          <FormWrapper
-            title="Get Degree"
-            subtitle="Share your details and our academic experts will guide you"
-            onClose={closeForm}
-            courseOptions={IIT_KGP_COURSES}
-            formNameOverride="IIT Kharagpur Sample Certificate Degree Form"
-            sourceOverride="IIT Kharagpur Certificate Section"
-            utmSourceFallback="IIT Kharagpur Organic"
-            utmMediumFallback="IIT Kharagpur Get Degree Button"
-            submitButtonText="Get Degree"
-          />
-        </CustomFormModal>
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Get Degree"
+            onClick={(event) => event.stopPropagation()}
+            className="relative max-h-[92vh] w-full max-w-md overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-7"
+          >
+            <FormWrapper
+              title="Get Degree"
+              subtitle="Share your details and our academic experts will guide you"
+              onClose={closeForm}
+              courseOptions={IIMK_COURSES}
+              defaultCourse="HRM Analytics Online Certification"
+              hideCourseField
+              formNameOverride="IIMK Sample Certificate Form"
+              sourceOverride="IIMK Certificate Section"
+              utmSourceFallback="IIMK Organic"
+              utmMediumFallback="IIMK Certificate Get Degree Button"
+              submitButtonText="Get Degree"
+              submitButtonClassName="bg-[#1d3d82] hover:bg-[#142b5c]"
+            />
+          </div>
+        </div>
       )}
     </>
-  );
-}
-
-type StatisticCardProps = {
-  item: StatisticItem;
-};
-
-function StatisticCard({ item }: StatisticCardProps) {
-  const Icon = item.icon;
-
-  return (
-    <article className="relative pt-4">
-      <div className="relative flex min-h-[61px] flex-col items-center justify-center rounded-[10px] border border-[#b8b8b8] bg-white px-5 pb-3 pt-5 text-center">
-        {/* Floating value */}
-        <div className="absolute -top-[20px] left-1/2 flex -translate-x-1/2 items-center gap-2 bg-white px-3">
-          <Icon
-            size={25}
-            strokeWidth={2.7}
-            className="shrink-0 text-[#ff5318]"
-          />
-
-          <p className="whitespace-nowrap text-[25px] font-black leading-none text-[#342184] sm:text-[27px]">
-            {item.value}
-          </p>
-        </div>
-
-        <p className="mt-2 text-[12px] font-extrabold leading-tight text-black sm:text-[13px]">
-          {item.description}
-        </p>
-      </div>
-    </article>
-  );
-}
-
-type CustomFormModalProps = {
-  title: string;
-  children: ReactNode;
-  onClose: () => void;
-};
-
-function CustomFormModal({ title, children, onClose }: CustomFormModalProps) {
-  return (
-    <div
-      role="presentation"
-      onMouseDown={onClose}
-      className="fixed inset-0 z-[9999] flex items-center justify-center overflow-y-auto bg-black/65 px-4 py-6 backdrop-blur-sm"
-    >
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-label={title}
-        onMouseDown={(event) => {
-          event.stopPropagation();
-        }}
-        className="relative max-h-[92vh] w-full max-w-[420px] overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-7"
-      >
-        <button
-          type="button"
-          aria-label="Close degree form"
-          onClick={onClose}
-          className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-[#fff0eb] text-[#ff5318] transition-colors duration-200 hover:bg-[#ffe1d7]"
-        >
-          <X size={20} strokeWidth={2.4} />
-        </button>
-
-        {children}
-      </div>
-    </div>
   );
 }

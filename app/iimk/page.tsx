@@ -1,33 +1,48 @@
+import type { Metadata } from "next";
+
 import { Header } from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import { Hero } from "./components/sections/Hero";
-import { Approvals } from "./components/sections/Approvals";
-import { CertificateSection } from "./components/sections/CertificateSection";
 import { About } from "./components/sections/About";
-import { RealWorldAISystems } from "./components/sections/RealWorldAISystems";
+import { WhyChoose } from "./components/sections/WhyChoose";
+import { Eligibility } from "./components/sections/Eligibility";
+import { CertificateSection } from "./components/sections/CertificateSection";
 import { ApplyAndFaq } from "./components/sections/ApplyAndFaq";
-import { CourseOverview } from "./components/sections/CourseOverview";
-import { Accreditations } from "./components/sections/Accreditations";
-import { WhatYouWillLearn } from "./components/sections/WhatYouWillLearn";
+import { ClarificationCta } from "./components/sections/ClarificationCta";
+import { FloatingWidgets } from "./components/sections/FloatingWidgets";
 
-export default function IIITBPage() {
+export const metadata: Metadata = {
+  title: "IIM Kozhikode HRM Course | IIM Kozhikode HR Analytics & Online HR Courses",
+  description:
+    "IIM Kozhikode HRM program and IIM Kozhikode HRM course in HR Analytics. Explore IIM Kozhikode online HR courses, IIM Kozhikode HR analytics fees, eligibility, certification details, and IIM Kozhikode HRM program admission process.",
+  keywords: ["IIM Kozhikode", "hr analytics course", "hr analytics certification"],
+  openGraph: {
+    title: "IIM Kozhikode HRM Course | IIM Kozhikode HR Analytics & Online HR Courses",
+    description:
+      "IIM Kozhikode HRM program and IIM Kozhikode HRM course in HR Analytics. Explore IIM Kozhikode online HR courses, IIM Kozhikode HR analytics fees, eligibility, certification details, and IIM Kozhikode HRM program admission process.",
+    type: "website",
+  },
+};
+
+export default function IIMKPage() {
   return (
     <>
       <Header />
-      {/* Fixed header ki height ke barabar padding */}
-      <main className="pt-20">
+
+      <main className="flex-1 bg-white">
         <Hero />
-        <Approvals />
-        <CourseOverview />
-        <RealWorldAISystems />
-        <Accreditations />
+        <WhyChoose />
         <About />
-        <WhatYouWillLearn />
+        <Eligibility />
         <CertificateSection />
         <ApplyAndFaq />
+        <ClarificationCta />
       </main>
 
       <Footer />
+
+      {/* Sticky & Floating Buttons */}
+      {/* <FloatingWidgets /> */}
     </>
   );
 }

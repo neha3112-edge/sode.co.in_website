@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Download, X } from "lucide-react";
+import { useState } from "react";
+import { Clock, Download, PhoneCall } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
 import FormWrapper, {
@@ -10,241 +10,312 @@ import FormWrapper, {
 } from "@/components/forms/FormWrapper";
 import { getAssetPath } from "@/lib/utils";
 
-/*
-|--------------------------------------------------------------------------
-| IIT Kharagpur Course Options
-|--------------------------------------------------------------------------
-*/
-
-const IIT_KGP_COURSE_OPTIONS: FormCourseOption[] = [
+const IIMK_COURSE_OPTIONS: FormCourseOption[] = [
   {
-    value: "Executive Post-Graduate Certificate in Generative AI & Agentic AI",
-    label: "Executive Post-Graduate Certificate in Generative AI & Agentic AI",
+    value: "HRM Analytics Online Certification",
+    label: "HRM Analytics Online Certification",
   },
 ];
-
-/*
-|--------------------------------------------------------------------------
-| Hero Section
-|--------------------------------------------------------------------------
-*/
 
 export function Hero() {
   const [downloadOpen, setDownloadOpen] = useState(false);
 
-  /*
-  |--------------------------------------------------------------------------
-  | Stop body scrolling when popup is open
-  |--------------------------------------------------------------------------
-  */
-
-  useEffect(() => {
-    document.body.style.overflow = downloadOpen ? "hidden" : "";
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [downloadOpen]);
-
-  /*
-  |--------------------------------------------------------------------------
-  | Close popup when Escape key is pressed
-  |--------------------------------------------------------------------------
-  */
-
-  useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setDownloadOpen(false);
-      }
-    };
-
-    window.addEventListener("keydown", handleEscape);
-
-    return () => {
-      window.removeEventListener("keydown", handleEscape);
-    };
-  }, []);
-
   return (
     <>
+      {/* ==========================================
+          DESKTOP VIEW (Visible on lg and above)
+          ========================================== */}
       <section
-        id="home"
-        className="relative min-h-[430px] scroll-mt-[84px] overflow-hidden bg-[#e9f0ff]"
+        id="home-desktop"
+        className="relative hidden lg:block overflow-hidden min-h-[580px] pt-18"
       >
-        {/* =============================================================
-            Desktop Background Image
-        ============================================================== */}
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={getAssetPath("/iimk/assets/img/iim_desktop_new_img.png")}
+            alt="IIM Kozhikode campus"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+        </div>
 
-        <Image
-          src={getAssetPath("/assets/images/iit-kgp-hero-bg.webp")}
-          alt="Indian Institute of Technology Kharagpur campus"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-
-        {/* Light overlay on complete hero */}
-        <div className="absolute inset-0 bg-white/5" />
-
-        {/* Left side light gradient for readable content */}
-        <div className="absolute inset-y-0 left-0 hidden w-[59%] bg-gradient-to-r from-[#eef2ff] via-[#eef2ff]/95 to-transparent lg:block" />
-
-        {/* Mobile solid overlay */}
-        <div className="absolute inset-0 bg-[#eef2ff]/95 lg:hidden" />
-
-        {/* =============================================================
-            Main Content
-        ============================================================== */}
-
-        <Container className="relative z-10">
-          <div className="grid min-h-[430px] grid-cols-1 items-center gap-8 py-8 lg:grid-cols-[minmax(0,1fr)_376px] lg:gap-12 lg:py-[22px]">
-            {/* =========================================================
-                Left Content
-            ========================================================== */}
-
-            <div className="mx-auto w-full max-w-[650px] text-center lg:mx-0 lg:text-left">
-              {/* IIT Kharagpur + upGrad Logo */}
-              <div className="mb-4 flex justify-center lg:justify-start">
+        <Container className="relative z-10 p-0">
+          <div className="grid min-h-[520px] grid-cols-[1.1fr_0.9fr] gap-8 py-8 items-center">
+            {/* Left Content Column (placed directly on light bg sky/fade area) */}
+            <div className="flex flex-col items-start pr-4">
+              {/* Logos */}
+              <div className="mb-4">
                 <Image
-                  src={getAssetPath("/assets/images/iit-kgp-upgrad-logo.webp")}
-                  alt="IIT Kharagpur and upGrad"
-                  width={430}
-                  height={65}
+                  src={getAssetPath("/iimk/assets/img/upgrade_iim_logo.png")}
+                  alt="IIM Kozhikode & upGrad Logo"
+                  width={280}
+                  height={60}
+                  className="w-70 object-contain"
                   priority
-                  className="h-auto w-full max-w-[430px] object-contain object-left"
                 />
               </div>
 
-              {/* Certificate label */}
-              <div className="flex justify-center lg:justify-start">
-                <div className="inline-flex rounded-[9px] border border-[#174da5] bg-white/35 px-3 py-[5px]">
-                  <p className="text-[14px] font-extrabold leading-none text-[#174da5] sm:text-[16px]">
-                    Executive Post-Graduate Certificate in
-                  </p>
-                </div>
-              </div>
-
-              {/* Main heading */}
-              <h1 className="mt-2 text-[37px] font-black leading-[0.98] tracking-[-0.045em] text-[#174da5] sm:text-[47px] lg:text-[54px]">
-                Generative AI &amp; Agentic AI
+              {/* Main Heading */}
+              <h1 className="font-extrabold leading-[1.05] text-[#0f3b8c] tracking-tight">
+                <span className="block text-[44px] xl:text-[40px]">
+                  HRM Analytics
+                </span>
+                <span className="block text-[42px] xl:text-[38px]">
+                  Online Certification
+                </span>
               </h1>
 
-              {/* Provider */}
-              <p className="mt-3 text-[15px] font-medium leading-tight text-[#111111] sm:text-[17px]">
-                From{" "}
-                <span className="font-extrabold underline decoration-[1.5px] underline-offset-[2px]">
-                  IIT Kharagpur
-                </span>{" "}
-                via{" "}
-                <span className="font-extrabold underline decoration-[1.5px] underline-offset-[2px]">
-                  upGrad
-                </span>
+              {/* Subheading/Provider */}
+              <p className="mt-3 text-lg font-bold text-gray-800">
+                By <span className="underline">IIM Kozhikode</span> via <span className="underline">Upgrade</span>
               </p>
 
               {/* Description */}
-              <p className="mx-auto mt-3 max-w-[520px] text-[14px] font-medium leading-[1.2] text-[#161616] sm:text-[15.5px] lg:mx-0">
-                An industry-first Generative AI program from IIT Kharagpur,
-                designed for professionals and led live by CSE faculty. Gain
-                job-ready skills to lead AI-driven projects with confidence in
-                real business environments.
+              <p className="mt-4 text-[13px] text-gray-700 max-w-md leading-relaxed">
+                Earn a 6-month professional certificate from IIM Kozhikode. This HR Analytics course covers recruitment, job posting, and workforce management via case studies &amp; real-world projects.
               </p>
+
+              {/* Duration Tag */}
+              <div className="mt-4 flex items-center gap-2 font-bold text-black text-lg">
+                <Clock className="text-[#0f3b8c]" size={20} />
+                <span>6 Months</span>
+              </div>
 
               {/* Download Brochure Button */}
               <button
                 type="button"
                 onClick={() => setDownloadOpen(true)}
-                className="mt-7 inline-flex min-h-[41px] items-center justify-center gap-2 rounded-[8px] bg-[#174da5] px-5 py-3 text-[13px] font-extrabold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#103d87] hover:shadow-md"
+                className="mt-6 inline-flex items-center justify-center gap-2 rounded-md bg-[#0f3b8c] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200 hover:bg-[#0c2e6f] cursor-pointer"
               >
-                Download Brochure
-                <Download size={15} strokeWidth={2.8} />
+                Get Brochure
+                <Download size={16} />
               </button>
             </div>
 
-            {/* =========================================================
-                Desktop Enquiry Form
-            ========================================================== */}
+            {/* Right Column (Form Card) */}
+            <div className="flex justify-end pr-4">
+              <div className="w-full max-w-md rounded-2xl bg-white px-6 py-6 shadow-2xl border border-gray-100">
+                {/* Form Header */}
+                <div className="text-center mb-4">
+                  <h2 className="text-[25px] font-extrabold text-[#0f3b8c]">Admission Open</h2>
+                  <p className="text-xs text-gray-500 mt-0.5">Academic Experts will assist you!</p>
 
-            <div className="hidden justify-end lg:flex">
-              <div className="w-full max-w-[376px] rounded-[11px] bg-white px-5 pb-[18px] pt-[18px] shadow-[0_8px_24px_rgba(0,0,0,0.24)]">
+                  {/* Phone Button */}
+                  <div className="mt-2.5 flex justify-center">
+                    <a
+                      href="tel:+917065777755"
+                      className="inline-flex items-center gap-2 bg-[#0f3b8c] text-white px-5 py-1.5 rounded-full font-bold text-xs hover:bg-[#0c2e6f] transition-colors"
+                    >
+                      <PhoneCall size={12} fill="currentColor" />
+                      <span>+91 7065 7777 55</span>
+                    </a>
+                  </div>
+                </div>
+
                 <FormWrapper
-                  title="Enquire Now"
-                  subtitle="Academic Experts will assist you!"
-                  courseOptions={IIT_KGP_COURSE_OPTIONS}
-                  formNameOverride="IIT Kharagpur Hero Enquiry Form"
-                  sourceOverride="IIT Kharagpur Landing Page"
-                  utmSourceFallback="IIT Kharagpur Organic"
-                  utmMediumFallback="IIT Kharagpur Website"
+                  hideHeader
+                  courseOptions={IIMK_COURSE_OPTIONS}
+                  defaultCourse="HRM Analytics Online Certification"
+                  hideCourseField
+                  formNameOverride="IIMK Hero Enquiry Form"
+                  sourceOverride="IIMK Landing Page"
+                  utmSourceFallback="IIMK Organic"
+                  utmMediumFallback="IIMK Website"
                   submitButtonText="Submit"
+                  submitButtonClassName="bg-[#0f3b8c] hover:bg-[#0c2e6f]"
                 />
               </div>
-            </div>
-          </div>
-
-          {/* =============================================================
-              Mobile Enquiry Form
-          ============================================================== */}
-
-          <div className="pb-10 lg:hidden">
-            <div className="mx-auto w-full max-w-md rounded-xl bg-white p-5 shadow-[0_10px_35px_rgba(0,0,0,0.22)]">
-              <FormWrapper
-                title="Enquire Now"
-                subtitle="Academic Experts will assist you!"
-                courseOptions={IIT_KGP_COURSE_OPTIONS}
-                formNameOverride="IIT Kharagpur Mobile Hero Enquiry Form"
-                sourceOverride="IIT Kharagpur Landing Page"
-                utmSourceFallback="IIT Kharagpur Organic"
-                utmMediumFallback="IIT Kharagpur Mobile Website"
-                submitButtonText="Submit"
-              />
             </div>
           </div>
         </Container>
       </section>
 
-      {/* =============================================================
-          Download Brochure Popup
-      ============================================================== */}
+      {/* ==========================================
+          MOBILE VIEW (Visible below lg)
+          ========================================== */}
+      <section
+        id="home-mobile"
+        className="block lg:hidden bg-[#eef4fd] pt-22 pb-10"
+      >
+        <div className="md:px-4 flex flex-col items-center">
+          {/* 1. Heading */}
+          <h1 className="text-center font-extrabold leading-[1.1] text-[#0f3b8c] tracking-tight">
+            <span className="block text-[34px] sm:text-[38px]">
+              HRM Analytics
+            </span>
+            <span className="block text-[32px] sm:text-[36px]">
+              Online Certification
+            </span>
+          </h1>
 
+          {/* 2. Subheading */}
+          <p className="mt-3 text-base sm:text-lg font-bold text-gray-800 text-center">
+            By <span className="underline">IIM Kozhikode</span> via <span className="underline">Upgrade</span>
+          </p>
+
+          {/* 3. Description */}
+          <p className="mt-4 text-sm sm:text-base text-gray-600 text-center max-w-md leading-relaxed px-4 md:px-0">
+            Earn a 6-month professional certificate from IIM Kozhikode. This HR Analytics course covers recruitment, job posting, and workforce management via case studies &amp; real-world projects.
+          </p>
+
+          {/* 4. Duration Tag */}
+          <div className="mt-4 flex items-center gap-2 font-bold text-black justify-center">
+            <Clock className="text-[#0f3b8c]" size={18} />
+            <span className="text-base">6 Months</span>
+          </div>
+
+          {/* 5. Logo */}
+          {/* <div className="mt-5 flex justify-center">
+            <Image
+              src={getAssetPath("/iimk/assets/img/upgrade_iim_logo.png")}
+              alt="IIM Kozhikode & upGrad Logo"
+              width={220}
+              height={50}
+              className="object-contain"
+            />
+          </div> */}
+
+          {/* 6. Campus Image */}
+          <div className="mt-6 w-full">
+            <Image
+              src={getAssetPath("/iimk/assets/img/iim_mobile_new_img.png")}
+              alt="IIM Kozhikode campus"
+              width={500}
+              height={290}
+              className="w-full h-auto object-cover"
+            />
+          </div>
+
+          {/* 7. Enquiry Form Card */}
+          <div className="w-[90%] -mt-5 max-w-md rounded-2xl bg-white p-5 shadow-xl border border-gray-100">
+            {/* Form Header */}
+            <div className="text-center mb-4">
+              <h2 className="text-[22px] font-extrabold text-[#0f3b8c]">Admission Open</h2>
+              <p className="text-xs text-gray-500 mt-0.5">Academic Experts will assist you!</p>
+
+              {/* Phone Button */}
+              <div className="mt-2.5 flex justify-center">
+                <a
+                  href="tel:+917065777755"
+                  className="inline-flex items-center gap-2 bg-[#0f3b8c] text-white px-5 py-1.5 rounded-full font-bold text-xs hover:bg-[#0c2e6f] transition-colors"
+                >
+                  <PhoneCall size={12} fill="currentColor" />
+                  <span>+91 7065 7777 55</span>
+                </a>
+              </div>
+            </div>
+
+            <FormWrapper
+              hideHeader
+              courseOptions={IIMK_COURSE_OPTIONS}
+              defaultCourse="HRM Analytics Online Certification"
+              hideCourseField
+              formNameOverride="IIMK Mobile Hero Enquiry Form"
+              sourceOverride="IIMK Landing Page"
+              utmSourceFallback="IIMK Organic"
+              utmMediumFallback="IIMK Mobile Website"
+              submitButtonText="Submit"
+              submitButtonClassName="bg-[#0f3b8c] hover:bg-[#0c2e6f]"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ==========================================
+          STATS/ACHIEVEMENTS BAR (Common)
+          ========================================== */}
+      <section className="bg-[#fedfa9] py-8">
+        <Container>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-4 md:gap-x-8 md:gap-y-0">
+            <StatItem
+              imageSrc="/iimk/assets/img/ic-01.webp"
+              value="50%"
+              label="Avg Salary Hike"
+            />
+            <StatItem
+              imageSrc="/iimk/assets/img/ic-02.webp"
+              value="10K+"
+              label="Student Enrolled"
+            />
+            <StatItem
+              imageSrc="/iimk/assets/img/ic-03.webp"
+              value="100+"
+              label="Hiring Partners"
+            />
+            <StatItem
+              imageSrc="/iimk/assets/img/ic-04.webp"
+              value="500+"
+              label="Industry Experts"
+            />
+          </div>
+        </Container>
+      </section>
+
+      {/* ==========================================
+          DOWNLOAD BROCHURE POPUP
+          ========================================== */}
       {downloadOpen && (
         <div
           role="presentation"
           onClick={() => setDownloadOpen(false)}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/65 px-4 py-6 backdrop-blur-sm"
+          className="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm"
         >
           <div
             role="dialog"
             aria-modal="true"
-            aria-label="Download IIT Kharagpur brochure"
+            aria-label="Download brochure"
             onClick={(event) => event.stopPropagation()}
-            className="relative max-h-[92vh] w-full max-w-[420px] overflow-y-auto rounded-xl bg-white p-6 shadow-2xl"
+            className="relative max-h-[92vh] w-full max-w-sm overflow-y-auto rounded-xl bg-white p-6 shadow-2xl"
           >
-            {/* Close Button */}
-            <button
-              type="button"
-              aria-label="Close brochure form"
-              onClick={() => setDownloadOpen(false)}
-              className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-700 transition-colors duration-200 hover:bg-gray-200 hover:text-black"
-            >
-              <X size={20} />
-            </button>
-
-            {/* Brochure Form */}
             <FormWrapper
               title="Download Brochure"
-              subtitle="Fill your details to receive the IIT Kharagpur brochure"
+              subtitle="Fill your details to receive the IIM Kozhikode brochure"
               onClose={() => setDownloadOpen(false)}
-              courseOptions={IIT_KGP_COURSE_OPTIONS}
-              formNameOverride="IIT Kharagpur Download Brochure Form"
-              sourceOverride="IIT Kharagpur Brochure"
-              utmSourceFallback="IIT Kharagpur Organic"
-              utmMediumFallback="IIT Kharagpur Brochure Popup"
+              courseOptions={IIMK_COURSE_OPTIONS}
+              defaultCourse="HRM Analytics Online Certification"
+              hideCourseField
+              formNameOverride="IIMK Download Brochure Form"
+              sourceOverride="IIMK Brochure"
+              utmSourceFallback="IIMK Organic"
+              utmMediumFallback="IIMK Brochure Popup"
               submitButtonText="Download Brochure"
+              submitButtonClassName="bg-[#0f3b8c] hover:bg-[#0c2e6f]"
             />
           </div>
         </div>
       )}
     </>
+  );
+}
+
+type StatItemProps = {
+  imageSrc: string;
+  value: string;
+  label: string;
+};
+
+function StatItem({ imageSrc, value, label }: StatItemProps) {
+  return (
+    <div className="flex items-center gap-3.5 justify-center md:justify-start">
+      <div className="relative h-14 w-14 shrink-0">
+        <Image
+          src={getAssetPath(imageSrc)}
+          alt={label}
+          fill
+          sizes="56px"
+          className="object-contain"
+        />
+      </div>
+      <div className="flex flex-col text-left">
+        <p className="text-2xl xl:text-3xl font-extrabold text-[#0f3b8c] leading-none">
+          {value}
+        </p>
+        <p className="text-[13px] font-bold text-gray-900 leading-tight mt-1">
+          {label}
+        </p>
+      </div>
+    </div>
   );
 }

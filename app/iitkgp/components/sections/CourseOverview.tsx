@@ -23,23 +23,23 @@ export function CourseOverview() {
     <>
       <section
         id="course"
-        className="scroll-mt-[84px] bg-white py-16 sm:py-20 lg:py-[88px]"
+        className="scroll-mt-21 bg-white py-16 sm:py-20 lg:py-22"
       >
         <Container>
-          <div className="mx-auto max-w-[1420px] text-center">
+          <div className="mx-auto max-w-355 text-center">
             {/* Main Heading */}
-            <h2 className="text-[34px] font-black uppercase leading-none tracking-[-0.03em] text-[#322088] sm:text-[44px] lg:text-[50px]">
+            <h2 className="text-[34px] font-black uppercase leading-none tracking-[-0.03em] text-[#322088] sm:text-[44px] lg:text-[40px]">
               Course Overview
             </h2>
 
             {/* Course Title */}
-            <h3 className="mx-auto mt-5 max-w-[1250px] text-[22px] font-extrabold leading-[1.2] tracking-[-0.02em] text-black sm:text-[28px] lg:text-[32px]">
+            <h3 className="mx-auto mt-5 max-w-312.5 text-[18px] font-extrabold leading-[1.2] tracking-[-0.02em] text-black sm:text-[28px] lg:text-[22px]">
               Executive Post Graduate Certificate in Generative AI &amp; Agentic
               AI
             </h3>
 
             {/* Description */}
-            <p className="mx-auto mt-12 max-w-[1450px] text-[16px] font-normal leading-[1.65] text-[#555555] sm:text-[18px] lg:text-[21px]">
+            <p className="mx-auto mt-6 max-w-362.5 text-[16px] font-normal leading-[1.65] text-[#555555] sm:text-[18px] lg:text-[14px]">
               The IIT Kharagpur AI course is designed to help learners build
               real-world skills in Generative AI and Agentic AI through a
               structured, job-focused curriculum. Delivered as part of IIT
@@ -53,20 +53,20 @@ export function CourseOverview() {
             </p>
 
             {/* Buttons */}
-            <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-7">
+            <div className="mt-12 flex items-center justify-center gap-2 flex-row sm:gap-4">
               <button
                 type="button"
                 onClick={() => setBrochureOpen(true)}
-                className="inline-flex min-h-[64px] w-full max-w-[300px] items-center justify-center gap-4 rounded-full border-[3px] border-[#ff4b0b] bg-white px-8 text-[18px] font-extrabold text-[#ff4b0b] transition-all duration-200 hover:bg-[#ff4b0b] hover:text-white sm:w-auto"
+                className="inline-flex min-h-12 items-center justify-center gap-4 rounded-full border-[3px] border-[#ff4b0b] bg-white px-4 md:px-8 text-[14px] font-extrabold text-[#ff4b0b] transition-all duration-200 hover:bg-[#ff4b0b] hover:text-white sm:w-auto"
               >
-                Download Brochure
-                <Download size={23} strokeWidth={2.7} />
+                Get Brochure
+                <Download size={16} strokeWidth={2.7} />
               </button>
 
               <button
                 type="button"
                 onClick={() => setApplyOpen(true)}
-                className="inline-flex min-h-[64px] w-full max-w-[210px] items-center justify-center rounded-full bg-[#322088] px-10 text-[18px] font-extrabold text-white transition-all duration-200 hover:bg-[#25166f] sm:w-auto"
+                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#322088] px-10 text-[14px] font-extrabold text-white transition-all duration-200 hover:bg-[#25166f] sm:w-auto"
               >
                 Apply Now
               </button>
@@ -132,14 +132,14 @@ function Modal({ title, ariaLabel, onClose, children }: ModalProps) {
     <div
       role="presentation"
       onClick={onClose}
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/65 px-4 py-6 backdrop-blur-sm"
+      className="fixed inset-0 z-9999 flex items-center justify-center bg-black/65 px-4 py-6 backdrop-blur-sm"
     >
       <div
         role="dialog"
         aria-modal="true"
         aria-label={ariaLabel}
         onClick={(event) => event.stopPropagation()}
-        className="relative max-h-[92vh] w-full max-w-[420px] overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl"
+        className="relative max-h-[92vh] w-full max-w-105 overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl"
       >
         <button
           type="button"
