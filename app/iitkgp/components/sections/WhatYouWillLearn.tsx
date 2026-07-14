@@ -66,19 +66,19 @@ export function WhatYouWillLearn() {
   return (
     <section
       id="what-you-will-learn"
-      className="scroll-mt-[84px] bg-[#35217f] py-14 text-white sm:py-16 lg:py-[72px]"
+      className="scroll-mt-21 bg-[#35217f] py-14 text-white sm:py-16 lg:py-18"
     >
       <Container>
-        <div className="mx-auto w-full max-w-[1240px]">
+        <div className="mx-auto w-full max-w-310">
           {/* Heading */}
           <div className="text-center">
-            <h2 className="text-[34px] font-black leading-none tracking-[-0.035em] text-white sm:text-[42px] lg:text-[48px]">
+            <h2 className="text-[34px] font-black leading-none tracking-[-0.035em] text-white sm:text-[42px] lg:text-[36px]">
               What Will You Learn?
             </h2>
           </div>
 
           {/* Learning Cards */}
-          <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:mt-8 lg:grid-cols-3 lg:gap-[22px]">
+          <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:mt-8 lg:grid-cols-3 lg:gap-5.5">
             {learningItems.map((item) => (
               <LearningCard key={item.id} item={item} />
             ))}
@@ -97,19 +97,19 @@ function LearningCard({ item }: LearningCardProps) {
   const Icon = item.icon;
 
   return (
-    <article className="flex min-h-[365px] flex-col items-center justify-center rounded-[28px] border border-white/35 bg-transparent px-7 py-10 text-center transition-all duration-300 hover:-translate-y-1 hover:border-white/70 hover:bg-white/5 sm:min-h-[350px]">
+    <article className="flex min-h-91.25 flex-col items-center justify-center rounded-[28px] border border-white/35 bg-transparent px-7 py-10 text-center transition-all duration-300 hover:-translate-y-1 hover:border-white/70 hover:bg-white/5 sm:min-h-87.5">
       {/* Icon */}
-      <div className="flex h-[78px] items-center justify-center text-white">
-        <Icon size={66} strokeWidth={2.1} />
+      <div className="flex h-14.5 items-center justify-center text-white">
+        <Icon size={50} strokeWidth={2.1} />
       </div>
 
       {/* Title */}
-      <h3 className="mt-6 max-w-[340px] text-[19px] font-extrabold leading-[1.18] text-white sm:text-[21px]">
+      <h3 className="mt-6 max-w-85 text-[19px] font-extrabold leading-[1.18] text-white sm:text-[18px]">
         {item.title}
       </h3>
 
       {/* Description */}
-      <p className="mt-4 max-w-[355px] text-[14px] font-normal leading-[1.55] text-white/90 sm:text-[15px]">
+      <p className="mt-4 max-w-88.75 text-[13px] font-normal leading-[1.55] text-white/90 sm:text-[13px]">
         {item.description}
       </p>
     </article>

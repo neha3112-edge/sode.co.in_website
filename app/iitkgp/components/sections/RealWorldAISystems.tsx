@@ -107,17 +107,17 @@ export function RealWorldAISystems() {
   return (
     <section
       id="real-world-ai-systems"
-      className="scroll-mt-[84px] overflow-hidden bg-[#f7f4f4] py-14 sm:py-16 lg:py-[62px]"
+      className="scroll-mt-21 overflow-hidden bg-[#f7f4f4] py-14 sm:py-16 lg:py-15.5"
     >
       <Container>
-        <div className="mx-auto w-full max-w-[1220px]">
+        <div className="mx-auto w-full max-w-305">
           {/* Heading */}
           <div className="text-center">
-            <h2 className="text-[30px] font-black leading-[1.05] tracking-[-0.035em] text-[#342184] sm:text-[38px] lg:text-[40px]">
+            <h2 className="text-[30px] font-black leading-[1.05] tracking-[-0.035em] text-[#342184] sm:text-[38px] lg:text-[36px]">
               Build Real-World AI Systems
             </h2>
 
-            <p className="mt-2 text-[16px] font-extrabold leading-tight text-black sm:text-[19px]">
+            <p className="mt-2 text-[16px] font-extrabold leading-tight text-black sm:text-[16px]">
               Learn to Build &amp; Deploy GenAI + Agentic AI Systems
             </p>
           </div>
@@ -168,10 +168,10 @@ export function RealWorldAISystems() {
                 onClick={() => {
                   carouselApi?.scrollTo(index);
                 }}
-                className={`h-[6px] rounded-full transition-all duration-300 ${
+                className={`h-1.5 rounded-full transition-all duration-300 ${
                   selectedIndex === index
-                    ? "w-[50px] bg-[#ff5318]"
-                    : "w-[35px] bg-[#939393] hover:bg-[#666666]"
+                    ? "w-12.5 bg-[#ff5318]"
+                    : "w-8.75 bg-[#939393] hover:bg-[#666666]"
                 }`}
               />
             ))}
@@ -190,9 +190,9 @@ function AISystemCard({ item }: AISystemCardProps) {
   const Icon = item.icon;
 
   return (
-    <article className="flex min-h-[285px] h-full flex-col items-center justify-center rounded-[25px] bg-[#fbfcfd] px-7 py-10 text-center shadow-[0_18px_32px_rgba(65,48,48,0.10)] sm:min-h-[300px]">
+    <article className="flex min-h-71.25 h-full flex-col items-center justify-center rounded-[25px] bg-[#fbfcfd] px-7 py-10 text-center sm:min-h-75">
       {/* Icon */}
-      <div className="flex h-[70px] w-[70px] items-center justify-center rounded-[12px] bg-[#ff5318] text-white">
+      <div className="flex h-17.5 w-17.5 items-center justify-center rounded-xl bg-[#ff5318] text-white">
         <Icon size={38} strokeWidth={2.5} />
       </div>
 
@@ -202,7 +202,7 @@ function AISystemCard({ item }: AISystemCardProps) {
       </h3>
 
       {/* Description */}
-      <p className="mt-3 max-w-[330px] text-[14px] font-medium leading-[1.55] text-[#4d4d4d] sm:text-[15px]">
+      <p className="mt-3 max-w-82.5 text-[14px] font-medium leading-[1.55] text-[#4d4d4d] sm:text-[15px]">
         {item.description}
       </p>
     </article>

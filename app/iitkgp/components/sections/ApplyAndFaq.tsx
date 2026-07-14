@@ -72,20 +72,31 @@ const applySteps: ApplyStep[] = [
 
 const faqs: FaqItem[] = [
   {
-    question: "Q1. What is the duration of the IIM Kozhikode HR Analytics Course?",
-    answer: "The IIM Kozhikode HR Analytics Course spans 6 months and comprises live classes, industry projects, and hands-on learning with tools such as Power BI, Tableau, and Excel.",
+    question: "What are the eligibility criteria?",
+    answer:
+      "Candidates must have a bachelor’s degree (B.Tech/M.Tech, B.E/M.E in CS/IT/AI/ECE/EE preferred, or B.Sc in CS/Maths/Statistics/Physics, or MCA) with at least 50% marks from a recognised university. Other graduates need a minimum of 2 years of experience, and those with less than 50% marks must clear an online entrance test.",
   },
   {
-    question: "Q2. Is the IIM Kozhikode HRM Online Course suitable for working professionals?",
-    answer: "Yes, the IIM Kozhikode HRM Online Courses are designed for flexibility, making them ideal for professionals who want to balance work while upgrading their skills.",
+    question: "What is the admission process?",
+    answer:
+      "The process includes four steps: submit your application, get shortlisted, receive the offer, and block your seat. Shortlisting is based on academic background and professional experience.",
   },
   {
-    question: "Q3. What certifications will I receive upon completing the program?",
-    answer: "Learners receive a recognized certification from IIM Kozhikode, along with a Power BI certification, making it one of the most valuable certification courses offered by IIM Kozhikode.",
+    question:
+      "Who is this program for?",
+    answer:
+      "This program is ideal for Software Engineers (3+ years), ML/Data Practitioners (2+ years), and Technical Leads/Architects who want to build production-ready GenAI systems and are comfortable with Python, APIs, and basic ML concepts.",
   },
   {
-    question: "Q4. What key skills are taught in HR Analytics IIM Kozhikode programs?",
-    answer: "The program covers strategic HR management, workforce planning, employee retention strategies, talent analytics, and people analytics, helping learners build practical expertise for career growth.",
+    question: "What will I build during this program?",
+    answer:
+      "You will build five production-ready projects, including a RAG system, a fine-tuned LLM, a multi-agent system, a deployed GenAI API, and an industry capstone project.",
+  },
+  {
+    question:
+      "What makes this program different from others?",
+    answer:
+      "It offers deep learning through 5 focused modules over 32 weeks, is fully faculty-led by IIT Kharagpur professors, includes robust deployment training, and culminates in a production-ready capstone system.",
   },
 ];
 
@@ -99,15 +110,15 @@ export function ApplyAndFaq() {
   return (
     <>
       {/* How To Apply Section */}
-      <section id="how-to-apply" className="bg-[#f8fafc] py-14 sm:py-16 lg:py-20">
+      <section id="how-to-apply" className="bg-white py-14 sm:py-16 lg:py-10">
         <Container className="max-w-370">
           <div className="text-center">
-            <h2 className="text-2xl font-bold leading-tight text-[#1d3d82] sm:text-3xl lg:text-[34px]">
-              How to Apply for IIM Kozhikode University Online Courses
+            <h2 className="text-2xl font-bold leading-tight text-[#2d1a78] sm:text-3xl lg:text-[34px]">
+              How to Apply for IIT Kharagpur Online Courses
             </h2>
 
             <p className="mx-auto mt-3 max-w-4xl text-sm leading-6 text-gray-600 sm:text-base">
-              Students can easily enrol in IIM Kozhikode University Online courses. Candidates can conveniently apply by selecting their desired program. Follow these steps to secure admission in the university.
+              Students can easily enrol in Mica University Online courses. Candidates can conveniently apply by selecting their desired program. Follow these steps to secure admission in the university.
             </p>
           </div>
 
@@ -121,13 +132,13 @@ export function ApplyAndFaq() {
 
       {/* FAQ Section */}
       <section
-        id="faqs"
+        id="faq"
         className="bg-white pb-16 pt-8 sm:pb-20 sm:pt-10 lg:pb-24"
       >
         <Container>
           <div className="text-center">
-            <h2 className="text-3xl font-extrabold leading-tight text-[#1d3d82] sm:text-4xl">
-              FAQ | Frequently Asked Questions
+            <h2 className="text-3xl font-extrabold leading-tight text-[#2d1a78] sm:text-4xl">
+              FAQ-Frequently Asked Question
             </h2>
           </div>
 
@@ -158,7 +169,7 @@ type ApplyStepCardProps = {
 function ApplyStepCard({ step }: ApplyStepCardProps) {
   return (
     <article
-      className={`${step.bgClass} relative flex min-h-[210px] flex-col items-center rounded-2xl px-5 pb-7 pt-5 text-center shadow-[0_8px_24px_rgba(0,0,0,0.06)]`}
+      className={`${step.bgClass} relative flex min-h-52.5 flex-col items-center rounded-2xl px-5 pb-7 pt-5 text-center shadow-[0_8px_24px_rgba(0,0,0,0.06)]`}
     >
       <div
         className={`${step.borderClass} ${step.numberClass} flex h-14 w-14 items-center justify-center rounded-full border-[3px] bg-white text-xl font-bold`}
@@ -198,7 +209,7 @@ function FaqAccordionItem({ faq, isOpen, onToggle }: FaqAccordionItemProps) {
         aria-expanded={isOpen}
         className="flex w-full items-center gap-4 px-5 py-4 text-left sm:px-6"
       >
-        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-[#1d3d82] text-white">
+        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-[#2d1a78] text-white">
           {isOpen ? (
             <Minus size={14} strokeWidth={3} />
           ) : (
@@ -206,7 +217,7 @@ function FaqAccordionItem({ faq, isOpen, onToggle }: FaqAccordionItemProps) {
           )}
         </span>
 
-        <span className="text-sm font-bold text-[#1d3d82] sm:text-base">
+        <span className="text-sm font-bold text-[#2d1a78] sm:text-base">
           {faq.question}
         </span>
       </button>

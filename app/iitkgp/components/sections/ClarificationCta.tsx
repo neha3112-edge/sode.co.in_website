@@ -7,10 +7,40 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import FormWrapper from "@/components/forms/FormWrapper";
 
-const IIMK_COURSES = [
+const IIITB_COURSES = [
   {
-    value: "HRM Analytics Online Certification",
-    label: "HRM Analytics Online Certification",
+    value: "Executive Programme in Generative AI for Leaders",
+    label: "Executive Programme in Generative AI for Leaders",
+  },
+  {
+    value: "Executive Post Graduate Certificate Programme in Data Science & AI",
+    label: "Executive Post Graduate Certificate Programme in Data Science & AI",
+  },
+  {
+    value:
+      "Professional Certificate Programme in Data Science with Generative AI",
+    label:
+      "Professional Certificate Programme in Data Science with Generative AI",
+  },
+  {
+    value: "Executive Post Graduate Programme in Applied AI and Agentic AI",
+    label: "Executive Post Graduate Programme in Applied AI and Agentic AI",
+  },
+  {
+    value: "Executive Diploma in Machine Learning & Artificial Intelligence",
+    label: "Executive Diploma in Machine Learning & Artificial Intelligence",
+  },
+  {
+    value: "Chief Technology Officer & AI Leadership Programme",
+    label: "Chief Technology Officer & AI Leadership Programme",
+  },
+  {
+    value: "Master of Science in Machine Learning & Artificial Intelligence",
+    label: "Master of Science in Machine Learning & Artificial Intelligence",
+  },
+  {
+    value: "Master of Science in Data Science with Generative AI",
+    label: "Master of Science in Data Science with Generative AI",
   },
 ];
 
@@ -23,7 +53,7 @@ export function ClarificationCta() {
 
   return (
     <>
-      <section id="clarification" className="w-full bg-[#1d3d82] py-8 sm:py-10">
+      <section id="clarification" className="w-full bg-[#076493] py-8 sm:py-10">
         <Container>
           <div className="flex flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
             {/* Left Content */}
@@ -42,7 +72,7 @@ export function ClarificationCta() {
               size="lg"
               type="button"
               onClick={() => setFormOpen(true)}
-              className="inline-flex min-h-12 w-fit items-center justify-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-bold text-[#1d3d82] shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-gray-100 hover:shadow-md md:w-auto cursor-pointer"
+              className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-bold text-black shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-gray-100 hover:shadow-md md:w-auto"
             >
               <Phone size={16} fill="currentColor" strokeWidth={2} />
               Talk to Experts
@@ -69,15 +99,12 @@ export function ClarificationCta() {
               title="Talk to Experts"
               subtitle="Share your details and our academic expert will contact you"
               onClose={closeForm}
-              courseOptions={IIMK_COURSES}
-              defaultCourse="HRM Analytics Online Certification"
-              hideCourseField
-              formNameOverride="IIMK Clarification CTA Form"
-              sourceOverride="IIMK Clarification Section"
-              utmSourceFallback="IIMK Organic"
-              utmMediumFallback="IIMK Talk to Experts Button"
+              courseOptions={IIITB_COURSES}
+              formNameOverride="IIITB Clarification CTA Form"
+              sourceOverride="IIITB Clarification Section"
+              utmSourceFallback="IIITB Organic"
+              utmMediumFallback="IIITB Talk to Experts Button"
               submitButtonText="Talk to Experts"
-              submitButtonClassName="bg-[#1d3d82] hover:bg-[#142b5c]"
               showPhoneCallLink
             />
           </div>

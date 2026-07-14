@@ -1,200 +1,121 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useState, type ReactNode } from "react";
-import { ArrowRight, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Phone } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
-import FormWrapper, {
-  type FormCourseOption,
-} from "@/components/forms/FormWrapper";
+import FormWrapper from "@/components/forms/FormWrapper";
+import { Button } from "@/components/ui/Button";
 import { getAssetPath } from "@/lib/utils";
 
-type AboutFormType = "consultation" | null;
+type AboutFormType = "callback" | "counselling" | null;
 
-const IIT_KGP_COURSES: FormCourseOption[] = [
+const IIMK_COURSES = [
   {
-    value: "Executive Post Graduate Certificate in Generative AI & Agentic AI",
-    label: "Executive Post Graduate Certificate in Generative AI & Agentic AI",
+    value: "HRM Analytics Online Certification",
+    label: "HRM Analytics Online Certification",
   },
 ];
 
 export function About() {
   const [activeForm, setActiveForm] = useState<AboutFormType>(null);
 
-  const closeForm = useCallback(() => {
-    setActiveForm(null);
-  }, []);
-
-  /*
-  |--------------------------------------------------------------------------
-  | Lock body scroll while modal is open
-  |--------------------------------------------------------------------------
-  */
-
   useEffect(() => {
-    document.body.style.overflow = activeForm ? "hidden" : "";
+    if (activeForm) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
 
     return () => {
       document.body.style.overflow = "";
     };
   }, [activeForm]);
 
-  /*
-  |--------------------------------------------------------------------------
-  | Close modal using Escape key
-  |--------------------------------------------------------------------------
-  */
-
-  useEffect(() => {
-    if (!activeForm) return;
-
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        closeForm();
-      }
-    };
-
-    window.addEventListener("keydown", handleEscape);
-
-    return () => {
-      window.removeEventListener("keydown", handleEscape);
-    };
-  }, [activeForm, closeForm]);
+  const closeForm = () => {
+    setActiveForm(null);
+  };
 
   return (
     <>
-      <section
-        id="about"
-        className="relative min-h-[555px] scroll-mt-[84px] overflow-hidden bg-[#657187]"
-      >
-        {/* =============================================================
-            Full Background Campus Image
-        ============================================================== */}
-
-        <Image
-          src={getAssetPath("/assets/images/iit-kgp-about-campus.webp")}
-          alt="Indian Institute of Technology Kharagpur campus"
-          fill
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-
-        {/* Blue-grey overlay */}
-        <div className="absolute inset-0 bg-[#56647d]/67" />
-
-        {/* Bottom dark transparent layer */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20" />
-
-        {/* =============================================================
-            Main Content
-        ============================================================== */}
-
-        <Container className="relative z-10">
-          <div className="flex min-h-[555px] items-start justify-center py-[60px] sm:py-[70px]">
-            <div className="w-full max-w-[960px] rounded-[42px] bg-white/95 px-5 py-8 text-center shadow-[0_18px_45px_rgba(0,0,0,0.18)] backdrop-blur-[2px] sm:px-10 sm:py-9 lg:px-[42px] lg:py-[31px]">
-              {/* Heading */}
-              <h2 className="text-[29px] font-black uppercase leading-tight tracking-[-0.03em] text-[#342184] sm:text-[34px] lg:text-[35px]">
-                About IIT Kharagpur
+      {/* About IIM Kozhikode Section */}
+      <section id="about" className="w-full bg-[#eef4fd] py-12 sm:py-16">
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-8 lg:gap-12 items-center">
+            {/* Left Content Column */}
+            <div className="flex flex-col items-center">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0f3b8c] tracking-wide text-center">
+                ABOUT IIM - KOZHIKODE
               </h2>
 
-              {/* First paragraph */}
-              <p className="mx-auto mt-4 max-w-[890px] text-[14px] font-normal leading-[1.55] text-[#404040] sm:text-[15px]">
-                Established in 1951, the Indian Institute of Technology
-                Kharagpur is India&apos;s first IIT and was declared an
-                Institute of National Importance under the Indian Institute of
-                Technology (Kharagpur) Act, 1956. Located in Kharagpur, West
-                Bengal, the institute occupies a 2,100-acre campus and has
-                consistently ranked among India&apos;s leading engineering
-                institutions, ranking 5th nationally in the NIRF 2025
-                Engineering category.
+              <p className="mt-5 text-sm sm:text-sm text-gray-800 text-center leading-relaxed max-w-2xl">
+                IIM Kozhikode is recognized as one of India’s leading business schools, known for its innovative teaching, global outlook, and strong industry partnerships. The institute offers a broad portfolio of programs, including executive and online learning opportunities tailored for professionals. With prestigious accreditations such as the Ministry of Education, EQUIS, and AACSB, IIM Kozhikode stands among globally benchmarked institutions. Through its specialized programs, such as IIM Kozhikode&apos;s HRM, and advanced certification options, the institute ensures that learners gain both academic depth and practical business insights. These certification courses in IIM Kozhikode are designed to prepare graduates, working executives, and managers to succeed in leadership and analytics-driven roles worldwide.
               </p>
 
-              {/* Second paragraph */}
-              <p className="mx-auto mt-8 max-w-[820px] text-[14px] font-normal leading-[1.55] text-[#404040] sm:text-[15px]">
-                IIT Kharagpur&apos;s research ecosystem is built on
-                interdisciplinary collaboration, with a dedicated focus on AI
-                research, industry-relevant solutions, and the advancement of
-                machine learning systems.
-              </p>
+              {/* Accreditations Box */}
+              <div className="mt-8 w-full max-w-xl">
+                <h3 className="text-center font-extrabold text-[#0f3b8c] text-lg mb-3.5">
+                  Accreditations and Recognitions of IIM Kozhikode
+                </h3>
 
-              {/* Consultation Button */}
-              <button
-                type="button"
-                onClick={() => setActiveForm("consultation")}
-                className="mt-5 inline-flex min-h-[50px] w-full max-w-[303px] items-center justify-center gap-4 rounded-full bg-[#ff5318] px-7 py-3 text-[15px] font-extrabold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#e9460d] hover:shadow-lg sm:text-[16px]"
-              >
-                Get FREE 1:1 Consultation
-                <ArrowRight size={21} strokeWidth={2.7} />
-              </button>
+                {/* Border Wrapped Logos Container */}
+                <div className="border border-gray-400 rounded-2xl p-5 bg-white/20 flex flex-wrap justify-center items-center gap-4">
+                  <div className="bg-white px-2 py-1 rounded-lg flex items-center justify-center h-14 w-28 shadow-xs border border-gray-100">
+                    <Image
+                      src={getAssetPath("/iimk/assets/img/amba-iim.webp")}
+                      alt="AMBA Accredited"
+                      width={90}
+                      height={45}
+                      className="object-contain"
+                    />
+                  </div>
+                  <div className="bg-white px-2 py-1 rounded-lg flex items-center justify-center h-14 w-28 shadow-xs border border-gray-100">
+                    <Image
+                      src={getAssetPath("/iimk/assets/img/equis-iim.webp")}
+                      alt="EQUIS Accredited"
+                      width={90}
+                      height={45}
+                      className="object-contain"
+                    />
+                  </div>
+                  <div className="bg-white px-2 py-1 rounded-lg flex items-center justify-center h-14 w-28 shadow-xs border border-gray-100">
+                    <Image
+                      src={getAssetPath("/iimk/assets/img/aacsb-iim.webp")}
+                      alt="AACSB Accredited"
+                      width={90}
+                      height={45}
+                      className="object-contain"
+                    />
+                  </div>
+                  <div className="bg-white px-2 py-1 rounded-lg flex items-center justify-center h-14 w-28 shadow-xs border border-gray-100">
+                    <Image
+                      src={getAssetPath("/iimk/assets/img/ministry-of-education.webp")}
+                      alt="Ministry of Education"
+                      width={95}
+                      height={45}
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Campus Image Column */}
+            <div className="w-full flex justify-center">
+              <div className="relative h-[280px] sm:h-[350px] w-full max-w-[420px] rounded-[36px] overflow-hidden shadow-xl bg-white border-4 border-white">
+                <Image
+                  src={getAssetPath("/iimk/assets/img/iim-university-image.webp")}
+                  alt="IIM Kozhikode campus building"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 420px"
+                  className="object-cover object-center rounded-[30px]"
+                />
+              </div>
             </div>
           </div>
         </Container>
       </section>
-
-      {/* =============================================================
-          Consultation Modal
-      ============================================================== */}
-
-      {activeForm === "consultation" && (
-        <AboutFormModal title="Get Free 1:1 Consultation" onClose={closeForm}>
-          <FormWrapper
-            title="Get FREE 1:1 Consultation"
-            subtitle="Our academic experts will guide you through the IIT Kharagpur programme"
-            onClose={closeForm}
-            courseOptions={IIT_KGP_COURSES}
-            formNameOverride="IIT Kharagpur About Consultation Form"
-            sourceOverride="IIT Kharagpur About Section"
-            utmSourceFallback="IIT Kharagpur Organic"
-            utmMediumFallback="IIT Kharagpur About Consultation"
-            submitButtonText="Book Free Consultation"
-          />
-        </AboutFormModal>
-      )}
     </>
-  );
-}
-
-/*
-|--------------------------------------------------------------------------
-| Form Modal
-|--------------------------------------------------------------------------
-*/
-
-type AboutFormModalProps = {
-  title: string;
-  children: ReactNode;
-  onClose: () => void;
-};
-
-function AboutFormModal({ title, children, onClose }: AboutFormModalProps) {
-  return (
-    <div
-      role="presentation"
-      onMouseDown={onClose}
-      className="fixed inset-0 z-[9999] flex items-center justify-center overflow-y-auto bg-black/65 px-4 py-6 backdrop-blur-sm"
-    >
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-label={title}
-        onMouseDown={(event) => {
-          event.stopPropagation();
-        }}
-        className="relative max-h-[92vh] w-full max-w-[420px] overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-7"
-      >
-        {/* Close Button */}
-        <button
-          type="button"
-          aria-label="Close consultation form"
-          onClick={onClose}
-          className="absolute right-3 top-3 z-20 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-[#fff0eb] text-[#ff5318] transition-colors duration-200 hover:bg-[#ffe1d7]"
-        >
-          <X size={20} strokeWidth={2.3} />
-        </button>
-
-        {children}
-      </div>
-    </div>
   );
 }

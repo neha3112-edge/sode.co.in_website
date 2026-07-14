@@ -4,97 +4,84 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-
 import { Container } from "@/components/ui/Container";
 import { getAssetPath } from "@/lib/utils";
-
-type NavItem = {
-  label: string;
-  href: string;
-};
-
-const navItems: NavItem[] = [
-  {
-    label: "Home",
-    href: "#home",
-  },
-  {
-    label: "Course",
-    href: "#courses",
-  },
-  {
-    label: "Approvals",
-    href: "#approvals",
-  },
-  {
-    label: "About",
-    href: "#about",
-  },
-  {
-    label: "Why IIT-KGP?",
-    href: "#why-iit-kgp",
-  },
-  {
-    label: "FAQ",
-    href: "#faq",
-  },
-];
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleNavClick = () => {
-    setIsMenuOpen(false);
-  };
+  const navItems = [
+    {
+      label: "About",
+      href: "#about",
+    },
+    {
+      label: "Eligibility",
+      href: "#benefits",
+    },
+    {
+      label: "Sample Degree",
+      href: "#sample-degree",
+    },
+    {
+      label: "FAQ",
+      href: "#faqs",
+    },
+  ];
 
   return (
-    <header className="fixed left-0 top-0 z-50 w-full border-b border-[#eeeeee] bg-white">
+    <header className="fixed left-0 top-0 z-50 w-full bg-white shadow-md">
+      {/* Desktop and mobile header row */}
       <Container>
-        <div className="flex h-[84px] items-center justify-between">
+        <div className="flex h-18 items-center justify-between">
           {/* Logo */}
           <Link
-            href="#home"
-            aria-label="Go to home section"
-            onClick={handleNavClick}
+            href="/"
+            aria-label="Go to home page"
             className="flex shrink-0 items-center"
           >
             <Image
               src={getAssetPath("/assets/images/new_sode_tm_logo.png")}
               alt="SODE logo"
-              width={76}
-              height={76}
+              width={50}
+              height={50}
               priority
-              className="h-[72px] w-[72px] object-contain"
+              className="h-12.5 w-12.5 cursor-pointer object-contain"
             />
           </Link>
 
           {/* Desktop Navigation */}
           <nav
             aria-label="Main navigation"
-            className="hidden items-center gap-[46px] lg:flex"
+            className="hidden items-center gap-1 text-[13px] text-black lg:flex"
           >
-            {navItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="whitespace-nowrap text-[18px] font-semibold leading-none tracking-[-0.01em] text-black transition-colors duration-200 hover:text-[#056493]"
-              >
-                {item.label}
-              </Link>
+            {navItems.map((item, index) => (
+              <div key={item.label} className="flex items-center">
+                <a
+                  href={item.href}
+                  className="px-3 py-2 transition-colors duration-200 hover:text-[#1d3d82]"
+                >
+                  {item.label}
+                </a>
+
+                {index !== navItems.length - 1 && (
+                  <span aria-hidden="true" className="text-gray-300">
+                    |
+                  </span>
+                )}
+              </div>
             ))}
           </nav>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile menu toggle */}
           <button
             type="button"
             aria-label={
               isMenuOpen ? "Close navigation menu" : "Open navigation menu"
             }
             aria-expanded={isMenuOpen}
-            onClick={() => {
-              setIsMenuOpen((previousValue) => !previousValue);
-            }}
-            className="flex h-11 w-11 items-center justify-center rounded-md bg-[#102441] text-white transition-colors duration-200 hover:bg-[#056493] lg:hidden"
+            onClick={() => setIsMenuOpen((currentValue) => !currentValue)}
+            className="flex items-center justify-center rounded-md bg-[#1d3d82] p-2 text-white transition-all duration-300 lg:hidden"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -103,23 +90,24 @@ export function Header() {
 
       {/* Mobile Navigation */}
       <div
-        className={`overflow-hidden bg-white transition-all duration-300 ease-in-out lg:hidden ${
-          isMenuOpen
-            ? "max-h-[500px] border-t border-gray-200 opacity-100"
-            : "max-h-0 border-t-0 opacity-0"
+        className={`overflow-hidden bg-white transition-all duration-300 lg:hidden ${
+          isMenuOpen ? "max-h-125 border-t border-gray-200" : "max-h-0"
         }`}
       >
         <Container>
-          <nav aria-label="Mobile navigation" className="flex flex-col py-4">
+          <nav
+            aria-label="Mobile navigation"
+            className="flex flex-col space-y-2 py-4 text-sm font-semibold text-gray-700"
+          >
             {navItems.map((item) => (
-              <Link
+              <a
                 key={item.label}
                 href={item.href}
-                onClick={handleNavClick}
-                className="rounded-md px-4 py-3 text-center text-[16px] font-semibold text-black transition-colors duration-200 hover:bg-gray-100 hover:text-[#056493]"
+                onClick={() => setIsMenuOpen(false)}
+                className="rounded-md px-4 py-3 text-center transition-colors duration-200 hover:bg-gray-100 hover:text-[#1d3d82]"
               >
-                {item.label}
-              </Link>
+                <span>{item.label}</span>
+              </a>
             ))}
           </nav>
         </Container>
