@@ -98,7 +98,7 @@ export function Hero() {
               </p>
 
               {/* Main Heading */}
-              <h1 className="mt-2 leading-[0.95] text-[#0757a4] font-semibold font-anton">
+              <h1 className="mt-2 leading-[0.95] text-[#0757a4] font-semibold">
                 <span className="block text-[44px] sm:text-[56px] lg:text-[58px]">
                   IIIT Bangalore
                 </span>
