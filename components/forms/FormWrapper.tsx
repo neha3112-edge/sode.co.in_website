@@ -138,123 +138,103 @@ const STATE_OPTIONS = [
 ========================================================= */
 
 const DEFAULT_COURSE_OPTIONS: FormCourseOption[] = [
-  /* ---------------------------------------------------------
+  /* =========================
      DOCTORATE
-  --------------------------------------------------------- */
-
+  ========================== */
   {
-    value: "__DOCTORATE_HEADING__",
+    value: "__DOCTORATE__",
     label: "Doctorate ━━",
     disabled: true,
   },
-
   {
     value: "DBA",
     label: "DBA",
   },
-
   {
-    value: "MBA_DBA",
+    value: "MBA+DBA",
     label: "MBA + DBA",
   },
 
-  /* ---------------------------------------------------------
+  /* =========================
      MASTER
-  --------------------------------------------------------- */
-
+  ========================== */
   {
-    value: "__MASTER_HEADING__",
+    value: "__MASTER__",
     label: "Master ━━",
     disabled: true,
   },
-
   {
     value: "MBA",
     label: "MBA",
   },
-
   {
-    value: "MSC_DATA_SCIENCE",
+    value: "MSC",
     label: "M.Sc. Data Science",
   },
-
   {
-    value: "MSC_MACHINE_LEARNING_AI",
+    value: "MSC",
     label: "M.Sc. Machine Learning & AI",
   },
-
   {
-    value: "EXECUTIVE_DIPLOMA_MACHINE_LEARNING_AI",
+    value: "DIPLOMA",
     label: "Executive Diploma in Machine Learning & AI",
   },
 
-  /* ---------------------------------------------------------
-     CERTIFICATIONS
-  --------------------------------------------------------- */
-
+  /* =========================
+     CERTIFICATION
+  ========================== */
   {
-    value: "__CERTIFICATION_HEADING__",
+    value: "__CERTIFICATION__",
     label: "Certification ━━",
     disabled: true,
   },
-
   {
-    value: "PROFESSIONAL_CERTIFICATE_HR_MANAGEMENT_ANALYTICS",
+    value: "CERTIFICATE",
     label: "Professional Certificate Programme in HR Management and Analytics",
   },
-
   {
-    value: "PROFESSIONAL_CERTIFICATE_DATA_SCIENCE_GENERATIVE_AI",
+    value: "CERTIFICATE",
     label:
       "Professional Certificate Programme in Data Science with Generative AI",
   },
-
   {
-    value: "EXECUTIVE_POST_GRADUATE_CERTIFICATE_DATA_SCIENCE_AI",
+    value: "CERTIFICATE",
     label: "Executive Post Graduate Certificate Programme in Data Science & AI",
   },
-
   {
-    value: "EXECUTIVE_POST_GRADUATE_CERTIFICATE_GENERATIVE_AGENTIC_AI",
+    value: "CERTIFICATE",
     label: "Executive Post Graduate Certificate in Generative AI & Agentic AI",
   },
-
   {
-    value: "ADVANCED_CERTIFICATE_DIGITAL_MARKETING_COMMUNICATION",
+    value: "CERTIFICATE",
     label: "Advanced Certificate in Digital Marketing & Communication",
   },
-
   {
-    value: "ADVANCED_CERTIFICATE_DIGITAL_BRAND_COMMUNICATION_STRATEGY",
+    value: "CERTIFICATE",
     label: "Advanced Certificate in Digital Brand Communication Strategy",
   },
 
-  /* ---------------------------------------------------------
+  /* =========================
      EXECUTIVE PROGRAMS
-  --------------------------------------------------------- */
-
+  ========================== */
   {
-    value: "__EXECUTIVE_PROGRAMS_HEADING__",
+    value: "__EXECUTIVE_PROGRAMS__",
     label: "Executive Programs ━━",
     disabled: true,
   },
-
   {
-    value: "EXECUTIVE_PROGRAMME_GENERATIVE_AI_FOR_LEADERS",
+    value: "PG PROGRAMS",
     label: "Executive Programme in Generative AI for Leaders",
   },
-
   {
-    value: "EXECUTIVE_POST_GRADUATE_PROGRAMME_APPLIED_AI_AGENTIC_AI",
+    value: "PG PROGRAMS",
     label: "Executive Post Graduate Programme in Applied AI and Agentic AI",
   },
-
   {
-    value: "CHIEF_TECHNOLOGY_OFFICER_AI_LEADERSHIP_PROGRAMME",
+    value: "PG PROGRAMS",
     label: "Chief Technology Officer & AI Leadership Programme",
   },
 ];
-
 /* =========================================================
    NORMALIZE COURSE OPTIONS
 ========================================================= */
