@@ -2,9 +2,7 @@
 
 import { useState } from "react";
 import { Minus, Plus } from "lucide-react";
-
 import { Container } from "@/components/ui/Container";
-
 type ApplyStep = {
   number: number;
   title: string;
@@ -72,20 +70,28 @@ const applySteps: ApplyStep[] = [
 
 const faqs: FaqItem[] = [
   {
-    question: "Q1. What is the duration of the IIM Kozhikode HR Analytics Course?",
-    answer: "The IIM Kozhikode HR Analytics Course spans 6 months and comprises live classes, industry projects, and hands-on learning with tools such as Power BI, Tableau, and Excel.",
+    question:
+      "Q1. What is the duration of the IIM Kozhikode HR Analytics Course?",
+    answer:
+      "The IIM Kozhikode HR Analytics Course spans 6 months and comprises live classes, industry projects, and hands-on learning with tools such as Power BI, Tableau, and Excel.",
   },
   {
-    question: "Q2. Is the IIM Kozhikode HRM Online Course suitable for working professionals?",
-    answer: "Yes, the IIM Kozhikode HRM Online Courses are designed for flexibility, making them ideal for professionals who want to balance work while upgrading their skills.",
+    question:
+      "Q2. Is the IIM Kozhikode HRM Online Course suitable for working professionals?",
+    answer:
+      "Yes, the IIM Kozhikode HRM Online Courses are designed for flexibility, making them ideal for professionals who want to balance work while upgrading their skills.",
   },
   {
-    question: "Q3. What certifications will I receive upon completing the program?",
-    answer: "Learners receive a recognized certification from IIM Kozhikode, along with a Power BI certification, making it one of the most valuable certification courses offered by IIM Kozhikode.",
+    question:
+      "Q3. What certifications will I receive upon completing the program?",
+    answer:
+      "Learners receive a recognized certification from IIM Kozhikode, along with a Power BI certification, making it one of the most valuable certification courses offered by IIM Kozhikode.",
   },
   {
-    question: "Q4. What key skills are taught in HR Analytics IIM Kozhikode programs?",
-    answer: "The program covers strategic HR management, workforce planning, employee retention strategies, talent analytics, and people analytics, helping learners build practical expertise for career growth.",
+    question:
+      "Q4. What key skills are taught in HR Analytics IIM Kozhikode programs?",
+    answer:
+      "The program covers strategic HR management, workforce planning, employee retention strategies, talent analytics, and people analytics, helping learners build practical expertise for career growth.",
   },
 ];
 
@@ -99,7 +105,10 @@ export function ApplyAndFaq() {
   return (
     <>
       {/* How To Apply Section */}
-      <section id="how-to-apply" className="bg-[#f8fafc] py-14 sm:py-16 lg:py-20">
+      <section
+        id="how-to-apply"
+        className="bg-[#f8fafc] py-14 sm:py-16 lg:py-20"
+      >
         <Container className="max-w-370">
           <div className="text-center">
             <h2 className="text-2xl font-bold leading-tight text-[#1d3d82] sm:text-3xl lg:text-[34px]">
@@ -107,7 +116,10 @@ export function ApplyAndFaq() {
             </h2>
 
             <p className="mx-auto mt-3 max-w-4xl text-sm leading-6 text-gray-600 sm:text-base">
-              Students can easily enrol in IIM Kozhikode University Online courses. Candidates can conveniently apply by selecting their desired program. Follow these steps to secure admission in the university.
+              Students can easily enrol in IIM Kozhikode University Online
+              courses. Candidates can conveniently apply by selecting their
+              desired program. Follow these steps to secure admission in the
+              university.
             </p>
           </div>
 

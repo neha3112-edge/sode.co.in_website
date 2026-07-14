@@ -1,42 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { Phone } from "lucide-react";
-
 import { Container } from "@/components/ui/Container";
-import FormWrapper from "@/components/forms/FormWrapper";
-import { Button } from "@/components/ui/Button";
 import { getAssetPath } from "@/lib/utils";
 
-type AboutFormType = "callback" | "counselling" | null;
-
-const IIMK_COURSES = [
-  {
-    value: "HRM Analytics Online Certification",
-    label: "HRM Analytics Online Certification",
-  },
-];
-
 export function About() {
-  const [activeForm, setActiveForm] = useState<AboutFormType>(null);
-
-  useEffect(() => {
-    if (activeForm) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [activeForm]);
-
-  const closeForm = () => {
-    setActiveForm(null);
-  };
-
   return (
     <>
       {/* About IIM Kozhikode Section */}
@@ -48,9 +16,21 @@ export function About() {
               <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0f3b8c] tracking-wide text-center">
                 ABOUT IIM - KOZHIKODE
               </h2>
-
               <p className="mt-5 text-sm sm:text-sm text-gray-800 text-center leading-relaxed max-w-2xl">
-                IIM Kozhikode is recognized as one of India’s leading business schools, known for its innovative teaching, global outlook, and strong industry partnerships. The institute offers a broad portfolio of programs, including executive and online learning opportunities tailored for professionals. With prestigious accreditations such as the Ministry of Education, EQUIS, and AACSB, IIM Kozhikode stands among globally benchmarked institutions. Through its specialized programs, such as IIM Kozhikode&apos;s HRM, and advanced certification options, the institute ensures that learners gain both academic depth and practical business insights. These certification courses in IIM Kozhikode are designed to prepare graduates, working executives, and managers to succeed in leadership and analytics-driven roles worldwide.
+                IIM Kozhikode is recognized as one of India’s leading business
+                schools, known for its innovative teaching, global outlook, and
+                strong industry partnerships. The institute offers a broad
+                portfolio of programs, including executive and online learning
+                opportunities tailored for professionals. With prestigious
+                accreditations such as the Ministry of Education, EQUIS, and
+                AACSB, IIM Kozhikode stands among globally benchmarked
+                institutions. Through its specialized programs, such as IIM
+                Kozhikode&apos;s HRM, and advanced certification options, the
+                institute ensures that learners gain both academic depth and
+                practical business insights. These certification courses in IIM
+                Kozhikode are designed to prepare graduates, working executives,
+                and managers to succeed in leadership and analytics-driven roles
+                worldwide.
               </p>
 
               {/* Accreditations Box */}
@@ -90,7 +70,9 @@ export function About() {
                   </div>
                   <div className="bg-white px-2 py-1 rounded-lg flex items-center justify-center h-14 w-28 shadow-xs border border-gray-100">
                     <Image
-                      src={getAssetPath("/iimk/assets/img/ministry-of-education.webp")}
+                      src={getAssetPath(
+                        "/iimk/assets/img/ministry-of-education.webp",
+                      )}
                       alt="Ministry of Education"
                       width={95}
                       height={45}
@@ -105,7 +87,9 @@ export function About() {
             <div className="w-full flex justify-center">
               <div className="relative h-[280px] sm:h-[350px] w-full max-w-[420px] rounded-[36px] overflow-hidden shadow-xl bg-white border-4 border-white">
                 <Image
-                  src={getAssetPath("/iimk/assets/img/iim-university-image.webp")}
+                  src={getAssetPath(
+                    "/iimk/assets/img/iim-university-image.webp",
+                  )}
                   alt="IIM Kozhikode campus building"
                   fill
                   sizes="(max-width: 1024px) 100vw, 420px"

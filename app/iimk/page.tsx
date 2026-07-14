@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { Header } from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
+
 import { Hero } from "./components/sections/Hero";
 import { About } from "./components/sections/About";
 import { WhyChoose } from "./components/sections/WhyChoose";
@@ -12,6 +13,12 @@ import { ApplyAndFaq } from "./components/sections/ApplyAndFaq";
 import FloatingButton from "@/components/layout/FloatingButton";
 import GlobalCTA from "@/components/layout/GlobalCTA";
 import CallCTA from "@/components/layout/CallCTA";
+
+import type { FormCourseOption } from "@/components/forms/FormWrapper";
+
+/* =========================================================
+   METADATA
+========================================================= */
 
 export const metadata: Metadata = {
   title:
@@ -30,6 +37,27 @@ export const metadata: Metadata = {
   },
 };
 
+/* =========================================================
+   IIM KOZHIKODE COURSE OPTIONS
+
+   label:
+   Dropdown me user ko "HR & Analytics" dikhega.
+
+   value:
+   Submit payload me "IIM HR" jayega.
+========================================================= */
+
+const IIMK_COURSE_OPTIONS: FormCourseOption[] = [
+  {
+    value: "IIM HR",
+    label: "HR & Analytics",
+  },
+];
+
+/* =========================================================
+   IIMK PAGE
+========================================================= */
+
 export default function IIMKPage() {
   return (
     <div className="flex min-h-screen flex-col bg-white">
@@ -46,10 +74,30 @@ export default function IIMKPage() {
 
       <Footer />
 
-      {/* Desktop: Call and Gift buttons side by side */}
-      <div className="fixed bottom-16 right-6 z-80 items-center space-y-1.5">
+      {/* =====================================================
+          FLOATING CALL AND SCHOLARSHIP BUTTONS
+
+          Page ke 45% scroll par floating scholarship form
+          automatically open hoga.
+      ====================================================== */}
+
+      <div className="fixed bottom-20 right-4 z-[80] flex flex-col items-center gap-2 lg:bottom-6 lg:right-6">
         <CallCTA />
-        <FloatingButton />
+
+        <FloatingButton
+          courseOptions={IIMK_COURSE_OPTIONS}
+          title="Get Scholarship Coupon Code"
+          subtitle="Select your course and our academic experts will contact you"
+          formNameOverride="IIMK Scholarship Floating Form"
+          sourceOverride="IIM LP"
+          utmSourceFallback="Organic"
+          utmMediumFallback="IIM_Organic"
+          submitButtonText="Get Coupon Code"
+          submitButtonClassName="bg-[#0f3b8c] hover:bg-[#0c2e6f]"
+          autoOpenAtScrollPercent={45}
+          autoOpenSessionKey="iimk-scholarship-form-auto-opened"
+          showConfettiOnAutoOpen
+        />
       </div>
 
       {/* Mobile bottom CTA */}

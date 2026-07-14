@@ -5,13 +5,23 @@ import { useEffect, useState } from "react";
 import { Check } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
-import FormWrapper from "@/components/forms/FormWrapper";
+import FormWrapper, {
+  type FormCourseOption,
+} from "@/components/forms/FormWrapper";
 import { getAssetPath } from "@/lib/utils";
+
+/* =========================================================
+   TYPES
+========================================================= */
 
 type Profile = {
   title: string;
   desc: string;
 };
+
+/* =========================================================
+   ELIGIBLE PROFILES
+========================================================= */
 
 const eligibleProfiles: Profile[] = [
   {
@@ -32,41 +42,105 @@ const eligibleProfiles: Profile[] = [
   },
 ];
 
-const IIMK_COURSES = [
+/* =========================================================
+   IIM KOZHIKODE COURSE OPTIONS
+
+   Dropdown label:
+   HR & Analytics
+
+   API payload value:
+   IIM HR
+========================================================= */
+
+const IIMK_COURSE_OPTIONS: FormCourseOption[] = [
   {
-    value: "HRM Analytics Online Certification",
-    label: "HRM Analytics Online Certification",
+    value: "IIM HR",
+    label: "HR & Analytics",
   },
 ];
+
+/* =========================================================
+   ELIGIBILITY COMPONENT
+========================================================= */
 
 export function Eligibility() {
   const [formOpen, setFormOpen] = useState(false);
 
+  /* =========================================================
+     LOCK BODY SCROLL WHEN MODAL IS OPEN
+  ========================================================= */
+
   useEffect(() => {
-    if (formOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
+    if (!formOpen) {
+      return;
     }
 
+    const previousOverflow = document.body.style.overflow;
+
+    document.body.style.overflow = "hidden";
+
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
     };
   }, [formOpen]);
 
+  /* =========================================================
+     CLOSE MODAL ON ESCAPE KEY
+  ========================================================= */
+
+  useEffect(() => {
+    if (!formOpen) {
+      return;
+    }
+
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setFormOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscapeKey);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [formOpen]);
+
+  /* =========================================================
+     OPEN AND CLOSE FORM
+  ========================================================= */
+
+  const openForm = () => {
+    setFormOpen(true);
+  };
+
+  const closeForm = () => {
+    setFormOpen(false);
+  };
+
   return (
     <>
-      {/* Eligibility Section */}
-      <section id="benefits" className="relative text-white py-16 overflow-hidden">
+      {/* =====================================================
+          ELIGIBILITY SECTION
+      ====================================================== */}
+
+      <section
+        id="benefits"
+        className="relative overflow-hidden py-16 text-white"
+      >
         {/* Decorative background image overlay */}
+
         <div className="absolute inset-0 z-0">
           <Image
             src={getAssetPath("/iimk/assets/img/benefit-bg.webp")}
-            alt="Background pattern"
+            alt=""
             fill
+            sizes="100vw"
             className="object-cover"
             unoptimized
           />
+
+          <div className="absolute inset-0 bg-black/10" />
         </div>
 
         <Container className="relative z-10">
@@ -77,13 +151,19 @@ export function Eligibility() {
 
             <div className="mt-8 space-y-6">
               {eligibleProfiles.map((profile) => (
-                <div key={profile.title} className="flex gap-4 items-start">
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#c9232c] text-white mt-1">
-                    <Check size={14} strokeWidth={3} />
+                <div key={profile.title} className="flex items-start gap-4">
+                  <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#c9232c] text-white">
+                    <Check size={14} strokeWidth={3} aria-hidden="true" />
                   </span>
+
                   <div>
-                    <h3 className="text-lg font-bold text-white">{profile.title}</h3>
-                    <p className="mt-1 text-sm text-gray-200 leading-relaxed max-w-2xl">{profile.desc}</p>
+                    <h3 className="text-lg font-bold text-white">
+                      {profile.title}
+                    </h3>
+
+                    <p className="mt-1 max-w-2xl text-sm leading-relaxed text-gray-200">
+                      {profile.desc}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -91,8 +171,8 @@ export function Eligibility() {
 
             <button
               type="button"
-              onClick={() => setFormOpen(true)}
-              className="mt-10 inline-flex min-h-12 items-center justify-center rounded-md bg-[#c9232c] px-8 py-3 text-sm font-bold text-white shadow-md transition duration-200 hover:bg-[#aa1c25] cursor-pointer"
+              onClick={openForm}
+              className="mt-10 inline-flex min-h-12 cursor-pointer items-center justify-center rounded-md bg-[#c9232c] px-8 py-3 text-sm font-bold text-white shadow-md transition duration-200 hover:bg-[#aa1c25]"
             >
               Get 100% Free Counseling
             </button>
@@ -100,12 +180,15 @@ export function Eligibility() {
         </Container>
       </section>
 
-      {/* Counselling Popup */}
+      {/* =====================================================
+          COUNSELLING POPUP
+      ====================================================== */}
+
       {formOpen && (
         <div
           role="presentation"
-          onClick={() => setFormOpen(false)}
-          className="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm"
+          onClick={closeForm}
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm"
         >
           <div
             role="dialog"
@@ -116,17 +199,17 @@ export function Eligibility() {
           >
             <FormWrapper
               title="Get 1:1 FREE Counselling"
-              subtitle="Our academic experts will guide you step by step"
-              onClose={() => setFormOpen(false)}
-              courseOptions={IIMK_COURSES}
-              defaultCourse="HRM Analytics Online Certification"
-              hideCourseField
+              subtitle="Select your course and our academic experts will guide you step by step"
+              onClose={closeForm}
+              courseOptions={IIMK_COURSE_OPTIONS}
+              defaultCourse=""
               formNameOverride="IIMK Eligibility Counselling Form"
-              sourceOverride="IIMK Eligibility Section"
-              utmSourceFallback="IIMK Organic"
-              utmMediumFallback="IIMK Eligibility Counselling Button"
+              sourceOverride="IIM LP"
+              utmSourceFallback="Organic"
+              utmMediumFallback="IIM_Organic"
               submitButtonText="Get Free Counselling"
               submitButtonClassName="bg-[#1d3d82] hover:bg-[#142b5c]"
+              redirectUrl="/thank-you?source=iimk"
             />
           </div>
         </div>

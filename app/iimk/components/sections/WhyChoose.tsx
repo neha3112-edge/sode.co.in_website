@@ -1,11 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { Check } from "lucide-react";
-
 import { Container } from "@/components/ui/Container";
-import FormWrapper from "@/components/forms/FormWrapper";
 import { getAssetPath } from "@/lib/utils";
 
 type Skill = {
@@ -76,47 +72,7 @@ const toolsLearned: Tool[] = [
   },
 ];
 
-const eligibleProfiles: Profile[] = [
-  {
-    title: "HR Professionals",
-    desc: "Working HR professionals can enroll in the IIM Kozhikode HR Analytics Course to enhance decision-making skills and apply analytics in workforce management.",
-  },
-  {
-    title: "Business and Analytics Managers",
-    desc: "Managers from different fields can join IIM Kozhikode HRM online courses to integrate data-driven strategies into business and people management.",
-  },
-  {
-    title: "Non-HR Professionals",
-    desc: "Graduates or executives from other domains can pursue the HR Analytics programs at IIM Kozhikode to transition into HR-focused or leadership roles.",
-  },
-  {
-    title: "MBA Graduates",
-    desc: "Fresh MBA graduates can strengthen their profiles with specialized certification courses in IIM Kozhikode, gaining practical HR analytics expertise for better career opportunities.",
-  },
-];
-
-const IIMK_COURSES = [
-  {
-    value: "HRM Analytics Online Certification",
-    label: "HRM Analytics Online Certification",
-  },
-];
-
 export function WhyChoose() {
-  const [formOpen, setFormOpen] = useState(false);
-
-  useEffect(() => {
-    if (formOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [formOpen]);
-
   return (
     <>
       {/* Overview Section */}
@@ -127,7 +83,14 @@ export function WhyChoose() {
               The IIM Kozhikode HRM Analytics Certification Courses
             </h2>
             <p className="mt-4 text-base text-gray-700 leading-relaxed">
-              The certificate course of IIM Kozhikode in HR Analytics is a 6-month online program that helps professionals learn HR concepts with modern analytics. The course is 280 hours of expert learning, live faculty sessions, and industry projects. Learners receive hands-on training in tools such as Tableau, Excel, and Power BI. The course is recognized as one of the leading HR courses. It is ideal for HR professionals, managers, and MBA graduates seeking to advance their careers.
+              The certificate course of IIM Kozhikode in HR Analytics is a
+              6-month online program that helps professionals learn HR concepts
+              with modern analytics. The course is 280 hours of expert learning,
+              live faculty sessions, and industry projects. Learners receive
+              hands-on training in tools such as Tableau, Excel, and Power BI.
+              The course is recognized as one of the leading HR courses. It is
+              ideal for HR professionals, managers, and MBA graduates seeking to
+              advance their careers.
             </p>
           </div>
         </div>
@@ -138,10 +101,15 @@ export function WhyChoose() {
         <Container>
           <div className="text-left">
             <h2 className="text-[20px] font-extrabold text-black sm:text-3xl leading-tight">
-              Key Skills You Will Gain from the <span className="text-[#0f3b8c]">IIM Kozhikode HR Analytics Course</span>
+              Key Skills You Will Gain from the{" "}
+              <span className="text-[#0f3b8c]">
+                IIM Kozhikode HR Analytics Course
+              </span>
             </h2>
             <p className="mt-4 text-base text-gray-700">
-              The IIM Kozhikode HR Analytics Online Course equips learners with industry-relevant skills to manage people and processes through data-driven methods. The curriculum focuses on:
+              The IIM Kozhikode HR Analytics Online Course equips learners with
+              industry-relevant skills to manage people and processes through
+              data-driven methods. The curriculum focuses on:
             </p>
           </div>
 
@@ -161,8 +129,12 @@ export function WhyChoose() {
                   />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-bold text-[#0f3b8c] leading-snug">{skill.title}</h3>
-                  <p className="mt-2 text-sm text-gray-600 leading-relaxed">{skill.desc}</p>
+                  <h3 className="text-lg font-bold text-[#0f3b8c] leading-snug">
+                    {skill.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-gray-600 leading-relaxed">
+                    {skill.desc}
+                  </p>
                 </div>
               </div>
             ))}
@@ -171,14 +143,23 @@ export function WhyChoose() {
       </section>
 
       {/* Tools & Technologies Section */}
-      <section id="courses" className="bg-white py-12 sm:py-16 border-t border-gray-100">
+      <section
+        id="courses"
+        className="bg-white py-12 sm:py-16 border-t border-gray-100"
+      >
         <Container>
           <div className="text-center max-w-4xl mx-auto">
             <h2 className="text-[20px] font-extrabold text-[#1d3d82] sm:text-4xl">
-              Tools & Technologies You’ll Learn in the IIM Kozhikode HR Analytics Course
+              Tools & Technologies You’ll Learn in the IIM Kozhikode HR
+              Analytics Course
             </h2>
             <p className="mt-4 text-base text-gray-600">
-              The IIM Kozhikode HR Analytics Course, one of the most career-focused courses at IIM Kozhikode, offers hands-on training with tools that define modern HRM practices. Designed as a practical certification course in IIM Kozhikode, it equips learners with the ability to analyze data and apply insights across HR functions.
+              The IIM Kozhikode HR Analytics Course, one of the most
+              career-focused courses at IIM Kozhikode, offers hands-on training
+              with tools that define modern HRM practices. Designed as a
+              practical certification course in IIM Kozhikode, it equips
+              learners with the ability to analyze data and apply insights
+              across HR functions.
             </p>
           </div>
 

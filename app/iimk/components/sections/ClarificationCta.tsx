@@ -1,21 +1,77 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Phone } from "lucide-react";
-import { useState } from "react";
 
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import FormWrapper from "@/components/forms/FormWrapper";
+import FormWrapper, {
+  type FormCourseOption,
+} from "@/components/forms/FormWrapper";
 
-const IIMK_COURSES = [
+/* =========================================================
+   IIM KOZHIKODE COURSE OPTIONS
+
+   User ko dropdown me:
+   HR & Analytics
+
+   API payload me:
+   IIM HR
+========================================================= */
+
+const IIMK_COURSE_OPTIONS: FormCourseOption[] = [
   {
-    value: "HRM Analytics Online Certification",
-    label: "HRM Analytics Online Certification",
+    value: "IIM HR",
+    label: "HR & Analytics",
   },
 ];
 
 export function ClarificationCta() {
   const [formOpen, setFormOpen] = useState(false);
+
+  /* =========================================================
+     LOCK BODY SCROLL WHEN MODAL IS OPEN
+  ========================================================= */
+
+  useEffect(() => {
+    if (!formOpen) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [formOpen]);
+
+  /* =========================================================
+     CLOSE MODAL ON ESCAPE KEY
+  ========================================================= */
+
+  useEffect(() => {
+    if (!formOpen) {
+      return;
+    }
+
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setFormOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscapeKey);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [formOpen]);
+
+  const openForm = () => {
+    setFormOpen(true);
+  };
 
   const closeForm = () => {
     setFormOpen(false);
@@ -33,7 +89,7 @@ export function ClarificationCta() {
               </h2>
 
               <p className="mt-1 text-lg font-semibold text-white/90 sm:text-xl">
-                Interact with experts, Get free consultation.
+                Interact with experts, get a free consultation.
               </p>
             </div>
 
@@ -41,22 +97,31 @@ export function ClarificationCta() {
             <Button
               size="lg"
               type="button"
-              onClick={() => setFormOpen(true)}
-              className="inline-flex min-h-12 w-fit items-center justify-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-bold text-[#1d3d82] shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-gray-100 hover:shadow-md md:w-auto cursor-pointer"
+              onClick={openForm}
+              className="inline-flex min-h-12 w-fit cursor-pointer items-center justify-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-bold text-[#1d3d82] shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-gray-100 hover:shadow-md md:w-auto"
             >
-              <Phone size={16} fill="currentColor" strokeWidth={2} />
-              Talk to Experts
+              <Phone
+                size={16}
+                fill="currentColor"
+                strokeWidth={2}
+                aria-hidden="true"
+              />
+
+              <span>Talk to Experts</span>
             </Button>
           </div>
         </Container>
       </section>
 
-      {/* Popup Form */}
+      {/* =====================================================
+          TALK TO EXPERTS POPUP
+      ====================================================== */}
+
       {formOpen && (
         <div
           role="presentation"
           onClick={closeForm}
-          className="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm"
         >
           <div
             role="dialog"
@@ -67,18 +132,18 @@ export function ClarificationCta() {
           >
             <FormWrapper
               title="Talk to Experts"
-              subtitle="Share your details and our academic expert will contact you"
+              subtitle="Select your course and our academic expert will contact you"
               onClose={closeForm}
-              courseOptions={IIMK_COURSES}
-              defaultCourse="HRM Analytics Online Certification"
-              hideCourseField
+              courseOptions={IIMK_COURSE_OPTIONS}
+              defaultCourse=""
               formNameOverride="IIMK Clarification CTA Form"
-              sourceOverride="IIMK Clarification Section"
-              utmSourceFallback="IIMK Organic"
-              utmMediumFallback="IIMK Talk to Experts Button"
+              sourceOverride="IIM LP"
+              utmSourceFallback="Organic"
+              utmMediumFallback="IIM_Organic"
               submitButtonText="Talk to Experts"
               submitButtonClassName="bg-[#1d3d82] hover:bg-[#142b5c]"
               showPhoneCallLink
+              redirectUrl="/thank-you?source=iimk"
             />
           </div>
         </div>
