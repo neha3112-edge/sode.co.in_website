@@ -10,7 +10,7 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { label: "C-Suite Programs", href: "#premium-programs" },
+    { label: "Executive Programs", href: "#premium-programs" },
     { label: "Universities", href: "#prestigious-institutions" },
     { label: "About SODE", href: "#about-sode" },
     { label: "Alumni Voices", href: "#alumni-voices" },
@@ -19,14 +19,14 @@ export function Header() {
 
   return (
     <header className="fixed top-0 w-full z-50 bg-white shadow-md">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between h-18">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between h-20">
         {/* LOGO */}
         <Link href="/" className="flex items-center">
           <Image
             src={getAssetPath("/assets/images/new_sode_tm_logo.png")}
             alt="Company Logo"
-            width={64}
-            height={64}
+            width={80}
+            height={80}
             priority
             className="object-contain cursor-pointer"
           />
@@ -35,7 +35,7 @@ export function Header() {
         {/* ✅ Desktop Navigation */}
         <nav className="hidden lg:flex items-center text-[13px] text-black gap-1">
           {navItems.map((item, index) => {
-            const isExecutive = item.label === "C-Suite Programs";
+            const isExecutive = item.label === "Executive Programs";
             return (
               <div key={item.label} className="flex items-center">
                 {isExecutive ? (
