@@ -146,13 +146,13 @@ export function Eligibility() {
         <Container className="relative z-10">
           <div className="max-w-3xl">
             <h2 className="text-[24px] font-extrabold text-white sm:text-3xl">
-              Eligibility for IIM Kozhikode HRM Online Courses
+              Who Should Apply for the IIM Kozhikode HRM Online Courses?
             </h2>
 
             <div className="mt-8 space-y-6">
               {eligibleProfiles.map((profile) => (
                 <div key={profile.title} className="flex items-start gap-4">
-                  <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#c9232c] text-white">
+                  <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#3ab449] text-white">
                     <Check size={14} strokeWidth={3} aria-hidden="true" />
                   </span>
 
@@ -172,7 +172,7 @@ export function Eligibility() {
             <button
               type="button"
               onClick={openForm}
-              className="mt-10 inline-flex min-h-12 cursor-pointer items-center justify-center rounded-md bg-[#c9232c] px-8 py-3 text-sm font-bold text-white shadow-md transition duration-200 hover:bg-[#aa1c25]"
+              className="mt-10 inline-flex min-h-12 cursor-pointer items-center justify-center rounded-md bg-[#3ab449] px-8 py-3 text-sm font-bold text-white shadow-md transition duration-200"
             >
               Get 100% Free Counseling
             </button>
@@ -208,7 +208,7 @@ export function Eligibility() {
               utmSourceFallback="Organic"
               utmMediumFallback="IIM_Organic"
               submitButtonText="Get Free Counselling"
-              submitButtonClassName="bg-[#1d3d82] hover:bg-[#142b5c]"
+              submitButtonClassName="bg-[#0f3b8c]"
               redirectUrl="/iimk/thank-you"
             />
           </div>

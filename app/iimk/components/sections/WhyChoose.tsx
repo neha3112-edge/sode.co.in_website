@@ -90,6 +90,24 @@ export function WhyChoose() {
           </div>
         </div>
       </section>
+      <div className="text-left mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <h2 className="text-[20px] font-extrabold text-[#0f3b8c] sm:text-2xl">
+          Eligibility to enroll in the HRM Certification Course
+        </h2>
+        <div className="flex flex-col gap-2 mt-3 mb-5">
+          <div className="flex gap-2 align-center">
+            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#3ab449] text-white"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-check" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
+            <p>If you have a Bachelor's Degree - Minimum 2 years work experience</p>
+          </div>
+          <div className="flex gap-2 align-center">
+            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#3ab449] text-white"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-check" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
+            <p>If you have a Master’s Degree - Freshers can apply</p>
+          </div>
+        </div>
+      </div>
+      <section>
+
+      </section>
 
       {/* Key Skills Section */}
       <section id="key-highlights" className="bg-white pb-16 pt-4">
