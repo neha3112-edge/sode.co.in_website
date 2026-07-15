@@ -11,16 +11,20 @@ export function Header() {
 
   const navItems = [
     {
+      label: "Home",
+      href: "#hero-section",
+    },
+    {
       label: "About",
       href: "#about",
     },
     {
       label: "Eligibility",
-      href: "#benefits",
+      href: "#eligibility",
     },
     {
       label: "Sample Degree",
-      href: "#sample-degree",
+      href: "#sample-certificate",
     },
     {
       label: "FAQ",
@@ -89,9 +93,8 @@ export function Header() {
 
       {/* Mobile Navigation */}
       <div
-        className={`overflow-hidden bg-white transition-all duration-300 lg:hidden ${
-          isMenuOpen ? "max-h-125 border-t border-gray-200" : "max-h-0"
-        }`}
+        className={`overflow-hidden bg-white transition-all duration-300 lg:hidden ${isMenuOpen ? "max-h-125 border-t border-gray-200" : "max-h-0"
+          }`}
       >
         <Container>
           <nav
