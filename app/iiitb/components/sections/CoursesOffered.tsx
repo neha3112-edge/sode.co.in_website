@@ -210,7 +210,7 @@ export function CoursesOffered() {
 
   return (
     <>
-      <section id="main-courses" className="bg-[#f6f7f8] py-8">
+      <section id="courses" className="bg-[#f6f7f8] py-8">
         <Container>
           {/* Heading */}
 

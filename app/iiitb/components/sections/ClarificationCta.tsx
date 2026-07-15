@@ -99,7 +99,10 @@ export function ClarificationCta() {
 
   return (
     <>
-      <section id="clarification" className="w-full bg-[#076493] py-8 sm:py-10">
+      <section
+        id="expert-counseling"
+        className="w-full bg-[#076493] py-8 sm:py-10"
+      >
         <Container>
           <div className="flex flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
             {/* Left Content */}

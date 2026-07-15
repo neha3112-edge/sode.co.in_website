@@ -121,7 +121,7 @@ export function About() {
 
   return (
     <>
-      <section id="about-sode" className="w-full overflow-hidden bg-[#076493]">
+      <section id="about" className="w-full overflow-hidden bg-[#076493]">
         <div className="grid w-full grid-cols-1 lg:grid-cols-[465px_minmax(0,1fr)]">
           {/* =================================================
               LEFT CAMPUS IMAGE

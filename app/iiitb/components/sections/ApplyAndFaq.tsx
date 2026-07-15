@@ -135,7 +135,7 @@ export function ApplyAndFaq() {
 
       {/* FAQ Section */}
       <section
-        id="faq"
+        id="faqs"
         className="bg-white pb-16 pt-8 sm:pb-20 sm:pt-10 lg:pb-24"
       >
         <Container>
