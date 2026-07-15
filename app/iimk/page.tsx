@@ -1,6 +1,5 @@
 import { Header } from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
-
 import { Hero } from "./components/sections/Hero";
 import { About } from "./components/sections/About";
 import { WhyChoose } from "./components/sections/WhyChoose";
@@ -46,7 +45,7 @@ export default function IIMKPage() {
           automatically open hoga.
       ====================================================== */}
 
-      <div className="fixed bottom-20 right-4 z-[80] flex flex-col items-center gap-2 lg:bottom-6 lg:right-6">
+      <div className="fixed bottom-20 right-4 z-80 flex flex-col items-center gap-2 lg:bottom-6 lg:right-6">
         <CallCTA />
 
         <FloatingButton

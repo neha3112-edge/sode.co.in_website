@@ -1,10 +1,8 @@
 import type { FormCourseOption } from "@/components/forms/FormWrapper";
-
 import { Header } from "@/components/layout/Header";
 import { MainFooter } from "@/components/layout/MainFooter";
 import FloatingButton from "@/components/layout/FloatingButton";
 import GlobalCTA from "@/components/layout/GlobalCTA";
-
 import { Hero } from "@/sections/Hero";
 import { StatsRibbon } from "@/sections/StatsRibbon";
 import { AboutSode } from "@/sections/AboutSode";
