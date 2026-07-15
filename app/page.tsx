@@ -19,7 +19,6 @@ const SODE_COURSE_OPTIONS: FormCourseOption[] = [
   /* =========================
      DOCTORATE
   ========================== */
-
   {
     value: "__DOCTORATE__",
     label: "Doctorate ━━",
