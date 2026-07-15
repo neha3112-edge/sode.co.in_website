@@ -12,20 +12,24 @@ export function Header() {
 
   const navItems = [
     {
-      label: "Universities",
-      href: "#prestigious-institutions",
+      label: "Home",
+      href: "#hero-section",
     },
     {
-      label: "About SODE",
-      href: "#about-sode",
+      label: "Courses",
+      href: "#courses",
     },
     {
-      label: "Alumni Voices",
-      href: "#alumni-voices",
+      label: "Approvals",
+      href: "#approvals",
+    },
+    {
+      label: "About",
+      href: "#about",
     },
     {
       label: "FAQs",
-      href: "#faq",
+      href: "#faqs",
     },
   ];
 
@@ -111,9 +115,8 @@ export function Header() {
 
       {/* Mobile Navigation */}
       <div
-        className={`overflow-hidden bg-white transition-all duration-300 lg:hidden ${
-          isMenuOpen ? "max-h-125 border-t border-gray-200" : "max-h-0"
-        }`}
+        className={`overflow-hidden bg-white transition-all duration-300 lg:hidden ${isMenuOpen ? "max-h-125 border-t border-gray-200" : "max-h-0"
+          }`}
       >
         <Container>
           <nav
