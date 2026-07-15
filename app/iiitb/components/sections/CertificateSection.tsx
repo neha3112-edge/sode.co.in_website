@@ -196,7 +196,7 @@ export function CertificateSection() {
                   onClick={() => setFormOpen(true)}
                   className="mt-6 cursor-pointer inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#075b91] px-6 py-3 text-sm font-bold text-white transition-colors duration-200 hover:bg-[#064b79]"
                 >
-                  Get Degree
+                  Get Certificate
                   <ArrowRight size={16} aria-hidden="true" />
                 </Button>
               </div>
@@ -212,8 +212,8 @@ export function CertificateSection() {
       {formOpen && (
         <CertificateFormModal title="Get Degree" onClose={closeForm}>
           <FormWrapper
-            title="Get Degree"
-            subtitle="Select your preferred course and our academic experts will guide you"
+            title="Get 1:1 Free Counselling"
+            subtitle="Our academic experts will guide you step by step"
             onClose={closeForm}
             defaultCourse=""
             courseOptions={IIITB_COURSE_OPTIONS}

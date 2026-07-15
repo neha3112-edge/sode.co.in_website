@@ -167,7 +167,7 @@ export function CertificateSection() {
                 onClick={() => setFormOpen(true)}
                 className="mt-8 inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-full bg-[#0f3b8c] px-6 py-3 text-sm font-bold text-white transition-colors duration-200 hover:bg-[#0c2e6f]"
               >
-                <span>Get Degree</span>
+                <span>Get Certificate</span>
 
                 <ArrowRight size={16} aria-hidden="true" />
               </Button>
@@ -222,13 +222,13 @@ export function CertificateSection() {
           <div
             role="dialog"
             aria-modal="true"
-            aria-label="Get Degree"
+            aria-label="Get Certificate"
             onClick={(event) => event.stopPropagation()}
             className="relative max-h-[92vh] w-full max-w-md overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-7"
           >
             <FormWrapper
-              title="Get Degree"
-              subtitle="Select your course and our academic experts will guide you"
+              title="Get 1:1 Free Counselling"
+              subtitle="Our academic experts will guide you step by step"
               onClose={closeForm}
               courseOptions={IIMK_COURSE_OPTIONS}
               defaultCourse=""
