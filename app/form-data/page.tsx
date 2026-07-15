@@ -1,22 +1,24 @@
 "use client";
 
-import {
-  useEffect,
-  useMemo,
-  useState,
-  type ChangeEvent,
-  type FormEvent,
-} from "react";
-import { useRouter } from "next/navigation";
-import { isValidPhoneNumber } from "libphonenumber-js";
-import { X } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 
-import Input from "@/components/ui/Input";
-import SelectField from "@/components/ui/SelectField";
-import { Button } from "@/components/ui/Button";
+import { useRouter } from "next/navigation";
+
+import { Alert, Button, Form, Input, Select, Typography } from "antd";
+
+import { CloseOutlined, PhoneOutlined } from "@ant-design/icons";
+
+import { isValidPhoneNumber } from "libphonenumber-js";
+
 import { getAssetPath } from "@/lib/utils";
 
-import PhoneField from "./PhoneField";
+import PhoneField from "@/components/forms/PhoneField";
+
+/* =========================================================
+   ANT DESIGN COMPONENTS
+========================================================= */
+
+const { Title, Paragraph, Text } = Typography;
 
 /* =========================================================
    TYPES
@@ -29,7 +31,7 @@ export type FormCourseOption = {
   hidden?: boolean;
 };
 
-type FormWrapperProps = {
+export type FormWrapperProps = {
   title?: string;
   subtitle?: string;
 
@@ -37,7 +39,7 @@ type FormWrapperProps = {
   onSuccess?: () => void;
 
   /*
-   * Form header hide karne ke liye.
+   * Form heading hide karne ke liye.
    */
   hideHeader?: boolean;
 
@@ -49,7 +51,7 @@ type FormWrapperProps = {
   courseOptions?: FormCourseOption[] | string[];
 
   /*
-   * Single-course landing page ke liye.
+   * Single course landing page ke liye.
    */
   defaultCourse?: string;
   hideCourseField?: boolean;
@@ -75,10 +77,17 @@ type FormWrapperProps = {
   redirectUrl?: string;
 
   /*
-   * Brochure flow ko explicitly control karne ke liye.
+   * Brochure flow control.
    */
   isBrochureForm?: boolean;
   brochureUrl?: string;
+};
+
+type FormValues = {
+  name: string;
+  email: string;
+  state: string;
+  course?: string;
 };
 
 type StoredUtmData = {
@@ -87,6 +96,11 @@ type StoredUtmData = {
   utm_term?: string | null;
   utm_campaign?: string | null;
   utm_content?: string | null;
+};
+
+type LeadResponse = {
+  success?: boolean;
+  message?: string;
 };
 
 /* =========================================================
@@ -140,6 +154,7 @@ const DEFAULT_COURSE_OPTIONS: FormCourseOption[] = [
   /* =========================
      DOCTORATE
   ========================== */
+
   {
     value: "__DOCTORATE__",
     label: "Doctorate ━━",
@@ -157,6 +172,7 @@ const DEFAULT_COURSE_OPTIONS: FormCourseOption[] = [
   /* =========================
      MASTER
   ========================== */
+
   {
     value: "__MASTER__",
     label: "Master ━━",
@@ -182,6 +198,7 @@ const DEFAULT_COURSE_OPTIONS: FormCourseOption[] = [
   /* =========================
      CERTIFICATION
   ========================== */
+
   {
     value: "__CERTIFICATION__",
     label: "Certification ━━",
@@ -216,6 +233,7 @@ const DEFAULT_COURSE_OPTIONS: FormCourseOption[] = [
   /* =========================
      EXECUTIVE PROGRAMS
   ========================== */
+
   {
     value: "__EXECUTIVE_PROGRAMS__",
     label: "Executive Programs ━━",
@@ -234,6 +252,7 @@ const DEFAULT_COURSE_OPTIONS: FormCourseOption[] = [
     label: "Chief Technology Officer & AI Leadership Programme",
   },
 ];
+
 /* =========================================================
    NORMALIZE COURSE OPTIONS
 ========================================================= */
@@ -290,26 +309,13 @@ export default function FormWrapper({
 }: FormWrapperProps) {
   const router = useRouter();
 
-  /* =======================================================
-     FORM STATE
-  ======================================================== */
-
-  const [name, setName] = useState("");
+  const [form] = Form.useForm<FormValues>();
 
   const [phone, setPhone] = useState("");
-
-  const [email, setEmail] = useState("");
-
-  const [state, setState] = useState("");
-
-  const [course, setCourse] = useState(defaultCourse);
-
   const [phoneError, setPhoneError] = useState("");
 
   const [formError, setFormError] = useState("");
-
   const [loading, setLoading] = useState(false);
-
   const [closing, setClosing] = useState(false);
 
   /* =======================================================
@@ -320,13 +326,30 @@ export default function FormWrapper({
     return normalizeCourseOptions(courseOptions);
   }, [courseOptions]);
 
+  const antdCourseOptions = useMemo(() => {
+    return finalCourseOptions
+      .filter((option) => !option.hidden)
+      .map((option) => ({
+        value: option.value,
+        label: option.label,
+        disabled: option.disabled,
+      }));
+  }, [finalCourseOptions]);
+
+  const antdStateOptions = useMemo(() => {
+    return STATE_OPTIONS.map((stateName) => ({
+      value: stateName,
+      label: stateName,
+    }));
+  }, []);
+
   /* =======================================================
      UPDATE DEFAULT COURSE
   ======================================================== */
 
   useEffect(() => {
-    setCourse(defaultCourse);
-  }, [defaultCourse]);
+    form.setFieldValue("course", defaultCourse || undefined);
+  }, [defaultCourse, form]);
 
   /* =======================================================
      SAVE CURRENT URL UTM PARAMETERS
@@ -382,11 +405,8 @@ export default function FormWrapper({
         utm_medium: utmMediumFallback || "SODE CO IN Organic",
 
         utm_term: "",
-
         utm_campaign: "",
-
         utm_content: "",
-
         page_url: "",
       };
     }
@@ -430,24 +450,45 @@ export default function FormWrapper({
      PHONE VALIDATION
   ======================================================== */
 
-  const handlePhone = (value: string) => {
+  const handlePhoneChange = (value: string) => {
     setPhone(value);
 
     if (!value) {
       setPhoneError("Phone number is required");
-
       return;
     }
 
     try {
       if (!isValidPhoneNumber(value)) {
-        setPhoneError("Invalid phone number");
-      } else {
-        setPhoneError("");
+        setPhoneError("Please enter a valid phone number");
+        return;
+      }
+
+      setPhoneError("");
+    } catch {
+      setPhoneError("Please enter a valid phone number");
+    }
+  };
+
+  const validatePhone = () => {
+    if (!phone) {
+      setPhoneError("Phone number is required");
+      return false;
+    }
+
+    try {
+      if (!isValidPhoneNumber(phone)) {
+        setPhoneError("Please enter a valid phone number");
+        return false;
       }
     } catch {
-      setPhoneError("Invalid phone number");
+      setPhoneError("Please enter a valid phone number");
+      return false;
     }
+
+    setPhoneError("");
+
+    return true;
   };
 
   /* =======================================================
@@ -455,18 +496,12 @@ export default function FormWrapper({
   ======================================================== */
 
   const resetForm = () => {
-    setName("");
+    form.resetFields();
+
+    form.setFieldValue("course", defaultCourse || undefined);
 
     setPhone("");
-
-    setEmail("");
-
-    setState("");
-
-    setCourse(defaultCourse);
-
     setPhoneError("");
-
     setFormError("");
   };
 
@@ -486,56 +521,28 @@ export default function FormWrapper({
      FORM SUBMIT
   ======================================================== */
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
+  const handleSubmit = async (values: FormValues) => {
     setFormError("");
 
-    const finalCourse = hideCourseField ? defaultCourse : course;
+    const phoneIsValid = validatePhone();
 
-    if (!name.trim()) {
-      setFormError("Name is required");
-
+    if (!phoneIsValid) {
       return;
     }
 
-    if (!phone) {
-      setFormError("Phone number is required");
-
-      return;
-    }
-
-    if (phoneError) {
-      setFormError(phoneError);
-
-      return;
-    }
-
-    if (!email.trim()) {
-      setFormError("Email is required");
-
-      return;
-    }
-
-    if (!state) {
-      setFormError("State is required");
-
-      return;
-    }
+    const finalCourse = hideCourseField ? defaultCourse : values.course || "";
 
     if (!finalCourse) {
       setFormError("Course is required");
-
       return;
     }
 
     /*
-     * Disabled section heading ko course ke roop mein
+     * Disabled section headings ko course ke roop mein
      * submit hone se prevent karta hai.
      */
     if (finalCourse.startsWith("__")) {
       setFormError("Please select a valid course");
-
       return;
     }
 
@@ -543,13 +550,13 @@ export default function FormWrapper({
 
     try {
       const payload = {
-        name: name.trim(),
+        name: values.name.trim(),
 
-        email: email.trim(),
+        email: values.email.trim(),
 
         phone,
 
-        state,
+        state: values.state,
 
         course: finalCourse,
 
@@ -572,10 +579,13 @@ export default function FormWrapper({
         body: JSON.stringify(payload),
       });
 
-      const data: {
-        success?: boolean;
-        message?: string;
-      } = await response.json();
+      let data: LeadResponse = {};
+
+      try {
+        data = (await response.json()) as LeadResponse;
+      } catch {
+        data = {};
+      }
 
       if (!response.ok || !data.success) {
         throw new Error(data.message || "Unable to submit form");
@@ -622,6 +632,16 @@ export default function FormWrapper({
   };
 
   /* =======================================================
+     FORM SUBMIT FAILURE
+  ======================================================== */
+
+  const handleSubmitFailed = () => {
+    setFormError("Please complete all required fields.");
+
+    validatePhone();
+  };
+
+  /* =======================================================
      COMPONENT UI
   ======================================================== */
 
@@ -641,19 +661,27 @@ export default function FormWrapper({
         <div className="relative mb-5">
           <div className="text-center">
             {title && (
-              <h2 className="text-xl font-bold text-[#005382]">{title}</h2>
+              <Title
+                level={2}
+                className="!mb-0 !text-xl !font-bold !text-[#005382]"
+              >
+                {title}
+              </Title>
             )}
 
             {subtitle && (
-              <p className="mt-1 text-sm text-gray-600">{subtitle}</p>
+              <Paragraph className="!mb-0 !mt-1 !text-sm !text-gray-600">
+                {subtitle}
+              </Paragraph>
             )}
 
             {showPhoneCallLink && (
-              <div className="mt-2">
+              <div className="mt-3">
                 <a
                   href="tel:+917065777755"
-                  className="inline-flex rounded-full bg-[#c9232c] px-5 py-1 text-sm font-semibold text-white transition hover:bg-[#aa1c25]"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#c9232c] px-5 py-2 text-sm font-semibold text-white transition hover:bg-[#aa1c25] hover:text-white"
                 >
+                  <PhoneOutlined />
                   +91 7065 7777 55
                 </a>
               </div>
@@ -661,14 +689,15 @@ export default function FormWrapper({
           </div>
 
           {onClose && (
-            <button
-              type="button"
+            <Button
+              type="text"
+              shape="circle"
+              danger
+              icon={<CloseOutlined />}
               onClick={onClose}
               aria-label="Close form"
-              className="absolute right-0 top-0 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-red-500 transition hover:bg-red-50"
-            >
-              <X size={20} aria-hidden="true" />
-            </button>
+              className="!absolute !right-0 !top-0"
+            />
           )}
         </div>
       )}
@@ -677,86 +706,195 @@ export default function FormWrapper({
           FORM
       ==================================================== */}
 
-      <form onSubmit={handleSubmit} className="space-y-3">
+      <Form<FormValues>
+        form={form}
+        layout="vertical"
+        requiredMark={false}
+        initialValues={{
+          name: "",
+          email: "",
+          state: undefined,
+          course: defaultCourse || undefined,
+        }}
+        onFinish={handleSubmit}
+        onFinishFailed={handleSubmitFailed}
+        autoComplete="off"
+        className="w-full"
+      >
         {/* Name */}
 
-        <Input
-          type="text"
-          placeholder="Enter Your Name"
-          value={name}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            setName(event.target.value);
-          }}
-          disabled={loading}
-        />
+        <Form.Item
+          name="name"
+          className="!mb-3"
+          rules={[
+            {
+              required: true,
+              whitespace: true,
+              message: "Please enter your name",
+            },
+            {
+              min: 2,
+              message: "Name must contain at least 2 characters",
+            },
+          ]}
+        >
+          <Input
+            size="large"
+            placeholder="Enter Your Name"
+            disabled={loading}
+            maxLength={100}
+            autoComplete="name"
+            className="!rounded-lg"
+          />
+        </Form.Item>
 
         {/* Email */}
 
-        <Input
-          type="email"
-          placeholder="Enter Your Email"
-          value={email}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            setEmail(event.target.value);
-          }}
-          disabled={loading}
-        />
+        <Form.Item
+          name="email"
+          className="!mb-3"
+          rules={[
+            {
+              required: true,
+              whitespace: true,
+              message: "Please enter your email",
+            },
+            {
+              type: "email",
+              message: "Please enter a valid email address",
+            },
+          ]}
+        >
+          <Input
+            size="large"
+            type="email"
+            placeholder="Enter Your Email"
+            disabled={loading}
+            maxLength={150}
+            autoComplete="email"
+            className="!rounded-lg"
+          />
+        </Form.Item>
 
         {/* Phone */}
 
-        <PhoneField value={phone} onChange={handlePhone} error={phoneError} />
+        <div className="mb-3">
+          <PhoneField
+            value={phone}
+            onChange={handlePhoneChange}
+            error={phoneError}
+          />
+        </div>
 
         {/* Course */}
 
         {!hideCourseField && (
-          <SelectField
-            placeholder="Select Course"
-            options={finalCourseOptions}
-            value={course}
-            onChange={(value: string) => {
-              setCourse(value);
-            }}
-          />
+          <Form.Item
+            name="course"
+            className="!mb-3"
+            rules={[
+              {
+                required: true,
+                message: "Please select a course",
+              },
+              {
+                validator: async (_, value?: string) => {
+                  if (value && value.startsWith("__")) {
+                    throw new Error("Please select a valid course");
+                  }
+                },
+              },
+            ]}
+          >
+            <Select
+              size="large"
+              showSearch
+              allowClear
+              placeholder="Select Course"
+              disabled={loading}
+              options={antdCourseOptions}
+              optionFilterProp="label"
+              className="w-full"
+              popupMatchSelectWidth
+              filterOption={(input, option) =>
+                String(option?.label || "")
+                  .toLowerCase()
+                  .includes(input.toLowerCase())
+              }
+            />
+          </Form.Item>
         )}
 
         {/* State */}
 
-        <SelectField
-          placeholder="Select Your State"
-          options={STATE_OPTIONS}
-          value={state}
-          onChange={(value: string) => {
-            setState(value);
-          }}
-        />
+        <Form.Item
+          name="state"
+          className="!mb-3"
+          rules={[
+            {
+              required: true,
+              message: "Please select your state",
+            },
+          ]}
+        >
+          <Select
+            size="large"
+            showSearch
+            allowClear
+            placeholder="Select Your State"
+            disabled={loading}
+            options={antdStateOptions}
+            optionFilterProp="label"
+            className="w-full"
+            popupMatchSelectWidth
+            filterOption={(input, option) =>
+              String(option?.label || "")
+                .toLowerCase()
+                .includes(input.toLowerCase())
+            }
+          />
+        </Form.Item>
 
         {/* Fixed course information */}
 
         {hideCourseField && defaultCourse && (
-          <div className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-3 text-sm text-gray-700">
-            Selected Course:{" "}
-            <span className="font-semibold">{defaultCourse}</span>
+          <div className="mb-3 rounded-lg border border-gray-200 bg-gray-50 px-3 py-3">
+            <Text className="!text-sm !text-gray-700">
+              Selected Course: <Text strong>{defaultCourse}</Text>
+            </Text>
           </div>
         )}
 
         {/* Form error */}
 
         {formError && (
-          <p role="alert" className="text-sm font-medium text-red-500">
-            {formError}
-          </p>
+          <Alert type="error" showIcon message={formError} className="!mb-3" />
         )}
 
         {/* Submit button */}
 
-        <Button
-          type="submit"
-          disabled={loading}
-          className={`h-11 w-full cursor-pointer bg-[#005382] font-semibold text-white ${submitButtonClassName}`}
-        >
-          {loading ? "Submitting..." : submitButtonText}
-        </Button>
-      </form>
+        <Form.Item className="!mb-0">
+          <Button
+            htmlType="submit"
+            type="primary"
+            size="large"
+            block
+            loading={loading}
+            disabled={loading}
+            className={`
+              !h-11
+              !rounded-lg
+              !border-none
+              !bg-[#005382]
+              !font-semibold
+              hover:!bg-[#003f63]
+              ${submitButtonClassName}
+            `}
+          >
+            {submitButtonText}
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   );
 }
