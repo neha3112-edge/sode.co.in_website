@@ -131,15 +131,10 @@ export function Hero() {
               {/* Main Heading */}
 
               <h1
-                className={`${anton.className} leading-[1.05] text-[#0f3b8c]`}
+                className={`${anton.className} leading-[1.05] text-[#0f3b8c] text-5xl`}
               >
-                <span className="block text-[44px] xl:text-[40px]">
-                  HRM Analytics
-                </span>
-
-                <span className="block text-[42px] xl:text-[38px]">
-                  Online Certification
-                </span>
+                <span className="block">HRM Analytics</span>
+                <span className="block">Online Certification</span>
               </h1>
 
               {/* Provider */}
@@ -178,7 +173,6 @@ export function Hero() {
                 className="mt-6 inline-flex cursor-pointer items-center justify-center gap-2 rounded-md bg-[#0f3b8c] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200 hover:bg-[#0c2e6f]"
               >
                 <span>Get Brochure</span>
-
                 <Download size={16} aria-hidden="true" />
               </button>
             </div>

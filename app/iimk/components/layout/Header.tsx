@@ -53,7 +53,7 @@ export function Header() {
           {/* Desktop Navigation */}
           <nav
             aria-label="Main navigation"
-            className="hidden items-center gap-1 text-[13px] text-gray-800 font-semibold lg:flex"
+            className="hidden items-center gap-1 text-[16px] text-gray-800 font-semibold lg:flex"
           >
             {navItems.map((item, index) => (
               <div key={item.label} className="flex items-center">
