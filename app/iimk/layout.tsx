@@ -54,13 +54,10 @@ export const metadata: Metadata = {
     url: "https://sode.co.in/iimk",
     siteName: "SODE",
     locale: "en_IN",
-
     title:
       "IIM Kozhikode HRM Course | IIM Kozhikode HR Analytics & Online HR Courses | SODE",
-
     description:
       "IIM Kozhikode HRM program and IIM Kozhikode HRM course in HR Analytics. Explore IIM Kozhikode online HR courses, IIM Kozhikode HR analytics fees, eligibility, certification details, and IIM Kozhikode HRM program admission process.",
-
     images: [
       {
         url: "/assets/images/sode-iim-og-card-image.png",

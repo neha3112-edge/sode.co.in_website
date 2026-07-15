@@ -70,60 +70,28 @@ const newsreader = Newsreader({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-
   title: {
     default: SITE_TITLE,
     template: `%s | ${SITE_NAME}`,
   },
-
   description: SITE_DESCRIPTION,
-
   applicationName: SITE_NAME,
-
   authors: [
     {
       name: "SODE",
       url: SITE_URL,
     },
   ],
-
   creator: "SODE",
-
   publisher: "SODE",
-
   generator: "Next.js",
-
-  keywords: [
-    "Certifications and Online Degree Courses",
-    "Online MBA",
-    "Online DBA",
-    "Executive MBA",
-    "Executive DBA",
-    "Online Degree Courses",
-    "IIT Online Courses",
-    "IIM Online Courses",
-    "Doctor of Business Administration",
-    "MBA for Working Professionals",
-    "DBA for Working Professionals",
-    "Executive Leadership Programs",
-    "Online Certification Courses",
-    "Online Courses from IITs",
-    "Online Courses from IIMs",
-    "Global Universities Online Courses",
-    "SODE",
-    "SODE Counseling Services",
-    "School of Online and Distance Education",
-  ],
-
   alternates: {
     canonical: "/",
   },
-
   robots: {
     index: true,
     follow: true,
     nocache: false,
-
     googleBot: {
       index: true,
       follow: true,
@@ -133,7 +101,6 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-
   icons: {
     icon: [
       {
@@ -141,26 +108,19 @@ export const metadata: Metadata = {
         type: "image/x-icon",
       },
     ],
-
     shortcut: FAVICON_PATH,
-
     apple: [
       {
         url: FAVICON_PATH,
       },
     ],
   },
-
   openGraph: {
     type: "website",
-
     siteName: SITE_NAME,
-
     title:
       "Certifications & Online Degree Courses from IITs, IIMs | DBA MBA – SODE",
-
     description: SITE_DESCRIPTION,
-
     url: `${SITE_URL}/`,
 
     locale: "en_IN",

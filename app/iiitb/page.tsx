@@ -1,5 +1,3 @@
-import type { Metadata } from "next";
-
 import { Header } from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 
@@ -17,26 +15,6 @@ import GlobalCTA from "@/components/layout/GlobalCTA";
 import CallCTA from "@/components/layout/CallCTA";
 
 import type { FormCourseOption } from "@/components/forms/FormWrapper";
-
-/* =========================================================
-   METADATA
-========================================================= */
-
-export const metadata: Metadata = {
-  title: "IIIT Bangalore Online Courses | Data Science & AI Programs | SODE",
-
-  description:
-    "Explore IIIT Bangalore online courses in Data Science, Artificial Intelligence, Machine Learning, Generative AI and technology leadership.",
-
-  alternates: {
-    canonical: "/iiitb",
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
 
 /* =========================================================
    IIITB COURSE OPTIONS
@@ -80,7 +58,7 @@ const IIITB_COURSE_OPTIONS: FormCourseOption[] = [
 ];
 
 /* =========================================================
-   PAGE
+   IIITB PAGE
 ========================================================= */
 
 export default function IIITBPage() {

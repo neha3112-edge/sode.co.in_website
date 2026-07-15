@@ -1,5 +1,3 @@
-import type { Metadata } from "next";
-
 import { Header } from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 
@@ -9,43 +7,10 @@ import { WhyChoose } from "./components/sections/WhyChoose";
 import { Eligibility } from "./components/sections/Eligibility";
 import { CertificateSection } from "./components/sections/CertificateSection";
 import { ApplyAndFaq } from "./components/sections/ApplyAndFaq";
-
 import FloatingButton from "@/components/layout/FloatingButton";
 import GlobalCTA from "@/components/layout/GlobalCTA";
 import CallCTA from "@/components/layout/CallCTA";
-
 import type { FormCourseOption } from "@/components/forms/FormWrapper";
-
-/* =========================================================
-   METADATA
-========================================================= */
-
-export const metadata: Metadata = {
-  title:
-    "IIM Kozhikode HRM Course | IIM Kozhikode HR Analytics & Online HR Courses",
-
-  description:
-    "IIM Kozhikode HRM program and IIM Kozhikode HRM course in HR Analytics. Explore IIM Kozhikode online HR courses, IIM Kozhikode HR analytics fees, eligibility, certification details, and IIM Kozhikode HRM program admission process.",
-
-  alternates: {
-    canonical: "/iimk",
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
-
-/* =========================================================
-   IIM KOZHIKODE COURSE OPTIONS
-
-   label:
-   Dropdown me user ko "HR & Analytics" dikhega.
-
-   value:
-   Submit payload me "IIM HR" jayega.
-========================================================= */
 
 const IIMK_COURSE_OPTIONS: FormCourseOption[] = [
   {
