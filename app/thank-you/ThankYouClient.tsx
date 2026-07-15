@@ -71,6 +71,7 @@ export default function ThankYouClient({
   const [isBrochure, setIsBrochure] = useState(false);
   const [brochureOpened, setBrochureOpened] = useState(false);
   const [isClientReady, setIsClientReady] = useState(false);
+  const [brochureUrl, setBrochureUrl] = useState<string>("");
 
   /*
    * React Strict Mode development me effects ko dobara run kar sakta hai.
@@ -94,6 +95,13 @@ export default function ThankYouClient({
       const brochureFlow = sessionStorage.getItem("isBrochureFlow") === "true";
 
       setIsBrochure(brochureFlow);
+
+      if (brochureFlow) {
+        const storedBrochureUrl = sessionStorage.getItem("brochureUrl");
+        if (storedBrochureUrl) {
+          setBrochureUrl(storedBrochureUrl.trim());
+        }
+      }
     } catch (error) {
       console.error("Unable to read brochure session:", error);
 
@@ -169,18 +177,8 @@ export default function ThankYouClient({
   ========================================================= */
 
   const getBrochureUrl = useCallback(() => {
-    try {
-      const storedBrochureUrl = sessionStorage.getItem("brochureUrl");
-
-      return (
-        storedBrochureUrl?.trim() || getAssetPath("/assets/pdf/brochure.pdf")
-      );
-    } catch (error) {
-      console.error("Unable to read brochure URL from session:", error);
-
-      return getAssetPath("/assets/pdf/brochure.pdf");
-    }
-  }, []);
+    return brochureUrl || getAssetPath("/assets/pdf/brochure.pdf");
+  }, [brochureUrl]);
 
   /* =========================================================
      CLEAR BROCHURE SESSION
@@ -231,19 +229,7 @@ export default function ThankYouClient({
        * New tab me brochure open karne ki koshish.
        */
 
-      const newTab = window.open(brochureUrl, "_blank", "noopener,noreferrer");
-
-      /*
-       * Browser popup block kare to same tab me brochure open hoga.
-       */
-
-      if (!newTab) {
-        clearBrochureSession();
-
-        window.location.assign(brochureUrl);
-
-        return;
-      }
+      window.open(brochureUrl, "_blank", "noopener,noreferrer");
 
       setBrochureOpened(true);
 
@@ -263,15 +249,7 @@ export default function ThankYouClient({
   const handleOpenBrochure = () => {
     const brochureUrl = getBrochureUrl();
 
-    const newTab = window.open(brochureUrl, "_blank", "noopener,noreferrer");
-
-    if (!newTab) {
-      clearBrochureSession();
-
-      window.location.assign(brochureUrl);
-
-      return;
-    }
+    window.open(brochureUrl, "_blank", "noopener,noreferrer");
 
     setBrochureOpened(true);
 

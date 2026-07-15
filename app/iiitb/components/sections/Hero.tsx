@@ -288,7 +288,7 @@ export function Hero() {
               utmMediumFallback="IIITB_Organic"
               submitButtonText="Download Brochure"
               isBrochureForm
-              brochureUrl="/assets/pdf/brochure.pdf"
+              brochureUrl="/iiitb/brochures/main_brochure.pdf"
               redirectUrl="/iiitb/thank-you"
             />
           </div>
