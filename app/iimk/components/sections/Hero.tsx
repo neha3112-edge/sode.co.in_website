@@ -399,7 +399,7 @@ export function Hero() {
               submitButtonText="Download Brochure"
               submitButtonClassName="bg-[#0f3b8c] hover:bg-[#0c2e6f]"
               isBrochureForm
-              brochureUrl="/assets/pdf/iim-kozhikode-brochure.pdf"
+              brochureUrl="/iimk/assets/brochures/main_brochure.pdf"
               redirectUrl="/iimk/thank-you"
             />
           </div>

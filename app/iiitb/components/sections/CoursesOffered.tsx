@@ -22,6 +22,7 @@ type Course = {
   duration: string;
   description: string;
   image: string;
+  brochureUrl: string;
 };
 
 type FormType = "apply" | "brochure" | null;
@@ -38,6 +39,7 @@ const courses: Course[] = [
     description:
       "IIIT Bangalore online courses help leaders learn GenAI strategy and adoption using the A.D.A.P.T. Framework, with real business use cases, a capstone, and executive-level outcomes.",
     image: "/iiitb/img/course-1.webp",
+    brochureUrl: "/iiitb/brochures/Executive_Program_in_Generative_AI_for_Leaders.pdf",
   },
   {
     id: 2,
@@ -46,6 +48,7 @@ const courses: Course[] = [
     description:
       "IIIT Bangalore online courses build skills in data science and artificial intelligence through statistics, machine learning, deep learning, industry projects, and expert mentorship.",
     image: "/iiitb/img/course-2.webp",
+    brochureUrl: "/iiitb/brochures/IIITB_EPGC_DS_AI.pdf",
   },
   {
     id: 3,
@@ -55,6 +58,7 @@ const courses: Course[] = [
     description:
       "IIIT Bangalore online courses deliver practical learning in analytics, ML pipelines, and GenAI, with labs, real datasets, hands-on projects, and portfolio support.",
     image: "/iiitb/img/course-3.webp",
+    brochureUrl: "/iiitb/brochures/PCP_in_DS_26_Gen_AI_with_IIIT_B.pdf",
   },
   {
     id: 4,
@@ -63,6 +67,7 @@ const courses: Course[] = [
     description:
       "Learn applied artificial intelligence, generative AI, autonomous agents, machine learning models, and real-world AI deployment through practical projects and industry use cases.",
     image: "/iiitb/img/course-4.webp",
+    brochureUrl: "/iiitb/brochures/Applied_AI_and_Agentic_AI-4.pdf",
   },
   {
     id: 5,
@@ -71,6 +76,7 @@ const courses: Course[] = [
     description:
       "Build strong foundations in machine learning, deep learning, natural language processing, and artificial intelligence with practical assignments and capstone projects.",
     image: "/iiitb/img/course-5.webp",
+    brochureUrl: "/iiitb/brochures/IIITB_ED_ML.pdf",
   },
   {
     id: 6,
@@ -79,6 +85,7 @@ const courses: Course[] = [
     description:
       "Designed for technology leaders who want to develop strategic capabilities in AI transformation, product innovation, digital leadership, and enterprise technology management.",
     image: "/iiitb/img/course-6.webp",
+    brochureUrl: "/iiitb/brochures/CTOAI_leadership_program.pdf",
   },
   {
     id: 7,
@@ -87,6 +94,7 @@ const courses: Course[] = [
     description:
       "Develop advanced capabilities in machine learning, artificial intelligence, deep learning, NLP, computer vision, and production-level AI systems.",
     image: "/iiitb/img/new-image1.webp",
+    brochureUrl: "/iiitb/brochures/master_of_science_in_machine_learning_and_artificial_intelligence.pdf",
   },
   {
     id: 8,
@@ -96,6 +104,7 @@ const courses: Course[] = [
     description:
       "Gain advanced knowledge of data science, analytics, statistical modelling, machine learning, generative AI, and business-focused data-driven decision-making.",
     image: "/iiitb/img/new-image2.webp",
+    brochureUrl: "/iiitb/brochures/master_of_science_in_data_science_now_integrated_with_generative_ai.pdf",
   },
 ];
 
@@ -149,6 +158,7 @@ const IIITB_COURSE_OPTIONS: FormCourseOption[] = [
 
 export function CoursesOffered() {
   const [activeForm, setActiveForm] = useState<FormType>(null);
+  const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
 
   /* =========================================================
      LOCK BODY SCROLL WHEN FORM IS OPEN
@@ -188,7 +198,8 @@ export function CoursesOffered() {
      OPEN APPLY FORM
   ========================================================= */
 
-  const openApplyForm = () => {
+  const openApplyForm = (course: Course) => {
+    setSelectedCourse(course);
     setActiveForm("apply");
   };
 
@@ -196,7 +207,8 @@ export function CoursesOffered() {
      OPEN BROCHURE FORM
   ========================================================= */
 
-  const openBrochureForm = () => {
+  const openBrochureForm = (course: Course) => {
+    setSelectedCourse(course);
     setActiveForm("brochure");
   };
 
@@ -206,6 +218,7 @@ export function CoursesOffered() {
 
   const closeForm = () => {
     setActiveForm(null);
+    setSelectedCourse(null);
   };
 
   return (
@@ -231,8 +244,8 @@ export function CoursesOffered() {
               <CourseCard
                 key={course.id}
                 course={course}
-                onApply={openApplyForm}
-                onDownload={openBrochureForm}
+                onApply={() => openApplyForm(course)}
+                onDownload={() => openBrochureForm(course)}
               />
             ))}
           </div>
@@ -272,7 +285,7 @@ export function CoursesOffered() {
                 title="Apply Now"
                 subtitle="Select your preferred course and start your application"
                 onClose={closeForm}
-                defaultCourse=""
+                defaultCourse={selectedCourse?.title || ""}
                 courseOptions={IIITB_COURSE_OPTIONS}
                 formNameOverride="IIITB Course Apply Form"
                 sourceOverride="IIITB LP"
@@ -319,7 +332,7 @@ export function CoursesOffered() {
                 title="Download Brochure"
                 subtitle="Select your preferred course to receive its brochure"
                 onClose={closeForm}
-                defaultCourse=""
+                defaultCourse={selectedCourse?.title || ""}
                 courseOptions={IIITB_COURSE_OPTIONS}
                 formNameOverride="IIITB Course Brochure Form"
                 sourceOverride="IIITB LP"
@@ -327,7 +340,7 @@ export function CoursesOffered() {
                 utmMediumFallback="IIITB_Organic"
                 submitButtonText="Download Brochure"
                 isBrochureForm
-                brochureUrl="/assets/pdf/brochure.pdf"
+                brochureUrl={selectedCourse?.brochureUrl || "/assets/pdf/brochure.pdf"}
                 redirectUrl="/iiitb/thank-you"
               />
             </div>

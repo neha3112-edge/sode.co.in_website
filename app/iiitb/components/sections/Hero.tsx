@@ -113,8 +113,7 @@ export function Hero() {
   return (
     <>
       <section
-        id="hero-section
-"
+        id="hero-section"
         className="relative overflow-hidden bg-[#eef4fd] pt-18"
       >
         {/* =================================================
@@ -289,7 +288,7 @@ export function Hero() {
               utmMediumFallback="IIITB_Organic"
               submitButtonText="Download Brochure"
               isBrochureForm
-              brochureUrl="/assets/pdf/brochure.pdf"
+              brochureUrl="/iiitb/brochures/main_brochure.pdf"
               redirectUrl="/iiitb/thank-you"
             />
           </div>
