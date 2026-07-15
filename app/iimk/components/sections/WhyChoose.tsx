@@ -92,7 +92,7 @@ export function WhyChoose() {
       </section>
 
       {/* Key Skills Section */}
-      <section id="key-skills" className="bg-white pb-16 pt-4">
+      <section id="key-highlights" className="bg-white pb-16 pt-4">
         <Container>
           <div className="text-left">
             <h2 className="text-[20px] font-extrabold text-black sm:text-3xl leading-tight">

@@ -121,7 +121,7 @@ export function CertificateSection() {
       ====================================================== */}
 
       <section
-        id="sample-degree"
+        id="sample-certificate"
         className="w-full bg-[#f8fafc] py-12 sm:py-16"
       >
         <Container>
@@ -180,7 +180,7 @@ export function CertificateSection() {
           PLACEMENT PARTNERS SECTION
       ====================================================== */}
 
-      <section id="placement" className="bg-white py-8 sm:py-12">
+      <section id="placement-partners" className="bg-white py-8 sm:py-12">
         <Container>
           <div className="rounded-[32px] border border-gray-100 bg-[#f2f2f2] px-6 py-10 shadow-xs sm:py-12">
             <h2 className="text-center text-2xl font-extrabold uppercase tracking-wide text-[#0f3b8c] sm:text-[26px]">

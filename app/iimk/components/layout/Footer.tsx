@@ -37,14 +37,15 @@ export default function Footer() {
     <>
       <footer className="bg-[#f4f7fa] pt-8 sm:pt-10 lg:pt-12">
         {/* Compare Section */}
-        <section className="px-4 sm:px-6 lg:px-8">
+        <section id="compare-university" className="px-4 sm:px-6 lg:px-8">
           <div className="relative mx-auto max-w-446.25 rounded-[20px] bg-[#1d3d82] px-5 py-12 text-center text-white sm:py-14 lg:py-12">
             <h2 className="text-xl font-bold sm:text-2xl lg:text-[25px]">
               Still Confused?
             </h2>
 
             <p className="mx-auto mt-4 max-w-4xl text-sm font-semibold leading-6 sm:text-base lg:text-lg">
-              Compare IIM Kozhikode University with Top World Renowned Universities
+              Compare IIM Kozhikode University with Top World Renowned
+              Universities
             </p>
 
             {/* Arrow GIF Button */}

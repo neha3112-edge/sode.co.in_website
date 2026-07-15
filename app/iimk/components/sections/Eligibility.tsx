@@ -125,7 +125,7 @@ export function Eligibility() {
       ====================================================== */}
 
       <section
-        id="benefits"
+        id="eligibility"
         className="relative overflow-hidden py-16 text-white"
       >
         {/* Decorative background image overlay */}

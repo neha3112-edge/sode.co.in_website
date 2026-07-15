@@ -92,7 +92,7 @@ export function Hero() {
       ====================================================== */}
 
       <section
-        id="home"
+        id="hero-section"
         className="relative hidden min-h-[580px] overflow-hidden pt-18 lg:block"
       >
         {/* Background Image */}
@@ -339,7 +339,7 @@ export function Hero() {
           STATS BAR
       ====================================================== */}
 
-      <section className="bg-[#fedfa9] py-8">
+      <section className="bg-[#fedfa9] py-8" id="stats">
         <Container>
           <div className="grid grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-4 md:gap-x-8 md:gap-y-0">
             <StatItem
