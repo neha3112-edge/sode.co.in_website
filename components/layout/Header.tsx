@@ -11,10 +11,10 @@ export function Header() {
 
   const navItems = [
     { label: "Executive Programs", href: "#premium-programs" },
-    { label: "Universities", href: "#prestigious-institutions" },
-    { label: "About SODE", href: "#about-sode" },
-    { label: "Alumni Voices", href: "#alumni-voices" },
-    { label: "FAQs", href: "#faq" },
+    { label: "Universities", href: "#universities" },
+    { label: "About SODE", href: "#about" },
+    { label: "Alumni Voices", href: "#reviews" },
+    { label: "FAQs", href: "#faqs" },
   ];
 
   return (
@@ -78,9 +78,8 @@ export function Header() {
 
       {/* ✅ Mobile Navigation */}
       <div
-        className={`lg:hidden transition-all duration-300 overflow-hidden ${
-          isMenuOpen ? "max-h-96 border-t border-gray-200" : "max-h-0"
-        } bg-white`}
+        className={`lg:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? "max-h-96 border-t border-gray-200" : "max-h-0"
+          } bg-white`}
       >
         <div className="flex flex-col px-6 py-4 space-y-4 text-sm font-semibold text-gray-700">
           {navItems.map((item) => {
