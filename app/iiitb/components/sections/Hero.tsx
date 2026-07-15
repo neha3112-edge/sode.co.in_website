@@ -230,7 +230,7 @@ export function Hero() {
                   utmSourceFallback="Organic"
                   utmMediumFallback="IIITB_Organic"
                   submitButtonText="Submit"
-                  redirectUrl="/thank-you?source=iiitb"
+                  redirectUrl="/iiitb/thank-you"
                 />
               </div>
             </div>
@@ -252,7 +252,7 @@ export function Hero() {
                 utmSourceFallback="Organic"
                 utmMediumFallback="IIITB_Organic"
                 submitButtonText="Submit"
-                redirectUrl="/thank-you?source=iiitb"
+                redirectUrl="/iiitb/thank-you"
               />
             </div>
           </div>
@@ -289,7 +289,7 @@ export function Hero() {
               submitButtonText="Download Brochure"
               isBrochureForm
               brochureUrl="/assets/pdf/brochure.pdf"
-              redirectUrl="/thank-you?source=iiitb"
+              redirectUrl="/iiitb/thank-you"
             />
           </div>
         </div>

@@ -153,7 +153,7 @@ export default function Page() {
           utmMediumFallback="SODE_Organic"
           submitButtonText="Get Coupon Code"
           submitButtonClassName="bg-[#0f3b8c] hover:bg-[#0c2e6f]"
-          redirectUrl="/thank-you?source=lp"
+          redirectUrl="/thank-you"
           autoOpenAtScrollPercent={45}
           autoOpenSessionKey="sode-scholarship-form-auto-opened"
           showConfettiOnAutoOpen

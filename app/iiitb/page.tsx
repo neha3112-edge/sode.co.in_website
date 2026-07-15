@@ -124,6 +124,7 @@ export default function IIITBPage() {
           autoOpenAtScrollPercent={45}
           autoOpenSessionKey="iiitb-scholarship-form-auto-opened"
           showConfettiOnAutoOpen
+          redirectUrl="/iiitb/thank-you"
         />
       </div>
 

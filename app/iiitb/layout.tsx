@@ -277,18 +277,14 @@ const webPageSchema = {
 
   isPartOf: {
     "@type": "WebSite",
-
     "@id": `${SITE_URL}/#website`,
-
     name: SITE_NAME,
-
     url: `${SITE_URL}/`,
   },
 
   about: {
     "@id": `${PAGE_URL}#educational-organization`,
   },
-
   publisher: {
     "@id": `${SITE_URL}/#organization`,
   },

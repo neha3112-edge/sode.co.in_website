@@ -279,6 +279,7 @@ export function CoursesOffered() {
                 utmSourceFallback="Organic"
                 utmMediumFallback="IIITB_Organic"
                 submitButtonText="Submit Application"
+                redirectUrl="/iiitb/thank-you"
               />
             </div>
           </div>
@@ -327,6 +328,7 @@ export function CoursesOffered() {
                 submitButtonText="Download Brochure"
                 isBrochureForm
                 brochureUrl="/assets/pdf/brochure.pdf"
+                redirectUrl="/iiitb/thank-you"
               />
             </div>
           </div>

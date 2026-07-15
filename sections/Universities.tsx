@@ -525,7 +525,7 @@ export function Universities() {
                   ? getAssetPath(selectedModalUni.brochureUrl)
                   : ""
               }
-              redirectUrl="/thank-you?source=lp"
+              redirectUrl="/thank-you"
             />
           </div>
         </div>

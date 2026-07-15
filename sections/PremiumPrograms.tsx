@@ -698,7 +698,7 @@ export function PremiumPrograms() {
                   ? getAssetPath(selectedProgram.brochureUrl)
                   : ""
               }
-              redirectUrl="/thank-you?source=lp"
+              redirectUrl="/thank-you"
             />
           </div>
         </div>

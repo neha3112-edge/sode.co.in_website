@@ -143,7 +143,7 @@ export function ClarificationCta() {
               submitButtonText="Talk to Experts"
               submitButtonClassName="bg-[#1d3d82] hover:bg-[#142b5c]"
               showPhoneCallLink
-              redirectUrl="/thank-you?source=iimk"
+              redirectUrl="/iimk/thank-you"
             />
           </div>
         </div>

@@ -162,6 +162,7 @@ export function ClarificationCta() {
               utmMediumFallback="IIITB_Organic"
               submitButtonText="Talk to Experts"
               showPhoneCallLink
+              redirectUrl="/iiitb/thank-you"
             />
           </div>
         </div>

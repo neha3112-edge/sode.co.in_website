@@ -12,7 +12,12 @@ import { getAssetPath } from "@/lib/utils";
    SUPPORTED GOOGLE ADS CONVERSION SOURCES
 ========================================================= */
 
-type ConversionSource = "iimk" | "iiitb" | "lp";
+export type ConversionSource = "iimk" | "iiitb" | "lp";
+
+export type ThankYouClientProps = {
+  conversionSource: ConversionSource;
+  homeHref?: string;
+};
 
 /* =========================================================
    GOOGLE TAG ARGUMENT TYPES
@@ -55,18 +60,13 @@ const GOOGLE_ADS_CONVERSION_LABELS: Record<ConversionSource, string> = {
 };
 
 /* =========================================================
-   VALIDATE CONVERSION SOURCE
-========================================================= */
-
-function isConversionSource(source: string | null): source is ConversionSource {
-  return source === "iimk" || source === "iiitb" || source === "lp";
-}
-
-/* =========================================================
    THANK YOU CLIENT COMPONENT
 ========================================================= */
 
-export default function ThankYouClient() {
+export default function ThankYouClient({
+  conversionSource,
+  homeHref = "/",
+}: ThankYouClientProps) {
   const [progress, setProgress] = useState(0);
   const [isBrochure, setIsBrochure] = useState(false);
   const [brochureOpened, setBrochureOpened] = useState(false);
@@ -106,11 +106,16 @@ export default function ThankYouClient() {
   /* =========================================================
      GOOGLE ADS CONVERSION TRACKING
 
-     Supported URLs:
+     Clean URL mapping:
 
-     /thank-you?source=iimk
-     /thank-you?source=iiitb
-     /thank-you?source=lp
+     /thank-you
+     -> lp
+
+     /iimk/thank-you
+     -> iimk
+
+     /iiitb/thank-you
+     -> iiitb
   ========================================================= */
 
   useEffect(() => {
@@ -118,60 +123,9 @@ export default function ThankYouClient() {
       return;
     }
 
-    const searchParams = new URLSearchParams(window.location.search);
+    const sendTo = GOOGLE_ADS_CONVERSION_LABELS[conversionSource];
 
-    const querySource =
-      searchParams.get("source")?.trim().toLowerCase() ?? null;
-
-    /*
-     * Query parameter missing ho to sessionStorage fallback use hoga.
-     */
-
-    let storedSource: string | null = null;
-
-    try {
-      storedSource =
-        sessionStorage.getItem("conversionSource")?.trim().toLowerCase() ??
-        null;
-    } catch (error) {
-      console.error("Unable to read conversion source:", error);
-    }
-
-    /*
-     * Priority:
-     *
-     * 1. URL query parameter
-     * 2. sessionStorage conversionSource
-     */
-
-    const source = isConversionSource(querySource)
-      ? querySource
-      : isConversionSource(storedSource)
-        ? storedSource
-        : null;
-
-    if (!source) {
-      console.warn(
-        "Google Ads conversion was not sent because conversion source is missing or invalid.",
-      );
-
-      return;
-    }
-
-    const sendTo = GOOGLE_ADS_CONVERSION_LABELS[source];
-
-    /*
-     * Current browser tab/session me same source ki conversion
-     * dobara fire nahi hogi.
-     *
-     * Example keys:
-     *
-     * googleAdsConversionSent:iimk
-     * googleAdsConversionSent:iiitb
-     * googleAdsConversionSent:lp
-     */
-
-    const conversionSessionKey = `googleAdsConversionSent:${source}`;
+    const conversionSessionKey = `googleAdsConversionSent:${conversionSource}`;
 
     try {
       const alreadySent =
@@ -179,7 +133,6 @@ export default function ThankYouClient() {
 
       if (alreadySent) {
         conversionSent.current = true;
-
         return;
       }
     } catch (error) {
@@ -187,13 +140,6 @@ export default function ThankYouClient() {
     }
 
     conversionSent.current = true;
-
-    /*
-     * Google tag script layout me load hona chahiye.
-     *
-     * Ye fallback ensure karta hai ki gtag function missing hone par
-     * event dataLayer me queue ho jaye.
-     */
 
     window.dataLayer = window.dataLayer || [];
 
@@ -203,28 +149,20 @@ export default function ThankYouClient() {
         window.dataLayer.push(args);
       };
 
-    /*
-     * Equivalent Google Ads event:
-     *
-     * gtag("event", "conversion", {
-     *   send_to: "AW-17946162864/CONVERSION_LABEL",
-     * });
-     */
-
     window.gtag("event", "conversion", {
       send_to: sendTo,
     });
 
     try {
       sessionStorage.setItem(conversionSessionKey, "true");
-
-      sessionStorage.removeItem("conversionSource");
     } catch (error) {
       console.error("Unable to store Google Ads conversion state:", error);
     }
 
-    console.info(`Google Ads conversion event sent for source: ${source}`);
-  }, []);
+    console.info(
+      `Google Ads conversion event sent for source: ${conversionSource}`,
+    );
+  }, [conversionSource]);
 
   /* =========================================================
      GET BROCHURE URL
@@ -474,7 +412,7 @@ export default function ThankYouClient() {
           <div className="mx-auto max-w-md">
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/"
+                href={homeHref}
                 className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#FFC107] py-3.5 font-bold text-black transition-colors hover:bg-[#e6af06]"
               >
                 <Home size={18} aria-hidden="true" />

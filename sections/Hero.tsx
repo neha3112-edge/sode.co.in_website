@@ -315,7 +315,7 @@ export function Hero() {
                     utmMediumFallback="SODE_Organic"
                     submitButtonText="Apply Now"
                     submitButtonClassName="bg-[#102441] hover:bg-[#0b1a30]"
-                    redirectUrl="/thank-you?source=lp"
+                    redirectUrl="/thank-you"
                   />
                 </Card>
               </div>
@@ -353,7 +353,7 @@ export function Hero() {
               utmMediumFallback="SODE_Organic"
               submitButtonText="Book Counselling"
               submitButtonClassName="bg-[#102441] hover:bg-[#0b1a30]"
-              redirectUrl="/thank-you?source=lp"
+              redirectUrl="/thank-you"
             />
           </div>
         </div>

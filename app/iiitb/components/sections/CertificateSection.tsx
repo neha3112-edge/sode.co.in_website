@@ -222,6 +222,7 @@ export function CertificateSection() {
             utmSourceFallback="Organic"
             utmMediumFallback="IIITB_Organic"
             submitButtonText="Get Degree"
+            redirectUrl="/iiitb/thank-you"
           />
         </CertificateFormModal>
       )}

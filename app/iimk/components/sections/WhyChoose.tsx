@@ -16,11 +16,6 @@ type Tool = {
   desc: string;
 };
 
-type Profile = {
-  title: string;
-  desc: string;
-};
-
 const keySkills: Skill[] = [
   {
     iconSrc: "/iimk/assets/img/icon-iim-01.webp",

@@ -496,7 +496,7 @@ export function MainFooter() {
                 utmMediumFallback="SODE_Organic"
                 submitButtonText="Talk to Experts"
                 submitButtonClassName="bg-[#1d3557] hover:bg-[#142943]"
-                redirectUrl="/thank-you?source=lp"
+                redirectUrl="/thank-you"
               />
             </div>
           </div>

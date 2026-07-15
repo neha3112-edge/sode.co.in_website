@@ -76,21 +76,15 @@ function getPageScrollPercentage() {
 
 export default function FloatingButton({
   courseOptions = [],
-
   title = "Get Scholarship Coupon Code",
   subtitle = "Our experts will contact you",
-
   formNameOverride = "Scholarship Floating Form",
   sourceOverride = "Website Floating Button",
-
   utmSourceFallback = "Organic",
   utmMediumFallback = "Floating Scholarship Button",
-
   submitButtonText = "Get Coupon Code",
   submitButtonClassName = "bg-[#1C3569] hover:bg-[#162a54]",
-
-  redirectUrl = "/thank-you?source=sode",
-
+  redirectUrl,
   autoOpenAtScrollPercent = null,
   autoOpenSessionKey = "scholarship-floating-form-auto-opened",
   showConfettiOnAutoOpen = true,

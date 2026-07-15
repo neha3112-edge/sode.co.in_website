@@ -209,7 +209,7 @@ export function Eligibility() {
               utmMediumFallback="IIM_Organic"
               submitButtonText="Get Free Counselling"
               submitButtonClassName="bg-[#1d3d82] hover:bg-[#142b5c]"
-              redirectUrl="/thank-you?source=iimk"
+              redirectUrl="/iimk/thank-you"
             />
           </div>
         </div>

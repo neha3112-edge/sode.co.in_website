@@ -222,7 +222,7 @@ export function Hero() {
                   utmMediumFallback="IIM_Organic"
                   submitButtonText="Submit"
                   submitButtonClassName="bg-[#0f3b8c] hover:bg-[#0c2e6f]"
-                  redirectUrl="/thank-you?source=iimk"
+                  redirectUrl="/iimk/thank-you"
                 />
               </div>
             </div>
@@ -329,7 +329,7 @@ export function Hero() {
               utmMediumFallback="IIM_Organic"
               submitButtonText="Submit"
               submitButtonClassName="bg-[#0f3b8c] hover:bg-[#0c2e6f]"
-              redirectUrl="/thank-you?source=iimk"
+              redirectUrl="/iimk/thank-you"
             />
           </div>
         </div>
@@ -400,7 +400,7 @@ export function Hero() {
               submitButtonClassName="bg-[#0f3b8c] hover:bg-[#0c2e6f]"
               isBrochureForm
               brochureUrl="/assets/pdf/iim-kozhikode-brochure.pdf"
-              redirectUrl="/thank-you?source=iimk"
+              redirectUrl="/iimk/thank-you"
             />
           </div>
         </div>

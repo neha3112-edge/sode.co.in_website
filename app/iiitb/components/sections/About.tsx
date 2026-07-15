@@ -216,6 +216,7 @@ export function About() {
             utmMediumFallback="IIITB_Organic"
             submitButtonText="Request Call Back"
             showPhoneCallLink
+            redirectUrl="/iiitb/thank-you"
           />
         </AboutFormModal>
       )}
@@ -237,6 +238,7 @@ export function About() {
             utmSourceFallback="Organic"
             utmMediumFallback="IIITB_Organic"
             submitButtonText="Get Free Counselling"
+            redirectUrl="/iiitb/thank-you"
           />
         </AboutFormModal>
       )}
