@@ -4,9 +4,6 @@ import Image from "next/image";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { X } from "lucide-react";
 
-import ArrowGif from "../../assets/img/arrow.gif";
-import DesLogo from "../../assets/img/new-des-logo.webp";
-
 type ModalType = "disclaimer" | "terms" | "privacy" | null;
 
 const COLORS = {
@@ -105,7 +102,7 @@ export default function Footer() {
               className="absolute -bottom-[36px] left-1/2 z-10 flex h-[72px] w-[72px] -translate-x-1/2 cursor-pointer items-center justify-center rounded-full border-[8px] border-white bg-white shadow-[0_3px_12px_rgba(0,0,0,0.08)] transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#0968B5]/25 sm:-bottom-[38px] sm:h-[76px] sm:w-[76px]"
             >
               <Image
-                src={ArrowGif}
+                src="/rushford/assets/img/arrow.svg"
                 alt=""
                 width={58}
                 height={58}
@@ -128,7 +125,7 @@ export default function Footer() {
             className="mx-auto block w-full max-w-[950px] cursor-pointer transition-opacity duration-200 hover:opacity-90"
           >
             <Image
-              src={DesLogo}
+              src="/rushford/assets/img/new-des-logo.webp"
               alt="Distance Education School"
               width={950}
               height={260}

@@ -7,8 +7,6 @@ import { X } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import FormWrapper from "@/components/forms/FormWrapper";
 
-import RushfordBuildingImage from "../../assets/img/iiitb_desktop_new_bg.png";
-
 type AboutFormType = "callback" | null;
 
 const RUSHFORD_COURSES = [
@@ -150,7 +148,7 @@ export function About() {
 
             <div className="relative h-[280px] w-full sm:h-[330px] lg:absolute lg:bottom-0 lg:right-[-60px] lg:h-[330px] lg:w-[58%] xl:right-[-35px]">
               <Image
-                src={RushfordBuildingImage}
+                src="/rushford/assets/img/rushford_new_desktop_bg.png"
                 alt="Rushford Business School campus building"
                 fill
                 priority={false}
