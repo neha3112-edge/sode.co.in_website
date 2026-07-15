@@ -1,40 +1,75 @@
 "use client";
 
-import { FaWhatsapp } from "react-icons/fa";
 import { ArrowRight } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 
-export default function BottomCTA({ onApply }: { onApply: () => void }) {
+/* =========================================================
+   PROPS
+========================================================= */
+
+export type BottomCTAProps = {
+  onApply: () => void;
+  whatsappPhone?: string;
+  whatsappMessage?: string;
+  brochureButtonText?: string;
+  applyButtonText?: string;
+};
+
+/* =========================================================
+   BOTTOM CTA
+========================================================= */
+
+export default function BottomCTA({
+  onApply,
+  whatsappPhone = "917065777755",
+  whatsappMessage = "I want to know more about the online degree and certification courses offered by SODE.",
+  brochureButtonText = "Get Brochure",
+  applyButtonText = "Apply Now",
+}: BottomCTAProps) {
+  /* =========================================================
+     OPEN WHATSAPP
+  ========================================================= */
+
   const handleWhatsApp = () => {
-    const phone = "917065777755"; // ✅ without +
+    const cleanPhoneNumber = whatsappPhone.replace(/\D/g, "");
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    const whatsappUrl =
+      `https://api.whatsapp.com/send/?phone=${cleanPhoneNumber}` +
+      `&text=${encodedMessage}`;
 
-    const message = encodeURIComponent(
-      "I want to download the 1-Year Online MBA Degree brochure",
-    );
-
-    const url = `https://api.whatsapp.com/send/?phone=${phone}&text=${message}`;
-
-    window.open(url, "_blank");
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
   };
 
   return (
-    <div className="fixed bottom-0  left-0 w-full z-50 flex items-center md:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.2)] bg-none rounded-2xl">
-      {/* WHATSAPP */}
+    <div className="fixed bottom-0 left-0 z-50 flex w-full items-center rounded-2xl bg-none shadow-[0_-4px_20px_rgba(0,0,0,0.2)] md:hidden">
+      {/* =====================================================
+          WHATSAPP BUTTON
+      ====================================================== */}
+
       <button
+        type="button"
         onClick={handleWhatsApp}
-        className="flex-1 bg-[#25D366] text-white py-3 font-semibold flex items-center justify-center gap-2 rounded-tl-2xl"
+        className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-tl-2xl bg-[#25D366] py-3 font-semibold text-white"
       >
-        <FaWhatsapp size={18} />
-        Get Brochure
+        <FaWhatsapp size={18} aria-hidden="true" />
+
+        <span>{brochureButtonText}</span>
       </button>
 
-      {/* APPLY (FORM OPEN) */}
+      {/* =====================================================
+          APPLY BUTTON
+      ====================================================== */}
+
       <button
+        type="button"
         onClick={onApply}
-        className="flex-1 bg-[#FFC107] text-black py-3 font-semibold flex items-center justify-center gap-2 rounded-tr-2xl group"
+        className="group flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-tr-2xl bg-[#FFC107] py-3 font-semibold text-black"
       >
-        Apply Now
+        <span>{applyButtonText}</span>
+
         <ArrowRight
           size={18}
+          aria-hidden="true"
           className="transition-transform group-hover:translate-x-1"
         />
       </button>

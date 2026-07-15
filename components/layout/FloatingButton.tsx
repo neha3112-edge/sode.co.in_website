@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import confetti from "canvas-confetti";
-
 import { getAssetPath } from "@/lib/utils";
 import FormWrapper, {
   type FormCourseOption,

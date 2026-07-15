@@ -94,6 +94,7 @@ export default function IIMKPage() {
           utmMediumFallback="IIM_Organic"
           submitButtonText="Get Coupon Code"
           submitButtonClassName="bg-[#0f3b8c] hover:bg-[#0c2e6f]"
+          redirectUrl="/iimk/thank-you"
           autoOpenAtScrollPercent={45}
           autoOpenSessionKey="iimk-scholarship-form-auto-opened"
           showConfettiOnAutoOpen
@@ -102,7 +103,17 @@ export default function IIMKPage() {
 
       {/* Mobile bottom CTA */}
       <div className="lg:hidden">
-        <GlobalCTA />
+        <GlobalCTA
+          courseOptions={IIMK_COURSE_OPTIONS}
+          sourceOverride="IIM LP"
+          utmSourceFallback="Organic"
+          utmMediumFallback="IIM_Organic"
+          redirectUrl="/iimk/thank-you"
+          whatsappMessage="I want to download the IIM Kozhikode Online Program brochure"
+          applyFormName="IIMK Mobile Bottom Apply Form"
+          brochureFormName="IIMK Mobile Bottom Brochure Form"
+          brochureUrl="/assets/pdf/iim-kozhikode-brochure.pdf"
+        />
       </div>
     </div>
   );

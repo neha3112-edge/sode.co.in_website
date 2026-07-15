@@ -121,10 +121,10 @@ export default function IIITBPage() {
           utmMediumFallback="IIITB_Organic"
           submitButtonText="Get Coupon Code"
           submitButtonClassName="bg-[#076493] hover:bg-[#05547c]"
+          redirectUrl="/iiitb/thank-you"
           autoOpenAtScrollPercent={45}
           autoOpenSessionKey="iiitb-scholarship-form-auto-opened"
           showConfettiOnAutoOpen
-          redirectUrl="/iiitb/thank-you"
         />
       </div>
 
@@ -133,7 +133,17 @@ export default function IIITBPage() {
       ====================================================== */}
 
       <div className="lg:hidden">
-        <GlobalCTA />
+        <GlobalCTA
+          courseOptions={IIITB_COURSE_OPTIONS}
+          sourceOverride="IIITB LP"
+          utmSourceFallback="Organic"
+          utmMediumFallback="IIITB_Organic"
+          redirectUrl="/iiitb/thank-you"
+          whatsappMessage="I want to download the IIIT Bangalore Online Program brochure"
+          applyFormName="IIITB Mobile Bottom Apply Form"
+          brochureFormName="IIITB Mobile Bottom Brochure Form"
+          brochureUrl="/assets/pdf/iiitb-brochure.pdf"
+        />
       </div>
     </div>
   );

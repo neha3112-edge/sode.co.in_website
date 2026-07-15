@@ -128,6 +128,7 @@ export default function Page() {
   return (
     <div className="flex min-h-screen flex-col bg-white">
       <Header />
+
       <main className="flex w-full flex-1 flex-col md:mt-10">
         <Hero />
         <StatsRibbon />
@@ -137,7 +138,9 @@ export default function Page() {
         <Testimonials />
         <FAQ />
       </main>
+
       <MainFooter />
+
       {/* =====================================================
           FLOATING SCHOLARSHIP BUTTON
       ====================================================== */}
@@ -160,10 +163,33 @@ export default function Page() {
         />
       </div>
 
-      {/* Mobile bottom CTA */}
+      {/* =====================================================
+          MOBILE BOTTOM CTA
+      ====================================================== */}
 
       <div className="lg:hidden">
-        <GlobalCTA />
+        <GlobalCTA
+          courseOptions={SODE_COURSE_OPTIONS}
+          sourceOverride="SODE"
+          utmSourceFallback="Organic"
+          utmMediumFallback="SODE_Organic"
+          redirectUrl="/thank-you"
+          whatsappPhone="917065777755"
+          whatsappMessage="I want to download the certification or online degree brochure"
+          brochureButtonText="Get Brochure"
+          applyButtonText="Apply Now"
+          applyFormTitle="Apply Now"
+          applyFormSubtitle="Select your preferred course and start your application journey"
+          applyFormName="SODE Mobile Bottom Apply Form"
+          applySubmitButtonText="Apply Now"
+          applySubmitButtonClassName="bg-[#0f3b8c] hover:bg-[#0c2e6f]"
+          brochureFormTitle="Download Brochure"
+          brochureFormSubtitle="Select your preferred course to receive the brochure"
+          brochureFormName="SODE Mobile Bottom Brochure Form"
+          brochureSubmitButtonText="Download Brochure"
+          brochureSubmitButtonClassName="bg-[#0f3b8c] hover:bg-[#0c2e6f]"
+          brochureUrl="/assets/pdf/brochure.pdf"
+        />
       </div>
     </div>
   );
