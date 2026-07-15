@@ -5,18 +5,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     {
-      url: `${baseUrl}/`,
-      lastModified: new Date(),
+      url: baseUrl,
+      changeFrequency: "daily",
       priority: 1,
     },
     {
       url: `${baseUrl}/iiitb`,
-      lastModified: new Date(),
+      changeFrequency: "daily",
       priority: 0.9,
     },
     {
       url: `${baseUrl}/iimk`,
-      lastModified: new Date(),
+      changeFrequency: "daily",
       priority: 0.9,
     },
   ];
