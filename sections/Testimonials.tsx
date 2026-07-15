@@ -86,10 +86,7 @@ export function Testimonials() {
   ];
 
   return (
-    <section
-      id="alumni-voices"
-      className="scroll-mt-10 py-16 md:py-24 bg-[#F8FAFC]"
-    >
+    <section id="reviews" className="scroll-mt-10 py-16 md:py-24 bg-[#F8FAFC]">
       <Container>
         {/* Header */}
         <div className="text-center mb-10 md:mb-6">

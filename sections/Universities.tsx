@@ -318,7 +318,7 @@ export function Universities() {
 
   return (
     <section
-      id="prestigious-institutions"
+      id="universities"
       className="scroll-mt-10 py-16 md:py-20 bg-white overflow-hidden"
     >
       <Container className="max-w-7xl">

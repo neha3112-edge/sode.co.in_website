@@ -185,7 +185,7 @@ export function Hero() {
   return (
     <>
       <section
-        id="home"
+        id="hero-section"
         className="relative w-full overflow-hidden bg-[#102441]"
       >
         {/* =================================================

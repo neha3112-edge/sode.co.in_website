@@ -119,7 +119,7 @@ export function MainFooter() {
         {/* =====================================================
             TOP CTA SECTION
         ====================================================== */}
-        <section className="bg-[#1d3557] py-8 md:py-10">
+        <section className="bg-[#1d3557] py-8 md:py-10" id="expert-counseling">
           <div className="mx-auto w-full max-w-7xl px-5 sm:px-8">
             <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
               <div className="text-center md:text-left">

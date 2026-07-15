@@ -217,7 +217,7 @@ export function AboutSode() {
   return (
     <>
       <section
-        id="about-sode"
+        id="about"
         className="scroll-mt-10 py-16 bg-[#1d3557] text-white overflow-hidden w-full relative z-10 border-t border-white/5"
       >
         <Container>

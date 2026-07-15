@@ -27,7 +27,10 @@ const stats = [
 
 export function Stats() {
   return (
-    <section className="bg-[#F3F7FB] py-6 w-full relative z-10 shadow-sm">
+    <section
+      className="bg-[#F3F7FB] py-6 w-full relative z-10 shadow-sm"
+      id="stats"
+    >
       <Container>
         {/* ✅ GRID FIX */}
         <div className="grid grid-cols-2 md:grid-cols-4 max-w-6xl mx-auto">
