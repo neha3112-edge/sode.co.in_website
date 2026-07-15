@@ -17,6 +17,7 @@ export default function CallCTA() {
         rounded-full
         bg-blue-400
         text-white
+        mb-2
       "
     >
       <Phone size={26} />

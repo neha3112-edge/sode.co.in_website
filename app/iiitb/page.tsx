@@ -86,9 +86,8 @@ export default function IIITBPage() {
           automatically open hoga.
       ====================================================== */}
 
-      <div className="fixed bottom-6 right-6 z-[80] hidden flex-col items-center gap-2 lg:flex">
+      <div className="fixed bottom-16 right-6 z-80 flex-col items-center lg:flex">
         <CallCTA />
-
         <FloatingButton
           courseOptions={IIITB_COURSE_OPTIONS}
           title="Get Scholarship Coupon Code"
