@@ -285,7 +285,7 @@ export function CoursesOffered() {
                 title="Apply Now"
                 subtitle="Select your preferred course and start your application"
                 onClose={closeForm}
-                defaultCourse={selectedCourse?.title || ""}
+                defaultCourse=""
                 courseOptions={IIITB_COURSE_OPTIONS}
                 formNameOverride="IIITB Course Apply Form"
                 sourceOverride="IIITB LP"
@@ -332,7 +332,7 @@ export function CoursesOffered() {
                 title="Download Brochure"
                 subtitle="Select your preferred course to receive its brochure"
                 onClose={closeForm}
-                defaultCourse={selectedCourse?.title || ""}
+                defaultCourse=""
                 courseOptions={IIITB_COURSE_OPTIONS}
                 formNameOverride="IIITB Course Brochure Form"
                 sourceOverride="IIITB LP"

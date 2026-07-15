@@ -34,63 +34,63 @@ const courses: Course[] = [
     title: "Doctorate of Business Administration",
     description:
       "Industry-aligned Curriculum that gives complete knowledge to excel in the business administration field.",
-    image: "/assets/img/dba-business-administration.webp",
+    image: "/rushford/assets/img/gebneralirushford.webp",
   },
   {
     id: 2,
     title: "DBA in International Business",
     description:
       "Focuses on global trade, cross-border strategies, and international business leadership.",
-    image: "/assets/img/dba-international-business.webp",
+    image: "/rushford/assets/img/international-business-rushford.webp",
   },
   {
     id: 3,
     title: "DBA in Healthcare Management",
     description:
       "Get leadership expertise in the administration of hospitals, clinics, and healthcare systems.",
-    image: "/assets/img/dba-healthcare-management.webp",
+    image: "/rushford/assets/img/healthcare-management-rushford.webp",
   },
   {
     id: 4,
     title: "DBA in Human Resource Management",
     description:
       "Enhances the human resource management in workforce planning, talent development, & HR strategies.",
-    image: "/assets/img/dba-human-resource-management.webp",
+    image: "/rushford/assets/img/human-resource-management-rushford.webp",
   },
   {
     id: 5,
     title: "DBA in Supply Chain Management",
     description:
       "Builds advanced knowledge and skills in logistics, operations, and supply chain efficiency.",
-    image: "/assets/img/dba-supply-chain-management.webp",
+    image: "/rushford/assets/img/supplychain-management-rushford.webp",
   },
   {
     id: 6,
     title: "DBA in Finance",
     description:
       "Covers essential sectors such as corporate finance, investment, and effective risk management.",
-    image: "/assets/img/dba-finance.webp",
+    image: "/rushford/assets/img/finance-rushford.webp",
   },
   {
     id: 7,
     title: "DBA in Data Science",
     description:
       "Uses data-driven research to create innovative business strategies to boost the growth of the organisation.",
-    image: "/assets/img/dba-data-science.webp",
+    image: "/rushford/assets/img/data-science-rushford.webp",
   },
   {
     id: 8,
     title: "DBA in Marketing",
     description:
       "Emphasizes on consumer insights, digital marketing, and brand management strategies.",
-    image: "/assets/img/dba-marketing.webp",
+    image: "/rushford/assets/img/marketing-rushford.webp",
   },
   {
     id: 9,
     title: "DBA in Business Analytics",
     description:
       "Develop advanced analytics skills for data-informed decision-making processes for business growth.",
-    image: "/assets/img/dba-business-analytics.webp",
+    image: "/rushford/assets/img/business-analytics-rushford.webp",
   },
 ];
 

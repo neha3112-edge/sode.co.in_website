@@ -9,8 +9,6 @@ import FormWrapper, {
   type FormCourseOption,
 } from "@/components/forms/FormWrapper";
 
-import IIITBImg from "../../assets/img/iiitb_desktop_new_bg.png";
-
 /*
 |--------------------------------------------------------------------------
 | IIIT Bangalore Course Options
@@ -93,7 +91,7 @@ export function Hero() {
       >
         {/* Background campus image */}
         <Image
-          src={IIITBImg}
+          src="/rushford/assets/img/rushford_new_desktop_bg.png"
           alt="IIIT Bangalore campus"
           fill
           priority
