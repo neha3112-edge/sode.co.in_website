@@ -126,7 +126,6 @@ export function MainFooter() {
                 <h3 className="text-2xl font-extrabold text-[#f1dfa0] md:text-4xl">
                   Need clarification?
                 </h3>
-
                 <p className="mt-2 text-sm font-medium text-white md:text-[18px]">
                   Interact with experts, Get free consultation.
                 </p>
