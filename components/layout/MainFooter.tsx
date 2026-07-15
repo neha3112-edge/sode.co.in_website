@@ -296,16 +296,14 @@ export function MainFooter() {
                     rel="noopener noreferrer"
                     aria-label="Pinterest"
                     title="Pinterest"
-                    className="flex h-8 w-8 items-center justify-center rounded-full bg-[#1d3557] text-[#f4cc78] transition duration-300 hover:-translate-y-1 hover:bg-[#142943]"
                   >
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="h-[18px] w-[18px]"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path d="M12 2a10 10 0 0 0-3.64 19.31c-.09-1.69-.02-3.72.42-5.58l1.29-5.47s-.32-.65-.32-1.61c0-1.51.87-2.64 1.96-2.64.93 0 1.37.7 1.37 1.53 0 .93-.59 2.32-.9 3.61-.26 1.08.54 1.96 1.6 1.96 1.92 0 3.4-2.03 3.4-4.95 0-2.59-1.86-4.4-4.52-4.4-3.08 0-4.89 2.31-4.89 4.7 0 .93.36 1.93.81 2.47.09.11.1.2.08.31l-.3 1.24c-.05.2-.16.24-.37.15-1.38-.64-2.24-2.65-2.24-4.27 0-3.48 2.53-6.67 7.29-6.67 3.83 0 6.8 2.73 6.8 6.37 0 3.8-2.4 6.86-5.72 6.86-1.12 0-2.17-.58-2.53-1.27l-.69 2.62c-.25.96-.92 2.16-1.37 2.89.84.26 1.71.4 2.61.4A10 10 0 0 0 12 2Z" />
-                    </svg>
+                    <Image
+                      src={getAssetPath("/assets/images/pinterest.png")}
+                      alt="Pinterest"
+                      width={32}
+                      height={32}
+                      className="object-contain"
+                    />
                   </a>
                 </div>
 
