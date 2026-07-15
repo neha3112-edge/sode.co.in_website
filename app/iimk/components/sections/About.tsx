@@ -41,25 +41,25 @@ export function About() {
 
                 {/* Border Wrapped Logos Container */}
                 <div className="border border-gray-400 rounded-2xl p-5 bg-white/20 flex flex-wrap justify-center items-center gap-4">
-                  <div className="bg-white px-2 py-1 rounded-lg flex items-center justify-center h-14 w-28 shadow-xs border border-gray-100">
+                  <div className="bg-white px-2 py-1 rounded-lg flex items-center justify-center h-25 w-50 shadow-xs border border-gray-100">
                     <Image
                       src={getAssetPath("/iimk/assets/img/amba-iim.webp")}
                       alt="AMBA Accredited"
-                      width={90}
-                      height={45}
+                      width={150}
+                      height={100}
                       className="object-contain"
                     />
                   </div>
-                  <div className="bg-white px-2 py-1 rounded-lg flex items-center justify-center h-14 w-28 shadow-xs border border-gray-100">
+                  <div className="bg-white px-2 py-1 rounded-lg flex items-center justify-center h-25 w-50 shadow-xs border border-gray-100">
                     <Image
                       src={getAssetPath("/iimk/assets/img/equis-iim.webp")}
                       alt="EQUIS Accredited"
-                      width={90}
-                      height={45}
+                      width={150}
+                      height={100}
                       className="object-contain"
                     />
                   </div>
-                  <div className="bg-white px-2 py-1 rounded-lg flex items-center justify-center h-14 w-28 shadow-xs border border-gray-100">
+                  {/* <div className="bg-white px-2 py-1 rounded-lg flex items-center justify-center h-14 w-28 shadow-xs border border-gray-100">
                     <Image
                       src={getAssetPath("/iimk/assets/img/aacsb-iim.webp")}
                       alt="AACSB Accredited"
@@ -67,8 +67,8 @@ export function About() {
                       height={45}
                       className="object-contain"
                     />
-                  </div>
-                  <div className="bg-white px-2 py-1 rounded-lg flex items-center justify-center h-14 w-28 shadow-xs border border-gray-100">
+                  </div> */}
+                  {/* <div className="bg-white px-2 py-1 rounded-lg flex items-center justify-center h-14 w-28 shadow-xs border border-gray-100">
                     <Image
                       src={getAssetPath(
                         "/iimk/assets/img/ministry-of-education.webp",
@@ -78,7 +78,7 @@ export function About() {
                       height={45}
                       className="object-contain"
                     />
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

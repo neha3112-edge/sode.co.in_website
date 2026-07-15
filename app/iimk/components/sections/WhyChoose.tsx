@@ -96,11 +96,11 @@ export function WhyChoose() {
         </h2>
         <div className="flex flex-col gap-2 mt-3 mb-5">
           <div className="flex gap-2 align-center">
-            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#3ab449] text-white"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-check" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
+            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#3ab449] text-white"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-check" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
             <p>If you have a Bachelor's Degree - Minimum 2 years work experience</p>
           </div>
           <div className="flex gap-2 align-center">
-            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#3ab449] text-white"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-check" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
+            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#3ab449] text-white"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-check" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
             <p>If you have a Master’s Degree - Freshers can apply</p>
           </div>
         </div>

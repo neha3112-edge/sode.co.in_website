@@ -172,7 +172,7 @@ export function Eligibility() {
             <button
               type="button"
               onClick={openForm}
-              className="mt-10 inline-flex min-h-12 cursor-pointer items-center justify-center rounded-md bg-[#c9232c] px-8 py-3 text-sm font-bold text-white shadow-md transition duration-200 hover:bg-[#aa1c25]"
+              className="mt-10 inline-flex min-h-12 cursor-pointer items-center justify-center rounded-md bg-[#3ab449] px-8 py-3 text-sm font-bold text-white shadow-md transition duration-200"
             >
               Get 100% Free Counseling
             </button>
@@ -208,7 +208,7 @@ export function Eligibility() {
               utmSourceFallback="Organic"
               utmMediumFallback="IIM_Organic"
               submitButtonText="Get Free Counselling"
-              submitButtonClassName="bg-[#3ab449]"
+              submitButtonClassName="bg-[#0f3b8c]"
               redirectUrl="/iimk/thank-you"
             />
           </div>

@@ -15,12 +15,12 @@ export function Header() {
       href: "#hero-section",
     },
     {
-      label: "About",
+      label: "About IIMK",
       href: "#about",
     },
     {
       label: "Eligibility",
-      href: "#eligibility",
+      href: "#overview",
     },
     {
       label: "Sample Degree",
@@ -46,8 +46,8 @@ export function Header() {
             <Image
               src={getAssetPath("/assets/images/new_sode_tm_logo.png")}
               alt="SODE logo"
-              width={74}
-              height={74}
+              width={64}
+              height={64}
               priority
               className="cursor-pointer object-contain"
             />
