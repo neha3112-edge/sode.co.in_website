@@ -38,7 +38,7 @@ export function Hero() {
     <>
       <section
         id="hero-section"
-        className="relative overflow-hidden bg-white pt-18 lg:pt-24 min-h-[500px]"
+        className="relative overflow-hidden pt-18 lg:pt-24 min-h-[500px] bg-[#d5e5fe]"
       >
         {/* =================================================
             DESKTOP BACKGROUND
@@ -58,8 +58,8 @@ export function Hero() {
           <div className="absolute inset-0 z-10" />
         </div>
 
-        <Container className="relative z-20 px-4 sm:px-6">
-          <div className="grid grid-cols-1 items-center gap-8 py-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12 lg:py-4">
+        <Container className="relative z-20 px-4 sm:px-6 p-0">
+          <div className="grid grid-cols-1 items-center gap-8 pt-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12 lg:py-4">
 
             {/* =================================================
                 LEFT CONTENT
@@ -67,7 +67,7 @@ export function Hero() {
 
             <div className="flex flex-col items-center text-center md:items-start md:text-left">
               {/* Logo */}
-              <div className="mb-3">
+              <div className="mb-3 hidden md:block">
                 <img
                   src="/rushford/assets/img/rushford_new_logo.png"
                   alt="Rushford Business School via upGrad"
@@ -83,8 +83,8 @@ export function Hero() {
               </div>
 
               {/* Main Heading */}
-              <h1 className={`${anton.className} leading-none font-black text-left`}>
-                <span className="block text-[48px] sm:text-[68px] lg:text-[70px] text-[#e0007a] tracking-tight">
+              <h1 className={`${anton.className} leading-none text-left`}>
+                <span className="block text-[54px] sm:text-[68px] lg:text-[70px] text-[#e0007a] tracking-tight">
                   ONLINE DBA
                 </span>
               </h1>
@@ -101,7 +101,7 @@ export function Hero() {
               </p>
 
               {/* 2x2 Badge Grid */}
-              <div className="flex flex-cols flex-wrap gap-3 mt-6 w-full max-w-[340px]">
+              <div className="flex flex-cols flex-wrap gap-3 mt-6 w-full max-w-[340px] justify-center md:justify-start">
                 <div className="border-2 border-[#0f3b8c] text-black py-2 bg-[#fff]/50 px-3 rounded-[4px] text-[13px] sm:text-[14px] font-medium text-center flex items-center justify-center">
                   100% Online
                 </div>
@@ -137,7 +137,7 @@ export function Hero() {
               <img
                 src="/rushford/assets/img/rushford_new_mobile.png"
                 alt="Rushford Mobile Banner"
-                className="h-auto w-full rounded-xl object-cover shadow-md"
+                className="h-auto w-full object-cover"
               />
             </div>
 
@@ -170,7 +170,7 @@ export function Hero() {
               MOBILE FORM
           ================================================== */}
 
-          <div className="mt-4 pb-10 lg:hidden">
+          <div className="-mt-4 pb-10 lg:hidden px-4">
             <div className="mx-auto w-full max-w-md rounded-2xl bg-white p-5 shadow-2xl rushford-form-container">
               <FormWrapper
                 title="Admission Open"

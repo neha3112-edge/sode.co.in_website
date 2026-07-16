@@ -58,7 +58,7 @@ const accreditationItems: AccreditationItem[] = [
     title: "5 Star QS Rating",
     description:
       "It holds 4 stars for overall and 5 stars for online learning and teaching in the QS rating system.",
-    image: "/assets/img/qs-stars-rating-logo.webp",
+    image: "/rushford/assets/img/approva-01-rusford.webp",
     imageAlt: "QS Stars Rating System",
     imageWidth: 140,
     imageHeight: 70,
@@ -68,7 +68,7 @@ const accreditationItems: AccreditationItem[] = [
     title: "EDUQUA Certified",
     description:
       "Rushford is certified by EduQua, ensuring the quality education standards in Switzerland.",
-    image: "/assets/img/eduqua-logo.webp",
+    image: "/rushford/assets/img/eduqua.webp",
     imageAlt: "EduQua certification",
     imageWidth: 145,
     imageHeight: 75,
@@ -78,7 +78,7 @@ const accreditationItems: AccreditationItem[] = [
     title: "ACBSP Member",
     description:
       "Rushford is a member of the Accreditation Council for Business Schools & Programs.",
-    image: "/assets/img/acbsp-logo.webp",
+    image: "/rushford/assets/img/acbsp-rushford.webp",
     imageAlt: "ACBSP accreditation",
     imageWidth: 105,
     imageHeight: 80,
@@ -88,7 +88,7 @@ const accreditationItems: AccreditationItem[] = [
     title: "BGA MP",
     description:
       "It is a member of the Business Graduates Association, which provides global recognition.",
-    image: "/assets/img/bga-member-logo.webp",
+    image: "/rushford/assets/img/bga-member.webp",
     imageAlt: "Business Graduates Association member",
     imageWidth: 105,
     imageHeight: 80,
@@ -98,7 +98,7 @@ const accreditationItems: AccreditationItem[] = [
     title: "IACBE Educational",
     description:
       "Rushford is an IACBE-accredited institution that proves accountability of its programs.",
-    image: "/assets/img/iacbe-logo.webp",
+    image: "/rushford/assets/img/iacbe-rushford.webp",
     imageAlt: "IACBE accreditation",
     imageWidth: 155,
     imageHeight: 72,
@@ -108,7 +108,7 @@ const accreditationItems: AccreditationItem[] = [
     title: "AACSB Member",
     description:
       "Rushford is a member of AACSB, advancing global quality in business education.",
-    image: "/assets/img/aacsb-member-logo.webp",
+    image: "/rushford/assets/img/aacsb-rushford.webp",
     imageAlt: "AACSB member",
     imageWidth: 145,
     imageHeight: 72,
@@ -127,12 +127,12 @@ const accreditationItems: AccreditationItem[] = [
 const certificateItems: CertificateItem[] = [
   {
     id: 1,
-    image: "/assets/img/rushford-dba-certificate.webp",
+    image: "/rushford/assets/img/certificate.webp",
     imageAlt: "Rushford Business School DBA certificate",
   },
   {
     id: 2,
-    image: "/assets/img/rushford-pwc-certificate.webp",
+    image: "/rushford/assets/img/rushford_sample_Degree.webp",
     imageAlt: "Rushford PwC Board Advisory certificate",
   },
 ];
@@ -258,11 +258,11 @@ export function Accreditations() {
           {/* Heading */}
 
           <div className="text-center">
-            <h2 className="text-[25px] font-normal leading-tight tracking-[-0.02em] text-[#111111] sm:text-[28px] lg:text-[29px]">
+            <h2 className="text-[25px] font-bold leading-tight tracking-[-0.02em] text-[#0f3b8c] sm:text-[28px] lg:text-[29px]">
               Accreditation &amp; Collaboration
             </h2>
 
-            <p className="mt-2 text-[14px] font-normal leading-tight text-[#1d1d1d] sm:text-[15px]">
+            <p className="mt-2 text-[14px] font-normal leading-tight text-[#000] sm:text-[15px]">
               Rushford Business School, Switzerland
             </p>
           </div>
@@ -345,11 +345,10 @@ export function Accreditations() {
                       onClick={() => {
                         certificateApi?.scrollTo(index);
                       }}
-                      className={`rounded-full transition-all duration-300 ${
-                        selectedCertificateIndex === index
-                          ? "h-[9px] w-[25px] bg-[#FF2A62]"
-                          : "h-[9px] w-[9px] bg-[#C8C8C8] hover:bg-[#999999]"
-                      }`}
+                      className={`rounded-full transition-all duration-300 ${selectedCertificateIndex === index
+                        ? "h-[9px] w-[25px] bg-[#FF2A62]"
+                        : "h-[9px] w-[9px] bg-[#C8C8C8] hover:bg-[#999999]"
+                        }`}
                     />
                   ))}
                 </div>
@@ -359,10 +358,8 @@ export function Accreditations() {
             {/* Certificate Text Content */}
 
             <div className="text-center lg:text-left">
-              <h2 className="text-[31px] font-bold leading-[0.95] tracking-[-0.025em] text-[#17469B] sm:text-[37px] lg:text-[39px]">
-                Get a DBA Completion
-                <br className="hidden sm:block" /> Certificate with PwC Board
-                <br className="hidden sm:block" /> Advisory
+              <h2 className="text-[20px] font-bold leading-[1.1] tracking-[-0.025em] text-[#17469B] sm:text-[37px] lg:text-[30px]">
+                Get a DBA Completion Certificate with PwC Board Advisory
               </h2>
 
               <p className="mx-auto mt-6 max-w-[575px] text-[14px] font-normal leading-[1.3] text-[#171717] sm:text-[15px] lg:mx-0">
@@ -438,11 +435,11 @@ function AccreditationCard({ item }: AccreditationCardProps) {
       {/* Text Content */}
 
       <div className="min-w-0 flex-1 pl-3 sm:pl-5">
-        <h3 className="text-[16px] font-extrabold leading-[1.2] text-[#17469B] sm:text-[19px]">
+        <h3 className="text-[16px] font-extrabold leading-[1.2] text-[#17469B] sm:text-[18px]">
           {item.title}
         </h3>
 
-        <p className="mt-1.5 text-[12px] font-normal leading-[1.25] text-[#3e3e3e] sm:text-[14px]">
+        <p className="mt-1.5 text-[12px] font-normal leading-[1.25] text-[#3e3e3e] sm:text-[13px]">
           {item.description}
         </p>
       </div>
@@ -466,27 +463,18 @@ function CustomFormModal({ title, children, onClose }: CustomFormModalProps) {
   return (
     <div
       role="presentation"
-      onMouseDown={onClose}
+      onClick={onClose}
       className="fixed inset-0 z-[9999] flex items-center justify-center overflow-y-auto bg-black/65 px-4 py-6 backdrop-blur-sm"
     >
       <div
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        onMouseDown={(event) => {
+        onClick={(event) => {
           event.stopPropagation();
         }}
         className="relative max-h-[92vh] w-full max-w-[420px] overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-7"
       >
-        <button
-          type="button"
-          aria-label="Close form"
-          onClick={onClose}
-          className="absolute right-3 top-3 z-20 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-[#EAF4FF] text-[#17469B] transition-colors duration-200 hover:bg-[#D7EAFF]"
-        >
-          <X size={20} strokeWidth={2.3} />
-        </button>
-
         {children}
       </div>
     </div>

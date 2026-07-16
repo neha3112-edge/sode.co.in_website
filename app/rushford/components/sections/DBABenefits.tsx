@@ -3,13 +3,9 @@
 import Image from "next/image";
 import {
   ArrowRight,
-  BadgeCheck,
-  BriefcaseBusiness,
-  Globe2,
   X,
 } from "lucide-react";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
-import type { LucideIcon } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
 import FormWrapper from "@/components/forms/FormWrapper";
@@ -20,7 +16,7 @@ type BenefitItem = {
   id: number;
   title: string;
   description: string;
-  icon: LucideIcon;
+  image: string;
 };
 
 type FormType = "enroll" | null;
@@ -31,28 +27,28 @@ const benefitItems: BenefitItem[] = [
     title: "Global Context:",
     description:
       "A doctoral degree provides a deep understanding of business operations on a global scale.",
-    icon: BriefcaseBusiness,
+    image: "/rushford/assets/img/expertise.webp",
   },
   {
     id: 2,
     title: "Flexible Format:",
     description:
       "Complete the programme fully online while maintaining your professional commitments.",
-    icon: BadgeCheck,
+    image: "/rushford/assets/img/growth.webp",
   },
   {
     id: 3,
     title: "Learning Approach:",
     description:
       "Access live faculty sessions, real-world projects, and alumni benefits worldwide.",
-    icon: Globe2,
+    image: "/rushford/assets/img/modern-learning.webp",
   },
   {
     id: 4,
     title: "180 ECTS European Credits:",
     description:
       "Internationally recognized accreditation and global value with Earn 180 ECTS credits.",
-    icon: BadgeCheck,
+    image: "/rushford/assets/img/credit.webp",
   },
 ];
 
@@ -107,7 +103,7 @@ export function DBABenefits() {
 
   return (
     <>
-      <section id="dba-benefits" className="overflow-hidden bg-[#eeeeee]">
+      <section id="dba-benefits" className="overflow-hidden bg-[#eeeeee] px-2 md:px-0">
         <Container>
           <div className="grid min-h-[440px] grid-cols-1 items-end gap-8 lg:grid-cols-[36%_64%] lg:gap-0">
             {/* =============================================================
@@ -118,7 +114,7 @@ export function DBABenefits() {
               <div className="relative h-full w-full max-w-[440px]">
                 <Image
                   src={getAssetPath(
-                    "/assets/img/rushford-dba-benefits-person.webp",
+                    "/rushford/assets/img/whychosse.webp",
                   )}
                   alt="Rushford DBA professional holding laptop"
                   fill
@@ -132,11 +128,11 @@ export function DBABenefits() {
                 Right Content
             ============================================================== */}
 
-            <div className="order-1 py-10 sm:py-12 lg:order-2 lg:py-[34px] lg:pl-6">
+            <div className="order-1 pt-10 sm:py-12 lg:order-2 lg:py-[34px] lg:pl-6">
               {/* Heading */}
 
               <div>
-                <h2 className="text-[25px] font-normal leading-[1.05] tracking-[-0.02em] sm:text-[28px] lg:text-[29px]">
+                <h2 className="text-[22px] font-medium leading-[1.1] tracking-[-0.02em] sm:text-[28px] lg:text-[24px]">
                   <span className="text-[#FF2A62]">
                     Endless Benefits of the online DBA program
                   </span>
@@ -162,7 +158,7 @@ export function DBABenefits() {
               <button
                 type="button"
                 onClick={() => setActiveForm("enroll")}
-                className="mt-6 inline-flex min-h-[39px] cursor-pointer items-center justify-center gap-1 rounded-[5px] bg-black px-5 py-2 text-[14px] font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#1c1c1c] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-black/15 sm:text-[15px]"
+                className="mt-4 inline-flex min-h-[39px] cursor-pointer items-center justify-center gap-1 rounded-[5px] bg-black px-5 py-2 text-[14px] font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#1c1c1c] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-black/15 sm:text-[13px]"
               >
                 Enroll &amp; Get Your DBA Degree
                 <ArrowRight size={17} strokeWidth={2.8} />
@@ -206,24 +202,28 @@ type BenefitCardProps = {
 };
 
 function BenefitCard({ benefit }: BenefitCardProps) {
-  const Icon = benefit.icon;
-
   return (
     <article className="flex items-start gap-4">
-      {/* Circular Icon */}
+      {/* Benefit Image */}
 
-      <div className="flex h-[68px] w-[68px] shrink-0 items-center justify-center rounded-full bg-[#0869B8] text-white">
-        <Icon size={36} strokeWidth={1.8} aria-hidden="true" />
+      <div className="relative h-[68px] w-[68px] shrink-0 overflow-hidden">
+        <Image
+          src={getAssetPath(benefit.image)}
+          alt={benefit.title}
+          fill
+          sizes="68px"
+          className="object-contain"
+        />
       </div>
 
       {/* Text */}
 
       <div className="min-w-0 pt-0.5">
-        <h3 className="text-[17px] font-extrabold leading-[1.15] text-[#111111] sm:text-[19px]">
+        <h3 className="text-[17px] font-bold leading-[1.15] text-[#111111] sm:text-[18px]">
           {benefit.title}
         </h3>
 
-        <p className="mt-1 text-[13px] font-normal leading-[1.2] text-[#171717] sm:text-[15px]">
+        <p className="mt-1 text-[13px] font-normal leading-[1.2] text-[#171717] sm:text-[13px]">
           {benefit.description}
         </p>
       </div>
@@ -251,27 +251,18 @@ function BenefitsFormModal({
   return (
     <div
       role="presentation"
-      onMouseDown={onClose}
+      onClick={onClose}
       className="fixed inset-0 z-[9999] flex items-center justify-center overflow-y-auto bg-black/65 px-4 py-6 backdrop-blur-sm"
     >
       <div
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        onMouseDown={(event) => {
+        onClick={(event) => {
           event.stopPropagation();
         }}
         className="relative max-h-[92vh] w-full max-w-[420px] overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-7"
       >
-        <button
-          type="button"
-          aria-label="Close enrollment form"
-          onClick={onClose}
-          className="absolute right-3 top-3 z-20 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-[#EAF4FF] text-[#0869B8] transition-colors duration-200 hover:bg-[#D7EAFF]"
-        >
-          <X size={20} strokeWidth={2.3} />
-        </button>
-
         {children}
       </div>
     </div>
