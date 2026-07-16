@@ -21,7 +21,7 @@ export function Header() {
     },
     {
       label: "Approvals",
-      href: "#approvals",
+      href: "#accreditations",
     },
     {
       label: "About",

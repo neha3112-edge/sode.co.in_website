@@ -3,6 +3,7 @@
 import {
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ChangeEvent,
   type FormEvent,
@@ -261,19 +262,20 @@ const DEFAULT_COURSE_OPTIONS: FormCourseOption[] = [
 function normalizeCourseOptions(
   options?: FormCourseOption[] | string[],
 ): FormCourseOption[] {
-  if (!options || options.length === 0) {
-    return DEFAULT_COURSE_OPTIONS;
-  }
+  const baseOptions = options && options.length > 0 ? options : DEFAULT_COURSE_OPTIONS;
 
-  return options.map((option) => {
+  return baseOptions.map((option) => {
     if (typeof option === "string") {
       return {
-        value: option,
+        value: `${option}::${option}`,
         label: option,
       };
     }
 
-    return option;
+    return {
+      ...option,
+      value: `${option.value}::${option.label}`,
+    };
   });
 }
 
@@ -310,6 +312,67 @@ export default function FormWrapper({
   dynamicCourseBrochures = false,
 }: FormWrapperProps) {
   const router = useRouter();
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  /* =======================================================
+     DISABLE CLOSE ON BACKDROP CLICK & ESCAPE KEY
+  ======================================================== */
+
+  useEffect(() => {
+    // 1. Intercept and block Escape key close handlers at capture phase
+    const handleEscapeCapture = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+    };
+    window.addEventListener("keydown", handleEscapeCapture, true);
+
+    // 2. Intercept and block backdrop clicks at capture phase
+    if (!containerRef.current) {
+      return () => {
+        window.removeEventListener("keydown", handleEscapeCapture, true);
+      };
+    }
+
+    let parent = containerRef.current.parentElement;
+    const preventBackdropClick = (e: MouseEvent) => {
+      let dialogEl: HTMLElement | null = containerRef.current;
+      while (dialogEl && dialogEl.parentElement !== parent) {
+        dialogEl = dialogEl.parentElement;
+      }
+
+      if (dialogEl && !dialogEl.contains(e.target as Node)) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
+    };
+
+    while (parent) {
+      const isBackdrop =
+        parent.getAttribute("role") === "presentation" ||
+        parent.classList.contains("fixed") ||
+        (typeof parent.className === "string" && (
+          parent.className.includes("fixed") ||
+          parent.className.includes("backdrop")
+        ));
+
+      if (isBackdrop) {
+        parent.addEventListener("click", preventBackdropClick, true);
+        parent.addEventListener("mousedown", preventBackdropClick, true);
+        break;
+      }
+      parent = parent.parentElement;
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleEscapeCapture, true);
+      if (parent) {
+        parent.removeEventListener("click", preventBackdropClick, true);
+        parent.removeEventListener("mousedown", preventBackdropClick, true);
+      }
+    };
+  }, []);
 
   /* =======================================================
      FORM STATE
@@ -323,7 +386,14 @@ export default function FormWrapper({
 
   const [state, setState] = useState("");
 
-  const [course, setCourse] = useState(defaultCourse);
+  const [course, setCourse] = useState(() => {
+    const options = normalizeCourseOptions(courseOptions);
+    if (!defaultCourse) return "";
+    const found = options.find((o) =>
+      o.value === defaultCourse || o.value.split("::")[0] === defaultCourse || o.label === defaultCourse
+    );
+    return found ? found.value : defaultCourse;
+  });
 
   const [courseLabel, setCourseLabel] = useState("");
 
@@ -348,8 +418,15 @@ export default function FormWrapper({
   ======================================================== */
 
   useEffect(() => {
-    setCourse(defaultCourse);
-  }, [defaultCourse]);
+    if (!defaultCourse) {
+      setCourse("");
+      return;
+    }
+    const found = finalCourseOptions.find((o) =>
+      o.value === defaultCourse || o.value.split("::")[0] === defaultCourse || o.label === defaultCourse
+    );
+    setCourse(found ? found.value : defaultCourse);
+  }, [defaultCourse, finalCourseOptions]);
 
   /* =======================================================
      SAVE CURRENT URL UTM PARAMETERS
@@ -565,6 +642,10 @@ export default function FormWrapper({
     setLoading(true);
 
     try {
+      const apiCourse = finalCourse && finalCourse.includes("::")
+        ? finalCourse.split("::")[0]
+        : finalCourse;
+
       const payload = {
         name: name.trim(),
 
@@ -574,7 +655,7 @@ export default function FormWrapper({
 
         state,
 
-        course: finalCourse,
+        course: apiCourse,
 
         form_name: formNameOverride || title?.trim() || "Website Form",
 
@@ -661,6 +742,7 @@ export default function FormWrapper({
 
   return (
     <div
+      ref={containerRef}
       className={`transition-all duration-300 ${closing
         ? "translate-y-2 scale-95 opacity-0"
         : "translate-y-0 scale-100 opacity-100"

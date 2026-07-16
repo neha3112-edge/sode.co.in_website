@@ -111,7 +111,7 @@ export function ApplyAndFaq() {
       <section id="how-to-apply" className="bg-[#fcfdfe] py-14 sm:py-16 lg:py-20">
         <Container className="max-w-370">
           <div className="text-center">
-            <h2 className="text-2xl font-bold leading-tight text-[#0f3b8c] sm:text-3xl lg:text-[34px] uppercase">
+            <h2 className="text-2xl font-bold leading-tight text-[#0f3b8c] sm:text-3xl lg:text-[34px]">
               How to Apply for Rushford University Online Courses
             </h2>
 
@@ -135,7 +135,7 @@ export function ApplyAndFaq() {
       >
         <Container>
           <div className="text-center">
-            <h2 className="text-3xl font-extrabold leading-tight text-[#0f3b8c] sm:text-4xl uppercase">
+            <h2 className="text-2xl font-extrabold leading-tight text-[#0f3b8c] sm:text-3xl">
               FAQs about the Rushford Online DBA Course
             </h2>
           </div>
@@ -197,9 +197,8 @@ type FaqAccordionItemProps = {
 function FaqAccordionItem({ faq, isOpen, onToggle }: FaqAccordionItemProps) {
   return (
     <div
-      className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
-        isOpen ? "border-transparent bg-[#f2f2f2]" : "border-gray-300 bg-white"
-      }`}
+      className={`overflow-hidden rounded-2xl border transition-all duration-300 ${isOpen ? "border-transparent bg-[#f2f2f2]" : "border-gray-300 bg-white"
+        }`}
     >
       <button
         type="button"
@@ -221,9 +220,8 @@ function FaqAccordionItem({ faq, isOpen, onToggle }: FaqAccordionItemProps) {
       </button>
 
       <div
-        className={`grid transition-all duration-300 ${
-          isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-        }`}
+        className={`grid transition-all duration-300 ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+          }`}
       >
         <div className="overflow-hidden">
           <p className="px-5 pb-6 pl-14 text-sm leading-5.5 text-gray-600 sm:px-6 sm:pb-7 sm:pl-16 sm:text-base">

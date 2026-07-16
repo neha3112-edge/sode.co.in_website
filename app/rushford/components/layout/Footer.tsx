@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import ArrowGif from "../../assets/img/arrow.gif";
 import DesLogo from "../../assets/img/new-des-logo.webp";
 type ModalType = "disclaimer" | "terms" | "privacy" | null;
 
@@ -44,7 +43,7 @@ export default function Footer() {
             </h2>
 
             <p className="mx-auto mt-4 max-w-4xl text-sm font-semibold leading-6.6 sm:text-base lg:text-lg">
-              Compare IIIT Bangalore University with Top UGC-DEB Approved
+              Compare Rushford University with Top UGC-DEB Approved
               Universities
             </p>
 
@@ -56,7 +55,7 @@ export default function Footer() {
               className="absolute -bottom-10 left-1/2 flex h-20 w-20 -translate-x-1/2 items-center justify-center rounded-full bg-white transition-transform duration-300 hover:scale-105"
             >
               <Image
-                src={ArrowGif}
+                src="/rushford/assets/img/arrow.gif"
                 alt="Scroll down"
                 width={48}
                 height={48}
