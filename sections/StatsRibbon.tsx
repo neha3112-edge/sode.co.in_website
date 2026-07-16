@@ -29,7 +29,7 @@ export function StatsRibbon() {
   ];
 
   return (
-    <section className="w-full bg-linear-to-r from-[#EEC471] via-[#F3CD73] to-[#FADA9A] py-5 md:py-10 shadow-md relative z-10">
+    <section id="stats" className="w-full bg-linear-to-r from-[#EEC471] via-[#F3CD73] to-[#FADA9A] py-5 md:py-10 shadow-md relative z-10">
       <Container>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 items-center max-w-6xl mx-auto">
           {stats.map((stat, idx) => (
