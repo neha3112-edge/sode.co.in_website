@@ -1,0 +1,7 @@
+/* Style the phone link inside FormWrapper to be blue on Rushford page */
+.rushford-form-container a[href^="tel:"] {
+  background-color: #0f3b8c !important;
+}
+.rushford-form-container a[href^="tel:"]:hover {
+  background-color: #0c2e6f !important;
+}

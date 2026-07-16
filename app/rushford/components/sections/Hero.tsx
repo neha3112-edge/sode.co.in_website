@@ -2,310 +2,230 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { CheckSquare, Download, X } from "lucide-react";
+import { Check, Download } from "lucide-react";
+import { Anton } from "next/font/google";
 
 import { Container } from "@/components/ui/Container";
-import FormWrapper, {
-  type FormCourseOption,
-} from "@/components/forms/FormWrapper";
+import FormWrapper from "@/components/forms/FormWrapper";
+import { RUSHFORD_COURSE_OPTIONS } from "../../constants";
 
-/*
-|--------------------------------------------------------------------------
-| IIIT Bangalore Course Options
-|--------------------------------------------------------------------------
-*/
-
-const IIITB_COURSE_OPTIONS: FormCourseOption[] = [
-  {
-    value: "Executive Programme in Generative AI for Leaders",
-    label: "Executive Programme in Generative AI for Leaders",
-  },
-  {
-    value: "Executive Post Graduate Certificate Programme in Data Science & AI",
-    label: "Executive Post Graduate Certificate Programme in Data Science & AI",
-  },
-  {
-    value:
-      "Professional Certificate Programme in Data Science with Generative AI",
-    label:
-      "Professional Certificate Programme in Data Science with Generative AI",
-  },
-  {
-    value: "Executive Post Graduate Programme in Applied AI and Agentic AI",
-    label: "Executive Post Graduate Programme in Applied AI and Agentic AI",
-  },
-  {
-    value: "Executive Diploma in Machine Learning & Artificial Intelligence",
-    label: "Executive Diploma in Machine Learning & Artificial Intelligence",
-  },
-  {
-    value: "Chief Technology Officer & AI Leadership Programme",
-    label: "Chief Technology Officer & AI Leadership Programme",
-  },
-  {
-    value: "Master of Science in Machine Learning & Artificial Intelligence",
-    label: "Master of Science in Machine Learning & Artificial Intelligence",
-  },
-  {
-    value: "Master of Science in Data Science with Generative AI",
-    label: "Master of Science in Data Science with Generative AI",
-  },
-];
-
-/*
-|--------------------------------------------------------------------------
-| Hero Section
-|--------------------------------------------------------------------------
-*/
+const anton = Anton({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
 
 export function Hero() {
   const [downloadOpen, setDownloadOpen] = useState(false);
 
-  useEffect(() => {
-    document.body.style.overflow = downloadOpen ? "hidden" : "";
+  /* =========================================================
+     BODY SCROLL LOCK FOR BROCHURE MODAL
+  ========================================================= */
 
-    return () => {
+  useEffect(() => {
+    if (downloadOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
       document.body.style.overflow = "";
-    };
+    }
   }, [downloadOpen]);
 
-  useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setDownloadOpen(false);
-      }
-    };
-
-    window.addEventListener("keydown", handleEscape);
-
-    return () => {
-      window.removeEventListener("keydown", handleEscape);
-    };
-  }, []);
+  const closeDownloadForm = () => {
+    setDownloadOpen(false);
+  };
 
   return (
     <>
       <section
-        id="home"
-        className="relative min-h-[430px] overflow-hidden bg-[#edf2ff]"
+        id="hero-section"
+        className="relative overflow-hidden bg-white pt-18 lg:pt-24 min-h-[500px]"
       >
-        {/* Background campus image */}
-        <Image
-          src="/rushford/assets/img/rushford_new_desktop_bg.png"
-          alt="IIIT Bangalore campus"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
+        {/* =================================================
+            DESKTOP BACKGROUND
+        ================================================== */}
 
-        {/* Screenshot jaisa overall subtle white layer */}
-        <div className="absolute inset-0 bg-white/5" />
+        <div className="absolute inset-0 z-0 hidden lg:block">
+          <Image
+            src="/rushford/assets/img/rushford_new_desktop_bg.png"
+            alt="Rushford Business School campus"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-right"
+          />
 
-        {/* Screenshot jaisa left light-blue gradient */}
-        <div className="absolute inset-y-0 left-0 hidden w-[48%] bg-linear-to-r from-[#edf2ff] via-[#edf2ff]/95 to-transparent lg:block" />
+          {/* Fade effect matching screenshot - fades white on the left into the building image on the right */}
+          <div className="absolute inset-0 z-10" />
+        </div>
 
-        {/* Mobile overlay */}
-        <div className="absolute inset-0 bg-[#edf2ff]/94 lg:hidden" />
+        <Container className="relative z-20 px-4 sm:px-6">
+          <div className="grid grid-cols-1 items-center gap-8 py-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12 lg:py-4">
 
-        <Container className="relative z-10">
-          <div className="grid min-h-[430px] grid-cols-1 items-center gap-8 py-8 lg:grid-cols-[minmax(0,1fr)_372px] lg:gap-14 lg:py-5">
-            {/* =========================================================
-                Left Content
-            ========================================================== */}
+            {/* =================================================
+                LEFT CONTENT
+            ================================================== */}
 
-            <div className="mx-auto w-full max-w-[570px] text-center lg:mx-0 lg:text-left">
-              {/* Logos */}
-              <div className="mb-3 flex items-center justify-center gap-3 lg:justify-start">
-                {/* IIIT logo placeholder */}
-                <div className="flex items-center gap-2">
-                  <div className="flex h-[38px] w-[38px] items-center justify-center rounded-full bg-[#173d68] text-[10px] font-black uppercase text-white">
-                    IIIT
-                  </div>
+            <div className="flex flex-col items-center text-center md:items-start md:text-left">
+              {/* Logo */}
+              <div className="mb-3">
+                <img
+                  src="/rushford/assets/img/rushford_new_logo.png"
+                  alt="Rushford Business School via upGrad"
+                  className="w-full max-w-[200px] sm:max-w-[240px] h-auto object-contain"
+                />
+              </div>
 
-                  <div className="text-left">
-                    <p className="text-[9px] font-bold uppercase leading-[1.1] text-[#1f2f43]">
-                      International Institute of
-                    </p>
-
-                    <p className="text-[9px] font-semibold leading-[1.1] text-[#1f2f43]">
-                      Information Technology Bangalore
-                    </p>
-                  </div>
-                </div>
-
-                <div className="h-7 w-px bg-[#9aa2ad]" />
-
-                <span className="text-[22px] font-black tracking-tight text-[#ef3340]">
-                  upGrad
+              {/* Blue Badge */}
+              <div className="mb-4">
+                <span className="inline-block bg-[#0f3b8c] text-white text-[11px] sm:text-xs font-bold px-3 py-1.5 rounded-[4px] uppercase tracking-wider">
+                  Doctorate of Business Administration
                 </span>
               </div>
 
-              {/* Small Heading */}
-              <p className="text-[19px] font-extrabold leading-[1.05] text-black sm:text-[21px]">
-                Build Leadership Skills With
-              </p>
-
               {/* Main Heading */}
-              <h1 className="mt-2 font-black leading-[0.93] tracking-[-0.035em] text-[#c9230c]">
-                <span className="block text-[45px] sm:text-[54px] lg:text-[58px]">
-                  IIIT Bangalore
-                </span>
-
-                <span className="mt-2 block text-[43px] sm:text-[52px] lg:text-[56px]">
-                  Online Courses
+              <h1 className={`${anton.className} leading-none font-black text-left`}>
+                <span className="block text-[48px] sm:text-[68px] lg:text-[70px] text-[#e0007a] tracking-tight">
+                  ONLINE DBA
                 </span>
               </h1>
 
-              {/* Provider */}
-              <p className="mt-5 text-[15px] font-semibold text-black sm:text-[16px]">
-                By{" "}
-                <span className="font-bold underline decoration-1 underline-offset-2">
-                  IIIT Bangalore via upGrad
-                </span>
+              {/* Provider Info */}
+              <p className="mt-3 text-[14px] text-black font-bold">
+                By <span className="underline decoration-1">Rushford Business School</span> via <span className="underline decoration-1">upGrad</span>
               </p>
 
-              {/* Screenshot jaisa bordered course box */}
-              <div className="mx-auto mt-7 w-fit lg:mx-0">
-                <div className="relative rounded-[20px] border-2 border-[#727272] bg-white/5 px-5 pb-4 pt-5">
-                  <span className="absolute -top-[15px] left-4 rounded-[7px] bg-[#ffc55b] px-3 py-1 text-[14px] font-extrabold text-[#c9230c]">
-                    Online
-                  </span>
+              {/* Sub-headline */}
+              <p className="mt-3 text-[16px] text-black font-medium leading-tight">
+                Earn a Doctorate Title <br />
+                along with Management Expertise
+              </p>
 
-                  <p className="whitespace-nowrap text-[22px] font-black text-[#c9230c] sm:text-[27px]">
-                    AI
-                    <span className="mx-2 text-[#c9230c]">|</span>
-                    Data Science
-                    <span className="mx-2 text-[#c9230c]">|</span>
-                    Leadership
-                  </p>
+              {/* 2x2 Badge Grid */}
+              <div className="flex flex-cols flex-wrap gap-3 mt-6 w-full max-w-[340px]">
+                <div className="border-2 border-[#0f3b8c] text-black py-2 bg-[#fff]/50 px-3 rounded-[4px] text-[13px] sm:text-[14px] font-medium text-center flex items-center justify-center">
+                  100% Online
+                </div>
+                <div className="border-2 border-[#0f3b8c] text-black py-2 bg-[#fff]/50 px-3 rounded-[4px] text-[13px] sm:text-[14px] font-medium text-center flex items-center justify-center">
+                  08+ Specialization
+                </div>
+                <div className="border-2 border-[#0f3b8c] text-black py-2 bg-[#fff]/50 px-3 rounded-[4px] text-[13px] sm:text-[14px] font-medium text-center flex items-center justify-center">
+                  1:1 Thesis Mentorship
+                </div>
+                <div className="border-2 border-[#0f3b8c] text-black py-2 bg-[#fff]/50 px-3 rounded-[4px] text-[13px] sm:text-[14px] font-medium text-center flex items-center justify-center">
+                  No Cost EMI
                 </div>
               </div>
 
-              {/* Features */}
-              <div className="mx-auto mt-4 w-fit space-y-1 text-left lg:mx-0">
-                <FeatureItem text="NAAC A+ accredited institution" />
-
-                <FeatureItem text="Executive and professional certification programmes" />
-
-                <FeatureItem text="Flexible online learning model" />
-
-                <FeatureItem text="Course duration from 5 to 14 months" />
+              {/* Download Brochure Button */}
+              <div className="mt-6">
+                <button
+                  type="button"
+                  onClick={() => setDownloadOpen(true)}
+                  className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-[4px] bg-[#0f3b8c] hover:bg-[#0c2e6f] px-6 py-3 text-sm sm:text-base font-bold text-white shadow-md transition duration-200"
+                >
+                  Download Brochure
+                  <Download size={18} aria-hidden="true" />
+                </button>
               </div>
-
-              {/* Download Button */}
-              <button
-                type="button"
-                onClick={() => setDownloadOpen(true)}
-                className="mt-3 inline-flex min-h-[41px] items-center justify-center gap-2 rounded-[11px] bg-[#cf240b] px-7 py-3 text-[14px] font-extrabold text-white shadow-[0_5px_10px_rgba(0,0,0,0.22)] transition-all duration-200 hover:bg-[#b91f09]"
-              >
-                Download Brochure
-                <Download size={15} strokeWidth={2.7} />
-              </button>
             </div>
 
-            {/* =========================================================
-                Desktop Enquiry Form
-            ========================================================== */}
+            {/* =================================================
+                MOBILE BANNER IMAGE (rendered below text, above mobile form)
+            ================================================== */}
+
+            <div className="w-full md:max-w-md mx-auto lg:hidden">
+              <img
+                src="/rushford/assets/img/rushford_new_mobile.png"
+                alt="Rushford Mobile Banner"
+                className="h-auto w-full rounded-xl object-cover shadow-md"
+              />
+            </div>
+
+            {/* =================================================
+                DESKTOP FORM
+            ================================================== */}
 
             <div className="hidden justify-end lg:flex">
-              <div className="w-full max-w-[372px] rounded-[11px] border border-[#d7d7d7] bg-white px-5 pb-5 pt-4 shadow-[0_8px_20px_rgba(0,0,0,0.25)]">
+              <div className="w-full max-w-[400px] rounded-2xl bg-white px-6 py-6 shadow-2xl rushford-form-container">
                 <FormWrapper
-                  title="Enquire Now"
+                  title="Admission Open"
                   subtitle="Academic Experts will assist you!"
-                  courseOptions={IIITB_COURSE_OPTIONS}
-                  formNameOverride="IIITB Hero Enquiry Form"
-                  sourceOverride="IIITB Landing Page"
-                  utmSourceFallback="IIITB Organic"
-                  utmMediumFallback="IIITB Website"
+                  showPhoneCallLink={true}
+                  defaultCourse=""
+                  courseOptions={RUSHFORD_COURSE_OPTIONS}
+                  formNameOverride="Rushford Hero Enquiry Form"
+                  sourceOverride="Rushford LP"
+                  utmSourceFallback="Organic"
+                  utmMediumFallback="Rushford_Organic"
                   submitButtonText="Submit"
+                  submitButtonClassName="bg-[#0f3b8c] hover:bg-[#0c2e6f]"
+                  redirectUrl="/rushford/thank-you"
                 />
               </div>
             </div>
+
           </div>
 
-          {/* Mobile Form */}
-          <div className="pb-10 lg:hidden">
-            <div className="mx-auto w-full max-w-md rounded-xl border border-gray-200 bg-white p-5 shadow-2xl">
+          {/* =================================================
+              MOBILE FORM
+          ================================================== */}
+
+          <div className="mt-4 pb-10 lg:hidden">
+            <div className="mx-auto w-full max-w-md rounded-2xl bg-white p-5 shadow-2xl rushford-form-container">
               <FormWrapper
-                title="Enquire Now"
+                title="Admission Open"
                 subtitle="Academic Experts will assist you!"
-                courseOptions={IIITB_COURSE_OPTIONS}
-                formNameOverride="IIITB Mobile Hero Enquiry Form"
-                sourceOverride="IIITB Landing Page"
-                utmSourceFallback="IIITB Organic"
-                utmMediumFallback="IIITB Mobile Website"
+                showPhoneCallLink={true}
+                defaultCourse=""
+                courseOptions={RUSHFORD_COURSE_OPTIONS}
+                formNameOverride="Rushford Mobile Hero Enquiry Form"
+                sourceOverride="Rushford LP"
+                utmSourceFallback="Organic"
+                utmMediumFallback="Rushford_Organic"
                 submitButtonText="Submit"
+                submitButtonClassName="bg-[#0f3b8c] hover:bg-[#0c2e6f]"
+                redirectUrl="/rushford/thank-you"
               />
             </div>
           </div>
         </Container>
       </section>
 
-      {/* =============================================================
-          Download Brochure Popup
-      ============================================================== */}
+      {/* =====================================================
+          DOWNLOAD BROCHURE POPUP
+      ====================================================== */}
 
       {downloadOpen && (
         <div
           role="presentation"
-          onClick={() => setDownloadOpen(false)}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/65 px-4 py-6 backdrop-blur-sm"
+          onClick={closeDownloadForm}
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm"
         >
           <div
             role="dialog"
             aria-modal="true"
-            aria-label="Download IIIT Bangalore brochure"
+            aria-label="Download Rushford brochure"
             onClick={(event) => event.stopPropagation()}
-            className="relative max-h-[92vh] w-full max-w-[400px] overflow-y-auto rounded-xl bg-white p-6 shadow-2xl"
+            className="relative max-h-[92vh] w-full max-w-sm overflow-y-auto rounded-xl bg-white p-6 shadow-2xl"
           >
-            <button
-              type="button"
-              aria-label="Close brochure form"
-              onClick={() => setDownloadOpen(false)}
-              className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-700 transition hover:bg-gray-200"
-            >
-              <X size={20} />
-            </button>
-
             <FormWrapper
               title="Download Brochure"
-              subtitle="Fill your details to receive the IIIT Bangalore brochure"
-              onClose={() => setDownloadOpen(false)}
-              courseOptions={IIITB_COURSE_OPTIONS}
-              formNameOverride="IIITB Download Brochure Form"
-              sourceOverride="IIITB Brochure"
-              utmSourceFallback="IIITB Organic"
-              utmMediumFallback="IIITB Brochure Popup"
+              subtitle="Select your preferred course to receive the Rushford brochure"
+              onClose={closeDownloadForm}
+              defaultCourse=""
+              courseOptions={RUSHFORD_COURSE_OPTIONS}
+              formNameOverride="Rushford Download Brochure Form"
+              sourceOverride="Rushford LP"
+              utmSourceFallback="Organic"
+              utmMediumFallback="Rushford_Organic"
               submitButtonText="Download Brochure"
+              isBrochureForm
+              brochureUrl="/rushford/assets/brochures/main_brochure.pdf"
+              redirectUrl="/rushford/thank-you"
             />
           </div>
         </div>
       )}
     </>
-  );
-}
-
-/*
-|--------------------------------------------------------------------------
-| Feature Item
-|--------------------------------------------------------------------------
-*/
-
-type FeatureItemProps = {
-  text: string;
-};
-
-function FeatureItem({ text }: FeatureItemProps) {
-  return (
-    <div className="flex items-start gap-1 text-[13px] font-semibold italic leading-[1.25] text-black sm:text-[14px]">
-      <CheckSquare
-        size={14}
-        strokeWidth={2.8}
-        className="mt-[1px] shrink-0 text-black"
-      />
-
-      <span>{text}</span>
-    </div>
   );
 }

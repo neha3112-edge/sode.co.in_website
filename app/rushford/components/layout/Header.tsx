@@ -4,112 +4,153 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-
 import { Container } from "@/components/ui/Container";
 import { getAssetPath } from "@/lib/utils";
-
-const navItems = [
-  {
-    label: "Courses",
-    href: "#courses",
-  },
-  {
-    label: "Approvals",
-    href: "#approvals",
-  },
-  {
-    label: "About",
-    href: "#about",
-  },
-  {
-    label: "FAQ",
-    href: "#faq",
-  },
-];
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleNavClick = () => {
-    setIsMenuOpen(false);
-  };
+  const navItems = [
+    {
+      label: "Home",
+      href: "#hero-section",
+    },
+    {
+      label: "Courses",
+      href: "#courses",
+    },
+    {
+      label: "Approvals",
+      href: "#approvals",
+    },
+    {
+      label: "About",
+      href: "#about",
+    },
+    {
+      label: "FAQs",
+      href: "#faqs",
+    },
+  ];
 
   return (
-    <header className="fixed left-0 top-0 z-50 w-full bg-white">
-      {/* Screenshot wali top navy line */}
-      <div className="h-[6px] w-full bg-[#101b30]" />
+    <header className="fixed left-0 top-0 z-50 w-full bg-white shadow-md">
+      {/* Desktop and mobile header row */}
+      <Container>
+        <div className="flex h-18 items-center justify-between">
+          {/* Logo */}
+          <a
+            href="/iiitb"
+            aria-label="Go to home page"
+            className="flex shrink-0 items-center"
+          >
+            <Image
+              src={getAssetPath("/assets/images/new_sode_tm_logo.png")}
+              alt="SODE logo"
+              width={50}
+              height={50}
+              priority
+              className="h-16 w-16 cursor-pointer object-contain"
+            />
+          </a>
 
-      <div className="border-b border-[#eeeeee] bg-white">
-        <Container>
-          <div className="flex h-[68px] items-center justify-between">
-            {/* Logo */}
-            <Link
-              href="/"
-              aria-label="Go to home page"
-              className="flex shrink-0 items-center justify-center"
-            >
-              <Image
-                src={getAssetPath("/assets/images/new_sode_tm_logo.png")}
-                alt="SODE logo"
-                width={58}
-                height={58}
-                priority
-                className="h-[58px] w-[58px] object-contain"
-              />
-            </Link>
+          {/* Desktop Navigation */}
+          <nav
+            aria-label="Main navigation"
+            className="hidden items-center gap-1 text-[13px] text-black lg:flex"
+          >
+            {navItems.map((item, index) => {
+              const isCSuiteProgram = item.label === "C-Suite Programs";
 
-            {/* Desktop Navigation */}
-            <nav
-              aria-label="Main navigation"
-              className="hidden items-center gap-[38px] lg:flex"
-            >
-              {navItems.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="relative py-5 text-[16px] font-semibold tracking-[0.01em] text-[#172033] transition-colors duration-200 hover:text-[#056493]"
-                >
-                  {item.label}
-                </a>
-              ))}
-            </nav>
+              return (
+                <div key={item.label} className="flex items-center">
+                  {isCSuiteProgram ? (
+                    <a
+                      href={item.href}
+                      className="mr-3 flex items-center gap-2 rounded-sm bg-linear-to-r from-[#EEC471] via-[#F3CD73] to-[#FADA9A] px-4 py-2 text-[#102441] shadow-xs transition-all duration-200 hover:brightness-95"
+                    >
+                      <Image
+                        src={getAssetPath("/assets/images/premium-icon.png")}
+                        alt=""
+                        width={16}
+                        height={16}
+                        className="h-4 w-4 object-contain"
+                      />
 
-            {/* Mobile Menu Button */}
-            <button
-              type="button"
-              aria-label={
-                isMenuOpen ? "Close navigation menu" : "Open navigation menu"
-              }
-              aria-expanded={isMenuOpen}
-              onClick={() => setIsMenuOpen((previousValue) => !previousValue)}
-              className="flex h-10 w-10 items-center justify-center rounded-md bg-[#102441] text-white transition-colors duration-200 hover:bg-[#056493] lg:hidden"
-            >
-              {isMenuOpen ? <X size={23} /> : <Menu size={23} />}
-            </button>
-          </div>
-        </Container>
-      </div>
+                      <span>{item.label}</span>
+                    </a>
+                  ) : (
+                    <a
+                      href={item.href}
+                      className="px-3 py-2 transition-colors duration-200 hover:text-[#056493] font-medium text-sm"
+                    >
+                      {item.label}
+                    </a>
+                  )}
+
+                  {index !== navItems.length - 1 && (
+                    <span aria-hidden="true" className="text-gray-300">
+                      |
+                    </span>
+                  )}
+                </div>
+              );
+            })}
+          </nav>
+
+          {/* Mobile menu toggle */}
+          <button
+            type="button"
+            aria-label={
+              isMenuOpen ? "Close navigation menu" : "Open navigation menu"
+            }
+            aria-expanded={isMenuOpen}
+            onClick={() => setIsMenuOpen((currentValue) => !currentValue)}
+            className="flex items-center justify-center rounded-md bg-primary p-2 text-white transition-all duration-300 lg:hidden"
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </Container>
 
       {/* Mobile Navigation */}
       <div
-        className={`overflow-hidden border-gray-200 bg-white shadow-md transition-all duration-300 lg:hidden ${
-          isMenuOpen
-            ? "max-h-[400px] border-t opacity-100"
-            : "max-h-0 border-t-0 opacity-0"
-        }`}
+        className={`overflow-hidden bg-white transition-all duration-300 lg:hidden ${isMenuOpen ? "max-h-125 border-t border-gray-200" : "max-h-0"
+          }`}
       >
         <Container>
-          <nav aria-label="Mobile navigation" className="flex flex-col py-4">
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={handleNavClick}
-                className="rounded-md px-4 py-3 text-center text-[15px] font-semibold text-[#172033] transition-colors duration-200 hover:bg-gray-100 hover:text-[#056493]"
-              >
-                {item.label}
-              </a>
-            ))}
+          <nav
+            aria-label="Mobile navigation"
+            className="flex flex-col space-y-2 py-4 text-sm font-semibold text-gray-700"
+          >
+            {navItems.map((item) => {
+              const isCSuiteProgram = item.label === "C-Suite Programs";
+
+              return (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={
+                    isCSuiteProgram
+                      ? "flex items-center justify-center gap-2 rounded-md bg-linear-to-r from-[#EEC471] via-[#F3CD73] to-[#FADA9A] px-4 py-3 text-center text-[#102441]"
+                      : "rounded-md px-4 py-3 text-center transition-colors duration-200 hover:bg-gray-100 hover:text-[#056493]"
+                  }
+                >
+                  {isCSuiteProgram && (
+                    <Image
+                      src={getAssetPath("/assets/images/premium-icon.png")}
+                      alt=""
+                      width={16}
+                      height={16}
+                      className="h-4 w-4 object-contain"
+                    />
+                  )}
+
+                  <span>{item.label}</span>
+                </a>
+              );
+            })}
           </nav>
         </Container>
       </div>

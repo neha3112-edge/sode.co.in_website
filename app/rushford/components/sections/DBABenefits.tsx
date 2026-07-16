@@ -14,6 +14,7 @@ import type { LucideIcon } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import FormWrapper from "@/components/forms/FormWrapper";
 import { getAssetPath } from "@/lib/utils";
+import { RUSHFORD_COURSE_OPTIONS } from "../../constants";
 
 type BenefitItem = {
   id: number;
@@ -27,16 +28,16 @@ type FormType = "enroll" | null;
 const benefitItems: BenefitItem[] = [
   {
     id: 1,
-    title: "Expertise in Business:",
+    title: "Global Context:",
     description:
-      "Gain advanced research, analytical, and leadership skills for global business excellence.",
+      "A doctoral degree provides a deep understanding of business operations on a global scale.",
     icon: BriefcaseBusiness,
   },
   {
     id: 2,
-    title: "Global Career Opportunity :",
+    title: "Flexible Format:",
     description:
-      "International opportunities in senior leadership roles with higher salary growth in management.",
+      "Complete the programme fully online while maintaining your professional commitments.",
     icon: BadgeCheck,
   },
   {
@@ -52,45 +53,6 @@ const benefitItems: BenefitItem[] = [
     description:
       "Internationally recognized accreditation and global value with Earn 180 ECTS credits.",
     icon: BadgeCheck,
-  },
-];
-
-const RUSHFORD_COURSE_OPTIONS = [
-  {
-    value: "Doctorate of Business Administration",
-    label: "Doctorate of Business Administration",
-  },
-  {
-    value: "DBA in International Business",
-    label: "DBA in International Business",
-  },
-  {
-    value: "DBA in Healthcare Management",
-    label: "DBA in Healthcare Management",
-  },
-  {
-    value: "DBA in Human Resource Management",
-    label: "DBA in Human Resource Management",
-  },
-  {
-    value: "DBA in Supply Chain Management",
-    label: "DBA in Supply Chain Management",
-  },
-  {
-    value: "DBA in Finance",
-    label: "DBA in Finance",
-  },
-  {
-    value: "DBA in Data Science",
-    label: "DBA in Data Science",
-  },
-  {
-    value: "DBA in Marketing",
-    label: "DBA in Marketing",
-  },
-  {
-    value: "DBA in Business Analytics",
-    label: "DBA in Business Analytics",
   },
 ];
 
