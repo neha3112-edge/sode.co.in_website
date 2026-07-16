@@ -39,7 +39,6 @@ export function WhyChoose() {
   return (
     <section
       className="py-16 md:py-28 bg-[#112255] text-white overflow-hidden"
-      id="why-choose"
     >
       <Container>
         <div className="text-center mb-12 md:mb-16 px-4">
