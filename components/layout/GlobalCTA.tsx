@@ -39,6 +39,7 @@ export type GlobalCTAProps = {
   brochureSubmitButtonClassName?: string;
 
   brochureUrl?: string;
+  showBrochureFormOnClick?: boolean;
 };
 
 /* =========================================================
@@ -83,6 +84,7 @@ export default function GlobalCTA({
   brochureSubmitButtonClassName = "bg-[#0f3b8c] hover:bg-[#0c2e6f]",
 
   brochureUrl = "/assets/pdf/brochure.pdf",
+  showBrochureFormOnClick = false,
 }: GlobalCTAProps) {
   const [applyOpen, setApplyOpen] = useState(false);
   const [brochureOpen, setBrochureOpen] = useState(false);
@@ -155,6 +157,9 @@ export default function GlobalCTA({
 
       <BottomCTA
         onApply={() => setApplyOpen(true)}
+        onBrochure={
+          showBrochureFormOnClick ? () => setBrochureOpen(true) : undefined
+        }
         whatsappPhone={whatsappPhone}
         whatsappMessage={whatsappMessage}
         brochureButtonText={brochureButtonText}

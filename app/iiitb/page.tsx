@@ -119,7 +119,7 @@ export default function IIITBPage() {
           whatsappMessage="I want to download the IIIT Bangalore Online Program brochure"
           applyFormName="IIITB Mobile Bottom Apply Form"
           brochureFormName="IIITB Mobile Bottom Brochure Form"
-          brochureUrl="/assets/pdf/iiitb-brochure.pdf"
+          brochureUrl="/iiitb/brochures/main_brochure.pdf"
         />
       </div>
     </div>

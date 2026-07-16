@@ -186,6 +186,7 @@ export default function Page() {
           brochureSubmitButtonText="Download Brochure"
           brochureSubmitButtonClassName="bg-[#0f3b8c] hover:bg-[#0c2e6f]"
           brochureUrl="/assets/pdf/brochure.pdf"
+          showBrochureFormOnClick={true}
         />
       </div>
     </div>
