@@ -10,7 +10,7 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { label: "Executive Programs", href: "#premium-programs" },
+    { label: "Executive Programs", href: "#courses" },
     { label: "Universities", href: "#universities" },
     { label: "About SODE", href: "#about" },
     { label: "Alumni Voices", href: "#reviews" },

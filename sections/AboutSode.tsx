@@ -273,7 +273,7 @@ export function AboutSode() {
           {/* ========================================================================= */}
 
           <div className="flex flex-col items-center mt-16 md:mt-20">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white text-center mb-12 px-4 leading-tight">
+            <h2 id="why-choose" className="text-3xl md:text-4xl font-extrabold text-white text-center mb-12 px-4 leading-tight">
               Why do Thousands of Learners Trust{" "}
               <span className="text-[#f7ebc7]">SODE?</span>
             </h2>
