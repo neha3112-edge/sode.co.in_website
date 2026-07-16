@@ -1,37 +1,29 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useState, type ReactNode } from "react";
-import { X } from "lucide-react";
-
+import { useEffect, useState } from "react";
+import ArrowGif from "../../assets/img/arrow.gif";
+import DesLogo from "../../assets/img/new-des-logo.webp";
 type ModalType = "disclaimer" | "terms" | "privacy" | null;
-
-const COLORS = {
-  primary: "#0968B5",
-  primaryDark: "#064875",
-  primaryHover: "#075A9D",
-  background: "#F5F8FB",
-  heading: "#082F55",
-};
 
 export default function Footer() {
   const [activeModal, setActiveModal] = useState<ModalType>(null);
 
-  /*
-  |--------------------------------------------------------------------------
-  | Close modal
-  |--------------------------------------------------------------------------
-  */
+  useEffect(() => {
+    if (activeModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
 
-  const closeModal = useCallback(() => {
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [activeModal]);
+
+  const closeModal = () => {
     setActiveModal(null);
-  }, []);
-
-  /*
-  |--------------------------------------------------------------------------
-  | Open comparison page
-  |--------------------------------------------------------------------------
-  */
+  };
 
   const openComparePage = () => {
     window.open(
@@ -41,107 +33,62 @@ export default function Footer() {
     );
   };
 
-  /*
-  |--------------------------------------------------------------------------
-  | Lock body scroll when popup is open
-  |--------------------------------------------------------------------------
-  */
-
-  useEffect(() => {
-    document.body.style.overflow = activeModal ? "hidden" : "";
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [activeModal]);
-
-  /*
-  |--------------------------------------------------------------------------
-  | Close popup using Escape key
-  |--------------------------------------------------------------------------
-  */
-
-  useEffect(() => {
-    if (!activeModal) return;
-
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        closeModal();
-      }
-    };
-
-    window.addEventListener("keydown", handleEscape);
-
-    return () => {
-      window.removeEventListener("keydown", handleEscape);
-    };
-  }, [activeModal, closeModal]);
-
   return (
     <>
-      <footer className="overflow-hidden bg-[#F5F8FB] pt-10 sm:pt-12 lg:pt-[60px]">
-        {/* =============================================================
-            Comparison CTA Section
-        ============================================================== */}
-
-        <section className="px-4 sm:px-8 lg:px-[60px]">
-          <div className="relative mx-auto max-w-[1800px] overflow-visible rounded-[20px] bg-[#0968B5] px-5 pb-[88px] pt-[49px] text-center text-white sm:px-8 sm:pb-[92px] sm:pt-[52px] lg:pb-[88px]">
-            <h2 className="text-[22px] font-extrabold leading-tight sm:text-[25px] lg:text-[26px]">
+      <footer className="bg-[#f4f7fa] pt-8 sm:pt-10 lg:pt-12">
+        {/* Compare Section */}
+        <section id="compare-university" className="px-4 sm:px-6 lg:px-8">
+          <div className="relative mx-auto max-w-446.25 rounded-[20px] bg-[#056493] px-5 py-12 text-center text-white sm:py-14 lg:py-12">
+            <h2 className="text-xl font-bold sm:text-2xl lg:text-[25px]">
               Still Confused?
             </h2>
 
-            <p className="mx-auto mt-7 max-w-[900px] text-[14px] font-extrabold leading-6 sm:text-[16px] lg:text-[17px]">
-              Compare Rushford University with Top World Renowned Universities
+            <p className="mx-auto mt-4 max-w-4xl text-sm font-semibold leading-6.6 sm:text-base lg:text-lg">
+              Compare IIIT Bangalore University with Top UGC-DEB Approved
+              Universities
             </p>
 
-            {/* Center circular arrow button */}
+            {/* Arrow GIF Button */}
             <button
               type="button"
               onClick={openComparePage}
-              aria-label="Compare Rushford University"
-              className="absolute -bottom-[36px] left-1/2 z-10 flex h-[72px] w-[72px] -translate-x-1/2 cursor-pointer items-center justify-center rounded-full border-[8px] border-white bg-white shadow-[0_3px_12px_rgba(0,0,0,0.08)] transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#0968B5]/25 sm:-bottom-[38px] sm:h-[76px] sm:w-[76px]"
+              aria-label="Compare universities"
+              className="absolute -bottom-10 left-1/2 flex h-20 w-20 -translate-x-1/2 items-center justify-center rounded-full bg-white transition-transform duration-300 hover:scale-105"
             >
               <Image
-                src="/rushford/assets/img/arrow.svg"
-                alt=""
-                width={58}
-                height={58}
+                src={ArrowGif}
+                alt="Scroll down"
+                width={48}
+                height={48}
+                className="h-18 w-18 rounded-full object-contain"
                 unoptimized
-                className="h-[58px] w-[58px] rounded-full object-contain sm:h-[60px] sm:w-[60px]"
               />
             </button>
           </div>
         </section>
 
-        {/* =============================================================
-            Distance Education School Logo
-        ============================================================== */}
-
-        <section className="px-4 pb-5 pt-[70px] sm:px-8 sm:pb-6 sm:pt-[76px] lg:pt-[70px]">
+        {/* Logo Section */}
+        <section className="px-4 pb-5 pt-20 sm:px-6 lg:px-8">
           <button
             type="button"
             onClick={openComparePage}
+            className="mx-auto block cursor-pointer"
             aria-label="Open university comparison page"
-            className="mx-auto block w-full max-w-[950px] cursor-pointer transition-opacity duration-200 hover:opacity-90"
           >
             <Image
-              src="/rushford/assets/img/new-des-logo.webp"
+              src={DesLogo}
               alt="Distance Education School"
               width={950}
               height={260}
-              priority={false}
-              className="mx-auto h-auto w-full max-w-[950px] object-contain"
+              className="mx-auto h-auto w-full max-w-220 object-contain"
             />
           </button>
         </section>
 
-        {/* =============================================================
-            Disclaimer and legal links
-        ============================================================== */}
-
-        <section className="px-4 pb-3 sm:px-8 sm:pb-4">
-          <div className="mx-auto max-w-[1800px] text-center">
-            <p className="mx-auto max-w-[1740px] text-[11px] font-medium leading-[1.55] text-[#111827] sm:text-[13px] lg:text-[14px]">
+        {/* Disclaimer Text */}
+        <section className="px-4 pb-5 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-450 text-center">
+            <p className="text-xs font-normal leading-5.5 text-gray-700 sm:text-sm">
               SODE Counselling Services LLP act as a marketing agency. All
               university names, logos, and trademarks mentioned are used for
               informational purposes only. We are not a university or an
@@ -149,31 +96,31 @@ export default function Footer() {
               the official website of the University before making decisions.
             </p>
 
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-x-1.5 gap-y-2 text-[13px] font-medium text-[#111111] sm:text-[14px]">
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-sm text-gray-800 sm:text-sm font-medium">
               <button
                 type="button"
                 onClick={() => setActiveModal("disclaimer")}
-                className="cursor-pointer transition-colors duration-200 hover:text-[#0968B5]"
+                className="transition-colors hover:text-[#056493] cursor-pointer"
               >
                 Disclaimer
               </button>
 
-              <span aria-hidden="true">|</span>
+              <span>|</span>
 
               <button
                 type="button"
                 onClick={() => setActiveModal("terms")}
-                className="cursor-pointer transition-colors duration-200 hover:text-[#0968B5]"
+                className="transition-colors hover:text-[#056493] cursor-pointer"
               >
                 Terms &amp; Conditions
               </button>
 
-              <span aria-hidden="true">|</span>
+              <span>|</span>
 
               <button
                 type="button"
                 onClick={() => setActiveModal("privacy")}
-                className="cursor-pointer transition-colors duration-200 hover:text-[#0968B5]"
+                className="transition-colors hover:text-[#056493] cursor-pointer"
               >
                 Privacy Policy
               </button>
@@ -181,125 +128,129 @@ export default function Footer() {
           </div>
         </section>
 
-        {/* =============================================================
-            Copyright Bar
-        ============================================================== */}
-
-        <div className="mt-1 bg-[#064875] px-4 py-[7px] text-center text-[11px] font-medium text-white sm:text-[12px]">
+        {/* Bottom Bar */}
+        <div className="bg-[#06456f] px-4 py-3 text-center text-sm text-white">
           © 2026 SODE Counseling Services LLP
         </div>
       </footer>
 
-      {/* =============================================================
-          Disclaimer Modal
-      ============================================================== */}
-
+      {/* Disclaimer Modal */}
       {activeModal === "disclaimer" && (
         <FooterModal title="Disclaimer" onClose={closeModal}>
           <p>
-            This information is provided by DistanceEducationSchool.com,
-            operated under the legal entity SODE Counselling Services LLP,
-            registered with the Ministry of Corporate Affairs. Our objective is
-            to provide educational information, guidance, and counselling
-            services. We do not act as a university or admission authority.
+            This information is provided by DistanceEducationSchool.com, under
+            the legal entity of SODE Counselling Services LLP, registered with
+            the Ministry of Corporate Affairs, with the main objective of
+            providing information, guidance, and counselling services about
+            UGC-DEB-approved universities. We do not act as a university or an
+            admission authority.
           </p>
 
-          <h3 className="mt-6 text-lg font-extrabold text-[#0968B5]">
+          <h3 className="mt-6 text-lg font-semibold text-[#06456f]">
             Essential Points
           </h3>
 
           <ul className="mt-3 list-disc space-y-2 pl-6">
             <li>
-              All university names, logos, and trademarks are used only for
-              informational purposes.
+              All university names, logos, and trademarks used are for
+              informational purposes only.
             </li>
 
             <li>
-              Our role is to provide information and counselling about online
-              and distance education programmes.
+              Our role is to provide updates, information, and guidance on
+              universities regarding their distance or online education
+              programs.
             </li>
 
             <li>
-              We do not charge students any university tuition or admission
-              fees.
+              We do not charge students any fees for counselling or guidance on
+              university applications.
             </li>
 
             <li>
-              We do not issue degrees, mark sheets, certificates, or admission
-              letters in the name of any university.
+              We do not issue degrees, mark sheets, or certificates in the name
+              of any university.
             </li>
 
             <li>
-              Users should verify programme information through the official
-              university website before making any decision.
+              Our aim is to offer free and unbiased counselling to help students
+              choose the right path.
             </li>
 
             <li>
-              Our services are intended to support students transparently and
-              lawfully.
+              We respect the integrity and reputation of all listed universities
+              and do not engage in any activity that damages their credibility.
+            </li>
+
+            <li>
+              Users are encouraged to verify information from official
+              university portals before making decisions.
+            </li>
+
+            <li>
+              Our services are transparent, legal, and purely for student
+              support.
             </li>
           </ul>
         </FooterModal>
       )}
 
-      {/* =============================================================
-          Terms and Conditions Modal
-      ============================================================== */}
-
+      {/* Terms Modal */}
       {activeModal === "terms" && (
         <FooterModal title="Terms and Conditions" onClose={closeModal}>
           <p>
-            These terms and conditions apply when you access or use the
-            educational information and counselling services provided through
-            this platform by SODE Counselling Services LLP.
+            This page outlines the terms and conditions that apply when you
+            access or use services provided on this platform, operated by SODE
+            Counselling Services LLP under DistanceEducationSchool.com.
           </p>
 
-          <ModalHeading>1. Our Role</ModalHeading>
-
-          <p className="mt-2">
-            We provide information, programme comparisons, and counselling
-            support. We are not a university and do not award academic degrees
-            or certifications.
+          <p className="mt-4">
+            We help students and working professionals explore distance and
+            online education options offered by UGC-DEB-approved universities.
+            These terms outline how we support the process, particularly when
+            payments and third-party tools are involved.
           </p>
 
-          <ModalHeading>2. Programme Information</ModalHeading>
+          <h3 className="mt-6 text-lg font-semibold text-[#06456f]">
+            1. Our Role
+          </h3>
 
           <p className="mt-2">
-            Programme details, fees, eligibility, duration, and accreditation
-            may be updated by the respective university. Users should confirm
-            all details from official university sources.
+            We provide information and counselling services only. We are not a
+            university and do not collect any university fees directly. All
+            academic or admission-related payments must be made to the
+            respective university.
           </p>
 
-          <ModalHeading>3. Payments</ModalHeading>
+          <h3 className="mt-6 text-lg font-semibold text-[#06456f]">
+            2. Unauthorised Use or Fraud
+          </h3>
 
           <p className="mt-2">
-            University tuition and academic fees should be paid only through
-            authorised university payment channels. SODE Counselling Services
-            LLP does not collect university fees as an academic institution.
+            If you suspect any unauthorised transaction linked to a service on
+            our platform, report it immediately. We will coordinate with the
+            respective payment partner for further action.
           </p>
 
-          <ModalHeading>4. External Services</ModalHeading>
+          <h3 className="mt-6 text-lg font-semibold text-[#06456f]">
+            3. Updates to These Terms
+          </h3>
 
           <p className="mt-2">
-            The website may link to university websites or third-party
-            platforms. Their services, policies, and content are governed by
-            their respective terms.
+            These terms may be updated as services evolve. Continued use of this
+            platform implies your agreement to the latest version of these
+            terms.
           </p>
 
-          <ModalHeading>5. Updates to These Terms</ModalHeading>
+          <h3 className="mt-6 text-lg font-semibold text-[#06456f]">
+            4. Contact Us
+          </h3>
 
           <p className="mt-2">
-            These terms may be updated as our services evolve. Continued use of
-            this website means you accept the latest version.
-          </p>
-
-          <ModalHeading>6. Contact Us</ModalHeading>
-
-          <p className="mt-2">
-            For support, email us at{" "}
+            For support, email us at:{" "}
             <a
               href="mailto:support@distanceeducationschool.com"
-              className="font-semibold text-[#0968B5] underline underline-offset-2"
+              className="font-medium text-[#056493] underline"
             >
               support@distanceeducationschool.com
             </a>
@@ -307,68 +258,82 @@ export default function Footer() {
         </FooterModal>
       )}
 
-      {/* =============================================================
-          Privacy Policy Modal
-      ============================================================== */}
-
+      {/* Privacy Modal */}
       {activeModal === "privacy" && (
         <FooterModal title="Privacy Policy" onClose={closeModal}>
           <p>
-            This privacy policy explains how SODE Counselling Services LLP
-            handles information submitted through forms, counselling requests,
-            and other interactions on this platform.
+            All information on this platform is provided by
+            DistanceEducationSchool.com, under the legal name of SODE
+            Counselling Services LLP. We are an educational counselling platform
+            that helps students find trusted distance and online courses from
+            UGC-DEB-approved universities.
           </p>
 
-          <ModalHeading>1. Information We Collect</ModalHeading>
+          <h3 className="mt-6 text-lg font-semibold text-[#06456f]">
+            1. No Personal Data Collected by Default
+          </h3>
 
           <p className="mt-2">
-            We may collect your name, email address, phone number, selected
-            course, state, and information you voluntarily provide when filling
-            out a form.
+            You can freely browse our website without sharing any personal
+            information. We do not collect your name, phone number, or email
+            address unless you choose to fill out a form or contact us directly.
           </p>
 
-          <ModalHeading>2. How We Use Your Information</ModalHeading>
+          <h3 className="mt-6 text-lg font-semibold text-[#06456f]">
+            2. How We Use It
+          </h3>
 
-          <p className="mt-2">Your information may be used to:</p>
+          <p className="mt-2">Your information is used to:</p>
 
           <ul className="mt-3 list-disc space-y-2 pl-6">
-            <li>Provide course and university counselling</li>
-            <li>Respond to brochure and callback requests</li>
-            <li>Share admission-related information and updates</li>
-            <li>Help you compare appropriate academic programmes</li>
-            <li>Improve our services and website experience</li>
+            <li>Guide you in choosing the right university or course</li>
+            <li>Provide counselling support</li>
+            <li>Share admission-related updates</li>
           </ul>
 
-          <ModalHeading>3. Communication</ModalHeading>
-
-          <p className="mt-2">
-            We may contact you through phone calls, email, SMS, or WhatsApp
-            regarding your enquiry. You may request to stop promotional
-            communication at any time.
+          <p className="mt-4">
+            We may send you important updates, such as admission deadlines or
+            university alerts, via WhatsApp and email. You can opt out anytime.
           </p>
 
-          <ModalHeading>4. Data Sharing</ModalHeading>
+          <h3 className="mt-6 text-lg font-semibold text-[#06456f]">
+            3. Scope
+          </h3>
 
           <p className="mt-2">
-            Information may be shared with relevant university partners or
-            authorised service providers only when required to support your
-            counselling or admission enquiry. We do not sell personal
-            information to advertisers.
+            This privacy policy applies to visitors who access this specific
+            platform operated under DistanceEducationSchool.com by SODE
+            Counselling Services LLP.
           </p>
 
-          <ModalHeading>5. External Links</ModalHeading>
+          <h3 className="mt-6 text-lg font-semibold text-[#06456f]">
+            4. Data Sharing
+          </h3>
 
           <p className="mt-2">
-            Our website may contain links to official university websites. We
-            are not responsible for the content or privacy practices of those
-            external websites.
+            We share your details only with trusted university partners and only
+            for counselling or admission purposes. We do not sell or share data
+            with third-party advertisers.
           </p>
 
-          <ModalHeading>6. Cookies and Analytics</ModalHeading>
+          <h3 className="mt-6 text-lg font-semibold text-[#06456f]">
+            5. External Links
+          </h3>
 
           <p className="mt-2">
-            We may use cookies and analytics tools to understand website usage,
-            improve performance, and enhance the user experience.
+            Our website may include links to official university portals. We are
+            not responsible for the content or privacy policies of those
+            external sites.
+          </p>
+
+          <h3 className="mt-6 text-lg font-semibold text-[#06456f]">
+            6. Cookies and Analytics
+          </h3>
+
+          <p className="mt-2">
+            Our website uses cookies to improve the user experience. These
+            cookies help us understand how visitors use the site and do not
+            identify you personally.
           </p>
         </FooterModal>
       )}
@@ -376,56 +341,37 @@ export default function Footer() {
   );
 }
 
-/*
-|--------------------------------------------------------------------------
-| Reusable modal heading
-|--------------------------------------------------------------------------
-*/
-
-function ModalHeading({ children }: { children: ReactNode }) {
-  return (
-    <h3 className="mt-6 text-lg font-extrabold text-[#0968B5]">{children}</h3>
-  );
-}
-
-/*
-|--------------------------------------------------------------------------
-| Footer Modal
-|--------------------------------------------------------------------------
-*/
-
 type FooterModalProps = {
   title: string;
-  children: ReactNode;
+  children: React.ReactNode;
   onClose: () => void;
 };
 
 function FooterModal({ title, children, onClose }: FooterModalProps) {
   return (
     <div
-      role="presentation"
-      onMouseDown={onClose}
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/65 px-4 py-6 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="footer-modal-title"
+      onClick={onClose}
+      className="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 px-4 py-6"
     >
       <div
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="footer-modal-title"
-        onMouseDown={(event) => event.stopPropagation()}
+        onClick={(event) => event.stopPropagation()}
         className="relative max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl sm:p-8"
       >
         <button
           type="button"
           onClick={onClose}
           aria-label="Close popup"
-          className="absolute right-4 top-4 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-[#EAF5FF] text-[#0968B5] transition-colors duration-200 hover:bg-[#D8ECFF]"
+          className="absolute right-4 top-3 flex h-10 w-10 items-center justify-center rounded-full text-3xl leading-none text-gray-600 transition-colors hover:bg-gray-100 hover:text-red-600"
         >
-          <X size={22} />
+          ×
         </button>
 
         <h2
           id="footer-modal-title"
-          className="pr-12 text-center text-2xl font-black text-[#0968B5] sm:text-3xl"
+          className="pr-10 text-center text-2xl font-bold text-[#06456f] sm:text-3xl"
         >
           {title}
         </h2>

@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-"use client";
+import { ChangeEvent } from "react";
 
 export default function SelectField({
   options = [],
@@ -10,7 +9,11 @@ export default function SelectField({
   return (
     <select
       value={value || ""} // ✅ CONTROLLED
-      onChange={(e) => onChange(e.target.value)} // ✅ IMPORTANT
+      onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+        const selectedIndex = e.target.selectedIndex;
+        const selectedOption = e.target.options[selectedIndex];
+        onChange(e.target.value, selectedOption ? selectedOption.text : "");
+      }}
       className="w-full px-4 py-3 rounded-md border border-gray-300 bg-[#F9FAFB] text-gray-700 font-medium"
     >
       <option value="" disabled hidden>

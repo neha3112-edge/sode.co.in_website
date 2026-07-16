@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/carousel";
 import FormWrapper from "@/components/forms/FormWrapper";
 import { getAssetPath } from "@/lib/utils";
+import { RUSHFORD_COURSE_OPTIONS } from "../../constants";
 
 /*
 |--------------------------------------------------------------------------
@@ -136,50 +137,7 @@ const certificateItems: CertificateItem[] = [
   },
 ];
 
-/*
-|--------------------------------------------------------------------------
-| Form Course Options
-|--------------------------------------------------------------------------
-*/
 
-const RUSHFORD_COURSE_OPTIONS = [
-  {
-    value: "Doctorate of Business Administration",
-    label: "Doctorate of Business Administration",
-  },
-  {
-    value: "DBA in International Business",
-    label: "DBA in International Business",
-  },
-  {
-    value: "DBA in Healthcare Management",
-    label: "DBA in Healthcare Management",
-  },
-  {
-    value: "DBA in Human Resource Management",
-    label: "DBA in Human Resource Management",
-  },
-  {
-    value: "DBA in Supply Chain Management",
-    label: "DBA in Supply Chain Management",
-  },
-  {
-    value: "DBA in Finance",
-    label: "DBA in Finance",
-  },
-  {
-    value: "DBA in Data Science",
-    label: "DBA in Data Science",
-  },
-  {
-    value: "DBA in Marketing",
-    label: "DBA in Marketing",
-  },
-  {
-    value: "DBA in Business Analytics",
-    label: "DBA in Business Analytics",
-  },
-];
 
 /*
 |--------------------------------------------------------------------------

@@ -40,6 +40,7 @@ export type GlobalCTAProps = {
 
   brochureUrl?: string;
   showBrochureFormOnClick?: boolean;
+  dynamicCourseBrochures?: boolean;
 };
 
 /* =========================================================
@@ -85,6 +86,7 @@ export default function GlobalCTA({
 
   brochureUrl = "/assets/pdf/brochure.pdf",
   showBrochureFormOnClick = false,
+  dynamicCourseBrochures = false,
 }: GlobalCTAProps) {
   const [applyOpen, setApplyOpen] = useState(false);
   const [brochureOpen, setBrochureOpen] = useState(false);
@@ -237,6 +239,7 @@ export default function GlobalCTA({
               isBrochureForm
               brochureUrl={brochureUrl}
               redirectUrl={redirectUrl}
+              dynamicCourseBrochures={dynamicCourseBrochures}
             />
           </div>
         </div>
