@@ -1,4 +1,4 @@
-import { FormCourseOption } from "@/types/form";
+import type { FormCourseOption } from "@/components/forms/FormWrapper";
 
 export const IITD_COURSE_OPTIONS: FormCourseOption[] = [
   {
