@@ -1,0 +1,186 @@
+"use client";
+
+import Image from "next/image";
+import { Container } from "@/components/ui/Container";
+import { getAssetPath } from "@/lib/utils";
+
+type GainSkill = {
+  title: string;
+  desc: string;
+  iconSrc: string;
+};
+
+type ToolLearned = {
+  title: string;
+  desc: string;
+  iconSrc: string;
+};
+
+const gainSkills: GainSkill[] = [
+  {
+    title: "Strategic Project Management",
+    desc: "Learn to align projects with organisational goals while managing project governance, integration, and portfolio strategies effectively.",
+    iconSrc: "/iit-delhi/executive-programme-in-advanced-project-management/assets/img/Strategic Project Management.webp",
+  },
+  {
+    title: "Project Planning & Scheduling",
+    desc: "Build expertise in project scope, work breakdown structures, resource planning, scheduling, cost estimation, and critical path analysis.",
+    iconSrc: "/iit-delhi/executive-programme-in-advanced-project-management/assets/img/Project Planning & Scheduling.webp",
+  },
+  {
+    title: "Risk & Resource Management",
+    desc: "Develop skills to identify, assess, and mitigate project risks while optimising resources for successful project execution.",
+    iconSrc: "/iit-delhi/executive-programme-in-advanced-project-management/assets/img/Risk & Resource Management.webp",
+  },
+  {
+    title: "Agile Project Management",
+    desc: "Understand Agile methodologies, Scrum practices, and techniques for managing projects in dynamic and fast-changing environments.",
+    iconSrc: "/iit-delhi/executive-programme-in-advanced-project-management/assets/img/Agile Project Management.webp",
+  },
+  {
+    title: "Leadership & Team Management",
+    desc: "Strengthen communication, stakeholder management, conflict resolution, and high-performance team leadership for successful project delivery.",
+    iconSrc: "/iit-delhi/executive-programme-in-advanced-project-management/assets/img/Leadership & Team Management.webp",
+  },
+  {
+    title: "Digital Project Management",
+    desc: "Gain hands-on exposure to digital collaboration, AI applications, analytics, and modern project management tools for informed decision-making.",
+    iconSrc: "/iit-delhi/executive-programme-in-advanced-project-management/assets/img/Digital Project Management.webp",
+  },
+];
+
+const toolsLearned: ToolLearned[] = [
+  {
+    title: "Primavera P6",
+    desc: "Plan, schedule, allocate resources, and monitor large-scale projects with advanced project controls.",
+    iconSrc: "/iit-delhi/executive-programme-in-advanced-project-management/assets/img/Primavera P6.webp",
+  },
+  {
+    title: "Microsoft Project",
+    desc: "Create project plans, manage timelines, track progress, and optimise resource utilisation.",
+    iconSrc: "/iit-delhi/executive-programme-in-advanced-project-management/assets/img/MS Project.webp",
+  },
+  {
+    title: "Jira",
+    desc: "Manage Agile workflows, sprint planning, issue tracking, and team collaboration for project delivery.",
+    iconSrc: "/iit-delhi/executive-programme-in-advanced-project-management/assets/img/Jira.webp",
+  },
+  {
+    title: "Asana",
+    desc: "Organise tasks, streamline team communication, and improve project execution through collaborative work management.",
+    iconSrc: "/iit-delhi/executive-programme-in-advanced-project-management/assets/img/Asana.webp",
+  },
+];
+
+export function WhyChoose() {
+  return (
+    <>
+      {/* Overview Section */}
+      <section id="overview" className="bg-white pt-16 pb-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-left">
+            <h2 className="text-[20px] font-extrabold text-black sm:text-2xl">
+              The Executive Programme in Advanced Project Management
+            </h2>
+            <p className="mt-4 text-sm text-gray-700 leading-relaxed">
+              Professionals build advanced project leadership capabilities with the <strong>Executive Programme in Advanced Project Management</strong>, a live online <strong>project management course</strong> offered by the Continuing Education Programme (CEP), IIT Delhi. Designed for working professionals and aspiring project managers, this <strong>project management professional certificate</strong> programme equips learners with practical knowledge of project planning, strategic alignment, resource management, risk management, agile methodologies, and team leadership.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Key Skills Section */}
+      <section id="key-highlights" className="bg-white pb-16 pt-4">
+        <Container>
+          <div className="text-left">
+            <h2 className="text-[18px] font-extrabold text-black sm:text-2xl leading-tight">
+              Top Skills You Will Gain in{" "}
+              <span className="text-[#C21717]">
+                Project Management Professional Certificate Course
+              </span>
+            </h2>
+            <p className="mt-4 text-base text-gray-700">
+              Develop practical project management capabilities through real-world methodologies, strategic frameworks, and leadership techniques to successfully plan, execute, monitor, and deliver complex projects across industries.
+            </p>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+            {gainSkills.map((skill) => (
+              <div
+                key={skill.title}
+                className="bg-white p-6 rounded-2xl border border-[#C21717] flex gap-2 md:gap-5 items-start text-left transition-all duration-300 hover:shadow-lg"
+              >
+                <div className="relative h-14 w-14 md:h-18 md:w-18 shrink-0 flex items-center justify-center">
+                  <Image
+                    src={getAssetPath(skill.iconSrc)}
+                    alt={skill.title}
+                    width={65}
+                    height={65}
+                    className="object-contain"
+                  />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-black leading-snug">
+                    {skill.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-gray-600 leading-relaxed">
+                    {skill.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Tools & Technologies Section */}
+      <section
+        id="courses"
+        className="bg-white py-12 md:pt-2 sm:pb-16 border-t border-gray-100"
+      >
+        <Container>
+          <div className="text-center max-w-4xl mx-auto">
+            <h2 className="text-[20px] font-extrabold sm:text-3xl">
+              Tools & Technologies You'll Learn in <br />
+              <span className="text-[#C21717]">
+                IIT Delhi’s Project Management Professional Certificate
+              </span>
+            </h2>
+            <p className="mt-4 text-base text-gray-600">
+              Gain hands-on experience with industry-standard project management pmp software and digital collaboration platforms to effectively plan, execute, monitor, and deliver complex projects across diverse business environments.
+            </p>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {toolsLearned.map((tool) => (
+              <div
+                key={tool.title}
+                className="flex flex-col rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-md transition-shadow duration-300"
+              >
+                <div className="flex-1 bg-white p-6 flex flex-col items-center text-center">
+                  <div className="relative h-24 w-48 flex items-center justify-center">
+                    <Image
+                      src={getAssetPath(tool.iconSrc)}
+                      alt={tool.title}
+                      width={200}
+                      height={100}
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+                <div className="bg-[#c21717] p-4 text-white text-xs leading-relaxed text-center font-medium min-h-38 flex flex-col items-center justify-center">
+                  <span className="text-[14px] pb-2">
+                    <strong>{tool.title}:</strong>
+                  </span>
+                  <span className="text-[12px]">
+                    {tool.desc}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+    </>
+  );
+}

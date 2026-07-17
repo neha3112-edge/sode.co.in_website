@@ -1,0 +1,117 @@
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
+import { Menu, X } from "lucide-react";
+import { Container } from "@/components/ui/Container";
+import { getAssetPath } from "@/lib/utils";
+
+export function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const homePath = "/iit-delhi/executive-programme-in-advanced-project-management";
+
+  const navItems = [
+    {
+      label: "About",
+      href: "#about",
+    },
+    {
+      label: "Eligibility",
+      href: "#eligibility",
+    },
+    {
+      label: "Sample Degree",
+      href: "#sample-degree",
+    },
+    {
+      label: "FAQ",
+      href: "#faqs",
+    },
+  ];
+
+  return (
+    <header className="fixed left-0 top-0 z-50 w-full bg-white shadow-md">
+      <Container>
+        <div className="flex h-18 items-center justify-between">
+          {/* Logo */}
+          <a
+            href={homePath}
+            aria-label="Go to home page"
+            className="flex shrink-0 items-center"
+          >
+            <Image
+              src={getAssetPath("/assets/images/new_sode_tm_logo.png")}
+              alt="SODE logo"
+              width={64}
+              height={64}
+              priority
+              className="cursor-pointer object-contain"
+            />
+          </a>
+
+          {/* Desktop Navigation */}
+          <nav
+            aria-label="Main navigation"
+            className="hidden items-center gap-1 text-[16px] text-gray-800 font-semibold lg:flex"
+          >
+            {navItems.map((item, index) => (
+              <div key={item.label} className="flex items-center">
+                <a
+                  href={item.href}
+                  className="px-3 py-2 transition-colors duration-200 hover:text-[#C21717]"
+                >
+                  {item.label}
+                </a>
+
+                {index !== navItems.length - 1 && (
+                  <span aria-hidden="true" className="text-gray-300">
+                    |
+                  </span>
+                )}
+              </div>
+            ))}
+          </nav>
+
+          {/* Mobile menu toggle */}
+          <button
+            type="button"
+            aria-label={
+              isMenuOpen ? "Close navigation menu" : "Open navigation menu"
+            }
+            aria-expanded={isMenuOpen}
+            onClick={() => setIsMenuOpen((currentValue) => !currentValue)}
+            className="flex items-center justify-center rounded-md bg-[#C21717] p-2 text-white transition-all duration-300 lg:hidden"
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </Container>
+
+      {/* Mobile Navigation */}
+      <div
+        className={`overflow-hidden bg-white transition-all duration-300 lg:hidden ${
+          isMenuOpen ? "max-h-125 border-t border-gray-200" : "max-h-0"
+        }`}
+      >
+        <Container>
+          <nav
+            aria-label="Mobile navigation"
+            className="flex flex-col space-y-2 py-4 text-sm font-semibold text-gray-700"
+          >
+            {navItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={() => setIsMenuOpen(false)}
+                className="rounded-md px-4 py-3 text-center transition-colors duration-200 hover:bg-gray-100 hover:text-[#C21717]"
+              >
+                <span>{item.label}</span>
+              </a>
+            ))}
+          </nav>
+        </Container>
+      </div>
+    </header>
+  );
+}
