@@ -19,5 +19,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily",
       priority: 0.9,
     },
+    {
+      url: `${baseUrl}/iit-madras/advanced-certificate-in-applied-artificial-intelligence-and-deep-learning`,
+      changeFrequency: "daily",
+      priority: 0.9,
+    },
   ];
 }
