@@ -1,13 +1,13 @@
 import type { FormCourseOption } from "@/components/forms/FormWrapper";
 
 export const RUSHFORD_COURSE_OPTIONS: FormCourseOption[] = [
-  { value: "DBA", label: "General" },
-  { value: "DBA", label: "International Business" },
-  { value: "DBA", label: "Healthcare Management" },
-  { value: "DBA", label: "Human Resource Management" },
-  { value: "DBA", label: "Supply Chain Management" },
-  { value: "DBA", label: "Finance" },
-  { value: "DBA", label: "Data Science" },
-  { value: "DBA", label: "Marketing" },
-  { value: "DBA", label: "Business Analytics" },
+  { value: "DBA", label: "DBA - General" },
+  { value: "DBA", label: "DBA - International Business" },
+  { value: "DBA", label: "DBA - Healthcare Management" },
+  { value: "DBA", label: "DBA - Human Resource Management" },
+  { value: "DBA", label: "DBA - Supply Chain Management" },
+  { value: "DBA", label: "DBA - Finance" },
+  { value: "DBA", label: "DBA - Data Science" },
+  { value: "DBA", label: "DBA - Marketing" },
+  { value: "DBA", label: "DBA - Business Analytics" },
 ];

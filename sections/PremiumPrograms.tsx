@@ -466,7 +466,7 @@ export function PremiumPrograms() {
 
   return (
     <section
-      id="premium-programs"
+      id="courses"
       className="py-16 md:py-24 bg-[#f5f4ec] scroll-mt-10 overflow-hidden"
     >
       <Container className="max-w-7xl">
@@ -493,11 +493,10 @@ export function PremiumPrograms() {
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-5 py-2.5 rounded-full font-bold text-xs md:text-sm transition-all duration-300 cursor-pointer border select-none ${
-                  isActive
+                className={`px-5 py-2.5 rounded-full font-bold text-xs md:text-sm transition-all duration-300 cursor-pointer border select-none ${isActive
                     ? "bg-[#A66E38] text-white border-transparent shadow-[0_4px_12px_rgba(166,110,56,0.3)]"
                     : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
-                }`}
+                  }`}
               >
                 {tab.label}
               </button>
