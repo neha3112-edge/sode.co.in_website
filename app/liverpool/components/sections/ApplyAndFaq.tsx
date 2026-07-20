@@ -72,31 +72,34 @@ const applySteps: ApplyStep[] = [
 
 const faqs: FaqItem[] = [
   {
-    question: "What are the IIIT Bangalore online courses?",
+    question: "Q1. What are the University of Liverpool MBA fees for the Online MBA programme?",
     answer:
-      "They are industry-focused online programmes from IIIT Bangalore, designed for working professionals with flexible learning, projects, and recognised certification.",
+      "The programme fee details can be obtained by downloading the brochure. The online MBA Liverpool programme offers a globally recognised MBA learning experience with flexible payment options.",
   },
   {
-    question: "Do IIIT Bangalore certification courses help in career growth?",
+    question: "Q2. Does the University of Liverpool MBA course include mandatory campus immersion?",
     answer:
-      "Yes. These programmes are designed to strengthen practical skills, improve professional credibility, and help learners prepare for career advancement in emerging technology and leadership roles.",
+      "The programme offers an international immersion experience at Liverpool Business School, where learners can interact and network with peers and experts. The IIM Udaipur campus immersion is an optional component available as part of the learning journey.",
   },
   {
-    question:
-      "Is IIIT Bangalore artificial intelligence taught with practical training?",
+    question: "Q3. Why is the MBA Liverpool John Moores University programme research phase relevant?",
     answer:
-      "Yes. The artificial intelligence programmes include hands-on projects, assignments, case studies, tools, and real-world applications so learners can build practical experience.",
+      "The 18-month MBA journey includes the IIM Udaipur phase, MBA specialisations, Applied Business Research, and a Strategic Business Consultancy Project designed to develop practical management and leadership skills.",
   },
   {
-    question: "Do IIIT Bangalore data science programmes include projects?",
+    question: "Q4. What is the University of Liverpool MBA ranking and recognition of the MBA with IIM Udaipur certification?",
     answer:
-      "Yes. Data science programmes typically include practical projects, datasets, analytical exercises, machine learning applications, and capstone-based learning.",
+      "Liverpool Business School, a part of Liverpool John Moores University (LJMU), is recognised for academic excellence. The MBA programme offers a WES-recognised degree from Liverpool Business School along with an Executive Programme in Business Management & AI Leadership certification from IIM Udaipur, supported by AACSB membership.",
   },
   {
-    question:
-      "Is IIM Udaipur artificial intelligence included in the CTO programme?",
+    question: "Q5. What are the University of Liverpool MBA fees for indian students?",
     answer:
-      "The CTO and AI leadership track includes leadership-focused learning and may involve academic or industry collaboration elements depending on the selected programme structure.",
+      "Fee details for Indian learners can be discussed with the admissions team. The programme provides a value-driven MBA experience with global credentials, practical learning, and access to a global alumni network.",
+  },
+  {
+    question: "Q6. What are the learning outcomes that make professionals choose an online MBA Liverpool programme?",
+    answer:
+      "The programme offers personalised learning, live sessions, HBR case studies, simulations, hands-on projects, specialisations, and access to a network of 3,000+ alumni.",
   },
 ];
 
@@ -110,22 +113,21 @@ export function ApplyAndFaq() {
   return (
     <>
       {/* How To Apply Section */}
-      <section id="how-to-apply" className="bg-white py-14 sm:py-16 lg:py-20">
-        <Container className="max-w-[1480px]">
+      <section
+        id="how-to-apply"
+        className="bg-[#f8fafc] py-14 sm:py-16 lg:py-20"
+      >
+        <Container className="max-w-7xl">
           <div className="text-center">
-            <h2 className="text-2xl font-bold leading-tight text-[#1d3d82] sm:text-3xl lg:text-[34px]">
-              How To Apply For IIIT Bangalore University Online Courses
+            <h2 className="text-xl font-extrabold leading-tight text-[#00499b] sm:text-3xl max-w-5xl mx-auto">
+              How to Apply for Liverpool Business School Online MBA
             </h2>
-
-            <p className="mx-auto mt-3 max-w-4xl text-sm leading-6 text-gray-600 sm:text-base">
-              Students can easily enroll in IIIT Bangalore University Online
-              courses. Candidates can conveniently apply by selecting their
-              desired program. Follow these steps to secure admission in the
-              university.
+            <p className="mx-auto mt-3 max-w-4xl text-sm leading-relaxed text-gray-600">
+              Applying for the Liverpool online MBA programme is a simple and streamlined process. Learners can begin their admission journey by completing the application form, submitting the required documents, and following the enrolment steps to secure their place in this globally recognised MBA in Liverpool programme.
             </p>
           </div>
 
-          <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+          <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-6">
             {applySteps.map((step) => (
               <ApplyStepCard key={step.number} step={step} />
             ))}
@@ -135,13 +137,13 @@ export function ApplyAndFaq() {
 
       {/* FAQ Section */}
       <section
-        id="faq"
+        id="faqs"
         className="bg-white pb-16 pt-8 sm:pb-20 sm:pt-10 lg:pb-24"
       >
         <Container>
           <div className="text-center">
-            <h2 className="text-3xl font-extrabold leading-tight text-[#075583] sm:text-4xl">
-              FAQ-Frequently Asked Question
+            <h2 className="text-xl font-extrabold leading-tight text-[#00499b] sm:text-3xl">
+              Frequently Asked Questions
             </h2>
           </div>
 
@@ -172,19 +174,19 @@ type ApplyStepCardProps = {
 function ApplyStepCard({ step }: ApplyStepCardProps) {
   return (
     <article
-      className={`${step.bgClass} relative flex min-h-[210px] flex-col items-center rounded-2xl px-5 pb-7 pt-5 text-center shadow-[0_8px_24px_rgba(0,0,0,0.06)]`}
+      className={`${step.bgClass} relative flex min-h-[190px] flex-col items-center rounded-2xl px-4 pb-6 pt-5 text-center shadow-[0_4px_16px_rgba(0,0,0,0.04)]`}
     >
       <div
-        className={`${step.borderClass} ${step.numberClass} flex h-14 w-14 items-center justify-center rounded-full border-[3px] bg-white text-xl font-bold`}
+        className={`${step.borderClass} ${step.numberClass} flex h-11 w-11 items-center justify-center rounded-full border-[3px] bg-white text-base font-bold`}
       >
         {step.number}
       </div>
 
-      <h3 className="mt-5 text-lg font-bold leading-tight text-black">
+      <h3 className="mt-4 text-sm font-bold leading-tight text-gray-900">
         {step.title}
       </h3>
 
-      <p className="mt-6 text-sm leading-5 text-gray-700">{step.description}</p>
+      <p className="mt-3 text-xs leading-relaxed text-gray-600">{step.description}</p>
 
       <div
         className={`${step.borderClass} absolute inset-x-0 bottom-0 h-1 rounded-b-2xl border-b-4`}
@@ -202,9 +204,8 @@ type FaqAccordionItemProps = {
 function FaqAccordionItem({ faq, isOpen, onToggle }: FaqAccordionItemProps) {
   return (
     <div
-      className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
-        isOpen ? "border-transparent bg-[#f2f2f2]" : "border-gray-300 bg-white"
-      }`}
+      className={`overflow-hidden rounded-xl border transition-all duration-300 ${isOpen ? "border-transparent bg-[#f8fafc]" : "border-gray-200 bg-white"
+        }`}
     >
       <button
         type="button"
@@ -212,28 +213,25 @@ function FaqAccordionItem({ faq, isOpen, onToggle }: FaqAccordionItemProps) {
         aria-expanded={isOpen}
         className="flex w-full items-center gap-4 px-5 py-4 text-left sm:px-6"
       >
-        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-[#075583] text-white">
+        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-[#00499b] text-white">
           {isOpen ? (
-            <Minus size={14} strokeWidth={3} />
+            <Minus size={12} strokeWidth={3} />
           ) : (
-            <Plus size={14} strokeWidth={3} />
+            <Plus size={12} strokeWidth={3} />
           )}
         </span>
 
-        <span className="text-sm font-bold text-[#075583] sm:text-base">
+        <span className="text-sm font-bold text-gray-800 sm:text-base">
           {faq.question}
         </span>
       </button>
 
       <div
-        className={`grid transition-all duration-300 ${
-          isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-        }`}
+        className={`transition-all duration-300 ease-in-out ${isOpen ? "max-h-[500px] border-t border-gray-150" : "max-h-0"
+          }`}
       >
-        <div className="overflow-hidden">
-          <p className="px-5 pb-6 pl-14 text-sm leading-6 text-gray-600 sm:px-6 sm:pb-7 sm:pl-16 sm:text-base">
-            {faq.answer}
-          </p>
+        <div className="p-5 text-xs sm:text-sm leading-relaxed text-gray-600 sm:px-6">
+          {faq.answer}
         </div>
       </div>
     </div>

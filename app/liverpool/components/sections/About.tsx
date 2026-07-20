@@ -1,12 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useState, type ReactNode } from "react";
-import { ChevronDown, Download, X } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
-import FormWrapper, {
-  type FormCourseOption,
-} from "@/components/forms/FormWrapper";
+import FormWrapper from "@/components/forms/FormWrapper";
+import { LIVERPOOL_COURSE_OPTIONS } from "../../constants";
+import { ArrowRight, Download } from "lucide-react";
 
 /*
 |--------------------------------------------------------------------------
@@ -14,36 +13,7 @@ import FormWrapper, {
 |--------------------------------------------------------------------------
 */
 
-type AboutFormType = "curriculum" | null;
-
-/*
-|--------------------------------------------------------------------------
-| Liverpool Course Options
-|--------------------------------------------------------------------------
-*/
-
-const LIVERPOOL_COURSES: FormCourseOption[] = [
-  {
-    value: "Online MBA",
-    label: "Online MBA",
-  },
-  {
-    value: "MBA in Leadership",
-    label: "MBA in Leadership",
-  },
-  {
-    value: "MBA in Business Analytics",
-    label: "MBA in Business Analytics",
-  },
-  {
-    value: "MBA in Marketing",
-    label: "MBA in Marketing",
-  },
-  {
-    value: "MBA in Finance",
-    label: "MBA in Finance",
-  },
-];
+type AboutFormType = "curriculum" | "apply" | null;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,63 +24,16 @@ const LIVERPOOL_COURSES: FormCourseOption[] = [
 export function About() {
   const [activeForm, setActiveForm] = useState<AboutFormType>(null);
 
-  /*
-  |--------------------------------------------------------------------------
-  | Close Form
-  |--------------------------------------------------------------------------
-  */
-
   const closeForm = useCallback(() => {
     setActiveForm(null);
   }, []);
 
-  /*
-  |--------------------------------------------------------------------------
-  | Scroll To Next Section
-  |--------------------------------------------------------------------------
-  */
-
-  const handleKnowMore = () => {
-    const nextSection = document.getElementById("program-journey");
-
-    if (nextSection) {
-      nextSection.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-
-      return;
-    }
-
-    const aboutSection = document.getElementById("about");
-
-    const followingSection = aboutSection?.nextElementSibling;
-
-    followingSection?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
-
-  /*
-  |--------------------------------------------------------------------------
-  | Body Scroll Lock
-  |--------------------------------------------------------------------------
-  */
-
   useEffect(() => {
     document.body.style.overflow = activeForm ? "hidden" : "";
-
     return () => {
       document.body.style.overflow = "";
     };
   }, [activeForm]);
-
-  /*
-  |--------------------------------------------------------------------------
-  | Escape Key Close
-  |--------------------------------------------------------------------------
-  */
 
   useEffect(() => {
     if (!activeForm) return;
@@ -120,9 +43,7 @@ export function About() {
         closeForm();
       }
     };
-
     window.addEventListener("keydown", handleEscape);
-
     return () => {
       window.removeEventListener("keydown", handleEscape);
     };
@@ -130,77 +51,54 @@ export function About() {
 
   return (
     <>
-      <section id="about" className="bg-white py-12 sm:py-14 lg:py-[38px]">
+      <section id="about" className="bg-white py-12 sm:py-14">
         <Container>
-          <div className="mx-auto max-w-[1140px] text-center">
-            {/* =====================================================
-                Heading
-            ====================================================== */}
-
-            <h2 className="text-[25px] font-black uppercase leading-[1.1] tracking-[-0.025em] text-black sm:text-[29px]">
-              About <span className="text-[#24cbbb]">The Course</span>
+          <div className="mx-auto max-w-7xl text-center">
+            {/* Heading */}
+            <h2 className="text-xl font-extrabold tracking-tight text-gray-900 sm:text-2xl lg:text-3xl">
+              About <span className="text-[#00499b]">Online MBA From Liverpool Business School</span>
             </h2>
 
-            {/* =====================================================
-                Description
-            ====================================================== */}
-
-            <div className="mx-auto mt-4 max-w-[1120px] space-y-5 text-[13px] font-medium leading-[1.25] text-[#171717] sm:text-[14px] lg:text-[15px]">
+            {/* Description */}
+            <div className="mt-6 space-y-5 text-sm leading-relaxed text-gray-700 sm:text-base">
               <p>
-                Liverpool Business School Online MBA program is an 18-month
-                personalised and research-driven program that is designed to
-                match the individual needs of all learners. The course offers a
-                powerful combination of double credentials, which enables the
-                learners to achieve an MBA from Liverpool Business School along
-                with an Advanced General Management Certificate from IMT
-                Ghaziabad.
+                The Liverpool Online MBA programme is an 18-month MBA journey designed to develop strategic thinking, leadership capabilities, and practical business skills. The programme combines the academic expertise of Liverpool Business School with the Executive Programme in Business Management & AI Leadership certification from IIM Udaipur.
               </p>
 
               <p>
-                This LBS online MBA course is designed in such a format that
-                allows learners to customize their own curriculum by selecting
-                electives aligned with their interests and extended goals. The
-                LBS MBA learning program aims to address the evidence-based
-                needs of confident, capable senior managers. It helps them to
-                combine strategic insight with strong operational excellence.
-                Students also get access to unlock a strong global network,
-                joining a community of 3,000+ alumni that provides valuable
-                industry connections, insights, and career opportunities
-                worldwide.
+                MBA in Liverpool is a distinctive and intellectually challenging course designed for professionals seeking career growth. This Liverpool online MBA offers a personalised, research-focused learning experience with live sessions, industry-led insights, HBR case studies, simulations, and hands-on projects.
+              </p>
+
+              <p>
+                Learners can customise their curriculum through specialisations in this MBA Liverpool University programme, which helps professionals enhance their business expertise and leadership potential with a global alumni network.
               </p>
             </div>
 
-            {/* =====================================================
-                Buttons
-            ====================================================== */}
-
-            <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            {/* Buttons */}
+            <div className="mt-8 flex flex-row items-center justify-center gap-3">
               <button
                 type="button"
                 onClick={() => setActiveForm("curriculum")}
-                className="inline-flex min-h-[42px] min-w-[185px] items-center justify-center gap-1.5 rounded-[5px] bg-[#24cbbb] px-5 py-2.5 text-[15px] font-medium text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#1eb3a5] hover:shadow-md"
+                className="inline-flex items-center justify-center gap-1.5 rounded-[6px] bg-[#25cfbf] hover:bg-[#1ebdae] px-6 py-3 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
               >
                 Get Curriculum
-                <Download size={17} strokeWidth={2.8} />
+                <Download size={14} strokeWidth={2.5} />
               </button>
 
               <button
                 type="button"
-                onClick={handleKnowMore}
-                className="inline-flex min-h-[42px] min-w-[148px] items-center justify-center gap-1 rounded-[5px] bg-black px-5 py-2.5 text-[15px] font-medium text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#222222] hover:shadow-md"
+                onClick={() => setActiveForm("apply")}
+                className="inline-flex items-center justify-center gap-1.5 rounded-[6px] bg-black hover:bg-gray-900 px-8 py-3 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
               >
-                Know More
-                <ChevronDown size={16} strokeWidth={3} />
+                Apply Now
+                <ArrowRight size={14} strokeWidth={2.5} />
               </button>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* =============================================================
-          Curriculum Modal
-      ============================================================== */}
-
+      {/* Curriculum Modal */}
       {activeForm === "curriculum" && (
         <AboutFormModal
           title="Get Liverpool MBA Curriculum"
@@ -210,15 +108,40 @@ export function About() {
             title="Get Curriculum"
             subtitle="Fill your details to receive the Liverpool Online MBA curriculum"
             onClose={closeForm}
-            courseOptions={LIVERPOOL_COURSES}
-            defaultCourse="Online MBA"
-            hideCourseField
+            courseOptions={LIVERPOOL_COURSE_OPTIONS}
+            defaultCourse=""
             formNameOverride="Liverpool About Curriculum Form"
-            sourceOverride="Liverpool About Course Section"
+            sourceOverride="Liverpool LP"
             utmSourceFallback="Liverpool Organic"
             utmMediumFallback="Liverpool Curriculum Button"
             submitButtonText="Get Curriculum"
-            submitButtonClassName="!bg-[#24cbbb] hover:!bg-[#1eb3a5]"
+            submitButtonClassName="bg-[#25cfbf] hover:bg-[#1ebdae] text-white"
+            isBrochureForm
+            brochureUrl="/liverpool/assets/img/main_brochure.pdf"
+            redirectUrl="/thank-you"
+          />
+        </AboutFormModal>
+      )}
+
+      {/* Apply Modal */}
+      {activeForm === "apply" && (
+        <AboutFormModal
+          title="Apply for Liverpool MBA"
+          onClose={closeForm}
+        >
+          <FormWrapper
+            title="Apply Now"
+            subtitle="Fill your details to start the application process"
+            onClose={closeForm}
+            courseOptions={LIVERPOOL_COURSE_OPTIONS}
+            defaultCourse=""
+            formNameOverride="Liverpool About Apply Form"
+            sourceOverride="Liverpool LP"
+            utmSourceFallback="Liverpool Organic"
+            utmMediumFallback="Liverpool About Apply Button"
+            submitButtonText="Apply Now"
+            submitButtonClassName="bg-[#00499b] hover:bg-[#003d83] text-white"
+            redirectUrl="/thank-you"
           />
         </AboutFormModal>
       )}
@@ -250,17 +173,8 @@ function AboutFormModal({ title, children, onClose }: AboutFormModalProps) {
         aria-modal="true"
         aria-label={title}
         onMouseDown={(event) => event.stopPropagation()}
-        className="relative max-h-[92vh] w-full max-w-[420px] overflow-y-auto rounded-xl bg-white p-5 shadow-2xl sm:p-7"
+        className="relative max-h-[92vh] w-full max-w-[400px] overflow-y-auto rounded-xl bg-white p-5 shadow-2xl sm:p-7"
       >
-        <button
-          type="button"
-          aria-label="Close curriculum form"
-          onClick={onClose}
-          className="absolute right-3 top-3 z-20 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-[#e9fbf9] text-[#1eb3a5] transition-colors hover:bg-[#d5f6f2]"
-        >
-          <X size={20} />
-        </button>
-
         {children}
       </div>
     </div>

@@ -1,14 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useState, type ReactNode } from "react";
-import { ArrowRight, X } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+import { ArrowRight } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
-import FormWrapper, {
-  type FormCourseOption,
-} from "@/components/forms/FormWrapper";
+import FormWrapper from "@/components/forms/FormWrapper";
 import { getAssetPath } from "@/lib/utils";
+import { LIVERPOOL_COURSE_OPTIONS } from "../../constants";
 
 /*
 |--------------------------------------------------------------------------
@@ -24,43 +23,15 @@ type JourneyStep = {
   description: string;
   logo: string;
   logoAlt: string;
-  accentClass: string;
+  borderColor: string;
+  badgeTextColor: string;
 };
 
 type JourneyFormType = "counselling" | null;
 
 /*
 |--------------------------------------------------------------------------
-| Liverpool Course Options
-|--------------------------------------------------------------------------
-*/
-
-const LIVERPOOL_COURSES: FormCourseOption[] = [
-  {
-    value: "Online MBA",
-    label: "Online MBA",
-  },
-  {
-    value: "MBA in Leadership",
-    label: "MBA in Leadership",
-  },
-  {
-    value: "MBA in Business Analytics",
-    label: "MBA in Business Analytics",
-  },
-  {
-    value: "MBA in Marketing",
-    label: "MBA in Marketing",
-  },
-  {
-    value: "MBA in Finance",
-    label: "MBA in Finance",
-  },
-];
-
-/*
-|--------------------------------------------------------------------------
-| Program Journey Data
+| Program Journey Data (Matching layout.png exactly)
 |--------------------------------------------------------------------------
 */
 
@@ -68,13 +39,14 @@ const journeySteps: JourneyStep[] = [
   {
     id: 1,
     step: "Step 01",
-    title: "Advanced General Management Certificate From IMT Ghaziabad",
+    title: "Executive Programme in Business Management & AI Leadership",
     duration: "(11 Months)",
     description:
-      "Over 11 months at IMT Ghaziabad, learners gain practical exposure to core management disciplines, real business challenges, and strategic decision-making, supported by 10+ HBR case studies and simulations.",
-    logo: "/assets/images/imt-ghaziabad-logo.webp",
-    logoAlt: "Institute of Management Technology Ghaziabad",
-    accentClass: "text-[#2b1f8f]",
+      "In the IIM-Udaipur phase of 11 months, learners build expertise in leadership, business strategy, finance, marketing, operations, and AI-driven decision-making through an industry-focused curriculum, real-world applications, and expert-led learning.",
+    logo: "/liverpool/assets/img/IIMU icon.webp",
+    logoAlt: "IIM Udaipur logo",
+    borderColor: "border-[#2b1f8f]",
+    badgeTextColor: "text-[#2b1f8f]",
   },
   {
     id: 2,
@@ -82,10 +54,11 @@ const journeySteps: JourneyStep[] = [
     title: "MBA Specialisations",
     duration: "(2 Months)",
     description:
-      "During the 2-month LBS Online MBA phase, learners choose one specialisation and gain advanced, hands-on expertise through focused courses and practical tools. They also develop skills in analytics and real-world, industry-relevant applications.",
-    logo: "/assets/images/liverpool-business-school-logo.webp",
-    logoAlt: "Liverpool Business School",
-    accentClass: "text-[#ff5600]",
+      "During the 2-month LBS Online MBA phase, learners choose one specialisation and gain advanced, hands-on expertise through focused courses and practical tools. The MBA Liverpool Online specialisation phase helps learners develop domain skills, analytics capabilities, and real-world industry applications through the MBA in Liverpool learning experience.",
+    logo: "/liverpool/assets/img/lbs-logo-696b29d4429b8.webp",
+    logoAlt: "Liverpool Business School logo",
+    borderColor: "border-[#ff7a1a]",
+    badgeTextColor: "text-[#ff7a1a]",
   },
   {
     id: 3,
@@ -93,10 +66,11 @@ const journeySteps: JourneyStep[] = [
     title: "Applied Business Research",
     duration: "(1 Month)",
     description:
-      "In the 1-month LBS MBA learning phase in Applied Research, students master research methodologies, explore diverse approaches, manage projects and enhance thesis report writing, analysis and presentation skills.",
-    logo: "/assets/images/liverpool-business-school-logo.webp",
-    logoAlt: "Liverpool Business School",
-    accentClass: "text-[#0d6a9a]",
+      "In the 1-month LBS MBA learning phase in Applied Research, students master research methodologies, explore diverse approaches, manage projects, and enhance thesis report writing through the Liverpool online MBA learning experience.",
+    logo: "/liverpool/assets/img/lbs-logo-696b29d4429b8.webp",
+    logoAlt: "Liverpool Business School logo",
+    borderColor: "border-[#0d6a9a]",
+    badgeTextColor: "text-[#0d6a9a]",
   },
   {
     id: 4,
@@ -104,10 +78,11 @@ const journeySteps: JourneyStep[] = [
     title: "Strategic Business Consultancy Project",
     duration: "(3 Months)",
     description:
-      "During the 3-month LBS Strategic Business Consultancy Project, professionals apply research insights to consultancy projects, solving industry-specific challenges in BFSI, FMCG, IT, automotive, and e-commerce.",
-    logo: "/assets/images/liverpool-business-school-logo.webp",
-    logoAlt: "Liverpool Business School",
-    accentClass: "text-[#ffbc00]",
+      "In the 3-month MBA in Liverpool University phase, the Strategic Business Consultancy Project, Professionals apply research insights to consultancy projects, solving industry-specific challenges in BFSI, FMCG, IT, automotive, and e-commerce.",
+    logo: "/liverpool/assets/img/lbs-logo-696b29d4429b8.webp",
+    logoAlt: "Liverpool Business School logo",
+    borderColor: "border-[#ffbc00]",
+    badgeTextColor: "text-[#ffbc00]",
   },
 ];
 
@@ -120,35 +95,16 @@ const journeySteps: JourneyStep[] = [
 export function ProgramJourney() {
   const [activeForm, setActiveForm] = useState<JourneyFormType>(null);
 
-  /*
-  |--------------------------------------------------------------------------
-  | Close Form
-  |--------------------------------------------------------------------------
-  */
-
   const closeForm = useCallback(() => {
     setActiveForm(null);
   }, []);
 
-  /*
-  |--------------------------------------------------------------------------
-  | Lock Body Scroll
-  |--------------------------------------------------------------------------
-  */
-
   useEffect(() => {
     document.body.style.overflow = activeForm ? "hidden" : "";
-
     return () => {
       document.body.style.overflow = "";
     };
   }, [activeForm]);
-
-  /*
-  |--------------------------------------------------------------------------
-  | Close With Escape Key
-  |--------------------------------------------------------------------------
-  */
 
   useEffect(() => {
     if (!activeForm) return;
@@ -158,9 +114,7 @@ export function ProgramJourney() {
         closeForm();
       }
     };
-
     window.addEventListener("keydown", handleEscape);
-
     return () => {
       window.removeEventListener("keydown", handleEscape);
     };
@@ -170,77 +124,82 @@ export function ProgramJourney() {
     <>
       <section
         id="program-journey"
-        className="bg-white py-12 sm:py-14 lg:py-[42px]"
+        className="bg-white py-14 sm:py-16"
       >
-        <Container className="max-w-[1800px]">
-          {/* =========================================================
-              Heading
-          ========================================================== */}
-
+        <Container className="max-w-[1300px]">
+          {/* Heading */}
           <div className="text-center">
-            <h2 className="text-[34px] font-black leading-none tracking-[-0.035em] text-[#1f3f8f] sm:text-[44px] lg:text-[54px]">
+            <h2 className="text-3xl font-extrabold tracking-tight text-[#00499b] sm:text-4xl">
               MBA Program Journey
             </h2>
-
-            <p className="mt-5 text-[22px] font-medium leading-none text-black sm:text-[27px] lg:text-[31px]">
-              LBS MBA Pathway + IMT-G
+            <p className="mt-2 text-sm text-gray-500 font-medium sm:text-base">
+              LBS MBA Pathway + IIM-U
             </p>
           </div>
 
-          {/* =========================================================
-              Journey Cards
-          ========================================================== */}
+          {/* Journey Grid */}
+          <div className="mt-14 relative">
+            {/* Grid Container */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 items-stretch">
+              {journeySteps.map((item, index) => {
+                return (
+                  <div key={item.id} className="relative flex flex-col h-full">
+                    {/* Dotted horizontal connector on desktop (placed between cards) */}
+                    {index < 3 && (
+                      <div className="hidden lg:block absolute -right-4 top-[50%] z-0 w-8 border-t-2 border-dotted border-gray-400" />
+                    )}
 
-          <div className="relative mt-14 lg:mt-[78px]">
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 xl:grid-cols-4 xl:gap-[54px]">
-              {journeySteps.map((item, index) => (
-                <JourneyCard
-                  key={item.id}
-                  item={item}
-                  showConnector={index !== journeySteps.length - 1}
-                />
-              ))}
+                    <JourneyCard item={item} />
+                  </div>
+                );
+              })}
             </div>
           </div>
 
-          {/* =========================================================
-              Counselling Button
-          ========================================================== */}
-
-          <div className="mt-12 flex justify-center sm:mt-14">
+          {/* CTA Footer */}
+          <div className="mt-12 flex justify-center">
             <button
               type="button"
               onClick={() => setActiveForm("counselling")}
-              className="inline-flex min-h-[50px] min-w-[230px] items-center justify-center gap-2 rounded-[6px] bg-[#03d8cf] px-7 py-3 text-[16px] font-extrabold text-[#083b72] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#00c5bd] hover:shadow-lg"
+              className="inline-flex min-h-[46px] items-center justify-center gap-2 rounded-full bg-[#002b5c] px-8 py-3 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#001f44] hover:shadow-lg"
             >
-              Get 1:1 Counselling
-              <ArrowRight size={17} strokeWidth={2.8} />
+              Get 1:1 Counseling
+              <ArrowRight size={16} />
             </button>
           </div>
         </Container>
       </section>
 
-      {/* =============================================================
-          Counselling Modal
-      ============================================================== */}
-
+      {/* Counseling Modal */}
       {activeForm === "counselling" && (
-        <JourneyFormModal title="Get 1:1 Counselling" onClose={closeForm}>
-          <FormWrapper
-            title="Get 1:1 Counselling"
-            subtitle="Our academic experts will help you understand the complete Liverpool MBA journey"
-            onClose={closeForm}
-            courseOptions={LIVERPOOL_COURSES}
-            defaultCourse="Online MBA"
-            hideCourseField
-            formNameOverride="Liverpool Program Journey Counselling Form"
-            sourceOverride="Liverpool Program Journey Section"
-            utmSourceFallback="Liverpool Organic"
-            utmMediumFallback="Liverpool Program Journey Counselling"
-            submitButtonText="Book Counselling"
-            submitButtonClassName="!bg-[#03d8cf] !text-[#083b72] hover:!bg-[#00c5bd]"
-          />
-        </JourneyFormModal>
+        <div
+          role="presentation"
+          onClick={closeForm}
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/65 px-4 py-6 backdrop-blur-sm"
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Get Free Counseling"
+            onClick={(event) => event.stopPropagation()}
+            className="relative max-h-[92vh] w-full max-w-[400px] overflow-y-auto rounded-xl bg-white p-5 shadow-2xl sm:p-7"
+          >
+            <FormWrapper
+              title="Get 1:1 Free Counseling"
+              subtitle="Share your details and our expert counselors will guide you through the process"
+              onClose={closeForm}
+              courseOptions={LIVERPOOL_COURSE_OPTIONS}
+              defaultCourse=""
+              formNameOverride="Liverpool Journey Counseling Form"
+              sourceOverride="Liverpool LP"
+              utmSourceFallback="Liverpool Organic"
+              utmMediumFallback="Liverpool Journey Counseling Button"
+              submitButtonText="Get Counseling"
+              submitButtonClassName="bg-[#00499b] hover:bg-[#003d83] text-white"
+              redirectUrl="/thank-you"
+            />
+          </div>
+        </div>
       )}
     </>
   );
@@ -248,108 +207,51 @@ export function ProgramJourney() {
 
 /*
 |--------------------------------------------------------------------------
-| Journey Card
+| Journey Card Component (Sitting on border overlap layout)
 |--------------------------------------------------------------------------
 */
 
 type JourneyCardProps = {
   item: JourneyStep;
-  showConnector: boolean;
 };
 
-function JourneyCard({ item, showConnector }: JourneyCardProps) {
+function JourneyCard({ item }: JourneyCardProps) {
   return (
-    <article className="relative">
-      {/* Step Label */}
-
-      <div className="relative z-10 mx-auto -mb-[18px] w-fit bg-white px-5">
-        <span
-          className={`text-[27px] font-black leading-none sm:text-[31px] ${item.accentClass}`}
-        >
-          {item.step}
-        </span>
-      </div>
-
-      {/* Card */}
-
-      <div className="relative flex min-h-[535px] h-full flex-col rounded-[17px] border-[1.5px] border-black bg-white px-7 pb-8 pt-[56px] sm:px-8">
-        {/* Logo */}
-
-        <div className="flex min-h-[120px] items-center justify-start">
-          <Image
-            src={getAssetPath(item.logo)}
-            alt={item.logoAlt}
-            width={280}
-            height={110}
-            className="max-h-[112px] w-auto max-w-full object-contain object-left"
-          />
-        </div>
-
-        {/* Title */}
-
-        <h3 className="mt-7 text-[21px] font-black leading-[1.35] text-black sm:text-[23px]">
-          {item.title}
-        </h3>
-
-        {/* Duration */}
-
-        <p className="mt-4 text-[17px] font-medium leading-none text-black sm:text-[19px]">
-          {item.duration}
-        </p>
-
-        {/* Description */}
-
-        <p className="mt-5 text-[15px] font-medium leading-[1.55] text-[#4d4d4d] sm:text-[16px]">
-          {item.description}
-        </p>
-
-        {/* Desktop Connector */}
-
-        {showConnector && (
-          <div className="absolute right-[-55px] top-1/2 hidden w-[55px] -translate-y-1/2 border-t-2 border-dotted border-black xl:block" />
-        )}
-      </div>
-    </article>
-  );
-}
-
-/*
-|--------------------------------------------------------------------------
-| Form Modal
-|--------------------------------------------------------------------------
-*/
-
-type JourneyFormModalProps = {
-  title: string;
-  children: ReactNode;
-  onClose: () => void;
-};
-
-function JourneyFormModal({ title, children, onClose }: JourneyFormModalProps) {
-  return (
-    <div
-      role="presentation"
-      onMouseDown={onClose}
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/65 px-4 py-6 backdrop-blur-sm"
+    <article
+      className={`relative z-10 flex flex-col h-full bg-white px-5 pt-10 pb-6 rounded-2xl border-2 ${item.borderColor} shadow-[0_4px_24px_rgba(0,0,0,0.03)]`}
     >
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-label={title}
-        onMouseDown={(event) => event.stopPropagation()}
-        className="relative max-h-[92vh] w-full max-w-[420px] overflow-y-auto rounded-xl bg-white p-5 shadow-2xl sm:p-7"
+      {/* Overlapping Step Badge */}
+      <span
+        className={`absolute -top-5 left-1/2 -translate-x-1/2 bg-white px-4 py-0.5 text-[20px] font-extrabold uppercase tracking-wider ${item.badgeTextColor}`}
       >
-        <button
-          type="button"
-          aria-label="Close counselling form"
-          onClick={onClose}
-          className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-[#e9fbfa] text-[#00a99f] transition-colors hover:bg-[#d5f7f4]"
-        >
-          <X size={20} />
-        </button>
+        {item.step}
+      </span>
 
-        {children}
+      {/* Logo */}
+      <div className="relative mb-6 flex h-16 w-full items-start">
+        <Image
+          src={getAssetPath(item.logo)}
+          alt={item.logoAlt}
+          width={150}
+          height={65}
+          className="max-h-16 w-auto object-contain"
+        />
       </div>
-    </div>
+
+      {/* Title */}
+      <h3 className="text-[15px] font-extrabold leading-snug text-gray-900 min-h-10 text-left">
+        {item.title}
+      </h3>
+
+      {/* Duration */}
+      <span className="text-xs font-semibold text-gray-800 mt-2 block text-left">
+        {item.duration}
+      </span>
+
+      {/* Description */}
+      <p className="mt-4 text-[12px] leading-relaxed text-gray-600 text-left flex-1">
+        {item.description}
+      </p>
+    </article>
   );
 }
