@@ -69,6 +69,14 @@ export function WhyChoose() {
       id="why-choose"
       className="relative overflow-hidden bg-[linear-gradient(90deg,#5979b3_0%,#1b3e86_100%)] text-white py-12"
     >
+      <Image
+        src={getAssetPath("/assets/images/MID.webp")}
+        alt="Liverpool Business School MBA student"
+        fill
+        priority
+        sizes="400px"
+        className="object-contain object-bottom hidden md:block"
+      />
       <Container>
         <div className="relative mx-auto max-w-[1180px]">
           {/* Heading */}
@@ -93,14 +101,14 @@ export function WhyChoose() {
 
             {/* Center Person */}
             <div className="relative z-10 h-[430px] w-full self-end">
-              <Image
+              {/* <Image
                 src={getAssetPath("/assets/images/MID.webp")}
                 alt="Liverpool Business School MBA student"
                 fill
                 priority
                 sizes="400px"
                 className="object-contain object-bottom"
-              />
+              /> */}
             </div>
 
             {/* Right Benefits */}

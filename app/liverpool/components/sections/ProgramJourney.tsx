@@ -146,7 +146,7 @@ export function ProgramJourney() {
                   <div key={item.id} className="relative flex flex-col h-full">
                     {/* Dotted horizontal connector on desktop (placed between cards) */}
                     {index < 3 && (
-                      <div className="hidden lg:block absolute -right-4 top-[50%] z-0 w-8 border-t-2 border-dotted border-gray-400" />
+                      <div className="hidden lg:block absolute -right-8 top-[50%] z-0 w-8 border-t-2 border-dotted border-gray-400" />
                     )}
 
                     <JourneyCard item={item} />

@@ -15,7 +15,7 @@ const navItems = [
   },
   {
     label: "Approvals",
-    href: "#approvals",
+    href: "#approvals-recognition",
   },
   {
     label: "About",
@@ -23,7 +23,7 @@ const navItems = [
   },
   {
     label: "FAQ",
-    href: "#faq",
+    href: "#faqs",
   },
 ];
 
@@ -37,7 +37,7 @@ export function Header() {
   return (
     <header className="fixed left-0 top-0 z-50 w-full border-b border-gray-100 bg-white">
       <Container>
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-18 items-center justify-between">
           {/* Logo */}
           <Link
             href="/"
@@ -87,11 +87,10 @@ export function Header() {
 
       {/* Mobile Navigation */}
       <div
-        className={`overflow-hidden border-gray-200 bg-white transition-all duration-300 lg:hidden ${
-          isMenuOpen
-            ? "max-h-[400px] border-t opacity-100"
-            : "max-h-0 border-t-0 opacity-0"
-        }`}
+        className={`overflow-hidden border-gray-200 bg-white transition-all duration-300 lg:hidden ${isMenuOpen
+          ? "max-h-[400px] border-t opacity-100"
+          : "max-h-0 border-t-0 opacity-0"
+          }`}
       >
         <Container>
           <nav aria-label="Mobile navigation" className="flex flex-col py-4">

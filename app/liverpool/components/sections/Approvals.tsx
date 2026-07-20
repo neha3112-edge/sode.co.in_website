@@ -86,7 +86,7 @@ type StatCardProps = {
 function StatCard({ item, showDivider }: StatCardProps) {
   return (
     <article
-      className={`relative flex flex-col items-center justify-center px-4 text-center ${showDivider ? "md:border-r md:border-[#e2e8f0]" : ""
+      className={`relative flex flex-col items-center justify-center px-4 text-center ${showDivider ? "md:border-r md:border-[#e2e8f0]/50" : ""
         }`}
     >
       {/* Icon */}
@@ -95,7 +95,7 @@ function StatCard({ item, showDivider }: StatCardProps) {
       </div>
 
       {/* Title */}
-      <h3 className="mt-2 text-sm font-bold text-white sm:text-base">
+      <h3 className="mt-2 text-base font-bold text-white sm:text-lg">
         {item.title}
       </h3>
 

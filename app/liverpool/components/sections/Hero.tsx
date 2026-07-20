@@ -107,13 +107,13 @@ export function Hero() {
               </p>
 
               {/* Features */}
-              <div className="mx-auto mt-6 w-fit space-y-3.5 text-left lg:mx-0">
+              <div className="mx-auto mt-6 w-fit space-y-1 text-left lg:mx-0">
                 {heroFeatures.map((feature) => (
-                  <div key={feature.id} className="flex items-center gap-3">
+                  <div key={feature.id} className="flex items-center gap-2">
                     <div className="flex h-6 w-6 shrink-0 items-center justify-center text-[#25cfbf]">
                       {feature.icon}
                     </div>
-                    <p className="text-[14px] font-semibold text-gray-800 sm:text-[16px]">
+                    <p className="text-[13px] font-semibold text-gray-800 sm:text-[14px] italic">
                       {feature.text}
                     </p>
                   </div>
@@ -147,7 +147,7 @@ export function Hero() {
 
             {/* Right Column Enquiry Form */}
             <div className="flex justify-center lg:justify-end px-4 md:px-0 -mt-12 md:mt-0">
-              <div className="w-full max-w-[440px] rounded-2xl border border-gray-100 bg-white px-6 py-6 shadow-2xl">
+              <div className="w-full max-w-[400px] rounded-2xl border border-gray-100 bg-white px-6 py-6 shadow-2xl">
                 <div className="mb-4 text-center">
                   <h2 className="text-[22px] font-extrabold leading-none text-[#00499b] sm:text-[25px]">
                     Admission Open
