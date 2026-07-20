@@ -712,6 +712,19 @@ export default function FormWrapper({
         sessionStorage.removeItem("brochureUrl");
       }
 
+      // Save conversion source in sessionStorage
+      try {
+        let conversionSource = "lp";
+        if (window.location.pathname.startsWith("/iimk")) {
+          conversionSource = "iimk";
+        } else if (window.location.pathname.startsWith("/iiitb")) {
+          conversionSource = "iiitb";
+        }
+        sessionStorage.setItem("thankYouConversionSource", conversionSource);
+      } catch (e) {
+        console.error(e);
+      }
+
       resetForm();
 
       setClosing(true);
@@ -721,7 +734,7 @@ export default function FormWrapper({
 
         onClose?.();
 
-        router.push(redirectUrl);
+        router.push("/thank-you");
       }, 300);
     } catch (error) {
       console.error("Form submit error:", error);
