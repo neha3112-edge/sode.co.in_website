@@ -25,26 +25,26 @@ const statItems: StatItem[] = [
   {
     id: 1,
     title: "Eligibility",
-    description: "Bachelor’s degree +2 years of experience",
-    icon: <UserRound size={30} strokeWidth={2.4} />,
+    description: "Bachelor’s degree + 2 years of experience",
+    icon: <UserRound size={26} strokeWidth={2} />,
   },
   {
     id: 2,
-    title: "Duration:",
+    title: "Duration",
     description: "18 months",
-    icon: <Clock3 size={30} strokeWidth={2.4} />,
+    icon: <Clock3 size={26} strokeWidth={2} />,
   },
   {
     id: 3,
-    title: "Faculty:",
+    title: "Faculty",
     description: "Leading industry experts",
-    icon: <GraduationCap size={32} strokeWidth={2.4} />,
+    icon: <GraduationCap size={28} strokeWidth={2} />,
   },
   {
     id: 4,
     title: "Level",
     description: "Postgraduate Degree",
-    icon: <BookOpen size={30} strokeWidth={2.4} />,
+    icon: <BookOpen size={26} strokeWidth={2} />,
   },
 ];
 
@@ -56,9 +56,9 @@ const statItems: StatItem[] = [
 
 export function Approvals() {
   return (
-    <section id="approvals" className="bg-[#f5f5f5] py-8 sm:py-10 lg:py-[31px]">
+    <section id="approvals" className="bg-[#00499b] py-6 sm:py-8 border-b border-gray-100">
       <Container>
-        <div className="grid grid-cols-1 gap-y-10 sm:grid-cols-2 sm:gap-x-8 lg:grid-cols-4 lg:gap-0">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4 md:gap-y-0">
           {statItems.map((item, index) => (
             <StatCard
               key={item.id}
@@ -86,25 +86,21 @@ type StatCardProps = {
 function StatCard({ item, showDivider }: StatCardProps) {
   return (
     <article
-      className={`relative flex min-h-[105px] flex-col items-center justify-center px-5 text-center ${
-        showDivider ? "lg:border-r lg:border-[#d7d7d7]" : ""
-      }`}
+      className={`relative flex flex-col items-center justify-center px-4 text-center ${showDivider ? "md:border-r md:border-[#e2e8f0]" : ""
+        }`}
     >
       {/* Icon */}
-
-      <div className="flex h-[36px] items-center justify-center text-[#20c7bb]">
+      <div className="flex h-10 w-10 items-center justify-center text-[#25cfbf]">
         {item.icon}
       </div>
 
       {/* Title */}
-
-      <h3 className="mt-1 text-[19px] font-extrabold leading-none text-[#666666] sm:text-[21px]">
+      <h3 className="mt-2 text-sm font-bold text-white sm:text-base">
         {item.title}
       </h3>
 
       {/* Description */}
-
-      <p className="mt-3 max-w-[220px] text-[14px] font-medium leading-[1.25] text-[#737373] sm:text-[15px]">
+      <p className="mt-1 max-w-[200px] text-xs font-medium leading-relaxed text-white/80 sm:text-sm">
         {item.description}
       </p>
     </article>

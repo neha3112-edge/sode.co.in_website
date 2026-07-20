@@ -70,7 +70,7 @@ export default function IITMAPage() {
           utmSourceFallback="Organic"
           utmMediumFallback="IITM_Organic"
           redirectUrl={`${pagePath}/thank-you`}
-          whatsappMessage="I want to download the IIT Madras Applied AI and Deep Learning Program brochure"
+          whatsappMessage="I want to download the IIT Madras Applied AI & Deep Learning Advanced Certificate brochure"
           applyFormName="IITM Mobile Bottom Apply Form"
           brochureFormName="IITM Mobile Bottom Brochure Form"
           brochureUrl={`${pagePath}/assets/brochures/main_brochure.pdf`}

@@ -26,24 +26,24 @@ type RecognitionItem = {
 const recognitionItems: RecognitionItem[] = [
   {
     id: 1,
-    image: "/assets/images/liverpool-wes-logo.webp",
-    imageAlt: "WES World Education Services",
-    width: 190,
+    image: "/liverpool/assets/img/Layer-36.png",
+    imageAlt: "AACSB Member Accreditation logo",
+    width: 170,
     height: 90,
   },
   {
     id: 2,
-    image: "/assets/images/liverpool-aacsb-logo.webp",
-    imageAlt: "AACSB Business Education Alliance Member",
+    image: "/liverpool/assets/img/Layer-37.png",
+    imageAlt: "Accreditation logo",
     width: 170,
     height: 90,
   },
   {
     id: 3,
-    image: "/assets/images/liverpool-practice-awards-gold.webp",
-    imageAlt: "2023 Excellence in Practice Awards Gold",
-    width: 190,
-    height: 100,
+    image: "/liverpool/assets/img/Layer-39-1.png",
+    imageAlt: "Excellence Awards logo",
+    width: 170,
+    height: 90,
   },
 ];
 
@@ -55,28 +55,18 @@ const recognitionItems: RecognitionItem[] = [
 
 export function ClarificationCta() {
   return (
-    <section id="approvals" className="bg-white py-10 sm:py-12 lg:py-[42px]">
+    <section id="approvals-recognition" className="bg-[#f8fafc] py-12 border-t border-b border-gray-100">
       <Container>
         <div className="mx-auto w-full max-w-[950px]">
-          {/* =========================================================
-              Heading
-          ========================================================== */}
-
+          {/* Heading */}
           <div className="text-center">
-            <h2 className="text-[26px] font-black uppercase leading-[1.05] tracking-[-0.025em] text-black sm:text-[30px]">
-              Approvals &amp; Recognition
+            <h2 className="text-xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
+              Approvals &amp; Recognition <span className="text-[#00499b]">of Online Liverpool Business School</span>
             </h2>
-
-            <p className="mx-auto mt-1 w-fit bg-[#effff9] px-1 text-[24px] font-black uppercase leading-[1.05] tracking-[-0.02em] text-[#25cfbf] sm:text-[29px]">
-              Of Online Liverpool Business School
-            </p>
           </div>
 
-          {/* =========================================================
-              Recognition Logos
-          ========================================================== */}
-
-          <div className="mt-10 grid grid-cols-1 items-center justify-items-center gap-10 sm:grid-cols-3 sm:gap-8 lg:mt-[48px]">
+          {/* Recognition Logos */}
+          <div className="mt-8 grid grid-cols-1 items-center justify-items-center gap-8 sm:grid-cols-3">
             {recognitionItems.map((item) => (
               <RecognitionLogo key={item.id} item={item} />
             ))}
@@ -99,13 +89,13 @@ type RecognitionLogoProps = {
 
 function RecognitionLogo({ item }: RecognitionLogoProps) {
   return (
-    <article className="flex min-h-[110px] w-full items-center justify-center px-4">
+    <article className="flex min-h-[90px] w-full items-center justify-center rounded-xl bg-white p-4 shadow-[0_4px_16px_rgba(0,0,0,0.03)] border border-gray-100">
       <Image
         src={getAssetPath(item.image)}
         alt={item.imageAlt}
         width={item.width}
         height={item.height}
-        className="max-h-[100px] w-auto max-w-full object-contain"
+        className="max-h-16 w-auto max-w-full object-contain"
       />
     </article>
   );
