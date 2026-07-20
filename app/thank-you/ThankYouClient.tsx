@@ -75,6 +75,7 @@ export default function ThankYouClient({
   const [brochureOpened, setBrochureOpened] = useState(false);
   const [isClientReady, setIsClientReady] = useState(false);
   const [brochureUrl, setBrochureUrl] = useState<string>("");
+  const [resolvedConversionSource, setResolvedConversionSource] = useState<ConversionSource>(conversionSource);
 
   /*
    * React Strict Mode development me effects ko dobara run kar sakta hai.
@@ -105,6 +106,12 @@ export default function ThankYouClient({
           setBrochureUrl(storedBrochureUrl.trim());
         }
       }
+
+      // Read stored conversionSource
+      const storedConversionSource = sessionStorage.getItem("thankYouConversionSource");
+      if (storedConversionSource) {
+        setResolvedConversionSource(storedConversionSource as ConversionSource);
+      }
     } catch (error) {
       console.error("Unable to read brochure session:", error);
 
@@ -130,11 +137,14 @@ export default function ThankYouClient({
   ========================================================= */
 
   useEffect(() => {
+    if (!isClientReady) {
+      return;
+    }
     if (conversionSent.current) {
       return;
     }
-    const sendTo = GOOGLE_ADS_CONVERSION_LABELS[conversionSource];
-    const conversionSessionKey = `googleAdsConversionSent:${conversionSource}`;
+    const sendTo = GOOGLE_ADS_CONVERSION_LABELS[resolvedConversionSource];
+    const conversionSessionKey = `googleAdsConversionSent:${resolvedConversionSource}`;
     try {
       const alreadySent =
         sessionStorage.getItem(conversionSessionKey) === "true";
@@ -167,9 +177,9 @@ export default function ThankYouClient({
     }
 
     console.info(
-      `Google Ads conversion event sent for source: ${conversionSource}`,
+      `Google Ads conversion event sent for source: ${resolvedConversionSource}`,
     );
-  }, [conversionSource]);
+  }, [resolvedConversionSource, isClientReady]);
 
   /* =========================================================
      GET BROCHURE URL
@@ -411,7 +421,7 @@ export default function ThankYouClient({
             <div className="mx-auto max-w-md">
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Link
-                  href={homeHref}
+                  href="/"
                   className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#FFC107] py-3.5 font-bold text-black transition-colors hover:bg-[#e6af06]"
                 >
                   <Home size={18} aria-hidden="true" />
