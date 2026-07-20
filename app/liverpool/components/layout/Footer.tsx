@@ -424,14 +424,14 @@ function FooterModal({ title, children, onClose }: FooterModalProps) {
           type="button"
           onClick={onClose}
           aria-label="Close popup"
-          className="absolute right-4 top-4 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-[#fff0ed] text-[#c52208] transition-colors hover:bg-[#ffe1da]"
+          className="absolute right-4 top-4 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-grey/40 text-black/80"
         >
           <X size={22} />
         </button>
 
         <h2
           id="footer-modal-title"
-          className="pr-12 text-center text-2xl font-black text-[#c52208] sm:text-3xl"
+          className="pr-12 text-center text-2xl font-black text-black/80 sm:text-3xl"
         >
           {title}
         </h2>
