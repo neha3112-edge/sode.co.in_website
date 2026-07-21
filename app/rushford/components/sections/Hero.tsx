@@ -151,6 +151,7 @@ export function Hero() {
                   title="Admission Open"
                   subtitle="Academic Experts will assist you!"
                   showPhoneCallLink={true}
+                  phoneLinkClassName="bg-[#0f3b8c] hover:bg-[#0c2e6f]"
                   defaultCourse=""
                   courseOptions={RUSHFORD_COURSE_OPTIONS}
                   formNameOverride="Rushford Hero Enquiry Form"
@@ -176,6 +177,7 @@ export function Hero() {
                 title="Admission Open"
                 subtitle="Academic Experts will assist you!"
                 showPhoneCallLink={true}
+                phoneLinkClassName="bg-[#0f3b8c] hover:bg-[#0c2e6f]"
                 defaultCourse=""
                 courseOptions={RUSHFORD_COURSE_OPTIONS}
                 formNameOverride="Rushford Mobile Hero Enquiry Form"
