@@ -72,6 +72,7 @@ type FormWrapperProps = {
    * Additional form configuration.
    */
   showPhoneCallLink?: boolean;
+  phoneLinkClassName?: string;
   submitButtonText?: string;
   submitButtonClassName?: string;
   redirectUrl?: string;
@@ -303,6 +304,7 @@ export default function FormWrapper({
   utmMediumFallback,
 
   showPhoneCallLink = false,
+  phoneLinkClassName = "",
   submitButtonText = "Submit",
   submitButtonClassName = "",
   redirectUrl = "/thank-you",
@@ -780,7 +782,9 @@ export default function FormWrapper({
               <div className="mt-2">
                 <a
                   href="tel:+917065777755"
-                  className="inline-flex rounded-full bg-[#c9232c] px-5 py-1 text-sm font-semibold text-white transition hover:bg-[#aa1c25]"
+                  className={`inline-flex rounded-full px-5 py-1 text-sm font-semibold text-white transition ${
+                    phoneLinkClassName || "bg-[#c9232c] hover:bg-[#aa1c25]"
+                  }`}
                 >
                   +91 7065 7777 55
                 </a>

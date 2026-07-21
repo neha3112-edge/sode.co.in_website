@@ -45,14 +45,14 @@ const GOOGLE_ADS_IDS = ["AW-17917271919", "AW-17946162864"];
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-poppins",
   display: "swap",
 });
 
 const playfairDisplay = Playfair_Display({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-playfair-display",
   display: "swap",
 });
@@ -510,8 +510,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
               gtag('js', new Date());
 
               ${GOOGLE_ADS_IDS.map(
-                (googleAdsId) => `gtag('config', '${googleAdsId}');`,
-              ).join("\n")}
+              (googleAdsId) => `gtag('config', '${googleAdsId}');`,
+            ).join("\n")}
             `,
           }}
         />
