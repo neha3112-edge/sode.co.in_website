@@ -5,10 +5,9 @@ import { useEffect, useState } from "react";
 import { Check } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
-import FormWrapper, {
-  type FormCourseOption,
-} from "@/components/forms/FormWrapper";
+import FormWrapper from "@/components/forms/FormWrapper";
 import { getAssetPath } from "@/lib/utils";
+import { IIMK_COURSE_OPTIONS } from "../../constants";
 
 /* =========================================================
    TYPES
@@ -42,22 +41,7 @@ const eligibleProfiles: Profile[] = [
   },
 ];
 
-/* =========================================================
-   IIM KOZHIKODE COURSE OPTIONS
 
-   Dropdown label:
-   HR & Analytics
-
-   API payload value:
-   IIM HR
-========================================================= */
-
-const IIMK_COURSE_OPTIONS: FormCourseOption[] = [
-  {
-    value: "IIM HR",
-    label: "HR & Analytics",
-  },
-];
 
 /* =========================================================
    ELIGIBILITY COMPONENT
@@ -132,7 +116,7 @@ export function Eligibility() {
 
         <div className="absolute inset-0 z-0">
           <Image
-            src={getAssetPath("/iimk/ai-strategic-course/assets/img/benefit-bg.webp")}
+            src={getAssetPath("/iimk/ai-strategic-course/assets/img/Blue banner.webp")}
             alt=""
             fill
             sizes="100vw"

@@ -5,26 +5,10 @@ import { Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import FormWrapper, {
-  type FormCourseOption,
-} from "@/components/forms/FormWrapper";
+import FormWrapper from "@/components/forms/FormWrapper";
+import { IIMK_COURSE_OPTIONS } from "../../constants";
 
-/* =========================================================
-   IIM KOZHIKODE COURSE OPTIONS
 
-   User ko dropdown me:
-   HR & Analytics
-
-   API payload me:
-   IIM HR
-========================================================= */
-
-const IIMK_COURSE_OPTIONS: FormCourseOption[] = [
-  {
-    value: "IIM HR",
-    label: "HR & Analytics",
-  },
-];
 
 export function ClarificationCta() {
   const [formOpen, setFormOpen] = useState(false);

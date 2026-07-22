@@ -11,7 +11,8 @@ import { getAssetPath } from "@/lib/utils";
 
 type BenefitItem = {
   id: number;
-  icon: string;
+  logo: string;
+  logoAlt: string;
   title: string;
 };
 
@@ -24,17 +25,20 @@ type BenefitItem = {
 const leftBenefits: BenefitItem[] = [
   {
     id: 1,
-    icon: "👤",
+    logo: "/psb/assets/img/Triple Crown Accredited Global MBA Degree.webp",
+    logoAlt: "Test",
     title: "Triple Crown Accredited Global MBA Degree",
   },
   {
     id: 2,
-    icon: "🎓",
+    logo: "/psb/assets/img/Personalise Your MBA with Two Specialisations.webp",
+    logoAlt: "Test",
     title: "Personalise Your MBA with Two Specialisations",
   },
   {
     id: 3,
-    icon: "📝",
+    logo: "/psb/assets/img/CEO Challenge Project with Real Business Problems.webp",
+    logoAlt: "Test",
     title: "CEO Challenge Project with Real Business Problems",
   },
 ];
@@ -42,17 +46,20 @@ const leftBenefits: BenefitItem[] = [
 const rightBenefits: BenefitItem[] = [
   {
     id: 4,
-    icon: "💼",
+    logo: "/psb/assets/img/Optional One-Week Paris Immersion Experience.webp",
+    logoAlt: "Test",
     title: "Optional One-Week Paris Immersion Experience",
   },
   {
     id: 5,
-    icon: "💰",
+    logo: "/psb/assets/img/Integrated curriculum built around four leadership pillars.webp",
+    logoAlt: "Test",
     title: "Integrated curriculum built around four leadership pillars",
   },
   {
     id: 6,
-    icon: "🌍",
+    logo: "/psb/assets/img/PSB Alumni Status with Global Networking Access.webp",
+    logoAlt: "Test",
     title: "PSB Alumni Status with Global Networking Access",
   },
 ];
@@ -157,8 +164,14 @@ type BenefitCardProps = {
 function BenefitCard({ benefit }: BenefitCardProps) {
   return (
     <article className="flex min-h-[86px] items-center gap-4 rounded-[12px] bg-white px-5 py-3.5 text-black shadow-[0_4px_16px_rgba(0,0,0,0.06)]">
-      <div className="flex h-9 w-9 shrink-0 items-center justify-center text-[26px]">
-        {benefit.icon}
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center text-[26px]">
+        <Image
+          src={getAssetPath(benefit.logo)}
+          alt={benefit.logoAlt}
+          width={150}
+          height={65}
+          className="max-h-20 w-auto object-contain"
+        />
       </div>
 
       <h3 className="text-xs font-bold leading-snug text-gray-800 sm:text-sm">

@@ -6,33 +6,15 @@ import { Clock, Download, PhoneCall } from "lucide-react";
 import { Anton } from "next/font/google";
 
 import { Container } from "@/components/ui/Container";
-import FormWrapper, {
-  type FormCourseOption,
-} from "@/components/forms/FormWrapper";
+import FormWrapper from "@/components/forms/FormWrapper";
 import { getAssetPath } from "@/lib/utils";
+import { IIMK_COURSE_OPTIONS } from "../../constants";
 
 const anton = Anton({
   subsets: ["latin"],
   weight: "400",
   display: "swap",
 });
-
-/* =========================================================
-   IIM KOZHIKODE COURSE OPTION
-
-   Dropdown label:
-   HR & Analytics
-
-   API payload value:
-   IIM HR
-========================================================= */
-
-const IIMK_COURSE_OPTIONS: FormCourseOption[] = [
-  {
-    value: "IIM HR",
-    label: "HR & Analytics",
-  },
-];
 
 export function Hero() {
   const [downloadOpen, setDownloadOpen] = useState(false);
