@@ -283,23 +283,13 @@ export function AboutSode() {
             <div className="flex flex-col lg:grid lg:grid-cols-[1fr_280px_1fr] gap-6 md:gap-2 items-center w-full px-4">
               {/* Left Column */}
 
-              <div className="flex flex-col space-y-6 order-1">
+              <div className="flex flex-col items-start space-y-6 order-1 lg:order-1">
                 {leftCards.map((card, idx) => (
                   <div
                     key={idx}
-                    className={`flex items-center md:flex-row-reverse justify-between bg-white rounded-[10px] p-3.5 shadow-xl text-[#102441] hover:scale-[1.02] transition-all duration-200 ${card.css}`}
+                    className={`flex md:flex-row-reverse items-center bg-white rounded-[10px] p-3.5 shadow-xl text-[#102441] hover:scale-[1.02] transition-all duration-200 ${card.css}`}
                   >
-                    <div className="rounded-lg flex items-center justify-center relative">
-                      <div className="flex flex-col leading-tight text-right mr-1.5">
-                        <h4 className="font-bold text-sm whitespace-nowrap">
-                          {card.title}
-                        </h4>
-
-                        <p className="text-gray-500 text-[11px] font-medium whitespace-nowrap">
-                          {card.desc}
-                        </p>
-                      </div>
-
+                    <div className="rounded-lg flex items-center justify-center shrink-0 relative">
                       <Image
                         src={card.icon}
                         alt={card.title}
@@ -307,6 +297,14 @@ export function AboutSode() {
                         height={40}
                         className="object-contain"
                       />
+                    </div>
+
+                    <div className="flex flex-col text-left leading-tight ml-2">
+                      <h4 className="font-bold text-sm">{card.title}</h4>
+
+                      <p className="text-gray-500 text-[11px] font-medium">
+                        {card.desc}
+                      </p>
                     </div>
                   </div>
                 ))}
