@@ -18,32 +18,32 @@ type Tool = {
 
 const keySkills: Skill[] = [
   {
-    iconSrc: "/iimk/ai-strategic-course/assets/img/icon-iim-01.webp",
+    iconSrc: "/iimk/ai-strategic-course/assets/img/AI Strategy & Leadership.webp",
     title: "AI Strategy & Leadership",
     desc: "Develop AI strategies aligned with business goals and lead AI-driven transformation initiatives in this IIM Kozhikode online courses for working professionals.",
   },
   {
-    iconSrc: "/iimk/ai-strategic-course/assets/img/icon-iim-02.webp",
+    iconSrc: "/iimk/ai-strategic-course/assets/img/Generative AI & Agentic AI-2.webp",
     title: "Generative AI & Agentic AI",
     desc: "Learn to leverage GenAI, LLMs, and Agentic AI for practical business applications through this leading IIM courses on AI.",
   },
   {
-    iconSrc: "/iimk/ai-strategic-course/assets/img/icon-iim-03.webp",
+    iconSrc: "/iimk/ai-strategic-course/assets/img/AI Business Case & ROI Analysis.webp",
     title: "AI Business Case & ROI Analysis",
     desc: "Build AI business cases, estimate ROI, and present data-backed recommendations to stakeholders.",
   },
   {
-    iconSrc: "/iimk/ai-strategic-course/assets/img/icon-iim-04.webp",
+    iconSrc: "/iimk/ai-strategic-course/assets/img/Prompt Engineering & AI Workflow Automation.webp",
     title: "Prompt Engineering & AI Workflow Automation",
     desc: "Master prompt engineering, AI workflows, automation, and tool integration to improve productivity.",
   },
   {
-    iconSrc: "/iimk/ai-strategic-course/assets/img/icon-iim-05.webp",
+    iconSrc: "/iimk/ai-strategic-course/assets/img/AI Governance & Responsible AI.webp",
     title: "AI Governance & Responsible AI",
     desc: "Understand AI ethics, governance frameworks, compliance, and risk management for responsible AI adoption.",
   },
   {
-    iconSrc: "/iimk/ai-strategic-course/assets/img/icon-iim-06.webp",
+    iconSrc: "/iimk/ai-strategic-course/assets/img/Data-Driven Decision Making.webp",
     title: "Data-Driven Decision Making",
     desc: "Use AI insights, performance metrics, and data storytelling to make faster, smarter business decisions.",
   },
@@ -51,17 +51,17 @@ const keySkills: Skill[] = [
 
 const toolsLearned: Tool[] = [
   {
-    iconSrc: "/iimk/ai-strategic-course/assets/img/power-bi.webp",
+    iconSrc: "/iimk/ai-strategic-course/assets/img/Generative AI & Agentic AI.webp",
     title: "Generative AI & Agentic AI",
     desc: "Understand how modern AI systems work and apply them to solve real business challenges with confidence with this AI course for executives.",
   },
   {
-    iconSrc: "/iimk/ai-strategic-course/assets/img/tableau.webp",
+    iconSrc: "/iimk/ai-strategic-course/assets/img/Large Language Models.webp",
     title: "Large Language Models (LLMs)",
     desc: "Learn how ChatGPT, Claude, and similar LLMs work to evaluate, direct, and use AI effectively in business through this strategic management course IIM.",
   },
   {
-    iconSrc: "/iimk/ai-strategic-course/assets/img/microsoft-excel.webp",
+    iconSrc: "/iimk/ai-strategic-course/assets/img/Prompt Engineering.webp",
     title: "Prompt Engineering",
     desc: "Create effective prompts and AI workflows to generate reliable, high-quality outputs for real-world business applications.",
   },

@@ -6,27 +6,11 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import FormWrapper, {
-  type FormCourseOption,
-} from "@/components/forms/FormWrapper";
+import FormWrapper from "@/components/forms/FormWrapper";
 import { getAssetPath } from "@/lib/utils";
+import { IIMK_COURSE_OPTIONS } from "../../constants";
 
-/* =========================================================
-   IIM KOZHIKODE COURSE OPTIONS
 
-   label:
-   User ko dropdown me "HR & Analytics" dikhega.
-
-   value:
-   API payload me "IIM HR" jayega.
-========================================================= */
-
-const IIMK_COURSE_OPTIONS: FormCourseOption[] = [
-  {
-    value: "IIM HR",
-    label: "HR & Analytics",
-  },
-];
 
 /* =========================================================
    PLACEMENT PARTNERS

@@ -9,14 +9,7 @@ import { ApplyAndFaq } from "./components/sections/ApplyAndFaq";
 import FloatingButton from "@/components/layout/FloatingButton";
 import GlobalCTA from "@/components/layout/GlobalCTA";
 import CallCTA from "@/components/layout/CallCTA";
-import type { FormCourseOption } from "@/components/forms/FormWrapper";
-
-const IIMK_COURSE_OPTIONS: FormCourseOption[] = [
-  {
-    value: "IIM HR",
-    label: "HR & Analytics",
-  },
-];
+import { IIMK_COURSE_OPTIONS } from "./constants";
 
 /* =========================================================
    IIMK PAGE
