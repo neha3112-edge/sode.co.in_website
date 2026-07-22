@@ -67,16 +67,16 @@ export function WhyChoose() {
   return (
     <section
       id="why-choose"
-      className="relative overflow-hidden bg-[linear-gradient(90deg,#5979b3_0%,#1b3e86_100%)] text-white py-12"
+      className="relative overflow-hidden bg-[linear-gradient(90deg,#233568_0%,#1b3e86_100%)] text-white pt-15"
     >
-      <Image
+      {/* <Image
         src={getAssetPath("/assets/images/MID.webp")}
         alt="Paris School of Business MBA student"
         fill
         priority
         sizes="400px"
         className="object-contain object-bottom hidden md:block"
-      />
+      /> */}
       <Container>
         <div className="relative mx-auto max-w-[1180px]">
           {/* Heading */}
@@ -85,13 +85,13 @@ export function WhyChoose() {
               Why Choose
             </h2>
 
-            <p className="mt-2 text-2xl font-extrabold leading-tight text-[#b31e6b] sm:text-3xl">
+            <p className="mt-2 text-2xl font-extrabold leading-tight text-white sm:text-3xl">
               the IIM Lucknow & Paris School of Business Executive MBA?
             </p>
           </div>
 
           {/* Desktop Layout */}
-          <div className="relative mt-10 hidden grid-cols-[1fr_400px_1fr] items-center gap-8 lg:grid">
+          <div className="relative mt-10 hidden grid-cols-[1fr_400px_1fr] items-center gap-8 lg:gap-0 lg:grid">
             {/* Left Benefits */}
             <div className="relative z-20 space-y-4">
               {leftBenefits.map((benefit) => (
@@ -100,15 +100,15 @@ export function WhyChoose() {
             </div>
 
             {/* Center Person */}
-            <div className="relative z-10 h-[430px] w-full self-end">
-              {/* <Image
-                src={getAssetPath("/assets/images/MID.webp")}
+            <div className="relative z-10 h-[400px] w-full">
+              <Image
+                src={getAssetPath("/psb/assets/img/new-girl.png")}
                 alt="Paris School of Business MBA student"
                 fill
                 priority
-                sizes="400px"
+                sizes="500px"
                 className="object-contain object-bottom"
-              /> */}
+              />
             </div>
 
             {/* Right Benefits */}
@@ -126,6 +126,16 @@ export function WhyChoose() {
               {[...leftBenefits, ...rightBenefits].map((benefit) => (
                 <BenefitCard key={benefit.id} benefit={benefit} />
               ))}
+            </div>
+            <div className="relative z-10 h-[400px] w-full -mt-10">
+              <Image
+                src={getAssetPath("/psb/assets/img/new-girl.png")}
+                alt="Paris School of Business MBA student"
+                fill
+                priority
+                sizes="500px"
+                className="object-contain object-bottom"
+              />
             </div>
           </div>
         </div>

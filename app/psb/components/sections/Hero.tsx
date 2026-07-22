@@ -102,8 +102,8 @@ export function Hero() {
               </h1>
 
               {/* Program Description */}
-              <p className="mt-3 text-[16px] leading-snug text-gray-900 sm:text-[14px]">
-                By <span className="underline font-semibold">Paris School of Business</span> with <br /> <span className="underline font-semibold">Certification</span> from <span className="underline font-semibold">IIM Lucknow.</span>
+              <p className="mt-3 text-[16px] text-gray-900 sm:text-[14px] md:max-w-[350px]">
+                By <span className="underline font-semibold">Paris School of Business</span> with Certification from <span className="underline font-semibold">IIM Lucknow</span> via <span className="underline font-semibold">upGrad</span>
               </p>
 
               {/* Features */}
@@ -125,7 +125,7 @@ export function Hero() {
                 <button
                   type="button"
                   onClick={() => setDownloadOpen(true)}
-                  className="inline-flex min-h-[30px] items-center justify-center gap-2 rounded-[6px] bg-[#233568] px-6 py-2.5 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#1a2850] hover:shadow-lg"
+                  className="inline-flex min-h-[30px] items-center justify-center gap-2 rounded-[6px] bg-[#b31e6b] hover:bg-[#9e0a56] px-6 py-2.5 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
                 >
                   Download Brochure
                   <Download size={18} strokeWidth={2.5} />

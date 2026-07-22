@@ -40,7 +40,7 @@ export function Header() {
         <div className="flex h-18 items-center justify-between">
           {/* Logo */}
           <a
-            href="/iiitb"
+            href="/rushford"
             aria-label="Go to home page"
             className="flex shrink-0 items-center"
           >
