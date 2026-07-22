@@ -171,7 +171,7 @@ export function DualCertification() {
 
             {/* Right Content Column */}
             <div className="text-center lg:text-left -mt-20 md:mt-0">
-              <h2 className="text-2xl font-extrabold leading-tight text-[#b31e6b] sm:text-3xl lg:text-4xl">
+              <h2 className="text-2xl font-extrabold leading-tight text-white sm:text-3xl lg:text-4xl">
                 Earn valuable credentials and recognition
               </h2>
 
