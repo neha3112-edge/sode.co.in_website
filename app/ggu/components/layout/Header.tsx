@@ -11,11 +11,11 @@ import { getAssetPath } from "@/lib/utils";
 const navItems = [
   {
     label: "Courses",
-    href: "#courses",
+    href: "#main-courses",
   },
   {
     label: "Approvals",
-    href: "#approvals",
+    href: "#accreditations",
   },
   {
     label: "About",
@@ -23,7 +23,7 @@ const navItems = [
   },
   {
     label: "FAQ",
-    href: "#faq",
+    href: "#faqs",
   },
 ];
 
@@ -40,17 +40,17 @@ export function Header() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link
-            href="/"
-            aria-label="Go to home page"
+            href="/ggu"
+            aria-label="Go to GGU home page"
             className="flex shrink-0 items-center"
           >
             <Image
-              src={getAssetPath("/assets/images/new_sode_tm_logo.png")}
+              src={getAssetPath("/ggu/assets/img/new_sode_tm_logo.png")}
               alt="SODE logo"
-              width={60}
-              height={60}
+              width={56}
+              height={56}
               priority
-              className="h-[60px] w-[60px] object-contain"
+              className="h-14 w-14 cursor-pointer object-contain"
             />
           </Link>
 
@@ -63,7 +63,7 @@ export function Header() {
               <a
                 key={item.label}
                 href={item.href}
-                className="relative py-3 text-[16px] font-bold leading-none tracking-[0.01em] text-[#172033] transition-colors duration-200 hover:text-[#056493]"
+                className="relative py-3 text-[16px] font-bold leading-none tracking-[0.01em] text-[#172033] transition-colors duration-300 ease-in-out hover:text-[#ee5105]"
               >
                 {item.label}
               </a>
@@ -78,7 +78,7 @@ export function Header() {
             }
             aria-expanded={isMenuOpen}
             onClick={() => setIsMenuOpen((previousValue) => !previousValue)}
-            className="flex h-10 w-10 items-center justify-center rounded-md bg-[#102441] text-white transition-colors duration-200 hover:bg-[#056493] lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-md bg-[#102441] text-white transition-colors duration-300 ease-in-out hover:bg-[#ee5105] lg:hidden"
           >
             {isMenuOpen ? <X size={23} /> : <Menu size={23} />}
           </button>
@@ -87,7 +87,7 @@ export function Header() {
 
       {/* Mobile Navigation */}
       <div
-        className={`overflow-hidden border-gray-200 bg-white transition-all duration-300 lg:hidden ${
+        className={`overflow-hidden border-gray-200 bg-white transition-all duration-300 ease-in-out lg:hidden ${
           isMenuOpen
             ? "max-h-[400px] border-t opacity-100"
             : "max-h-0 border-t-0 opacity-0"
@@ -100,7 +100,7 @@ export function Header() {
                 key={item.label}
                 href={item.href}
                 onClick={handleNavClick}
-                className="rounded-md px-4 py-3 text-center text-[15px] font-semibold text-[#172033] transition-colors duration-200 hover:bg-gray-100 hover:text-[#056493]"
+                className="rounded-md px-4 py-3 text-center text-[15px] font-semibold text-[#172033] transition-colors duration-300 ease-in-out hover:bg-gray-100 hover:text-[#ee5105]"
               >
                 {item.label}
               </a>

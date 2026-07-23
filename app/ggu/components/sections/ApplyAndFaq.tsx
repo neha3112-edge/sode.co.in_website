@@ -72,31 +72,29 @@ const applySteps: ApplyStep[] = [
 
 const faqs: FaqItem[] = [
   {
-    question: "What are the IIIT Bangalore online courses?",
+    question: "What is the Online DBA course at Golden Gate University?",
     answer:
-      "They are industry-focused online programmes from IIIT Bangalore, designed for working professionals with flexible learning, projects, and recognised certification.",
+      "The Doctor of Business Administration (DBA) at GGU is a 36-month, fully online program designed for senior professionals seeking to enhance their leadership and research capabilities.",
   },
   {
-    question: "Do IIIT Bangalore certification courses help in career growth?",
+    question: "Why choose an Online DBA course from Golden Gate University?",
     answer:
-      "Yes. These programmes are designed to strengthen practical skills, improve professional credibility, and help learners prepare for career advancement in emerging technology and leadership roles.",
+      "Golden Gate University's Online DBA offers flexible learning, practical application, and access to experienced faculty, providing a robust education for career advancement.",
   },
   {
-    question:
-      "Is IIIT Bangalore artificial intelligence taught with practical training?",
+    question: "How does the Golden Gate University MBA online support working professionals?",
     answer:
-      "Yes. The artificial intelligence programmes include hands-on projects, assignments, case studies, tools, and real-world applications so learners can build practical experience.",
+      "The program offers flexible online learning, practice-based coursework, and instruction from U.S.-based faculty with real industry experience.",
   },
   {
-    question: "Do IIIT Bangalore data science programmes include projects?",
+    question: "How do the MBA and DBA programs at Golden Gate University differ?",
     answer:
-      "Yes. Data science programmes typically include practical projects, datasets, analytical exercises, machine learning applications, and capstone-based learning.",
+      "The MBA builds management and leadership skills, while the DBA focuses on advanced research, strategic analysis, and executive-level problem-solving.",
   },
   {
-    question:
-      "Is IIM Udaipur artificial intelligence included in the CTO programme?",
+    question: "Who should apply for the Golden Gate University MBA online?",
     answer:
-      "The CTO and AI leadership track includes leadership-focused learning and may involve academic or industry collaboration elements depending on the selected programme structure.",
+      "The program is ideal for working professionals seeking leadership roles, career growth, or advanced business knowledge without pausing their professional commitments.",
   },
 ];
 
@@ -113,15 +111,14 @@ export function ApplyAndFaq() {
       <section id="how-to-apply" className="bg-white py-14 sm:py-16 lg:py-20">
         <Container className="max-w-[1480px]">
           <div className="text-center">
-            <h2 className="text-2xl font-bold leading-tight text-[#1d3d82] sm:text-3xl lg:text-[34px]">
-              How To Apply For IIIT Bangalore University Online Courses
+            <h2 className="text-2xl font-extrabold leading-tight text-[#003d78] sm:text-3xl lg:text-[34px]">
+              How to Apply for Golden Gate University Online Courses
             </h2>
 
             <p className="mx-auto mt-3 max-w-4xl text-sm leading-6 text-gray-600 sm:text-base">
-              Students can easily enroll in IIIT Bangalore University Online
-              courses. Candidates can conveniently apply by selecting their
-              desired program. Follow these steps to secure admission in the
-              university.
+              Students can easily enrol in Golden Gate University Online courses.
+              Candidates can conveniently apply by selecting their desired program.
+              Follow these steps to secure admission in the university.
             </p>
           </div>
 
@@ -135,13 +132,13 @@ export function ApplyAndFaq() {
 
       {/* FAQ Section */}
       <section
-        id="faq"
+        id="faqs"
         className="bg-white pb-16 pt-8 sm:pb-20 sm:pt-10 lg:pb-24"
       >
         <Container>
           <div className="text-center">
-            <h2 className="text-3xl font-extrabold leading-tight text-[#075583] sm:text-4xl">
-              FAQ-Frequently Asked Question
+            <h2 className="text-3xl font-extrabold leading-tight text-[#003d78] sm:text-4xl">
+              FAQ-Frequently Asked Questions
             </h2>
           </div>
 
@@ -202,9 +199,8 @@ type FaqAccordionItemProps = {
 function FaqAccordionItem({ faq, isOpen, onToggle }: FaqAccordionItemProps) {
   return (
     <div
-      className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
-        isOpen ? "border-transparent bg-[#f2f2f2]" : "border-gray-300 bg-white"
-      }`}
+      className={`overflow-hidden rounded-2xl border transition-all duration-300 ease-in-out ${isOpen ? "border-transparent bg-[#f2f2f2]" : "border-gray-300 bg-white"
+        }`}
     >
       <button
         type="button"
@@ -212,7 +208,7 @@ function FaqAccordionItem({ faq, isOpen, onToggle }: FaqAccordionItemProps) {
         aria-expanded={isOpen}
         className="flex w-full items-center gap-4 px-5 py-4 text-left sm:px-6"
       >
-        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-[#075583] text-white">
+        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-[#003d78] text-white">
           {isOpen ? (
             <Minus size={14} strokeWidth={3} />
           ) : (
@@ -220,15 +216,14 @@ function FaqAccordionItem({ faq, isOpen, onToggle }: FaqAccordionItemProps) {
           )}
         </span>
 
-        <span className="text-sm font-bold text-[#075583] sm:text-base">
+        <span className="text-sm font-bold text-[#003d78] sm:text-base">
           {faq.question}
         </span>
       </button>
 
       <div
-        className={`grid transition-all duration-300 ${
-          isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-        }`}
+        className={`grid transition-all duration-300 ease-in-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+          }`}
       >
         <div className="overflow-hidden">
           <p className="px-5 pb-6 pl-14 text-sm leading-6 text-gray-600 sm:px-6 sm:pb-7 sm:pl-16 sm:text-base">

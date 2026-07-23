@@ -1,21 +1,10 @@
+"use client";
+
 import Image from "next/image";
-import {
-  BadgeCheck,
-  BookOpen,
-  GraduationCap,
-  Lightbulb,
-  Presentation,
-  ShieldCheck,
-} from "lucide-react";
+import { BadgeCheck, BookOpen, GraduationCap, Lightbulb, ShieldCheck, Presentation } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
 import { getAssetPath } from "@/lib/utils";
-
-/*
-|--------------------------------------------------------------------------
-| Types
-|--------------------------------------------------------------------------
-*/
 
 type LearningOutcome = {
   id: number;
@@ -30,56 +19,44 @@ type Statistic = {
   label: string;
 };
 
-/*
-|--------------------------------------------------------------------------
-| Learning Outcomes Data
-|--------------------------------------------------------------------------
-*/
-
 const learningOutcomes: LearningOutcome[] = [
   {
     id: 1,
     title: "PwC Board Certification",
     description: "Earn a PwC Board Advisory Certification",
-    icon: <BadgeCheck size={40} strokeWidth={1.7} />,
+    icon: <BadgeCheck size={40} className="text-white" />,
   },
   {
     id: 2,
     title: "Publish Your Dissertation",
     description: "Release your Doctoral dissertation as a book",
-    icon: <BookOpen size={40} strokeWidth={1.7} />,
+    icon: <BookOpen size={40} className="text-white" />,
   },
   {
     id: 3,
     title: "Teach at UGC Colleges",
     description: "Teach in UGC recognised colleges in your free time",
-    icon: <GraduationCap size={42} strokeWidth={1.7} />,
+    icon: <GraduationCap size={42} className="text-white" />,
   },
   {
     id: 4,
     title: "No-Code Prototyping",
     description: "Prototype and pilot your ideas with no-code platforms",
-    icon: <Lightbulb size={40} strokeWidth={1.7} />,
+    icon: <Lightbulb size={40} className="text-white" />,
   },
   {
     id: 5,
     title: "Global IP Protection",
     description: "Protect your Ideas with Solid IPs in 155 countries",
-    icon: <ShieldCheck size={40} strokeWidth={1.7} />,
+    icon: <ShieldCheck size={40} className="text-white" />,
   },
   {
     id: 6,
     title: "Pitch to VCs",
     description: "Pitch your ideas to real VCs with chequebooks",
-    icon: <Presentation size={40} strokeWidth={1.7} />,
+    icon: <Presentation size={40} className="text-white" />,
   },
 ];
-
-/*
-|--------------------------------------------------------------------------
-| Statistics Data
-|--------------------------------------------------------------------------
-*/
 
 const statistics: Statistic[] = [
   {
@@ -104,162 +81,112 @@ const statistics: Statistic[] = [
   },
 ];
 
-/*
-|--------------------------------------------------------------------------
-| Main Component
-|--------------------------------------------------------------------------
-*/
-
 export function LearningOutcomes() {
+  const desktopImage = getAssetPath(
+    "/ggu/assets/img/learning-outcome-01.webp",
+  );
+  const mobileImage = getAssetPath(
+    "/ggu/assets/img/learing-outome-mobile.webp",
+  );
+
   return (
-    <section id="learning-outcomes" className="relative bg-white">
-      {/* =============================================================
-          Learning Outcomes Main Section
-      ============================================================== */}
+    <section id="benefits" className="relative bg-white pt-10 lg:pt-0">
+      {/* Learning Outcomes Layout */}
 
-      <div className="grid grid-cols-1 lg:grid-cols-[35%_65%]">
-        {/* =========================================================
-            Left Bridge Image
-        ========================================================== */}
+      <div className="grid grid-cols-1 lg:grid-cols-[40%_60%] lg:items-stretch">
+        {/* Left Side: Desktop Image */}
 
-        <div className="relative min-h-[360px] sm:min-h-[500px] lg:min-h-[720px]">
+        <div className="relative hidden min-h-[500px] lg:block">
           <Image
-            src={getAssetPath("/assets/images/golden-gate-bridge.webp")}
-            alt="Golden Gate Bridge in San Francisco"
+            src={desktopImage}
+            alt="Learning outcomes of Golden Gate University online DBA"
             fill
-            priority
-            sizes="(max-width: 1024px) 100vw, 35vw"
+            sizes="40vw"
             className="object-cover object-center"
           />
-
-          {/* Mobile overlay */}
-
-          <div className="absolute inset-0 bg-black/10 lg:hidden" />
         </div>
 
-        {/* =========================================================
-            Right Content
-        ========================================================== */}
+        {/* Right Side: Learning Outcomes List */}
 
-        <div className="flex items-center bg-[#063c70] px-5 py-12 text-white sm:px-8 sm:py-14 lg:min-h-[720px] lg:px-[70px] lg:py-[60px] xl:px-[90px]">
-          <div className="mx-auto w-full max-w-[1110px]">
+        <div className="bg-[#063c70] px-5 py-12 text-white sm:px-8 sm:py-14 lg:px-[60px] lg:py-[65px] xl:px-[80px]">
+          <div className="mx-auto w-full max-w-[720px]">
             {/* Heading */}
 
             <div className="text-center lg:text-left">
-              <h2 className="text-[31px] font-black uppercase leading-none tracking-[-0.03em] text-white sm:text-[38px] lg:text-[42px]">
+              <h2 className="text-[28px] font-extrabold uppercase leading-none tracking-[-0.03em] text-white sm:text-[38px] lg:text-[32px]">
                 Learning Outcomes
               </h2>
 
-              <p className="mt-2 text-[24px] font-medium leading-none text-white sm:text-[31px]">
+              <p className="mt-3 text-[22px] font-medium leading-none text-white sm:text-[20px]">
                 After a DBA at GGU
               </p>
             </div>
 
-            {/* Outcomes Grid */}
+            {/* Outcomes List */}
 
-            <div className="mt-12 grid grid-cols-1 gap-x-12 gap-y-10 md:grid-cols-2 lg:mt-[54px] lg:gap-x-[80px] lg:gap-y-[40px]">
+            <div className="mt-10 grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-2 lg:mt-[45px] lg:gap-y-[35px]">
               {learningOutcomes.map((outcome) => (
-                <LearningOutcomeItem key={outcome.id} outcome={outcome} />
+                <div key={outcome.id} className="flex items-center gap-4">
+                  {/* Icon Circle */}
+
+                  <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[#ee5105] text-white sm:h-20 sm:w-20">
+                    {outcome.icon}
+                  </div>
+
+                  {/* Content */}
+
+                  <div className="min-w-0">
+                    <h3 className="text-[17px] font-extrabold leading-[1.2] text-white sm:text-[16px]">
+                      {outcome.title}
+                    </h3>
+
+                    <p className="mt-1 text-[12px] font-medium leading-[1.3] text-white/90">
+                      {outcome.description}
+                    </p>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
         </div>
       </div>
 
-      {/* =============================================================
-          Statistics Section
-      ============================================================== */}
+      {/* Mobile Image (Displayed at bottom of list on mobile) */}
 
-      <StatisticsSection />
-    </section>
-  );
-}
-
-/*
-|--------------------------------------------------------------------------
-| Learning Outcome Item
-|--------------------------------------------------------------------------
-*/
-
-type LearningOutcomeItemProps = {
-  outcome: LearningOutcome;
-};
-
-function LearningOutcomeItem({ outcome }: LearningOutcomeItemProps) {
-  return (
-    <article className="flex items-center gap-4 sm:gap-5">
-      {/* Icon Circle */}
-
-      <div className="flex h-[86px] w-[86px] shrink-0 items-center justify-center rounded-full bg-[#ed4c00] text-white sm:h-[92px] sm:w-[92px]">
-        {outcome.icon}
+      <div className="relative aspect-[1.33/1] w-full lg:hidden">
+        <Image
+          src={mobileImage}
+          alt="Learning outcomes mobile illustration"
+          fill
+          sizes="100vw"
+          className="object-cover object-bottom"
+        />
       </div>
 
-      {/* Text */}
+      {/* Statistics Band */}
 
-      <div className="min-w-0">
-        <h3 className="text-[19px] font-black leading-[1.15] text-white sm:text-[22px] lg:text-[24px]">
-          {outcome.title}
-        </h3>
+      <div className="bg-white px-4 py-8 sm:px-6 sm:py-10 lg:pt-[50px] lg:pb-0">
+        <Container>
+          <div className="mx-auto w-full max-w-[1140px] overflow-hidden rounded-[8px] bg-[#063c70] px-5 py-8 sm:px-8 sm:py-10 lg:px-[45px] lg:py-[29px] shadow-sm">
+            <div className="grid grid-cols-1 divide-y divide-white/20 sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4 lg:divide-x lg:divide-white/20">
+              {statistics.map((statistic) => (
+                <div
+                  key={statistic.id}
+                  className="flex flex-col items-center justify-center py-6 text-center sm:py-4 lg:py-0"
+                >
+                  <h3 className="text-[40px] font-extrabold uppercase leading-none tracking-[-0.035em] text-white sm:text-[48px] lg:text-[45px]">
+                    {statistic.value}
+                  </h3>
 
-        <p className="mt-1 text-[14px] font-medium leading-[1.3] text-white/95 sm:text-[16px] lg:text-[17px]">
-          {outcome.description}
-        </p>
-      </div>
-    </article>
-  );
-}
-
-/*
-|--------------------------------------------------------------------------
-| Statistics Section
-|--------------------------------------------------------------------------
-*/
-
-function StatisticsSection() {
-  return (
-    <div className="bg-white px-4 py-8 sm:px-6 sm:py-10 lg:py-[30px]">
-      <Container>
-        <div className="mx-auto w-full max-w-[1635px] overflow-hidden rounded-[8px] bg-[#063c70] px-5 py-8 sm:px-8 sm:py-10 lg:px-[45px] lg:py-[29px]">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-            {statistics.map((statistic, index) => (
-              <StatisticItem
-                key={statistic.id}
-                statistic={statistic}
-                showDivider={index < statistics.length - 1}
-              />
-            ))}
+                  <p className="mt-4 text-[15px] leading-[1.3] text-white sm:text-[13px] lg:text-[15px]">
+                    {statistic.label}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </Container>
-    </div>
-  );
-}
-
-/*
-|--------------------------------------------------------------------------
-| Statistic Item
-|--------------------------------------------------------------------------
-*/
-
-type StatisticItemProps = {
-  statistic: Statistic;
-  showDivider: boolean;
-};
-
-function StatisticItem({ statistic, showDivider }: StatisticItemProps) {
-  return (
-    <article
-      className={`relative flex min-h-[150px] flex-col items-center justify-center px-4 py-6 text-center lg:min-h-[158px] ${
-        showDivider ? "border-b border-white/70 sm:border-b-0 lg:border-r" : ""
-      }`}
-    >
-      <h3 className="text-[45px] font-black uppercase leading-none tracking-[-0.045em] text-white sm:text-[54px] lg:text-[68px]">
-        {statistic.value}
-      </h3>
-
-      <p className="mt-6 text-[14px] font-semibold leading-[1.3] text-white sm:text-[16px] lg:text-[18px]">
-        {statistic.label}
-      </p>
-    </article>
+        </Container>
+      </div>
+    </section>
   );
 }
