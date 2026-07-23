@@ -5,84 +5,30 @@ import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { X } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
-import FormWrapper, {
-  type FormCourseOption,
-} from "@/components/forms/FormWrapper";
+import FormWrapper from "@/components/forms/FormWrapper";
 import { getAssetPath } from "@/lib/utils";
-
-/*
-|--------------------------------------------------------------------------
-| Golden Gate University Courses
-|--------------------------------------------------------------------------
-*/
-
-const GGU_COURSES: FormCourseOption[] = [
-  {
-    value: "Doctor of Business Administration",
-    label: "Doctor of Business Administration",
-  },
-  {
-    value: "Master of Business Administration",
-    label: "Master of Business Administration",
-  },
-  {
-    value: "Online DBA in Leadership",
-    label: "Online DBA in Leadership",
-  },
-  {
-    value: "Online DBA in Business Analytics",
-    label: "Online DBA in Business Analytics",
-  },
-  {
-    value: "Online DBA in Marketing",
-    label: "Online DBA in Marketing",
-  },
-  {
-    value: "Online DBA in General Management",
-    label: "Online DBA in General Management",
-  },
-];
+import { GGU_COURSE_OPTIONS } from "../../constants";
 
 type AboutFormType = "callback" | null;
 
-/*
-|--------------------------------------------------------------------------
-| About Component
-|--------------------------------------------------------------------------
-*/
-
 export function About() {
   const [activeForm, setActiveForm] = useState<AboutFormType>(null);
-
-  /*
-  |--------------------------------------------------------------------------
-  | Close Form
-  |--------------------------------------------------------------------------
-  */
 
   const closeForm = useCallback(() => {
     setActiveForm(null);
   }, []);
 
-  /*
-  |--------------------------------------------------------------------------
-  | Body Scroll Lock
-  |--------------------------------------------------------------------------
-  */
-
   useEffect(() => {
-    document.body.style.overflow = activeForm ? "hidden" : "";
+    if (activeForm) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
 
     return () => {
       document.body.style.overflow = "";
     };
   }, [activeForm]);
-
-  /*
-  |--------------------------------------------------------------------------
-  | Escape Key Close
-  |--------------------------------------------------------------------------
-  */
 
   useEffect(() => {
     if (!activeForm) return;
@@ -100,33 +46,35 @@ export function About() {
     };
   }, [activeForm, closeForm]);
 
+  const campusImage = getAssetPath(
+    "/ggu/assets/img/about-ggu.webp",
+  );
+
   return (
     <>
       <section
         id="about"
         className="relative overflow-hidden bg-[#063c70] text-white"
       >
-        <div className="grid min-h-[615px] grid-cols-1 lg:grid-cols-[66%_34%]">
-          {/* =========================================================
-              Left Content
-          ========================================================== */}
+        <div className="grid min-h-[300px] grid-cols-1 lg:grid-cols-[66%_34%]">
+          {/* Left Content */}
 
-          <div className="relative flex items-center bg-[#063c70] py-12 sm:py-14 lg:py-[62px]">
+          <div className="relative flex items-center bg-[#063c70] py-12 sm:py-14">
             <Container className="w-full">
               <div className="max-w-[1080px] pr-0 lg:pr-12 xl:pr-16">
                 {/* Heading */}
 
-                <h2 className="text-[37px] font-black uppercase leading-none tracking-[-0.025em] text-white sm:text-[43px]">
+                <h2 className="text-[37px] font-bold uppercase leading-none tracking-[-0.025em] text-white sm:text-[30px]">
                   About Us
                 </h2>
 
-                <h3 className="mt-3 text-[25px] font-medium leading-[1.2] tracking-[-0.02em] text-white sm:text-[31px]">
+                <h3 className="mt-3 text-[18px] font-medium leading-[1.2] tracking-[-0.02em] text-white sm:text-[20px]">
                   Golden Gate University San Francisco
                 </h3>
 
                 {/* Description */}
 
-                <div className="mt-10 max-w-[1090px] space-y-7 text-[16px] font-semibold leading-[1.35] text-white sm:text-[18px] lg:text-[20px]">
+                <div className="mt-6 max-w-[1090px] space-y-7 text-[14px] leading-[1.35] text-white sm:text-[18px] lg:text-[14px]">
                   <p>
                     Founded in 1901, Golden Gate University (GGU) in San
                     Francisco is a pioneer in practice-based education for
@@ -152,7 +100,7 @@ export function About() {
                 <button
                   type="button"
                   onClick={() => setActiveForm("callback")}
-                  className="mt-12 inline-flex min-h-[59px] min-w-[265px] items-center justify-center rounded-[7px] bg-[#e94b04] px-8 py-3 text-[20px] font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#cc4002] hover:shadow-lg sm:text-[22px]"
+                  className="mt-6 inline-flex items-center justify-center rounded-[7px] bg-[#e94b04] px-6 py-2 text-[16px] font-medium text-white transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-[#cc4002] hover:shadow-lg"
                 >
                   Request Call Back
                 </button>
@@ -160,13 +108,11 @@ export function About() {
             </Container>
           </div>
 
-          {/* =========================================================
-              Right Campus Image
-          ========================================================== */}
+          {/* Right Campus Image */}
 
-          <div className="relative min-h-[360px] lg:min-h-[615px]">
+          <div className="relative min-h-[360px] lg:min-h-[300px]">
             <Image
-              src={getAssetPath("/assets/images/golden-gate-about-campus.webp")}
+              src={campusImage}
               alt="Golden Gate University San Francisco campus"
               fill
               priority
@@ -181,9 +127,7 @@ export function About() {
         </div>
       </section>
 
-      {/* =============================================================
-          Request Callback Modal
-      ============================================================== */}
+      {/* Request Callback Modal */}
 
       {activeForm === "callback" && (
         <AboutFormModal title="Request Call Back" onClose={closeForm}>
@@ -191,25 +135,21 @@ export function About() {
             title="Request Call Back"
             subtitle="Our academic experts will contact you shortly"
             onClose={closeForm}
-            courseOptions={GGU_COURSES}
+            courseOptions={GGU_COURSE_OPTIONS}
+            defaultCourse=""
             formNameOverride="GGU About Request Callback Form"
-            sourceOverride="GGU About Section"
-            utmSourceFallback="GGU Organic"
-            utmMediumFallback="GGU About Callback Button"
+            sourceOverride="GGU LP"
+            utmSourceFallback="Organic"
+            utmMediumFallback="GGU_Organic"
             submitButtonText="Request Call Back"
             submitButtonClassName="!bg-[#e94b04] hover:!bg-[#cc4002]"
+            redirectUrl="/thank-you"
           />
         </AboutFormModal>
       )}
     </>
   );
 }
-
-/*
-|--------------------------------------------------------------------------
-| About Form Modal
-|--------------------------------------------------------------------------
-*/
 
 type AboutFormModalProps = {
   title: string;
@@ -231,16 +171,6 @@ function AboutFormModal({ title, children, onClose }: AboutFormModalProps) {
         onMouseDown={(event) => event.stopPropagation()}
         className="relative max-h-[92vh] w-full max-w-[420px] overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-7"
       >
-        {/* Close Button */}
-
-        <button
-          type="button"
-          aria-label="Close callback form"
-          onClick={onClose}
-          className="absolute right-3 top-3 z-20 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-[#fff0e8] text-[#e94b04] transition-colors duration-200 hover:bg-[#ffe0d0]"
-        >
-          <X size={20} />
-        </button>
 
         {children}
       </div>

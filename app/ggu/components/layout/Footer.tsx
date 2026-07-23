@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { ArrowDown, X } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
+import { getAssetPath } from "@/lib/utils";
 
 import DesLogo from "../../assets/img/new-des-logo.webp";
 
@@ -81,12 +82,12 @@ export default function Footer() {
         ============================================================== */}
 
         <section className="px-4 sm:px-7 lg:px-[64px]">
-          <div className="relative mx-auto max-w-[1760px] rounded-[18px] bg-[#073d72] px-5 pb-[86px] pt-12 text-center text-white sm:pb-[92px] sm:pt-14 lg:pb-[88px] lg:pt-[48px]">
-            <h2 className="text-[25px] font-black leading-tight sm:text-[30px]">
+          <div className="relative mx-auto max-w-[1760px] rounded-[18px] bg-[#073d72] px-5 pb-[46px] pt-12 text-center text-white sm:pb-[92px] sm:pt-14 lg:pb-[60px] lg:pt-[48px]">
+            <h2 className="text-[25px] font-extrabold leading-tight sm:text-[30px]">
               Still Confused?
             </h2>
 
-            <p className="mx-auto mt-5 max-w-[900px] text-[14px] font-extrabold leading-6 sm:text-[16px]">
+            <p className="mx-auto mt-5 max-w-[900px] text-[14px] font-bold leading-6 sm:text-[16px]">
               Compare Golden Gate University with Top World Renowned
               Universities
             </p>
@@ -97,9 +98,15 @@ export default function Footer() {
               type="button"
               onClick={openComparePage}
               aria-label="Compare universities"
-              className="absolute -bottom-[41px] left-1/2 flex h-[82px] w-[82px] -translate-x-1/2 cursor-pointer items-center justify-center rounded-full border-[8px] border-white bg-[#073d72] text-white shadow-[0_5px_15px_rgba(0,0,0,0.12)] transition-transform duration-300 hover:scale-105"
+              className="absolute -bottom-[30px] left-1/2 flex h-[60px] w-[60px] -translate-x-1/2 cursor-pointer items-center justify-center rounded-full border-[0px] border-white bg-white text-white shadow-[0_5px_15px_rgba(0,0,0,0.12)] transition-transform duration-300 ease-in-out hover:scale-105 overflow-hidden"
             >
-              <ArrowDown size={38} strokeWidth={2.5} />
+              <Image
+                src={getAssetPath("/ggu/assets/img/arrow.gif")}
+                alt="Arrow down"
+                width={82}
+                height={82}
+                className="h-full w-full object-cover"
+              />
             </button>
           </div>
         </section>
@@ -120,7 +127,7 @@ export default function Footer() {
               alt="Distance Education School"
               width={900}
               height={230}
-              className="mx-auto h-auto w-full max-w-[760px] object-contain sm:max-w-[880px]"
+              className="mx-auto h-auto w-full max-w-[760px] object-contain sm:max-w-[700px]"
             />
           </button>
         </section>
@@ -145,7 +152,7 @@ export default function Footer() {
                 <button
                   type="button"
                   onClick={() => setActiveModal("disclaimer")}
-                  className="cursor-pointer transition-colors hover:text-[#073d72]"
+                  className="cursor-pointer transition-colors duration-300 ease-in-out hover:text-[#073d72]"
                 >
                   Disclaimer
                 </button>
@@ -155,7 +162,7 @@ export default function Footer() {
                 <button
                   type="button"
                   onClick={() => setActiveModal("terms")}
-                  className="cursor-pointer transition-colors hover:text-[#073d72]"
+                  className="cursor-pointer transition-colors duration-300 ease-in-out hover:text-[#073d72]"
                 >
                   Terms &amp; Conditions
                 </button>
@@ -165,7 +172,7 @@ export default function Footer() {
                 <button
                   type="button"
                   onClick={() => setActiveModal("privacy")}
-                  className="cursor-pointer transition-colors hover:text-[#073d72]"
+                  className="cursor-pointer transition-colors duration-300 ease-in-out hover:text-[#073d72]"
                 >
                   Privacy Policy
                 </button>
@@ -423,7 +430,7 @@ function FooterModal({ title, children, onClose }: FooterModalProps) {
           type="button"
           onClick={onClose}
           aria-label="Close popup"
-          className="absolute right-4 top-4 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-[#eaf1f8] text-[#073d72] transition-colors hover:bg-[#d8e6f3]"
+          className="absolute right-4 top-4 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-[#eaf1f8] text-[#073d72] transition-colors duration-300 ease-in-out hover:bg-[#d8e6f3]"
         >
           <X size={22} />
         </button>
