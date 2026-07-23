@@ -60,13 +60,13 @@ export function Hero() {
   };
 
   const IIITBImg = getAssetPath(
-    "/iim-udaipur/chief-technology-officer-&-ai-leadership-programme/img/iiitb_desktop_new_bg.webp",
+    "/iim-udaipur/chief-data-and-AI-officer-programme/img/iiitb_desktop_new_bg.webp",
   );
   const logo = getAssetPath(
-    "/iim-udaipur/chief-technology-officer-&-ai-leadership-programme/img/iiitb_new_logo_main.webp",
+    "/iim-udaipur/chief-data-and-AI-officer-programme/img/iiitb_new_logo_main.webp",
   );
   const MobileImg = getAssetPath(
-    "/iim-udaipur/chief-technology-officer-&-ai-leadership-programme/img/iiitb_mobile_new_img.webp",
+    "/iim-udaipur/chief-data-and-AI-officer-programme/img/iiitb_mobile_new_img.webp",
   );
 
   return (
@@ -115,7 +115,7 @@ export function Hero() {
               {/* Small Heading */}
 
               <p className="text-md font-semibold leading-tight text-black sm:text-[16px]">
-                Where Technology Leadership Meets
+                Where Data Leadership Meets
                 <br />
                 AI-Driven Transformation
               </p>
@@ -126,11 +126,11 @@ export function Hero() {
                 className={`${anton.className} mt-4 leading-[0.95] text-[#0757a4] uppercase`}
               >
                 <span className="block text-[42px] sm:text-[52px] lg:text-[52px]">
-                  CTO &amp; AI Leadership
+                  Chief Data &amp; AI
                 </span>
 
                 <span className="mt-2 block text-[42px] sm:text-[52px] lg:text-[52px]">
-                  Programme
+                  Officer Program
                 </span>
               </h1>
 
@@ -145,8 +145,8 @@ export function Hero() {
 
               <div className="mx-auto mt-5 space-y-1 text-left md:text-center lg:mx-0">
                 <FeatureItem text="24-Week Executive Programme" />
-                <FeatureItem text="8 Strategic Modules for CTO &amp; AI Leadership Capabilities" />
-                <FeatureItem text="Dual Executive Alumni Networks(IIIT-B &amp; IIM-U)" />
+                <FeatureItem text="7 Strategic Modules for CDO/CDAIO Capabilities" />
+                <FeatureItem text="Dual Executive Alumni Networks" />
               </div>
 
               {/* Download Button */}
@@ -193,7 +193,7 @@ export function Hero() {
                   utmSourceFallback="Organic"
                   utmMediumFallback="IIMU_Organic"
                   submitButtonText="Submit"
-                  redirectUrl="/iim-udaipur/chief-technology-officer-&-ai-leadership-programme/thank-you"
+                  redirectUrl="/iim-udaipur/chief-data-and-AI-officer-programme/thank-you"
                 />
               </div>
             </div>
@@ -215,7 +215,7 @@ export function Hero() {
                 utmSourceFallback="Organic"
                 utmMediumFallback="IIMU_Organic"
                 submitButtonText="Submit"
-                redirectUrl="/iim-udaipur/chief-technology-officer-&-ai-leadership-programme/thank-you"
+                redirectUrl="/iim-udaipur/chief-data-and-AI-officer-programme/thank-you"
               />
             </div>
           </div>
@@ -251,8 +251,8 @@ export function Hero() {
               utmMediumFallback="IIMU_Organic"
               submitButtonText="Download Brochure"
               isBrochureForm
-              brochureUrl="/iim-udaipur/chief-technology-officer-&-ai-leadership-programme/brochure/main_brochure.pdf"
-              redirectUrl="/iim-udaipur/chief-technology-officer-&-ai-leadership-programme/thank-you"
+              brochureUrl="/iim-udaipur/chief-data-and-AI-officer-programme/brochure/main_brochure.pdf"
+              redirectUrl="/iim-udaipur/chief-data-and-AI-officer-programme/thank-you"
             />
           </div>
         </div>
