@@ -3,9 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { X } from "lucide-react";
-
-import ArrowGif from "../../assets/img/arrow.gif";
-import DesLogo from "../../assets/img/new-des-logo.webp";
+import { getAssetPath } from "@/lib/utils";
 
 type ModalType = "disclaimer" | "terms" | "privacy" | null;
 
@@ -80,12 +78,12 @@ export default function Footer() {
         ============================================================== */}
 
         <section className="px-4 sm:px-8 lg:px-[60px]">
-          <div className="relative mx-auto max-w-[1800px] rounded-[20px] bg-[#c52208] px-5 pb-[86px] pt-12 text-center text-white sm:pb-[90px] sm:pt-14 lg:pb-[88px]">
+          <div className="relative mx-auto max-w-[1800px] rounded-[20px] bg-[#c52208] px-5 pb-[86px] pt-12 text-center text-white sm:pb-[90px] sm:pt-14 lg:pb-[58px]">
             <h2 className="text-[21px] font-extrabold leading-tight sm:text-[24px]">
               Still Confused?
             </h2>
 
-            <p className="mx-auto mt-5 max-w-[850px] text-[14px] font-extrabold leading-6 sm:text-[16px]">
+            <p className="mx-auto mt-5 max-w-[850px] text-[14px] font-bold leading-6 sm:text-[16px]">
               Compare Edgewood University with Top World Renowned Universities
             </p>
 
@@ -94,15 +92,15 @@ export default function Footer() {
               type="button"
               onClick={openComparePage}
               aria-label="Compare universities"
-              className="absolute -bottom-[43px] left-1/2 flex h-[86px] w-[86px] -translate-x-1/2 cursor-pointer items-center justify-center rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.12)] transition-transform duration-300 hover:scale-105"
+              className="absolute -bottom-[35px] left-1/2 flex h-[70px] w-[70px] rounded-full -translate-x-1/2 cursor-pointer items-center justify-center bg-white shadow-[0_5px_15px_rgba(0,0,0,0.12)] transition-transform duration-300 hover:scale-105"
             >
               <Image
-                src={ArrowGif}
+                src={getAssetPath("/edgewood/assets/img/arrow.gif")}
                 alt="Open university comparison"
                 width={62}
                 height={62}
                 unoptimized
-                className="h-[62px] w-[62px] object-contain"
+                className="h-[62px] w-[62px] object-contain rounded-full"
               />
             </button>
           </div>
@@ -120,11 +118,11 @@ export default function Footer() {
             aria-label="Open university comparison page"
           >
             <Image
-              src={DesLogo}
+              src={getAssetPath("/edgewood/assets/img/new-des-logo.webp")}
               alt="Distance Education School"
               width={950}
               height={260}
-              className="mx-auto h-auto w-full max-w-[950px] object-contain"
+              className="mx-auto h-auto w-full max-w-[650px] object-contain"
             />
           </button>
         </section>
@@ -135,7 +133,7 @@ export default function Footer() {
 
         <section className="px-4 pb-5 sm:px-8">
           <div className="mx-auto max-w-[1800px] text-center">
-            <p className="text-[12px] font-medium leading-[1.55] text-[#161616] sm:text-[14px]">
+            <p className="text-[12px] font-medium leading-[1.55] text-[#161616] sm:text-[13px]">
               SODE Counselling Services LLP act as a marketing agency. All
               university names, logos, and trademarks mentioned are used for
               informational purposes only. We are not a university or an

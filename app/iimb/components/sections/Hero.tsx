@@ -109,7 +109,7 @@ export function Hero() {
 
               {/* Main Heading */}
               <h1
-                className={`${anton.className} text-[#0f3b8c] text-center leading-[1.2] tracking-tight text-[30px] sm:text-[38px] lg:text-left lg:text-4xl lg:tracking-normal lg:max-w-md`}
+                className={`${anton.className} text-[#B12322] text-center leading-[1.2] tracking-tight text-[30px] sm:text-[38px] lg:text-left lg:text-4xl lg:tracking-normal lg:max-w-md`}
               >
                 <span className="block">Young Leaders Programme in General Management by IIM Bangalore</span>
               </h1>
@@ -139,7 +139,7 @@ export function Hero() {
               <button
                 type="button"
                 onClick={openDownloadForm}
-                className="mt-6 hidden lg:inline-flex cursor-pointer items-center justify-center gap-2 rounded-md bg-[#0f3b8c] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200 hover:bg-[#0c2e6f]"
+                className="mt-6 hidden lg:inline-flex cursor-pointer items-center justify-center gap-2 rounded-md bg-[#B12322] px-6 py-3 text-sm font-bold text-white shadow-md transition duration-200"
               >
                 <span>Get Brochure</span>
                 <Download size={16} aria-hidden="true" />
@@ -166,7 +166,7 @@ export function Hero() {
               <div className="-mt-5 w-[90%] max-w-md rounded-2xl border border-gray-100 bg-white p-5 shadow-xl lg:mt-0 lg:w-full lg:p-6 lg:shadow-2xl">
                 {/* Form Heading */}
                 <div className="mb-4 text-center">
-                  <h2 className="text-[22px] font-extrabold text-[#0f3b8c] lg:text-[25px]">
+                  <h2 className="text-[22px] font-extrabold text-[#B12322] lg:text-[25px]">
                     Admission Open
                   </h2>
 
@@ -178,7 +178,7 @@ export function Hero() {
                   <div className="mt-2.5 flex justify-center">
                     <a
                       href="tel:+917065777755"
-                      className="inline-flex items-center gap-2 rounded-full bg-[#0f3b8c] px-5 py-1.5 text-xs font-bold text-white transition-colors hover:bg-[#0c2e6f]"
+                      className="inline-flex items-center gap-2 rounded-full bg-[#B12322] px-5 py-1.5 text-xs font-bold text-white transition-colors"
                     >
                       <PhoneCall
                         size={12}
@@ -195,11 +195,11 @@ export function Hero() {
                   courseOptions={IIMB_COURSE_OPTIONS}
                   defaultCourse=""
                   formNameOverride="IIMB Hero Enquiry Form"
-                  sourceOverride="IIM LP"
+                  sourceOverride="IIMB LP"
                   utmSourceFallback="Organic"
-                  utmMediumFallback="IIM_Organic"
+                  utmMediumFallback="IIMB_Organic"
                   submitButtonText="Submit"
-                  submitButtonClassName="bg-[#0f3b8c] hover:bg-[#0c2e6f]"
+                  submitButtonClassName="bg-[#B12322] hover:bg-[#B12322]"
                   redirectUrl="/iimb/thank-you"
                 />
               </div>
@@ -212,29 +212,29 @@ export function Hero() {
           STATS BAR
       ====================================================== */}
 
-      <section className="bg-[#fedfa9] py-8" id="stats">
+      <section className="bg-[#B12322] py-8" id="stats">
         <Container>
           <div className="grid grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-4 md:gap-x-8 md:gap-y-0">
             <StatItem
-              imageSrc="/iimb/assets/img/ic-01.webp"
+              imageSrc="/iimb/assets/img/Alumni Network.webp"
               value="25000+"
               label="Alumni Network"
             />
 
             <StatItem
-              imageSrc="/iimb/assets/img/ic-02.webp"
+              imageSrc="/iimb/assets/img/Full-Time Faculty.webp"
               value="108"
               label="Full-Time Faculty"
             />
 
             <StatItem
-              imageSrc="/iimb/assets/img/ic-03.webp"
+              imageSrc="/iimb/assets/img/Academic Areas.webp"
               value="11"
               label="Academic Areas"
             />
 
             <StatItem
-              imageSrc="/iimb/assets/img/ic-04.webp"
+              imageSrc="/iimb/assets/img/Established.webp"
               value="1973"
               label="Established"
             />
@@ -266,11 +266,11 @@ export function Hero() {
               courseOptions={IIMB_COURSE_OPTIONS}
               defaultCourse=""
               formNameOverride="IIMB Download Brochure Form"
-              sourceOverride="IIM LP"
+              sourceOverride="IIMB LP"
               utmSourceFallback="Organic"
-              utmMediumFallback="IIM_Organic"
+              utmMediumFallback="IIMB_Organic"
               submitButtonText="Download Brochure"
-              submitButtonClassName="bg-[#0f3b8c] hover:bg-[#0c2e6f]"
+              submitButtonClassName="bg-[#B12322] hover:bg-[#B12322]"
               isBrochureForm
               brochureUrl="/iimb/assets/brochures/main_brochure.pdf"
               redirectUrl="/iimb/thank-you"
@@ -306,11 +306,11 @@ function StatItem({ imageSrc, value, label }: StatItemProps) {
       </div>
 
       <div className="flex flex-col text-left">
-        <p className="text-2xl font-extrabold leading-none text-[#0f3b8c] xl:text-3xl">
+        <p className="text-2xl font-extrabold leading-none text-white xl:text-3xl">
           {value}
         </p>
 
-        <p className="mt-1 text-[13px] font-bold leading-tight text-gray-900">
+        <p className="mt-1 text-[13px] font-bold leading-tight text-white/80">
           {label}
         </p>
       </div>

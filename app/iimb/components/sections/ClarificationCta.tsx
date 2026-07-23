@@ -121,9 +121,9 @@ export function ClarificationCta() {
               courseOptions={IIMB_COURSE_OPTIONS}
               defaultCourse=""
               formNameOverride="IIMB Clarification CTA Form"
-              sourceOverride="IIM LP"
+              sourceOverride="IIMB LP"
               utmSourceFallback="Organic"
-              utmMediumFallback="IIM_Organic"
+              utmMediumFallback="IIMB_Organic"
               submitButtonText="Talk to Experts"
               submitButtonClassName="bg-[#1d3d82] hover:bg-[#142b5c]"
               showPhoneCallLink

@@ -109,10 +109,9 @@ export function Hero() {
 
               {/* Main Heading */}
               <h1
-                className={`${anton.className} text-[#0f3b8c] text-center leading-[1.1] tracking-tight text-[50px] sm:text-[38px] lg:text-left lg:text-5xl lg:leading-[1.05] lg:tracking-normal`}
+                className={`${anton.className} text-[#0f3b8c] text-center leading-[1.2] text-[34px] sm:text-[38px] lg:text-left lg:text-4xl lg:max-w-[450px] lg:leading-[1.15] lg:tracking-normal`}
               >
-                <span className="block">AI for Business</span>
-                <span className="block">Professionals</span>
+                Certificate Programme in Strategic AI for Business Professionals
               </h1>
 
               {/* Provider */}

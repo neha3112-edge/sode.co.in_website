@@ -117,7 +117,7 @@ export function ApplyAndFaq() {
       >
         <Container className="max-w-370">
           <div className="text-center">
-            <h2 className="text-2xl font-bold leading-tight text-[#1d3d82] sm:text-3xl lg:text-[34px]">
+            <h2 className="text-2xl font-bold leading-tight text-black/80 sm:text-3xl lg:text-[34px]">
               How to Apply for the Young Leaders Programme
             </h2>
 
@@ -141,7 +141,7 @@ export function ApplyAndFaq() {
       >
         <Container>
           <div className="text-center">
-            <h2 className="text-2xl font-extrabold leading-tight text-[#1d3d82] sm:text-4xl">
+            <h2 className="text-2xl font-extrabold leading-tight text-black/80 sm:text-4xl">
               FAQs | Frequently Asked Questions
             </h2>
           </div>
@@ -212,7 +212,7 @@ function FaqAccordionItem({ faq, isOpen, onToggle }: FaqAccordionItemProps) {
         aria-expanded={isOpen}
         className="flex w-full items-center gap-4 px-5 py-4 text-left sm:px-6"
       >
-        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-[#1d3d82] text-white">
+        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-[#B12322] text-white">
           {isOpen ? (
             <Minus size={14} strokeWidth={3} />
           ) : (
@@ -220,7 +220,7 @@ function FaqAccordionItem({ faq, isOpen, onToggle }: FaqAccordionItemProps) {
           )}
         </span>
 
-        <span className="text-sm font-bold text-[#1d3d82] sm:text-base">
+        <span className="text-sm font-bold text-black/80 sm:text-base">
           {faq.question}
         </span>
       </button>

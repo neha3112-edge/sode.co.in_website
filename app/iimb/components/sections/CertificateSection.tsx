@@ -151,7 +151,7 @@ export function CertificateSection() {
             {/* Right Content */}
 
             <div className="text-center lg:text-left">
-              <h2 className="text-2xl font-extrabold leading-tight text-[#0f3b8c] sm:text-4xl">
+              <h2 className="text-2xl font-extrabold leading-tight text-black/80 sm:text-4xl">
                 Credential from India's # 3 ranked IIM, NIRF 2026
               </h2>
 
@@ -178,7 +178,7 @@ export function CertificateSection() {
                 size="lg"
                 type="button"
                 onClick={() => setFormOpen(true)}
-                className="mt-8 inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-full bg-[#0f3b8c] px-6 py-3 text-sm font-bold text-white transition-colors duration-200 hover:bg-[#0c2e6f]"
+                className="mt-8 inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-full bg-[#B12322] px-6 py-3 text-sm font-bold text-white transition-colors duration-200 hover:bg-[#B12322]"
               >
                 <span>Get Certificate</span>
 
@@ -246,11 +246,11 @@ export function CertificateSection() {
               courseOptions={IIMB_COURSE_OPTIONS}
               defaultCourse=""
               formNameOverride="IIMB Sample Certificate Form"
-              sourceOverride="IIM LP"
+              sourceOverride="IIMB LP"
               utmSourceFallback="Organic"
-              utmMediumFallback="IIM_Organic"
+              utmMediumFallback="IIMB_Organic"
               submitButtonText="Get Degree"
-              submitButtonClassName="bg-[#1d3d82] hover:bg-[#142b5c]"
+              submitButtonClassName="bg-[#B12322] hover:bg-[#B12322]"
               redirectUrl="/iimb/thank-you"
             />
           </div>

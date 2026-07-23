@@ -6,43 +6,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import FormWrapper from "@/components/forms/FormWrapper";
-
-const IIITB_COURSES = [
-  {
-    value: "Executive Programme in Generative AI for Leaders",
-    label: "Executive Programme in Generative AI for Leaders",
-  },
-  {
-    value: "Executive Post Graduate Certificate Programme in Data Science & AI",
-    label: "Executive Post Graduate Certificate Programme in Data Science & AI",
-  },
-  {
-    value:
-      "Professional Certificate Programme in Data Science with Generative AI",
-    label:
-      "Professional Certificate Programme in Data Science with Generative AI",
-  },
-  {
-    value: "Executive Post Graduate Programme in Applied AI and Agentic AI",
-    label: "Executive Post Graduate Programme in Applied AI and Agentic AI",
-  },
-  {
-    value: "Executive Diploma in Machine Learning & Artificial Intelligence",
-    label: "Executive Diploma in Machine Learning & Artificial Intelligence",
-  },
-  {
-    value: "Chief Technology Officer & AI Leadership Programme",
-    label: "Chief Technology Officer & AI Leadership Programme",
-  },
-  {
-    value: "Master of Science in Machine Learning & Artificial Intelligence",
-    label: "Master of Science in Machine Learning & Artificial Intelligence",
-  },
-  {
-    value: "Master of Science in Data Science with Generative AI",
-    label: "Master of Science in Data Science with Generative AI",
-  },
-];
+import { EDGEWOOD_COURSE_OPTIONS } from "../../constants";
 
 export function ClarificationCta() {
   const [formOpen, setFormOpen] = useState(false);
@@ -99,12 +63,14 @@ export function ClarificationCta() {
               title="Talk to Experts"
               subtitle="Share your details and our academic expert will contact you"
               onClose={closeForm}
-              courseOptions={IIITB_COURSES}
-              formNameOverride="IIITB Clarification CTA Form"
-              sourceOverride="IIITB Clarification Section"
-              utmSourceFallback="IIITB Organic"
-              utmMediumFallback="IIITB Talk to Experts Button"
+              courseOptions={EDGEWOOD_COURSE_OPTIONS}
+              formNameOverride="Edgewood Clarification CTA Form"
+              sourceOverride="Edgewood LP"
+              utmSourceFallback="Edgewood Organic"
+              utmMediumFallback="Edgewood Talk to Experts Button"
               submitButtonText="Talk to Experts"
+              submitButtonClassName="bg-[#c9230c] hover:bg-[#aa1c08]"
+              redirectUrl="/thank-you"
               showPhoneCallLink
             />
           </div>

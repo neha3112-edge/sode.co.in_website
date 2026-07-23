@@ -203,9 +203,9 @@ export function Eligibility() {
               courseOptions={IIMB_COURSE_OPTIONS}
               defaultCourse=""
               formNameOverride="IIMB Eligibility Counselling Form"
-              sourceOverride="IIM LP"
+              sourceOverride="IIMB LP"
               utmSourceFallback="Organic"
-              utmMediumFallback="IIM_Organic"
+              utmMediumFallback="IIMB_Organic"
               submitButtonText="Get Free Counselling"
               submitButtonClassName="bg-[#0f3b8c]"
               redirectUrl="/iimb/thank-you"

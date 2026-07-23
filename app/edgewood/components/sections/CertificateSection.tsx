@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
-import { ArrowRight, Award, X } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
 import FormWrapper from "@/components/forms/FormWrapper";
 import { getAssetPath } from "@/lib/utils";
+import { EDGEWOOD_COURSE_OPTIONS } from "../../constants";
 
 /*
 |--------------------------------------------------------------------------
@@ -43,17 +44,17 @@ const dbaSpecializations: Specialization[] = [
     id: 1,
     title: "DBA Leadership",
     description:
-      "Edgewood University Online DBA Leadership builds leadership skills that enable students to learn management and strategic decision-making skills, using applied research to solve real organisational challenges in senior roles, and to gain skilled knowledge.",
-    image: "/assets/img/dba-leadership.webp",
-    courseName: "Edgewood University Online DBA - Leadership",
+      "Edgewood University Online DBA leadership builds leadership skills that enable students to learn management and strategic decision-making skills, using applied research to solve real organisational challenges in senior roles, and to gain skilled knowledge.",
+    image: "/edgewood/assets/img/leadership-edgewood.webp",
+    courseName: "DBA in Leadership",
   },
   {
     id: 2,
     title: "DBA Finance",
     description:
-      "Finance Specializations in Edgewood University's Online DBA develop advanced expertise in financial strategy, risk management, and corporate decision-making. This curriculum helps students use research-led frameworks to manage complex financial problems.",
-    image: "/assets/img/dba-finance.webp",
-    courseName: "Edgewood University Online DBA - Finance",
+      "Finance Specializations in Edgewood University's Online DBA develop advanced expertise in financial strategy, risk management, and corporate decision-making. This curriculum help student use research-led frameworks to manage complex financial problems.",
+    image: "/edgewood/assets/img/finanance-edgewood.webp",
+    courseName: "DBA in Finance",
   },
 ];
 
@@ -68,17 +69,17 @@ const mbaDbaSpecializations: Specialization[] = [
     id: 1,
     title: "MBA + DBA Leadership",
     description:
-      "Edgewood University Online MBA + DBA Leadership combines MBA leadership skills with doctoral-level applied research, preparing professionals for senior management, consulting, and enterprise growth roles.",
-    image: "/assets/img/mba-dba-leadership.webp",
-    courseName: "Edgewood University Online MBA + DBA - Leadership",
+      "Edgewood University Online DBA Learning in MBA + DBA Leadership combines MBA leadership skills with doctoral-level applied research, preparing professionals for senior management, consulting, and enterprise growth roles.",
+    image: "/edgewood/assets/img/leadership-edgewood-2.webp",
+    courseName: "MBA + DBA in Leadership",
   },
   {
     id: 2,
     title: "MBA + DBA Finance",
     description:
-      "Edgewood University Online MBA + DBA Finance blends MBA finance fundamentals with advanced doctoral research, supporting strategic investment, risk control, and high-level corporate finance decisions.",
-    image: "/assets/img/mba-dba-finance.webp",
-    courseName: "Edgewood University Online MBA + DBA - Finance",
+      "Edgewood University Online DBA Learning in MBA + DBA Finance blends MBA finance fundamentals with advanced doctoral research, supporting strategic investment, risk control, and high-level corporate finance decisions.",
+    image: "/edgewood/assets/img/Finance.webp",
+    courseName: "MBA + DBA in Finance",
   },
 ];
 
@@ -117,38 +118,13 @@ const learningOutcomes: LearningOutcome[] = [
     id: 5,
     title: "Expert Faculty:",
     description:
-      "Learn from expert faculty who guide projects, share industry insights, and support academic progress personally to help learners gain the skills they need.",
+      "Learn from expert faculty who guide projects, share industry insights, and support academic progress personally to help learner gain the skills they need.",
   },
   {
     id: 6,
     title: "Nationally Recognized:",
     description:
-      "Earn a nationally recognised U.S. qualification that enhances credibility, promotion prospects, and global mobility faster.",
-  },
-];
-
-/*
-|--------------------------------------------------------------------------
-| Form Course Options
-|--------------------------------------------------------------------------
-*/
-
-const EDGEWOOD_COURSE_OPTIONS = [
-  {
-    value: "Edgewood University Online DBA - Leadership",
-    label: "Edgewood University Online DBA - Leadership",
-  },
-  {
-    value: "Edgewood University Online DBA - Finance",
-    label: "Edgewood University Online DBA - Finance",
-  },
-  {
-    value: "Edgewood University Online MBA + DBA - Leadership",
-    label: "Edgewood University Online MBA + DBA - Leadership",
-  },
-  {
-    value: "Edgewood University Online MBA + DBA - Finance",
-    label: "Edgewood University Online MBA + DBA - Finance",
+      "Earn a nationally recognized U.S. qualification that enhances credibility, promotion prospects, and global mobility faster.",
   },
 ];
 
@@ -160,50 +136,24 @@ const EDGEWOOD_COURSE_OPTIONS = [
 
 export function CertificateSection() {
   const [activeTab, setActiveTab] = useState<SpecializationTab>("dba");
-
   const [activeForm, setActiveForm] = useState<FormType>(null);
-
   const [selectedSpecialization, setSelectedSpecialization] =
     useState<Specialization | null>(null);
-
-  /*
-  |--------------------------------------------------------------------------
-  | Close Form
-  |--------------------------------------------------------------------------
-  */
 
   const closeForm = useCallback(() => {
     setActiveForm(null);
     setSelectedSpecialization(null);
   }, []);
 
-  /*
-  |--------------------------------------------------------------------------
-  | Apply Form
-  |--------------------------------------------------------------------------
-  */
-
   const openApplyForm = (specialization: Specialization) => {
     setSelectedSpecialization(specialization);
     setActiveForm("apply");
   };
 
-  /*
-  |--------------------------------------------------------------------------
-  | Degree Form
-  |--------------------------------------------------------------------------
-  */
-
   const openDegreeForm = () => {
     setSelectedSpecialization(null);
     setActiveForm("degree");
   };
-
-  /*
-  |--------------------------------------------------------------------------
-  | Lock Body Scroll
-  |--------------------------------------------------------------------------
-  */
 
   useEffect(() => {
     document.body.style.overflow = activeForm ? "hidden" : "";
@@ -212,12 +162,6 @@ export function CertificateSection() {
       document.body.style.overflow = "";
     };
   }, [activeForm]);
-
-  /*
-  |--------------------------------------------------------------------------
-  | Escape Key
-  |--------------------------------------------------------------------------
-  */
 
   useEffect(() => {
     if (!activeForm) return;
@@ -251,7 +195,7 @@ export function CertificateSection() {
         <Container>
           {/* Heading */}
           <div className="text-center">
-            <h2 className="text-[25px] font-black leading-tight text-[#c9230c] sm:text-[30px] lg:text-[34px]">
+            <h2 className="text-[23px] font-extrabold leading-tight text-[#c9230c] sm:text-[27px] lg:text-[30px]">
               Specializations of Edgewood University Online DBA / MBA + DBA
             </h2>
           </div>
@@ -261,11 +205,10 @@ export function CertificateSection() {
             <button
               type="button"
               onClick={() => setActiveTab("dba")}
-              className={`min-w-[82px] cursor-pointer border px-5 py-2.5 text-[13px] font-extrabold transition-all duration-200 ${
-                activeTab === "dba"
-                  ? "border-[#bd2009] bg-[#bd2009] text-white"
-                  : "border-[#cccccc] bg-white text-black hover:border-[#bd2009] hover:text-[#bd2009]"
-              }`}
+              className={`min-w-[82px] cursor-pointer border px-5 py-2 text-[12px] font-extrabold transition-all duration-200 rounded-[4px] ${activeTab === "dba"
+                ? "border-[#bd2009] bg-[#bd2009] text-white"
+                : "border-[#cccccc] bg-white text-bold hover:border-[#bd2009] hover:text-[#bd2009]"
+                }`}
             >
               DBA
             </button>
@@ -273,18 +216,17 @@ export function CertificateSection() {
             <button
               type="button"
               onClick={() => setActiveTab("mba-dba")}
-              className={`min-w-[126px] cursor-pointer border px-5 py-2.5 text-[13px] font-extrabold transition-all duration-200 ${
-                activeTab === "mba-dba"
-                  ? "border-[#bd2009] bg-[#bd2009] text-white"
-                  : "border-[#cccccc] bg-white text-black hover:border-[#bd2009] hover:text-[#bd2009]"
-              }`}
+              className={`min-w-[126px] cursor-pointer border px-5 py-2 text-[12px] font-extrabold transition-all duration-200 rounded-[4px] ${activeTab === "mba-dba"
+                ? "border-[#bd2009] bg-[#bd2009] text-white"
+                : "border-[#cccccc] bg-white text-bold hover:border-[#bd2009] hover:text-[#bd2009]"
+                }`}
             >
               MBA + DBA
             </button>
           </div>
 
           {/* Cards */}
-          <div className="mx-auto mt-8 grid max-w-[1040px] grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
+          <div className="mx-auto mt-8 grid max-w-[940px] grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-10">
             {visibleSpecializations.map((specialization) => (
               <SpecializationCard
                 key={`${activeTab}-${specialization.id}`}
@@ -300,22 +242,22 @@ export function CertificateSection() {
           LEARNING OUTCOMES
       ============================================================== */}
 
-      <section className="bg-[#bd2009] py-14 text-white sm:py-16 lg:py-[64px]">
+      <section id="learning-section" className="bg-[#bd2009] py-14 text-white sm:py-16 lg:py-[64px]">
         <Container>
           {/* Heading */}
           <div className="text-center">
-            <h2 className="text-[28px] font-black uppercase leading-tight text-white sm:text-[34px] lg:text-[38px]">
+            <h2 className="text-[26px] font-extrabold uppercase leading-tight text-white sm:text-[30px] lg:text-[34px]">
               Learning Outcomes of
             </h2>
 
-            <div className="mx-auto mt-2 flex max-w-[920px] items-center gap-4">
-              <span className="h-px flex-1 bg-white/60" />
+            <div className="mx-auto mt-2 flex max-w-[920px] items-center justify-center gap-4">
+              <span className="hidden h-px flex-1 bg-white/60 sm:block" />
 
-              <p className="text-[17px] font-medium text-white sm:text-[20px]">
+              <p className="text-[15px] font-medium text-white sm:text-[18px]">
                 Edgewood University Online
               </p>
 
-              <span className="h-px flex-1 bg-white/60" />
+              <span className="hidden h-px flex-1 bg-white/60 sm:block" />
             </div>
           </div>
 
@@ -343,7 +285,7 @@ export function CertificateSection() {
               <div className="relative aspect-[1.43/1] w-full overflow-hidden bg-white shadow-[0_10px_26px_rgba(0,0,0,0.07)]">
                 <Image
                   src={getAssetPath(
-                    "/assets/img/edgewood-sample-certificate.webp",
+                    "/edgewood/assets/img/sample-certficate-edgewood.webp",
                   )}
                   alt="Edgewood University Online sample certification"
                   fill
@@ -355,46 +297,27 @@ export function CertificateSection() {
 
             {/* Certificate Content */}
             <div className="text-center lg:text-left">
-              <h2 className="text-[34px] font-black leading-tight tracking-[-0.03em] text-black sm:text-[42px] lg:text-[46px]">
+              <h2 className="text-[30px] font-extrabold leading-tight text-black/80 sm:text-[36px]">
                 Sample Certification
               </h2>
 
-              <p className="mt-3 text-[14px] font-extrabold text-[#e62b72] sm:text-[15px]">
+              <p className="mt-3 text-[13px] font-extrabold text-[#e62b72] sm:text-[14px]">
                 Edgewood University Online
               </p>
 
-              <p className="mx-auto mt-5 max-w-[510px] text-[14px] leading-[1.58] text-[#5d5d5d] sm:text-[15px] lg:mx-0">
-                Edgewood University Online offers two certifications after
-                completion of their degree: PwC and the certificate of Edgewood
-                University. These two certificates help students prepare for
-                top-board level roles. In partnership with PwC India, the
-                programme teaches strategic thinking, handling stakeholders,
-                governance, and compliance through live lectures and real-world
-                expert guidance.
-              </p>
-
-              <p className="mx-auto mt-2 max-w-[510px] text-[14px] leading-[1.58] text-[#5d5d5d] sm:text-[15px] lg:mx-0">
-                These qualifications build confidence to succeed in business
-                careers through the Edgewood University Online MBA + DBA and DBA
-                programmes.
+              <p className="mx-auto mt-5 max-w-[510px] text-[13px] leading-[1.58] text-[#5d5d5d] sm:text-[13px] lg:mx-0">
+                Edgewood University Online offers two certifications after completion of their degree: PwC and the certificate of Edgewood University. These two certificates help students prepare for top-board level roles. In the partnership of PwC India, it teaches strategic thinking, handling stakeholders, governance, and compliance through live lecture which teaching studnet a real-world expertise guidance, which buld confinace to succeed in a business career with Edgewood University Online MBA + DBA and MBA.
               </p>
 
               <button
                 type="button"
                 onClick={openDegreeForm}
-                className="mt-7 inline-flex min-h-[43px] cursor-pointer items-center justify-center gap-4 rounded-full bg-[#c9230c] px-8 py-3 text-[14px] font-extrabold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#aa1c08]"
+                className="mt-7 inline-flex min-h-[38px] cursor-pointer items-center justify-center gap-3 rounded-full bg-[#c9230c] px-6 py-2.5 text-[13px] font-extrabold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#aa1c08]"
               >
                 Get Degree
-                <ArrowRight size={16} strokeWidth={2.5} />
+                <ArrowRight size={14} strokeWidth={2.5} />
               </button>
             </div>
-          </div>
-
-          {/* Next Section Heading */}
-          <div className="mt-20 text-center sm:mt-24">
-            <h2 className="text-[25px] font-black leading-tight text-[#193778] sm:text-[31px] lg:text-[34px]">
-              How To Apply For Edgewood University Online Courses
-            </h2>
           </div>
         </Container>
       </section>
@@ -412,13 +335,14 @@ export function CertificateSection() {
             title="Apply Now"
             subtitle={`Start your application for ${selectedSpecialization.title}`}
             onClose={closeForm}
-            defaultCourse={selectedSpecialization.courseName}
-            hideCourseField
+            courseOptions={EDGEWOOD_COURSE_OPTIONS}
             formNameOverride={`Edgewood Specialization Apply Form - ${selectedSpecialization.title}`}
-            sourceOverride="Edgewood Specialization Apply"
+            sourceOverride="Edgewood LP"
             utmSourceFallback="Edgewood Organic"
             utmMediumFallback={`${selectedSpecialization.title} Apply Button`}
             submitButtonText="Submit Application"
+            submitButtonClassName="bg-[#c9230c] hover:bg-[#aa1c08]"
+            redirectUrl="/thank-you"
           />
         </CustomFormModal>
       )}
@@ -438,10 +362,12 @@ export function CertificateSection() {
             onClose={closeForm}
             courseOptions={EDGEWOOD_COURSE_OPTIONS}
             formNameOverride="Edgewood Sample Certification Get Degree Form"
-            sourceOverride="Edgewood Sample Certification"
+            sourceOverride="Edgewood LP"
             utmSourceFallback="Edgewood Organic"
             utmMediumFallback="Edgewood Get Degree Button"
             submitButtonText="Get Degree"
+            submitButtonClassName="bg-[#c9230c] hover:bg-[#aa1c08]"
+            redirectUrl="/thank-you"
           />
         </CustomFormModal>
       )}
@@ -480,11 +406,11 @@ function SpecializationCard({
 
         {/* Content */}
         <div className="flex flex-1 flex-col px-7 pb-12 pt-6 text-center sm:px-8">
-          <h3 className="text-[25px] font-black leading-tight text-black sm:text-[28px]">
+          <h3 className="text-[21px] font-bold leading-tight text-black sm:text-[23px]">
             {specialization.title}
           </h3>
 
-          <p className="mx-auto mt-4 max-w-[430px] text-[14px] leading-[1.5] text-[#474747] sm:text-[15px]">
+          <p className="mx-auto mt-4 max-w-[430px] text-[13px] leading-[1.5] text-[#474747] sm:text-[13px]">
             {specialization.description}
           </p>
         </div>
@@ -494,7 +420,7 @@ function SpecializationCard({
       <button
         type="button"
         onClick={onApply}
-        className="absolute bottom-0 left-1/2 min-h-[43px] min-w-[182px] -translate-x-1/2 cursor-pointer rounded-[8px] bg-[#c9230c] px-7 py-2.5 text-[17px] font-extrabold text-white shadow-[0_6px_14px_rgba(0,0,0,0.25)] transition-all duration-200 hover:bg-[#aa1c08]"
+        className="absolute bottom-0 left-1/2 min-h-[38px] min-w-[160px] -translate-x-1/2 cursor-pointer rounded-[8px] bg-[#c9230c] px-6 py-2 text-[14px] font-extrabold text-white shadow-[0_6px_14px_rgba(0,0,0,0.25)] transition-all duration-200 hover:bg-[#aa1c08]"
       >
         Apply Now
       </button>
@@ -515,16 +441,22 @@ type LearningOutcomeCardProps = {
 function LearningOutcomeCard({ outcome }: LearningOutcomeCardProps) {
   return (
     <article className="flex items-start gap-4">
-      <div className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full bg-white text-[#252525]">
-        <Award size={27} strokeWidth={2.4} />
+      <div className="relative flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full bg-white p-1">
+        <Image
+          src={getAssetPath("/edgewood/assets/img/learning-outcome-edgewood-icon.webp")}
+          alt=""
+          width={50}
+          height={50}
+          className="object-contain"
+        />
       </div>
 
       <div>
-        <h3 className="text-[17px] font-extrabold leading-[1.25] text-white sm:text-[18px]">
+        <h3 className="text-[15px] font-extrabold leading-[1.25] text-white sm:text-[16px]">
           {outcome.title}
         </h3>
 
-        <p className="mt-2 text-[14px] leading-[1.5] text-white/95 sm:text-[15px]">
+        <p className="mt-2 text-[13px] leading-[1.5] text-white/95 sm:text-[13px]">
           {outcome.description}
         </p>
       </div>
@@ -558,15 +490,6 @@ function CustomFormModal({ title, children, onClose }: CustomFormModalProps) {
         onMouseDown={(event) => event.stopPropagation()}
         className="relative max-h-[92vh] w-full max-w-[420px] overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-7"
       >
-        <button
-          type="button"
-          aria-label="Close form"
-          onClick={onClose}
-          className="absolute right-3 top-3 z-20 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-[#fff0ed] text-[#c9230c] transition hover:bg-[#ffe2dc]"
-        >
-          <X size={20} />
-        </button>
-
         {children}
       </div>
     </div>

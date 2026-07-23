@@ -15,15 +15,15 @@ const navItems = [
   },
   {
     label: "Approvals",
-    href: "#approvals",
+    href: "#accreditation",
   },
   {
     label: "About",
-    href: "#about",
+    href: "#about-section",
   },
   {
     label: "FAQ",
-    href: "#faq",
+    href: "#faqs",
   },
 ];
 
@@ -45,12 +45,12 @@ export function Header() {
             className="flex shrink-0 items-center"
           >
             <Image
-              src={getAssetPath("/assets/images/new_sode_tm_logo.png")}
+              src={getAssetPath("/edgewood/assets/img/new_sode_tm_logo.png")}
               alt="SODE logo"
-              width={60}
-              height={60}
+              width={160}
+              height={50}
               priority
-              className="h-[58px] w-[58px] object-contain"
+              className="h-[50px] w-[160px] object-contain object-left"
             />
           </Link>
 
@@ -63,7 +63,7 @@ export function Header() {
               <a
                 key={item.label}
                 href={item.href}
-                className="relative py-3 text-[16px] font-semibold tracking-[0.01em] text-[#172033] transition-colors duration-200 hover:text-[#056493]"
+                className="relative py-3 text-[14px] font-bold tracking-[0.01em] text-[#172033] transition-colors duration-200 hover:text-[#c9230c]"
               >
                 {item.label}
               </a>
@@ -78,7 +78,7 @@ export function Header() {
             }
             aria-expanded={isMenuOpen}
             onClick={() => setIsMenuOpen((previousValue) => !previousValue)}
-            className="flex h-10 w-10 items-center justify-center rounded-md bg-[#102441] text-white transition-colors duration-200 hover:bg-[#056493] lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-md bg-[#102441] text-white transition-colors duration-200 hover:bg-[#c9230c] lg:hidden"
           >
             {isMenuOpen ? <X size={23} /> : <Menu size={23} />}
           </button>
@@ -100,7 +100,7 @@ export function Header() {
                 key={item.label}
                 href={item.href}
                 onClick={handleNavClick}
-                className="rounded-md px-4 py-3 text-center text-[15px] font-semibold text-[#172033] transition-colors duration-200 hover:bg-gray-100 hover:text-[#056493]"
+                className="rounded-md px-4 py-3 text-center text-[13px] font-bold text-[#172033] transition-colors duration-200 hover:bg-gray-100 hover:text-[#c9230c]"
               >
                 {item.label}
               </a>

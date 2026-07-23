@@ -62,7 +62,7 @@ export function Header() {
               <div key={item.label} className="flex items-center">
                 <a
                   href={item.href}
-                  className="px-3 py-2 transition-colors duration-200 hover:text-[#1d3d82]"
+                  className="px-3 py-2 transition-colors duration-200 hover:text-[#B12322]"
                 >
                   {item.label}
                 </a>

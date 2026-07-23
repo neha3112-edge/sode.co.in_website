@@ -3,62 +3,18 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { CheckSquare, Download, X } from "lucide-react";
+import { Anton } from "next/font/google";
 
 import { Container } from "@/components/ui/Container";
-import FormWrapper, {
-  type FormCourseOption,
-} from "@/components/forms/FormWrapper";
+import FormWrapper from "@/components/forms/FormWrapper";
+import { getAssetPath } from "@/lib/utils";
+import { EDGEWOOD_COURSE_OPTIONS } from "../../constants";
 
-import IIITBImg from "../../assets/img/iiitb_desktop_new_bg.png";
-
-/*
-|--------------------------------------------------------------------------
-| IIIT Bangalore Course Options
-|--------------------------------------------------------------------------
-*/
-
-const IIITB_COURSE_OPTIONS: FormCourseOption[] = [
-  {
-    value: "Executive Programme in Generative AI for Leaders",
-    label: "Executive Programme in Generative AI for Leaders",
-  },
-  {
-    value: "Executive Post Graduate Certificate Programme in Data Science & AI",
-    label: "Executive Post Graduate Certificate Programme in Data Science & AI",
-  },
-  {
-    value:
-      "Professional Certificate Programme in Data Science with Generative AI",
-    label:
-      "Professional Certificate Programme in Data Science with Generative AI",
-  },
-  {
-    value: "Executive Post Graduate Programme in Applied AI and Agentic AI",
-    label: "Executive Post Graduate Programme in Applied AI and Agentic AI",
-  },
-  {
-    value: "Executive Diploma in Machine Learning & Artificial Intelligence",
-    label: "Executive Diploma in Machine Learning & Artificial Intelligence",
-  },
-  {
-    value: "Chief Technology Officer & AI Leadership Programme",
-    label: "Chief Technology Officer & AI Leadership Programme",
-  },
-  {
-    value: "Master of Science in Machine Learning & Artificial Intelligence",
-    label: "Master of Science in Machine Learning & Artificial Intelligence",
-  },
-  {
-    value: "Master of Science in Data Science with Generative AI",
-    label: "Master of Science in Data Science with Generative AI",
-  },
-];
-
-/*
-|--------------------------------------------------------------------------
-| Hero Section
-|--------------------------------------------------------------------------
-*/
+const anton = Anton({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
 
 export function Hero() {
   const [downloadOpen, setDownloadOpen] = useState(false);
@@ -89,16 +45,16 @@ export function Hero() {
     <>
       <section
         id="home"
-        className="relative min-h-[430px] overflow-hidden bg-[#edf2ff]"
+        className="relative overflow-hidden bg-[#eef4fd] py-6"
       >
         {/* Background campus image */}
         <Image
-          src={IIITBImg}
-          alt="IIIT Bangalore campus"
+          src={getAssetPath("/edgewood/assets/img/edgewood_desktop_new_bg.png")}
+          alt="Edgewood campus"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover object-center hidden md:block"
         />
 
         {/* Screenshot jaisa overall subtle white layer */}
@@ -110,100 +66,88 @@ export function Hero() {
         {/* Mobile overlay */}
         <div className="absolute inset-0 bg-[#edf2ff]/94 lg:hidden" />
 
-        <Container className="relative z-10">
-          <div className="grid min-h-[430px] grid-cols-1 items-center gap-8 py-8 lg:grid-cols-[minmax(0,1fr)_372px] lg:gap-14 lg:py-5">
+        <Container className="relative z-10 px-0">
+          <div className="grid grid-cols-1 items-center gap-8 pt-2 lg:grid-cols-[minmax(0,1fr)_372px] lg:gap-14 lg:py-5">
             {/* =========================================================
                 Left Content
             ========================================================== */}
 
             <div className="mx-auto w-full max-w-[570px] text-center lg:mx-0 lg:text-left">
               {/* Logos */}
-              <div className="mb-3 flex items-center justify-center gap-3 lg:justify-start">
-                {/* IIIT logo placeholder */}
-                <div className="flex items-center gap-2">
-                  <div className="flex h-[38px] w-[38px] items-center justify-center rounded-full bg-[#173d68] text-[10px] font-black uppercase text-white">
-                    IIIT
-                  </div>
-
-                  <div className="text-left">
-                    <p className="text-[9px] font-bold uppercase leading-[1.1] text-[#1f2f43]">
-                      International Institute of
-                    </p>
-
-                    <p className="text-[9px] font-semibold leading-[1.1] text-[#1f2f43]">
-                      Information Technology Bangalore
-                    </p>
-                  </div>
+              <div className="mb-3 flex items-center justify-center gap-3 lg:justify-start hidden md:block">
+                <div className="relative h-[45px] w-[180px]">
+                  <Image
+                    src={getAssetPath("/edgewood/assets/img/edgewood-university-black.png")}
+                    alt="Edgewood University logo"
+                    fill
+                    sizes="180px"
+                    className="object-contain object-left"
+                  />
                 </div>
-
-                <div className="h-7 w-px bg-[#9aa2ad]" />
-
-                <span className="text-[22px] font-black tracking-tight text-[#ef3340]">
-                  upGrad
-                </span>
               </div>
 
               {/* Small Heading */}
-              <p className="text-[19px] font-extrabold leading-[1.05] text-black sm:text-[21px]">
-                Build Leadership Skills With
+              <p className="text-[17px] font-bold leading-[1.05] text-black/85 sm:text-[16px]">
+                Learn Business Leadership Skills With
               </p>
 
               {/* Main Heading */}
-              <h1 className="mt-2 font-black leading-[0.93] tracking-[-0.035em] text-[#c9230c]">
-                <span className="block text-[45px] sm:text-[54px] lg:text-[58px]">
-                  IIIT Bangalore
+              <h1 className={`${anton.className} mt-3 leading-[0.95] text-[#c9230c] font-semibold`}>
+                <span className="block text-[50px] sm:text-[46px] lg:text-[50px]">
+                  EdgeWood
                 </span>
 
-                <span className="mt-2 block text-[43px] sm:text-[52px] lg:text-[56px]">
-                  Online Courses
+                <span className="mt-2 block text-[50px] sm:text-[44px] lg:text-[48px]">
+                  Online University
                 </span>
               </h1>
 
               {/* Provider */}
-              <p className="mt-5 text-[15px] font-semibold text-black sm:text-[16px]">
+              <p className="mt-4 text-[15px] text-black/90 sm:text-[15px]">
                 By{" "}
-                <span className="font-bold underline decoration-1 underline-offset-2">
-                  IIIT Bangalore via upGrad
+                <span className="font-bold underline decoration-1 underline-offset-2 font-semibold">
+                  Edgewood University
+                </span>
+                {" "}via{" "}
+                <span className="font-bold underline decoration-1 underline-offset-2 font-semibold">
+                  upGrad
                 </span>
               </p>
 
               {/* Screenshot jaisa bordered course box */}
-              <div className="mx-auto mt-7 w-fit lg:mx-0">
+              <div className="mx-auto mt-6 w-fit lg:mx-0">
                 <div className="relative rounded-[20px] border-2 border-[#727272] bg-white/5 px-5 pb-4 pt-5">
-                  <span className="absolute -top-[15px] left-4 rounded-[7px] bg-[#ffc55b] px-3 py-1 text-[14px] font-extrabold text-[#c9230c]">
+                  <span className="absolute -top-[15px] left-4 rounded-[7px] bg-[#ffc55b] px-3 py-1 text-[13px] font-extrabold text-[#c9230c]">
                     Online
                   </span>
 
-                  <p className="whitespace-nowrap text-[22px] font-black text-[#c9230c] sm:text-[27px]">
-                    AI
+                  <p className="whitespace-nowrap text-[18px] font-bold text-[#c9230c] sm:text-[23px]">
+                    DBA
                     <span className="mx-2 text-[#c9230c]">|</span>
-                    Data Science
-                    <span className="mx-2 text-[#c9230c]">|</span>
-                    Leadership
+                    MBA + DBA
                   </p>
                 </div>
               </div>
 
               {/* Features */}
               <div className="mx-auto mt-4 w-fit space-y-1 text-left lg:mx-0">
-                <FeatureItem text="NAAC A+ accredited institution" />
+                <FeatureItem text="Globally recognised U.S. accreditation (HLC)" />
 
-                <FeatureItem text="Executive and professional certification programmes" />
-
-                <FeatureItem text="Flexible online learning model" />
-
-                <FeatureItem text="Course duration from 5 to 14 months" />
+                <FeatureItem text="No GMAT/GRE + flexible pay-per-month model" />
               </div>
 
               {/* Download Button */}
-              <button
-                type="button"
-                onClick={() => setDownloadOpen(true)}
-                className="mt-3 inline-flex min-h-[41px] items-center justify-center gap-2 rounded-[11px] bg-[#cf240b] px-7 py-3 text-[14px] font-extrabold text-white shadow-[0_5px_10px_rgba(0,0,0,0.22)] transition-all duration-200 hover:bg-[#b91f09]"
-              >
-                Download Brochure
-                <Download size={15} strokeWidth={2.7} />
-              </button>
+              <div className="hidden md:block">
+                <button
+                  type="button"
+                  onClick={() => setDownloadOpen(true)}
+                  className="mt-5 inline-flex min-h-[38px] items-center justify-center gap-2 rounded-[11px] bg-[#cf240b] px-6 py-2.5 text-[13px] font-extrabold text-white shadow-[0_5px_10px_rgba(0,0,0,0.22)] transition-all duration-200 hover:bg-[#b91f09]"
+                >
+                  Download Brochure
+                  <Download size={14} strokeWidth={2.7} />
+                </button>
+              </div>
+
             </div>
 
             {/* =========================================================
@@ -215,29 +159,43 @@ export function Hero() {
                 <FormWrapper
                   title="Enquire Now"
                   subtitle="Academic Experts will assist you!"
-                  courseOptions={IIITB_COURSE_OPTIONS}
-                  formNameOverride="IIITB Hero Enquiry Form"
-                  sourceOverride="IIITB Landing Page"
-                  utmSourceFallback="IIITB Organic"
-                  utmMediumFallback="IIITB Website"
+                  courseOptions={EDGEWOOD_COURSE_OPTIONS}
+                  formNameOverride="Edgewood Hero Enquiry Form"
+                  sourceOverride="Edgewood LP"
+                  utmSourceFallback="Edgewood Organic"
+                  utmMediumFallback="Edgewood Website"
                   submitButtonText="Submit"
+                  redirectUrl="/thank-you"
                 />
               </div>
             </div>
           </div>
 
+          {/* Mobile Image */}
+          <div className="relative mt-4 mx-auto h-[300px] w-full lg:hidden">
+            <Image
+              src={getAssetPath("/edgewood/assets/img/edgewood_mobile_new_img.png")}
+              alt="Edgewood University mobile representation"
+              fill
+              priority
+              sizes="280px"
+              className="object-contain"
+            />
+          </div>
+
           {/* Mobile Form */}
-          <div className="pb-10 lg:hidden">
+          <div className="-mt-[30px] pb-6 lg:hidden px-6">
             <div className="mx-auto w-full max-w-md rounded-xl border border-gray-200 bg-white p-5 shadow-2xl">
               <FormWrapper
                 title="Enquire Now"
                 subtitle="Academic Experts will assist you!"
-                courseOptions={IIITB_COURSE_OPTIONS}
-                formNameOverride="IIITB Mobile Hero Enquiry Form"
-                sourceOverride="IIITB Landing Page"
-                utmSourceFallback="IIITB Organic"
-                utmMediumFallback="IIITB Mobile Website"
+                courseOptions={EDGEWOOD_COURSE_OPTIONS}
+                formNameOverride="Edgewood Mobile Hero Enquiry Form"
+                sourceOverride="Edgewood LP"
+                utmSourceFallback="Edgewood Organic"
+                utmMediumFallback="Edgewood Mobile Website"
                 submitButtonText="Submit"
+                redirectUrl="/thank-you"
               />
             </div>
           </div>
@@ -257,29 +215,25 @@ export function Hero() {
           <div
             role="dialog"
             aria-modal="true"
-            aria-label="Download IIIT Bangalore brochure"
+            aria-label="Download Edgewood brochure"
             onClick={(event) => event.stopPropagation()}
             className="relative max-h-[92vh] w-full max-w-[400px] overflow-y-auto rounded-xl bg-white p-6 shadow-2xl"
           >
-            <button
-              type="button"
-              aria-label="Close brochure form"
-              onClick={() => setDownloadOpen(false)}
-              className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-700 transition hover:bg-gray-200"
-            >
-              <X size={20} />
-            </button>
+
 
             <FormWrapper
               title="Download Brochure"
-              subtitle="Fill your details to receive the IIIT Bangalore brochure"
+              subtitle="Fill your details to receive the Edgewood brochure"
               onClose={() => setDownloadOpen(false)}
-              courseOptions={IIITB_COURSE_OPTIONS}
-              formNameOverride="IIITB Download Brochure Form"
-              sourceOverride="IIITB Brochure"
-              utmSourceFallback="IIITB Organic"
-              utmMediumFallback="IIITB Brochure Popup"
+              courseOptions={EDGEWOOD_COURSE_OPTIONS}
+              formNameOverride="Edgewood Download Brochure Form"
+              sourceOverride="Edgewood LP"
+              utmSourceFallback="Edgewood Organic"
+              utmMediumFallback="Edgewood Brochure Popup"
               submitButtonText="Download Brochure"
+              isBrochureForm
+              brochureUrl="/edgewood/assets/brochures/main_brochure.pdf"
+              redirectUrl="/thank-you"
             />
           </div>
         </div>
@@ -300,9 +254,9 @@ type FeatureItemProps = {
 
 function FeatureItem({ text }: FeatureItemProps) {
   return (
-    <div className="flex items-start gap-1 text-[13px] font-semibold italic leading-[1.25] text-black sm:text-[14px]">
+    <div className="flex items-start gap-1 text-[12px] font-semibold italic leading-[1.25] text-black sm:text-[13px]">
       <CheckSquare
-        size={14}
+        size={13}
         strokeWidth={2.8}
         className="mt-[1px] shrink-0 text-black"
       />
