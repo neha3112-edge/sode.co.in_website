@@ -61,7 +61,7 @@ export function CertificateSection() {
 
   return (
     <>
-      <section id="sample-certificate" className="w-full bg-grey-bg">
+      <section id="sample-certificate" className="px-2 w-full bg-grey-bg">
 
 
         {/* =================================================
