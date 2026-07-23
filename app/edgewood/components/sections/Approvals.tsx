@@ -30,10 +30,10 @@ export function Approvals() {
   return (
     <section
       id="approvals"
-      className="bg-[#c91f06] py-10 text-white sm:py-12 lg:py-[52px]"
+      className="bg-[#c91f06] py-5 text-white sm:py-12 lg:py-[30px]"
     >
       <Container>
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
           {statItems.map((item) => (
             <StatCard key={item.title} item={item} />
           ))}
@@ -49,7 +49,7 @@ type StatCardProps = {
 
 function StatCard({ item }: StatCardProps) {
   return (
-    <article className="flex items-center justify-center gap-3 lg:justify-start">
+    <article className="flex items-center gap-3 justify-start">
       {/* White Circle Icon */}
       <div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-white text-[#c91f06]">
         <GraduationCap size={28} strokeWidth={2.4} />
@@ -57,7 +57,7 @@ function StatCard({ item }: StatCardProps) {
 
       {/* Text */}
       <div>
-        <h3 className="text-[28px] font-extrabold leading-none tracking-[-0.02em] text-white sm:text-[30px]">
+        <h3 className="text-[22px] font-bold leading-none tracking-[-0.02em] text-white sm:text-[30px]">
           {item.title}
         </h3>
 

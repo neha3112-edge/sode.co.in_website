@@ -13,7 +13,7 @@ export function About() {
           <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-8 lg:gap-12 items-center">
             {/* Left Content Column */}
             <div className="flex flex-col items-center">
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0f3b8c] tracking-wide text-center">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-black/80 tracking-wide text-center">
                 About IIM Bangalore
               </h2>
               <p className="mt-5 text-sm sm:text-sm text-gray-800 text-center leading-relaxed max-w-2xl">
@@ -22,7 +22,7 @@ export function About() {
 
               {/* Accreditations Box */}
               <div className="mt-8 w-full max-w-xl">
-                <h3 className="text-center font-extrabold text-[#0f3b8c] text-lg mb-3.5">
+                <h3 className="text-center font-extrabold text-black/80 text-lg mb-3.5">
                   Accreditations and Recognitions of IIM Bangalore
                 </h3>
 

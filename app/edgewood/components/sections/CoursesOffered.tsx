@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
-import { ChevronDown, X } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
 import FormWrapper from "@/components/forms/FormWrapper";
 import { getAssetPath } from "@/lib/utils";
+import { EDGEWOOD_COURSE_OPTIONS } from "../../constants";
 
 type Course = {
   id: number;
@@ -15,6 +16,7 @@ type Course = {
   eligibility: string;
   description: string;
   image: string;
+  brochureUrl: string;
 };
 
 type FormType = "apply" | "brochure" | null;
@@ -26,8 +28,9 @@ const courses: Course[] = [
     duration: "24 Months",
     eligibility: "Bachelor's + Master's Degree with relevant experience",
     description:
-      "The Online DBA accredited by HLC introduces learners to board dynamics, strategic finance, decision-making, and digital transformation. This 24-month programme prepares professionals for the Dr. title, with real-time project exposure and top faculty.",
-    image: "/assets/img/generative-ai-leaders.webp",
+      "The Online DBA accredited by HLC introduces learners to board dynamics, strategic finance, decision-making, and digital transformation. This 24-month program prepares professionals for the Dr. title, with real-time project exposure and top faculty, following a 5-day campus immersion and the Online Networking Gala for Network and Career Growth.",
+    image: "/edgewood/assets/img/online-dba-edgewood.webp",
+    brochureUrl: "/edgewood/assets/brochures/edgewood_dba.pdf",
   },
   {
     id: 2,
@@ -35,8 +38,9 @@ const courses: Course[] = [
     duration: "24 Months",
     eligibility: "Bachelor's Degree",
     description:
-      "The dual degree is in demand nowadays. Many students plan to study an online MBA + DBA as their career pathway. The programme combines executive MBA skills with applied research and the respected Dr title.",
-    image: "/assets/img/data-science-ai.webp",
+      "The Dual degree is in demand nowadays. Many students plan to study an online MBA + DBA as their career pathway. The student can complete the degree in 2.5 years, which combines executive skills an MBA student needs with applied research and the respected “Dr” title.",
+    image: "/edgewood/assets/img/dbamba-edgewood.webp",
+    brochureUrl: "/edgewood/assets/brochures/edgewood_mba_dba.pdf",
   },
 ];
 
@@ -44,63 +48,28 @@ export function CoursesOffered() {
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [activeForm, setActiveForm] = useState<FormType>(null);
 
-  /*
-  |--------------------------------------------------------------------------
-  | Close Modal
-  |--------------------------------------------------------------------------
-  */
-
   const closeForm = useCallback(() => {
     setActiveForm(null);
     setSelectedCourse(null);
   }, []);
-
-  /*
-  |--------------------------------------------------------------------------
-  | Open Apply Modal
-  |--------------------------------------------------------------------------
-  */
 
   const openApplyForm = (course: Course) => {
     setSelectedCourse(course);
     setActiveForm("apply");
   };
 
-  /*
-  |--------------------------------------------------------------------------
-  | Open Brochure Modal
-  |--------------------------------------------------------------------------
-  */
-
   const openBrochureForm = (course: Course) => {
     setSelectedCourse(course);
     setActiveForm("brochure");
   };
 
-  /*
-  |--------------------------------------------------------------------------
-  | Lock Body Scroll
-  |--------------------------------------------------------------------------
-  */
-
   useEffect(() => {
-    if (!activeForm) {
-      document.body.style.overflow = "";
-      return;
-    }
-
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = activeForm ? "hidden" : "";
 
     return () => {
       document.body.style.overflow = "";
     };
   }, [activeForm]);
-
-  /*
-  |--------------------------------------------------------------------------
-  | Close Modal With Escape Key
-  |--------------------------------------------------------------------------
-  */
 
   useEffect(() => {
     if (!activeForm) return;
@@ -157,13 +126,14 @@ export function CoursesOffered() {
             title="Apply Now"
             subtitle="Start your application journey today"
             onClose={closeForm}
-            defaultCourse={selectedCourse.title}
-            hideCourseField
+            courseOptions={EDGEWOOD_COURSE_OPTIONS}
             formNameOverride={`Edgewood Apply Form - ${selectedCourse.title}`}
-            sourceOverride="Edgewood Course Apply"
+            sourceOverride="Edgewood LP"
             utmSourceFallback="Edgewood Organic"
             utmMediumFallback="Edgewood Course Apply Form"
             submitButtonText="Submit Application"
+            submitButtonClassName="bg-[#c9230c] hover:bg-[#aa1c08]"
+            redirectUrl="/thank-you"
           />
         </CourseFormModal>
       )}
@@ -175,13 +145,16 @@ export function CoursesOffered() {
             title="Get Brochure"
             subtitle="Fill your details to receive the course brochure"
             onClose={closeForm}
-            defaultCourse={selectedCourse.title}
-            hideCourseField
+            courseOptions={EDGEWOOD_COURSE_OPTIONS}
             formNameOverride={`Edgewood Brochure Form - ${selectedCourse.title}`}
-            sourceOverride="Edgewood Course Brochure"
+            sourceOverride="Edgewood LP"
             utmSourceFallback="Edgewood Organic"
             utmMediumFallback="Edgewood Course Brochure Form"
             submitButtonText="Get Brochure"
+            submitButtonClassName="bg-[#c9230c] hover:bg-[#aa1c08]"
+            isBrochureForm
+            brochureUrl={selectedCourse.brochureUrl}
+            redirectUrl="/thank-you"
           />
         </CourseFormModal>
       )}
@@ -211,39 +184,39 @@ function CourseCard({ course, onApply, onDownload }: CourseCardProps) {
 
       {/* Course Content */}
       <div className="flex flex-1 flex-col px-7 pb-7 pt-7 sm:px-8">
-        <h3 className="text-[23px] font-black leading-[1.2] text-black sm:text-[25px]">
+        <h3 className="text-[21px] font-extrabold leading-[1.2] text-black sm:text-[20px]">
           {course.title}
         </h3>
 
-        <p className="mt-3 text-[14px] leading-[1.55] text-[#5b5b5b] sm:text-[15px]">
+        <p className="mt-3 text-[13px] leading-[1.55] text-[#5b5b5b] sm:text-[13px]">
           {course.description}
         </p>
 
-        <div className="mt-4 space-y-2 text-[14px] font-bold leading-[1.25] text-[#333333] sm:text-[15px]">
+        <div className="mt-4 space-y-2 text-[12px] font-bold leading-[1.25] text-[#333333] sm:text-[12px]">
           <p>
-            <span>Duration:</span> {course.duration}
+            <span className="text-gray-500 font-medium">Duration:</span> {course.duration}
           </p>
 
           <p>
-            <span>Eligibility:</span> {course.eligibility}
+            <span className="text-gray-500 font-medium">Eligibility:</span> {course.eligibility}
           </p>
         </div>
 
         {/* Buttons */}
-        <div className="mt-auto grid grid-cols-1 gap-3 pt-6 sm:grid-cols-2 sm:gap-4">
+        <div className="mt-auto grid grid-cols-2 gap-3 pt-6 sm:grid-cols-2 sm:gap-4">
           <button
             type="button"
             onClick={onDownload}
-            className="flex min-h-[42px] w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-[#c9230c] bg-white px-4 py-2.5 text-[13px] font-extrabold text-[#c9230c] transition-all duration-200 hover:bg-[#c9230c] hover:text-white"
+            className="flex min-h-[38px] w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-[#c9230c] bg-white px-4 py-2.5 text-[12px] font-extrabold text-[#c9230c] transition-all duration-200 hover:bg-[#c9230c] hover:text-white"
           >
             Get Brochure
-            <ChevronDown size={14} strokeWidth={2.5} />
+            <ChevronDown size={13} strokeWidth={2.5} />
           </button>
 
           <button
             type="button"
             onClick={onApply}
-            className="min-h-[42px] w-full cursor-pointer rounded-full bg-[#c9230c] px-4 py-2.5 text-[13px] font-extrabold text-white transition-all duration-200 hover:bg-[#aa1c08]"
+            className="min-h-[38px] w-full cursor-pointer rounded-full bg-[#c9230c] px-4 py-2.5 text-[12px] font-extrabold text-white transition-all duration-200 hover:bg-[#aa1c08]"
           >
             Apply Now
           </button>
@@ -273,15 +246,6 @@ function CourseFormModal({ title, children, onClose }: CourseFormModalProps) {
         onMouseDown={(event) => event.stopPropagation()}
         className="relative max-h-[92vh] w-full max-w-[420px] overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-7"
       >
-        <button
-          type="button"
-          aria-label="Close form"
-          onClick={onClose}
-          className="absolute right-3 top-3 z-20 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-[#fff0ed] text-[#c9230c] transition hover:bg-[#ffe2dc]"
-        >
-          <X size={20} />
-        </button>
-
         {children}
       </div>
     </div>

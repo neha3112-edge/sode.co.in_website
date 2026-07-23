@@ -46,9 +46,9 @@ export default function IIMBPage() {
           title="Get Scholarship Coupon Code"
           subtitle="Select your course and our academic experts will contact you"
           formNameOverride="IIMB Scholarship Floating Form"
-          sourceOverride="IIM LP"
+          sourceOverride="IIMB LP"
           utmSourceFallback="Organic"
-          utmMediumFallback="IIM_Organic"
+          utmMediumFallback="IIMB_Organic"
           submitButtonText="Get Coupon Code"
           submitButtonClassName="bg-[#0f3b8c] hover:bg-[#0c2e6f]"
           redirectUrl="/iimb/thank-you"
@@ -62,9 +62,9 @@ export default function IIMBPage() {
       <div className="lg:hidden">
         <GlobalCTA
           courseOptions={IIMB_COURSE_OPTIONS}
-          sourceOverride="IIM LP"
+          sourceOverride="IIMB LP"
           utmSourceFallback="Organic"
-          utmMediumFallback="IIM_Organic"
+          utmMediumFallback="IIMB_Organic"
           redirectUrl="/iimb/thank-you"
           whatsappMessage="I want to download the IIM Bangalore Online Program brochure"
           applyFormName="IIMB Mobile Bottom Apply Form"
