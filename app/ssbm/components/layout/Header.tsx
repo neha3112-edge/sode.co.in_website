@@ -15,11 +15,11 @@ type NavItem = {
 const navItems: NavItem[] = [
   {
     label: "Courses",
-    href: "#courses",
+    href: "#whychoose",
   },
   {
     label: "Approvals",
-    href: "#approvals",
+    href: "#accreditations",
   },
   {
     label: "About",
@@ -39,24 +39,24 @@ export function Header() {
   };
 
   return (
-    <header className="fixed left-0 top-0 z-50 w-full border-b border-[#f1f1f1] bg-white">
+    <header className="fixed left-0 top-0 z-50 w-full border-b border-[#eeeeee] bg-white">
       {/* Main Header */}
       <div className="mx-auto w-full max-w-[1140px] px-5 sm:px-6 lg:px-0">
-        <div className="flex h-[70px] items-center justify-between">
+        <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link
-            href="/"
+            href="/ssbm"
             onClick={closeMobileMenu}
             aria-label="Go to home page"
-            className="flex shrink-0 items-center justify-center"
+            className="flex shrink-0 items-left"
           >
             <Image
-              src={getAssetPath("/assets/images/new_sode_tm_logo.png")}
+              src={getAssetPath("/ssbm/assets/img/new_sode_tm_logo.png")}
               alt="SODE logo"
-              width={58}
-              height={58}
+              width={200}
+              height={56}
               priority
-              className="h-[58px] w-[58px] object-contain"
+              className="h-[50px] w-[160px] object-contain object-left"
             />
           </Link>
 
@@ -69,7 +69,7 @@ export function Header() {
               <a
                 key={item.label}
                 href={item.href}
-                className="relative py-6 text-[16px] font-semibold leading-none tracking-[-0.1px] text-[#172033] transition-colors duration-200 hover:text-[#056493]"
+                className="relative py-6 text-[16px] font-semibold leading-none tracking-[-0.1px] text-[#172033] transition-colors duration-300 ease-in-out hover:text-[#c11f28]"
               >
                 {item.label}
               </a>
@@ -84,7 +84,7 @@ export function Header() {
               isMenuOpen ? "Close navigation menu" : "Open navigation menu"
             }
             aria-expanded={isMenuOpen}
-            className="flex h-10 w-10 items-center justify-center rounded-md bg-[#102441] text-white transition-colors duration-200 hover:bg-[#056493] lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-md bg-[#102441] text-white transition-colors duration-300 ease-in-out hover:bg-[#c11f28] lg:hidden"
           >
             {isMenuOpen ? (
               <X className="h-[23px] w-[23px]" strokeWidth={2.2} />
@@ -97,27 +97,25 @@ export function Header() {
 
       {/* Mobile Navigation */}
       <div
-        className={`overflow-hidden bg-white transition-all duration-300 ease-in-out lg:hidden ${
-          isMenuOpen
-            ? "max-h-[350px] border-t border-[#eeeeee] opacity-100"
-            : "max-h-0 border-t border-transparent opacity-0"
-        }`}
+        className={`overflow-hidden bg-white transition-all duration-300 ease-in-out lg:hidden ${isMenuOpen
+            ? "max-h-[400px] border-t border-gray-200 opacity-100"
+            : "max-h-0 border-t-0 opacity-0"
+          }`}
       >
-        <nav
-          aria-label="Mobile navigation"
-          className="mx-auto flex w-full max-w-[1140px] flex-col px-5 py-3 sm:px-6"
-        >
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              onClick={closeMobileMenu}
-              className="rounded-md px-4 py-[13px] text-center text-[15px] font-semibold text-[#172033] transition-colors duration-200 hover:bg-[#f4f7f9] hover:text-[#056493]"
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
+        <div className="mx-auto w-full max-w-[1140px] px-5 py-4">
+          <nav aria-label="Mobile navigation" className="flex flex-col">
+            {navItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={closeMobileMenu}
+                className="rounded-md px-4 py-3 text-center text-[15px] font-semibold text-[#172033] transition-colors duration-300 ease-in-out hover:bg-gray-100 hover:text-[#c11f28]"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+        </div>
       </div>
     </header>
   );

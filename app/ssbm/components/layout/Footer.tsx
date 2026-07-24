@@ -3,9 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { X } from "lucide-react";
-
-import ArrowGif from "../../assets/img/arrow.gif";
-import DesLogo from "../../assets/img/new-des-logo.webp";
+import { getAssetPath } from "@/lib/utils";
 
 type ModalType = "disclaimer" | "terms" | "privacy" | null;
 
@@ -80,13 +78,13 @@ export default function Footer() {
         ============================================================== */}
 
         <section className="px-4 sm:px-8 lg:px-[60px]">
-          <div className="relative mx-auto max-w-[1800px] rounded-[20px] bg-[#c52208] px-5 pb-[86px] pt-12 text-center text-white sm:pb-[90px] sm:pt-14 lg:pb-[88px]">
+          <div className="relative mx-auto max-w-[1800px] rounded-[20px] bg-[#c11f28] px-5 pb-[46px] pt-12 text-center text-white sm:pb-[90px] sm:pt-14 lg:pb-[48px]">
             <h2 className="text-[21px] font-extrabold leading-tight sm:text-[24px]">
               Still Confused?
             </h2>
 
-            <p className="mx-auto mt-5 max-w-[850px] text-[14px] font-extrabold leading-6 sm:text-[16px]">
-              Compare Edgewood University with Top World Renowned Universities
+            <p className="mx-auto mt-5 max-w-[850px] text-[14px] leading-6 sm:text-[16px]">
+              Compare SSBM Geneva with Top World Renowned Universities
             </p>
 
             {/* Circular Arrow Button */}
@@ -94,15 +92,15 @@ export default function Footer() {
               type="button"
               onClick={openComparePage}
               aria-label="Compare universities"
-              className="absolute -bottom-[43px] left-1/2 flex h-[86px] w-[86px] -translate-x-1/2 cursor-pointer items-center justify-center rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.12)] transition-transform duration-300 hover:scale-105"
+              className="absolute -bottom-[30px] left-1/2 flex h-[66px] w-[66px] -translate-x-1/2 cursor-pointer items-center justify-center rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.12)] transition-transform duration-300 hover:scale-105"
             >
               <Image
-                src={ArrowGif}
+                src={getAssetPath("/ssbm/assets/img/arrow.gif")}
                 alt="Open university comparison"
                 width={62}
                 height={62}
                 unoptimized
-                className="h-[62px] w-[62px] object-contain"
+                className="h-[62px] w-[62px] object-contain rounded-full"
               />
             </button>
           </div>
@@ -120,11 +118,11 @@ export default function Footer() {
             aria-label="Open university comparison page"
           >
             <Image
-              src={DesLogo}
-              alt="Distance Education School"
+              src={getAssetPath("/ssbm/assets/img/new-des-logo.webp")}
+              alt="Distance Education School Logo"
               width={950}
               height={260}
-              className="mx-auto h-auto w-full max-w-[950px] object-contain"
+              className="mx-auto h-auto w-full max-w-[750px] object-contain"
             />
           </button>
         </section>
@@ -147,7 +145,7 @@ export default function Footer() {
               <button
                 type="button"
                 onClick={() => setActiveModal("disclaimer")}
-                className="cursor-pointer transition-colors hover:text-[#c52208]"
+                className="cursor-pointer transition-colors hover:text-[#c11f28]"
               >
                 Disclaimer
               </button>
@@ -157,7 +155,7 @@ export default function Footer() {
               <button
                 type="button"
                 onClick={() => setActiveModal("terms")}
-                className="cursor-pointer transition-colors hover:text-[#c52208]"
+                className="cursor-pointer transition-colors hover:text-[#c11f28]"
               >
                 Terms &amp; Conditions
               </button>
@@ -167,7 +165,7 @@ export default function Footer() {
               <button
                 type="button"
                 onClick={() => setActiveModal("privacy")}
-                className="cursor-pointer transition-colors hover:text-[#c52208]"
+                className="cursor-pointer transition-colors hover:text-[#c11f28]"
               >
                 Privacy Policy
               </button>
@@ -198,7 +196,7 @@ export default function Footer() {
             services. We do not act as a university or admission authority.
           </p>
 
-          <h3 className="mt-6 text-lg font-extrabold text-[#c52208]">
+          <h3 className="mt-6 text-lg font-extrabold text-[#c11f28]">
             Essential Points
           </h3>
 
@@ -248,7 +246,7 @@ export default function Footer() {
             this platform by SODE Counselling Services LLP.
           </p>
 
-          <h3 className="mt-6 text-lg font-extrabold text-[#c52208]">
+          <h3 className="mt-6 text-lg font-extrabold text-[#c11f28]">
             1. Our Role
           </h3>
 
@@ -258,7 +256,7 @@ export default function Footer() {
             or certifications.
           </p>
 
-          <h3 className="mt-6 text-lg font-extrabold text-[#c52208]">
+          <h3 className="mt-6 text-lg font-extrabold text-[#c11f28]">
             2. Programme Information
           </h3>
 
@@ -268,7 +266,7 @@ export default function Footer() {
             all details from official university sources.
           </p>
 
-          <h3 className="mt-6 text-lg font-extrabold text-[#c52208]">
+          <h3 className="mt-6 text-lg font-extrabold text-[#c11f28]">
             3. Payments
           </h3>
 
@@ -278,7 +276,7 @@ export default function Footer() {
             LLP does not collect university fees as an academic institution.
           </p>
 
-          <h3 className="mt-6 text-lg font-extrabold text-[#c52208]">
+          <h3 className="mt-6 text-lg font-extrabold text-[#c11f28]">
             4. External Services
           </h3>
 
@@ -288,7 +286,7 @@ export default function Footer() {
             their respective terms.
           </p>
 
-          <h3 className="mt-6 text-lg font-extrabold text-[#c52208]">
+          <h3 className="mt-6 text-lg font-extrabold text-[#c11f28]">
             5. Updates to These Terms
           </h3>
 
@@ -297,7 +295,7 @@ export default function Footer() {
             this website means you accept the latest version.
           </p>
 
-          <h3 className="mt-6 text-lg font-extrabold text-[#c52208]">
+          <h3 className="mt-6 text-lg font-extrabold text-[#c11f28]">
             6. Contact Us
           </h3>
 
@@ -305,7 +303,7 @@ export default function Footer() {
             For support, email us at{" "}
             <a
               href="mailto:support@distanceeducationschool.com"
-              className="font-semibold text-[#c52208] underline"
+              className="font-semibold text-[#c11f28] underline"
             >
               support@distanceeducationschool.com
             </a>
@@ -325,7 +323,7 @@ export default function Footer() {
             and other interactions on this platform.
           </p>
 
-          <h3 className="mt-6 text-lg font-extrabold text-[#c52208]">
+          <h3 className="mt-6 text-lg font-extrabold text-[#c11f28]">
             1. Information We Collect
           </h3>
 
@@ -335,7 +333,7 @@ export default function Footer() {
             out a form.
           </p>
 
-          <h3 className="mt-6 text-lg font-extrabold text-[#c52208]">
+          <h3 className="mt-6 text-lg font-extrabold text-[#c11f28]">
             2. How We Use Your Information
           </h3>
 
@@ -349,7 +347,7 @@ export default function Footer() {
             <li>Improve our services and website experience</li>
           </ul>
 
-          <h3 className="mt-6 text-lg font-extrabold text-[#c52208]">
+          <h3 className="mt-6 text-lg font-extrabold text-[#c11f28]">
             3. Communication
           </h3>
 
@@ -359,7 +357,7 @@ export default function Footer() {
             communication at any time.
           </p>
 
-          <h3 className="mt-6 text-lg font-extrabold text-[#c52208]">
+          <h3 className="mt-6 text-lg font-extrabold text-[#c11f28]">
             4. Data Sharing
           </h3>
 
@@ -370,7 +368,7 @@ export default function Footer() {
             information to advertisers.
           </p>
 
-          <h3 className="mt-6 text-lg font-extrabold text-[#c52208]">
+          <h3 className="mt-6 text-lg font-extrabold text-[#c11f28]">
             5. External Links
           </h3>
 
@@ -380,7 +378,7 @@ export default function Footer() {
             external websites.
           </p>
 
-          <h3 className="mt-6 text-lg font-extrabold text-[#c52208]">
+          <h3 className="mt-6 text-lg font-extrabold text-[#c11f28]">
             6. Cookies and Analytics
           </h3>
 
@@ -424,21 +422,21 @@ function FooterModal({ title, children, onClose }: FooterModalProps) {
           type="button"
           onClick={onClose}
           aria-label="Close popup"
-          className="absolute right-4 top-4 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-[#fff0ed] text-[#c52208] transition-colors hover:bg-[#ffe1da]"
+          className="absolute right-4 top-4 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-[#fff0ed] text-[#c11f28] transition-colors hover:bg-[#ffe1da]"
         >
           <X size={22} />
         </button>
 
         <h2
           id="footer-modal-title"
-          className="pr-12 text-center text-2xl font-black text-[#c52208] sm:text-3xl"
+          className="pr-12 text-center text-2xl font-black text-[#c11f28] sm:text-3xl"
         >
           {title}
         </h2>
 
         <div className="my-5 h-px bg-gray-200" />
 
-        <div className="text-sm leading-7 text-gray-700 sm:text-base">
+        <div className="text-sm leading-7 text-gray-700 sm:text-base font-medium">
           {children}
         </div>
       </div>
