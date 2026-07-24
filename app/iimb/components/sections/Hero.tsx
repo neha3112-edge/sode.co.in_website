@@ -116,8 +116,8 @@ export function Hero() {
 
               {/* Provider */}
               <p className="mt-3 text-base text-black sm:text-lg lg:text-left lg:text-base md:max-w-[400px]">
-                Offered By <span className="underline font-bold">Indian Institute of Management Bangalore (IIM Bangalore).</span> Delivered through{" "}
-                <span className="underline font-bold">IIMBx</span>
+                By <span className="underline font-bold">IIM Bangalore</span> via{" "}
+                <span className="underline font-bold">upGrad</span>
               </p>
 
               {/* Description */}

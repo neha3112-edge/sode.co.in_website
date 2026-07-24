@@ -78,7 +78,7 @@ export function Hero() {
         <Container className="relative z-10 p-0">
           <div className="grid min-h-[420px] grid-cols-1 gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-12">
             {/* Left Content */}
-            <div className="mx-auto w-full max-w-[620px] text-center lg:mx-0 lg:text-left">
+            <div className="mx-auto w-full max-w-[620px] text-center lg:mx-0 lg:text-left px-4 md:px-0">
               {/* Logos */}
               <div className="mb-6 flex flex-wrap items-center justify-center gap-4 lg:justify-start hidden md:block">
                 <Image
@@ -103,7 +103,7 @@ export function Hero() {
 
               {/* Program Description */}
               <p className="mt-3 text-[16px] text-gray-900 sm:text-[14px] md:max-w-[350px]">
-                By <span className="underline font-semibold">Paris School of Business</span> with Certification from <span className="underline font-semibold">IIM Lucknow</span> via <span className="underline font-semibold">upGrad</span>
+                By <span className="underline font-semibold">Paris School of Business</span> with <span className="underline font-semibold">IIM Lucknow</span> via <span className="underline font-semibold">upGrad</span>
               </p>
 
               {/* Features */}

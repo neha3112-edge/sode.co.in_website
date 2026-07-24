@@ -2,47 +2,12 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Download, Phone, X } from "lucide-react";
+import { Download, Phone } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
-import FormWrapper, {
-  type FormCourseOption,
-} from "@/components/forms/FormWrapper";
-
-import ESGCIHeroBg from "../../assets/img/iiitb_new_logo_main.png";
-
-/*
-|--------------------------------------------------------------------------
-| ESGCI Course Options
-|--------------------------------------------------------------------------
-*/
-
-const ESGCI_COURSE_OPTIONS: FormCourseOption[] = [
-  {
-    value: "Online Doctor of Business Administration",
-    label: "Online Doctor of Business Administration",
-  },
-  {
-    value: "Online DBA in Leadership",
-    label: "Online DBA in Leadership",
-  },
-  {
-    value: "Online DBA in Strategy",
-    label: "Online DBA in Strategy",
-  },
-  {
-    value: "Online DBA in International Business",
-    label: "Online DBA in International Business",
-  },
-  {
-    value: "Online DBA in Marketing",
-    label: "Online DBA in Marketing",
-  },
-  {
-    value: "Online DBA in Finance",
-    label: "Online DBA in Finance",
-  },
-];
+import FormWrapper from "@/components/forms/FormWrapper";
+import { getAssetPath } from "@/lib/utils";
+import { ESGCI_COURSE_OPTIONS } from "../../constants";
 
 /*
 |--------------------------------------------------------------------------
@@ -51,7 +16,7 @@ const ESGCI_COURSE_OPTIONS: FormCourseOption[] = [
 */
 
 const CONTACT_NUMBER = "+917065777755";
-const DISPLAY_CONTACT_NUMBER = "+91 7065 777 755";
+const DISPLAY_CONTACT_NUMBER = "+91 7065 7777 55";
 
 /*
 |--------------------------------------------------------------------------
@@ -107,8 +72,8 @@ export function Hero() {
         ========================================================== */}
 
         <Image
-          src={ESGCIHeroBg}
-          alt="ESGCI Paris campus"
+          src={getAssetPath("/esgci/assets/img/esgci_new_desktop_bg.png")}
+          alt="ESGCI Paris background"
           fill
           priority
           sizes="100vw"
@@ -124,65 +89,54 @@ export function Hero() {
         {/* Mobile background overlay */}
         <div className="absolute inset-0 bg-[#eaf6fc]/95 lg:hidden" />
 
-        <Container className="relative z-10">
-          <div className="grid min-h-[470px] grid-cols-1 items-center gap-8 py-10 lg:grid-cols-[minmax(0,1fr)_370px] lg:gap-12 lg:py-[30px] xl:grid-cols-[minmax(0,1fr)_370px]">
+        <Container className="relative z-10 p-0">
+          <div className="grid min-h-[470px] grid-cols-1 items-center gap-8 py-5 lg:grid-cols-[minmax(0,1fr)_370px] lg:gap-12 lg:py-[30px] xl:grid-cols-[minmax(0,1fr)_370px]">
             {/* ======================================================
                 Left Content
             ====================================================== */}
 
             <div className="mx-auto w-full max-w-[600px] text-center lg:mx-0 lg:text-left">
               {/* ESGCI and upGrad Logos */}
-              <div className="mb-5 flex items-center justify-center gap-3 lg:justify-start">
-                <div className="flex items-end">
-                  <span className="text-[34px] font-black leading-none tracking-[-0.055em] text-black sm:text-[38px]">
-                    ES
-                  </span>
-
-                  <span className="text-[34px] font-black leading-none tracking-[-0.055em] text-[#009b4d] sm:text-[38px]">
-                    G
-                  </span>
-
-                  <span className="text-[34px] font-black leading-none tracking-[-0.055em] text-black sm:text-[38px]">
-                    CI
-                  </span>
-                </div>
-
-                <div className="h-[34px] w-px bg-[#8f9599]" />
-
-                <span className="text-[22px] font-black tracking-[-0.04em] text-[#ef3340] sm:text-[25px]">
-                  upGrad
-                </span>
+              <div className="mb-5 flex items-center justify-center gap-3 lg:justify-start hidden lg:block">
+                <Image
+                  src={getAssetPath("/esgci/assets/img/esgci_new_logo.png")}
+                  alt="ESGCI logo"
+                  width={150}
+                  height={50}
+                  priority
+                  className="h-10 w-auto object-contain"
+                />
               </div>
 
               {/* Small heading */}
-              <p className="text-[15px] font-extrabold leading-tight text-black sm:text-[17px]">
+              <p className="text-[16px] font-semibold leading-tight text-black sm:text-[17px]">
                 Doctoral Program for Global Leaders
               </p>
 
               {/* Main heading */}
-              <h1 className="mt-1 text-[55px] font-black leading-[0.95] tracking-[-0.055em] text-[#009c43] sm:text-[68px] lg:text-[74px]">
+              <h1 className="mt-1 text-[60px] font-black leading-[0.95] tracking-[-0.055em] text-[#009c43] sm:text-[68px] lg:text-[74px]">
                 Online DBA
               </h1>
 
               {/* Provider */}
-              <p className="mt-3 text-[14px] font-semibold text-black sm:text-[15px]">
+              <p className="mt-3 text-[16px] text-black sm:text-[15px]">
                 By{" "}
-                <span className="font-extrabold underline decoration-1 underline-offset-2">
+                <span className="font-bold underline decoration-1 underline-offset-2">
                   ESGCI Online
                 </span>{" "}
                 via{" "}
-                <span className="font-extrabold underline decoration-1 underline-offset-2">
+                <span className="font-bold underline decoration-1 underline-offset-2">
                   upGrad
                 </span>
               </p>
 
               {/* Course heading */}
-              <h2 className="mt-5 text-[21px] font-black leading-tight text-black sm:text-[23px]">
+              <h2 className="mt-5 text-[21px] font-bold leading-tight text-black sm:text-[23px]">
                 Doctor of Business Administration
               </h2>
 
               {/* Description */}
-              <p className="mx-auto mt-2 max-w-[385px] text-[13px] font-medium leading-[1.45] text-black sm:text-[14px] lg:mx-0">
+              <p className="mx-auto mt-2 max-w-[300px] text-[15px] font-medium leading-[1.45] text-black sm:text-[14px] lg:mx-0">
                 Earn a prestigious Online DBA from Paris-based ESGCI while
                 advancing your career from anywhere in the world.
               </p>
@@ -191,11 +145,23 @@ export function Hero() {
               <button
                 type="button"
                 onClick={() => setDownloadOpen(true)}
-                className="mt-5 inline-flex min-h-[42px] items-center justify-center gap-2 rounded-[6px] bg-[#009c43] px-5 py-2.5 text-[15px] font-bold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#00863a] hover:shadow-md"
+                className="mt-5 hidden lg:inline-flex items-center justify-center gap-2 rounded-[6px] px-5 py-2.5 text-[15px] font-semibold text-white shadow-sm transition-all duration-300 ease-in-out hover:-translate-y-0.5 bg-[#009c43] hover:bg-[#00863a] hover:shadow-md"
               >
                 Download Brochure
                 <Download size={18} strokeWidth={2.8} />
               </button>
+
+              {/* Mobile Only Banner Image */}
+              <div className="block lg:hidden">
+                <div className="relative w-full h-[450px] max-h-[600px]">
+                  <Image
+                    src={getAssetPath("/esgci/assets/img/esgci_new_mobile.png")}
+                    alt="ESGCI DBA program details"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              </div>
             </div>
 
             {/* ======================================================
@@ -203,10 +169,10 @@ export function Hero() {
             ====================================================== */}
 
             <div className="hidden justify-end lg:flex">
-              <div className="w-full max-w-[370px] bg-white px-5 pb-[18px] pt-5 shadow-[0_5px_20px_rgba(0,0,0,0.16)]">
+              <div className="w-full max-w-[370px] bg-white px-5 pb-[18px] pt-5 shadow-[0_5px_20px_rgba(0,0,0,0.16)] rounded-xl">
                 {/* Form top heading */}
                 <div className="mb-3 text-center">
-                  <h2 className="text-[20px] font-black leading-tight text-[#009c43]">
+                  <h2 className="text-[24px] font-extrabold leading-tight text-[#009c43]">
                     Admission Open
                   </h2>
 
@@ -214,25 +180,27 @@ export function Hero() {
                     Academic Experts will assist you!
                   </p>
 
-                  <a
+                  {/* <a
                     href={`tel:${CONTACT_NUMBER}`}
-                    className="mx-auto mt-2 inline-flex min-h-[28px] items-center justify-center gap-1.5 rounded-full bg-[#009c43] px-5 py-1 text-[14px] font-extrabold leading-none text-white transition-colors hover:bg-[#00863a]"
+                    className="mx-auto mt-2 inline-flex min-h-[28px] items-center justify-center gap-1.5 rounded-full bg-[#009c43] px-5 py-1 text-[14px] font-extrabold leading-none text-white transition-colors duration-300 ease-in-out hover:bg-[#00863a]"
                   >
                     <Phone size={14} fill="currentColor" strokeWidth={2.5} />
 
                     {DISPLAY_CONTACT_NUMBER}
-                  </a>
+                  </a> */}
                 </div>
 
                 <FormWrapper
                   title=""
                   subtitle=""
                   courseOptions={ESGCI_COURSE_OPTIONS}
+                  defaultCourse=""
                   formNameOverride="ESGCI Hero Enquiry Form"
-                  sourceOverride="ESGCI Landing Page"
-                  utmSourceFallback="ESGCI Organic"
-                  utmMediumFallback="ESGCI Website"
+                  sourceOverride="ESGCI LP"
+                  utmSourceFallback="Organic"
+                  utmMediumFallback="ESGCI_Organic"
                   submitButtonText="Submit"
+                  redirectUrl="/thank-you"
                 />
               </div>
             </div>
@@ -242,8 +210,8 @@ export function Hero() {
               Mobile Enquiry Form
           ======================================================== */}
 
-          <div className="pb-10 lg:hidden">
-            <div className="mx-auto w-full max-w-md bg-white p-5 shadow-[0_8px_24px_rgba(0,0,0,0.18)]">
+          <div className="pb-10 lg:hidden px-4 -mt-[50px]">
+            <div className="mx-auto w-full max-w-md bg-white p-5 shadow-[0_8px_24px_rgba(0,0,0,0.18)] rounded-xl">
               <div className="mb-4 text-center">
                 <h2 className="text-[22px] font-black text-[#009c43]">
                   Admission Open
@@ -253,25 +221,27 @@ export function Hero() {
                   Academic Experts will assist you!
                 </p>
 
-                <a
+                {/* <a
                   href={`tel:${CONTACT_NUMBER}`}
                   className="mx-auto mt-2 inline-flex min-h-[30px] items-center justify-center gap-2 rounded-full bg-[#009c43] px-5 py-1 text-[14px] font-extrabold text-white"
                 >
                   <Phone size={14} fill="currentColor" />
 
                   {DISPLAY_CONTACT_NUMBER}
-                </a>
+                </a> */}
               </div>
 
               <FormWrapper
                 title=""
                 subtitle=""
                 courseOptions={ESGCI_COURSE_OPTIONS}
+                defaultCourse=""
                 formNameOverride="ESGCI Mobile Hero Enquiry Form"
-                sourceOverride="ESGCI Landing Page"
-                utmSourceFallback="ESGCI Organic"
-                utmMediumFallback="ESGCI Mobile Website"
+                sourceOverride="ESGCI LP"
+                utmSourceFallback="Organic"
+                utmMediumFallback="GGU_Organic"
                 submitButtonText="Submit"
+                redirectUrl="/thank-you"
               />
             </div>
           </div>
@@ -295,37 +265,20 @@ export function Hero() {
             onMouseDown={(event) => event.stopPropagation()}
             className="relative max-h-[92vh] w-full max-w-[410px] overflow-y-auto rounded-xl bg-white p-6 shadow-2xl"
           >
-            {/* Close button */}
-            <button
-              type="button"
-              aria-label="Close brochure form"
-              onClick={() => setDownloadOpen(false)}
-              className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-[#e8f8ef] text-[#009c43] transition-colors hover:bg-[#d3f1df]"
-            >
-              <X size={20} />
-            </button>
-
-            {/* Popup heading */}
-            <div className="mb-5 pr-10">
-              <h2 className="text-[24px] font-black text-[#009c43]">
-                Download Brochure
-              </h2>
-
-              <p className="mt-1 text-[13px] leading-5 text-gray-600">
-                Fill in your details to receive the ESGCI Online DBA brochure.
-              </p>
-            </div>
-
             <FormWrapper
-              title=""
-              subtitle=""
+              title="Download Brochure"
+              subtitle="Please enter your details to download the brochure:"
               onClose={() => setDownloadOpen(false)}
               courseOptions={ESGCI_COURSE_OPTIONS}
+              defaultCourse=""
               formNameOverride="ESGCI Download Brochure Form"
-              sourceOverride="ESGCI Brochure"
-              utmSourceFallback="ESGCI Organic"
-              utmMediumFallback="ESGCI Brochure Popup"
-              submitButtonText="Download Brochure"
+              sourceOverride="ESGCI LP"
+              utmSourceFallback="Organic"
+              utmMediumFallback="ESGCI_Organic"
+              submitButtonText="Submit"
+              isBrochureForm
+              brochureUrl="/esgci/assets/brochures/main_brochure.pdf"
+              redirectUrl="/thank-you"
             />
           </div>
         </div>

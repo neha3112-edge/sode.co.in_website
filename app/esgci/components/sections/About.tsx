@@ -2,14 +2,11 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
-import { X } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
-import FormWrapper, {
-  type FormCourseOption,
-} from "@/components/forms/FormWrapper";
-
-import AboutESGCIImage from "../../assets/img/iiim-udaipur.webp";
+import FormWrapper from "@/components/forms/FormWrapper";
+import { getAssetPath } from "@/lib/utils";
+import { ESGCI_COURSE_OPTIONS } from "../../constants";
 
 /*
 |--------------------------------------------------------------------------
@@ -18,19 +15,6 @@ import AboutESGCIImage from "../../assets/img/iiim-udaipur.webp";
 */
 
 type AboutFormType = "callback" | null;
-
-/*
-|--------------------------------------------------------------------------
-| ESGCI Course Options
-|--------------------------------------------------------------------------
-*/
-
-const ESGCI_COURSES: FormCourseOption[] = [
-  {
-    value: "ESGCI Online Doctor of Business Administration",
-    label: "ESGCI Online Doctor of Business Administration",
-  },
-];
 
 /*
 |--------------------------------------------------------------------------
@@ -95,14 +79,14 @@ export function About() {
               Left Content
           ======================================================== */}
 
-          <div className="relative z-10 flex items-center bg-black px-5 py-10 sm:px-8 lg:px-0 lg:py-12">
-            <Container className="lg:pr-8 xl:pr-12">
-              <div className="max-w-[960px]">
+          <div className="relative z-10 flex items-center px-5 py-10 sm:px-8 lg:px-0 lg:py-12">
+            <Container className="mx-auto">
+              <div className="max-w-[800px]">
                 <h2 className="text-[30px] font-black uppercase leading-none tracking-[-0.025em] text-white sm:text-[34px] lg:text-[36px]">
                   About Us
                 </h2>
 
-                <p className="mt-5 max-w-[980px] text-[13px] font-medium leading-[1.45] text-white sm:text-[14px]">
+                <p className="mt-5 max-w-[750px] text-[14px] leading-[1.45] text-white sm:text-[13px]">
                   ESGCI (Ecoles Supérieur de Gestion – Commerce International)
                   was founded in 1986 in Paris. It is a famous management school
                   known for its global approach. About 20% of its students come
@@ -117,7 +101,7 @@ export function About() {
                 <button
                   type="button"
                   onClick={() => setActiveForm("callback")}
-                  className="mt-5 inline-flex min-h-[39px] items-center justify-center rounded-[6px] bg-[#ffe500] px-5 py-2.5 text-[15px] font-bold text-black transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#f1d900] hover:shadow-lg"
+                  className="mt-6 inline-flex items-center justify-center rounded-[6px] bg-[#ffe500] px-5 py-2.5 text-[15px] font-bold text-black transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-[#f1d900] hover:shadow-lg"
                 >
                   Request Call Back
                 </button>
@@ -129,9 +113,9 @@ export function About() {
               Right Campus Image
           ======================================================== */}
 
-          <div className="relative min-h-[260px] overflow-hidden sm:min-h-[320px] lg:min-h-full">
+          <div className="relative min-h-[260px] overflow-hidden sm:min-h-[320px] lg:min-h-full hidden md:block">
             <Image
-              src={AboutESGCIImage}
+              src={getAssetPath("/esgci/assets/img/about-us.webp")}
               alt="ESGCI Paris campus"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -148,7 +132,7 @@ export function About() {
       </section>
 
       {/* ============================================================
-          Request Callback Modal
+          Request Callback Modal Overlay
       ============================================================ */}
 
       {activeForm === "callback" && (
@@ -157,14 +141,14 @@ export function About() {
             title="Request Call Back"
             subtitle="Our academic experts will contact you shortly"
             onClose={closeForm}
-            courseOptions={ESGCI_COURSES}
-            defaultCourse="ESGCI Online Doctor of Business Administration"
-            hideCourseField
+            courseOptions={ESGCI_COURSE_OPTIONS}
+            defaultCourse=""
             formNameOverride="ESGCI About Callback Form"
-            sourceOverride="ESGCI About Section"
-            utmSourceFallback="ESGCI Organic"
-            utmMediumFallback="ESGCI Request Callback"
+            sourceOverride="ESGCI LP"
+            utmSourceFallback="Organic"
+            utmMediumFallback="ESGCI_Organic"
             submitButtonText="Request Call Back"
+            redirectUrl="/thank-you"
           />
         </AboutFormModal>
       )}
@@ -198,15 +182,6 @@ function AboutFormModal({ title, children, onClose }: AboutFormModalProps) {
         onMouseDown={(event) => event.stopPropagation()}
         className="relative max-h-[92vh] w-full max-w-[420px] overflow-y-auto rounded-xl bg-white p-5 shadow-2xl sm:p-7"
       >
-        <button
-          type="button"
-          aria-label="Close callback form"
-          onClick={onClose}
-          className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-[#fff9cc] text-black transition-colors hover:bg-[#ffef7a]"
-        >
-          <X size={20} />
-        </button>
-
         {children}
       </div>
     </div>
