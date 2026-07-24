@@ -1,17 +1,11 @@
 "use client";
 
-import Image from "next/image";
-import {
-  Award,
-  BookOpen,
-  ChevronDown,
-  Clock3,
-  Download,
-  GraduationCap,
-} from "lucide-react";
-
+import { useEffect, useState } from "react";
+import { Award, BookOpen, ChevronDown, Clock3, Download, GraduationCap } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import FormWrapper from "@/components/forms/FormWrapper";
 import { getAssetPath } from "@/lib/utils";
+import { SSBM_COURSE_OPTIONS } from "../../constants";
 
 type OverviewItem = {
   title: string;
@@ -42,136 +36,106 @@ const overviewItems: OverviewItem[] = [
   },
 ];
 
-type BrandLogo = {
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-  className: string;
-};
-
-const accreditationLogos: BrandLogo[] = [
-  {
-    src: "/assets/images/acbsp-logo.png",
-    alt: "ACBSP accreditation",
-    width: 95,
-    height: 60,
-    className: "h-[58px] w-auto object-contain",
-  },
-  {
-    src: "/assets/images/chea-logo.png",
-    alt: "CHEA accreditation",
-    width: 240,
-    height: 65,
-    className: "h-[64px] w-auto max-w-[230px] object-contain",
-  },
-  {
-    src: "/assets/images/bac-logo.png",
-    alt: "BAC accreditation",
-    width: 110,
-    height: 65,
-    className: "h-[63px] w-auto object-contain",
-  },
-];
-
-const rankingLogos: BrandLogo[] = [
-  {
-    src: "/assets/images/ceoworld-logo.png",
-    alt: "CEO World Magazine",
-    width: 180,
-    height: 55,
-    className: "h-[51px] w-auto max-w-[180px] object-contain",
-  },
-  {
-    src: "/assets/images/postgrad-logo.png",
-    alt: "Postgrad",
-    width: 125,
-    height: 48,
-    className: "h-[42px] w-auto max-w-[125px] object-contain",
-  },
-  {
-    src: "/assets/images/study-in-switzerland-logo.png",
-    alt: "Study in Switzerland",
-    width: 165,
-    height: 55,
-    className: "h-[52px] w-auto max-w-[170px] object-contain",
-  },
-];
-
 export function Approvals() {
-  const handleCurriculumClick = () => {
-    const heroSection = document.getElementById("home");
+  const [downloadOpen, setDownloadOpen] = useState(false);
 
-    heroSection?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+  const handleCurriculumClick = () => {
+    setDownloadOpen(true);
   };
 
   const handleKnowMoreClick = () => {
-    const coursesSection = document.getElementById("courses");
-
-    coursesSection?.scrollIntoView({
+    const whyChooseSection = document.getElementById("whychoose");
+    whyChooseSection?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
   };
 
+  /*
+  |--------------------------------------------------------------------------
+  | Disable body scrolling while popup is open
+  |--------------------------------------------------------------------------
+  */
+
+  useEffect(() => {
+    document.body.style.overflow = downloadOpen ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [downloadOpen]);
+
+  /*
+  |--------------------------------------------------------------------------
+  | Close popup on Escape
+  |--------------------------------------------------------------------------
+  */
+
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setDownloadOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscape);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
   return (
     <>
-      {/* =========================================================
-          Course Overview
-      ========================================================== */}
-
       <section
-        id="approvals"
-        className="border-b border-[#e8e8e8] bg-white py-10 sm:py-12 lg:py-[40px]"
+        id="overview"
+        className="border-b border-[#e8e8e8] bg-white py-10 sm:py-12 lg:py-14"
       >
-        <Container>
-          <div className="mx-auto w-full max-w-[1140px]">
+        <Container className="p-0">
+          <div className="mx-auto w-full max-w-[1140px] px-4 md:px-0">
             {/* Heading */}
             <div className="text-center">
-              <h2 className="text-[31px] font-extrabold leading-tight tracking-[-0.035em] text-black sm:text-[36px]">
+              <h2 className="text-[31px] font-extrabold tracking-[-0.035em] text-black sm:text-[36px]">
                 Course{" "}
-                <span className="relative inline-block text-[#c9232c]">
+                <span className="relative inline-block text-[#c11f28]">
                   Overview
-                  <span className="absolute -bottom-1 left-0 h-[3px] w-full bg-[#c9232c]" />
                 </span>
               </h2>
             </div>
 
             {/* Description */}
-            <p className="mx-auto mt-4 max-w-[1120px] text-center text-[13px] font-medium leading-[1.42] text-black sm:text-[14px]">
-              The Online SSBM DBA program offers a strong path with many salient
-              features. The SSBM University not only offers a well-recognised
-              degree program but also includes PwC India&apos;s Board Advisory
-              Certification, with patent-to-idea guidance, where Swiss expert
-              faculty guide learners in conducting practical research and
-              turning their ideas into theory. SSBM Doctorate online course also
-              offers support in research, publishing, and leadership development
-              for working professionals. The learner also takes advantage of
-              practical boardroom skills enhancement, expert mentorship, global
-              publishing opportunities, and allows them to interact with elite
-              networks. The SSBM DBA online program offers the mixture of
-              academic depth with real-world application, helping professionals
-              increase their strategic decision-making and help themselves
-              establish an influential leader. Students after taking the SSBM
-              DBA admission can also expect a major salary increase.
+            <p className="mx-auto mt-3 max-w-[1120px] text-center text-[13px] font-medium leading-[1.6] text-gray-800 sm:text-[13px]">
+              The Online SSBM DBA program offers a strong path with many silent features. The SSBM University not only offers a well-recognised degree program but also includes PwC India&apos;s Board Advisory Certification, with patent-to-idea guidance, where Swiss expert faculty guide learners in conducting practical research and turning their ideas into theory. SSBM Doctorate online course also offers support in research, publishing, and leadership development for working professionals. The learner also takes advantage of practical boardroom skills enhancement, expert mentorship, global publishing opportunities, and allows them to interact with elite networks. The SSBM DBA online program offers the mixture of academic depth with real-world application, helping professionals increase their strategic decision-making and help themselves establish an influential leader. Students after taking the SSBM DBA admission can also expect a major salary increase.
             </p>
 
             {/* Overview Cards */}
-            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+            <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
               {overviewItems.map((item) => (
-                <OverviewCard key={item.title} item={item} />
+                <article
+                  key={item.title}
+                  className="flex flex-col md:flex-row min-h-[76px] items-center gap-4 bg-[#f4f5f8] rounded-xl px-5 py-4 border border-gray-300 transition-all duration-300 ease-in-out hover:shadow-md hover:scale-[1.01]"
+                >
+                  <div className="flex h-[42px] w-[32px] shrink-0 items-center justify-center text-[#c11f28]">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-[17px] font-bold leading-tight text-black">
+                      {item.title}
+                    </h3>
+                    <p className="mt-1.5 text-[12px] font-semibold leading-tight text-gray-700">
+                      {item.description}
+                    </p>
+                  </div>
+                </article>
               ))}
             </div>
 
             {/* Buttons */}
-            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-1">
+            <div className="mt-10 flex items-center justify-center gap-4 flex-row sm:gap-3">
               <button
                 type="button"
                 onClick={handleCurriculumClick}
-                className="inline-flex min-h-[39px] min-w-[168px] items-center justify-center gap-1 rounded-[5px] bg-[#c9232c] px-5 py-2.5 text-[14px] font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#a91d25]"
+                className="inline-flex min-h-[42px] min-w-[178px] items-center justify-center gap-2 rounded-[5px] bg-[#c11f28] px-6 py-2.5 text-[14px] font-bold text-white transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-[#a8141c] hover:shadow-md"
               >
                 Get Curriculum
                 <Download size={15} strokeWidth={2.5} />
@@ -180,7 +144,7 @@ export function Approvals() {
               <button
                 type="button"
                 onClick={handleKnowMoreClick}
-                className="inline-flex min-h-[39px] min-w-[135px] items-center justify-center gap-1 rounded-[5px] bg-black px-5 py-2.5 text-[14px] font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#242424]"
+                className="inline-flex min-h-[42px] min-w-[145px] items-center justify-center gap-2 rounded-[5px] bg-black px-6 py-2.5 text-[14px] font-bold text-white transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-[#242424] hover:shadow-md"
               >
                 Know More
                 <ChevronDown size={15} strokeWidth={2.7} />
@@ -191,99 +155,40 @@ export function Approvals() {
       </section>
 
       {/* =========================================================
-          Accreditations & Rankings
-      ========================================================== */}
+          Download Brochure Popup Modal
+      ========================================================= */}
 
-      <section className="bg-[#f2f2f2] py-12 sm:py-14 lg:py-[58px]">
-        <Container>
-          <div className="mx-auto w-full max-w-[1200px]">
-            {/* Heading */}
-            <h2 className="text-center text-[31px] font-extrabold leading-tight tracking-[-0.035em] text-black sm:text-[38px] lg:text-[42px]">
-              Accreditations{" "}
-              <span className="text-[#bd2c2c]">&amp; Rankings</span>
-            </h2>
-
-            {/* Boxes */}
-            <div className="mt-9 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-8">
-              <LogoGroup title="Accreditations" logos={accreditationLogos} />
-
-              <LogoGroup title="Rankings" logos={rankingLogos} />
-            </div>
-          </div>
-        </Container>
-      </section>
-    </>
-  );
-}
-
-/*
-|--------------------------------------------------------------------------
-| Overview Card
-|--------------------------------------------------------------------------
-*/
-
-type OverviewCardProps = {
-  item: OverviewItem;
-};
-
-function OverviewCard({ item }: OverviewCardProps) {
-  return (
-    <article className="flex min-h-[68px] items-center gap-3 bg-[#f0f0f0] px-4 py-3">
-      <div className="flex h-[42px] w-[32px] shrink-0 items-center justify-center text-[#c9232c]">
-        {item.icon}
-      </div>
-
-      <div>
-        <h3 className="text-[18px] font-extrabold leading-tight text-black">
-          {item.title}
-        </h3>
-
-        <p className="mt-1 text-[13px] font-medium leading-tight text-black">
-          {item.description}
-        </p>
-      </div>
-    </article>
-  );
-}
-
-/*
-|--------------------------------------------------------------------------
-| Accreditation / Ranking Group
-|--------------------------------------------------------------------------
-*/
-
-type LogoGroupProps = {
-  title: string;
-  logos: BrandLogo[];
-};
-
-function LogoGroup({ title, logos }: LogoGroupProps) {
-  return (
-    <div className="relative rounded-[15px] border-2 border-[#c9232c] bg-[#f2f2f2] px-5 pb-7 pt-8 sm:px-8">
-      {/* Border title */}
-      <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 bg-[#f2f2f2] px-3">
-        <h3 className="whitespace-nowrap text-[16px] font-bold text-black">
-          {title}
-        </h3>
-      </div>
-
-      {/* Logos */}
-      <div className="flex min-h-[82px] flex-col items-center justify-center gap-6 sm:flex-row sm:gap-8">
-        {logos.map((logo) => (
+      {downloadOpen && (
+        <div
+          role="presentation"
+          onMouseDown={() => setDownloadOpen(false)}
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/65 px-4 py-6 backdrop-blur-sm"
+        >
           <div
-            key={logo.alt}
-            className="flex min-h-[65px] flex-1 items-center justify-center"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Download brochure"
+            onMouseDown={(event) => event.stopPropagation()}
+            className="relative max-h-[92vh] w-full max-w-[410px] overflow-y-auto rounded-xl bg-white p-6 shadow-2xl"
           >
-            <Image
-              src={getAssetPath(logo.src)}
-              alt={logo.alt}
-              width={logo.width}
-              height={logo.height}
-              className={logo.className}
+            <FormWrapper
+              title="Download Brochure"
+              subtitle="Please enter your details to download the brochure:"
+              onClose={() => setDownloadOpen(false)}
+              courseOptions={SSBM_COURSE_OPTIONS}
+              defaultCourse=""
+              formNameOverride="SSBM Overview Download Brochure Form"
+              sourceOverride="SSBM LP"
+              utmSourceFallback="Organic"
+              utmMediumFallback="SSBM_Organic"
+              submitButtonText="Submit"
+              isBrochureForm
+              brochureUrl="/ssbm/assets/brochures/main_brochure.pdf"
+              redirectUrl="/thank-you"
             />
           </div>
-        ))}
-      </div>
-    </div>
+        </div>
+      )}
+    </>
   );
 }

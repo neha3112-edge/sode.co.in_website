@@ -72,31 +72,29 @@ const applySteps: ApplyStep[] = [
 
 const faqs: FaqItem[] = [
   {
-    question: "What are the IIIT Bangalore online courses?",
+    question: "What is the Online SSBM DBA program?",
     answer:
-      "They are industry-focused online programmes from IIIT Bangalore, designed for working professionals with flexible learning, projects, and recognised certification.",
+      "It is a flexible, research-focused doctoral program designed for working professionals seeking advanced leadership and strategic business expertise.",
   },
   {
-    question: "Do IIIT Bangalore certification courses help in career growth?",
+    question: "Is the SSBM doctorate globally recognized?",
     answer:
-      "Yes. These programmes are designed to strengthen practical skills, improve professional credibility, and help learners prepare for career advancement in emerging technology and leadership roles.",
+      "Yes, the SSBM doctorate is internationally recognized and follows high academic standards with strong industry relevance.",
   },
   {
-    question:
-      "Is IIIT Bangalore artificial intelligence taught with practical training?",
+    question: "Who can apply for SSBM DBA Admission?",
     answer:
-      "Yes. The artificial intelligence programmes include hands-on projects, assignments, case studies, tools, and real-world applications so learners can build practical experience.",
+      "Applicants typically need a postgraduate degree and relevant professional experience to qualify for SSBM DBA Admission.",
   },
   {
-    question: "Do IIIT Bangalore data science programmes include projects?",
+    question: "How is the SSBM University online learning experience structured?",
     answer:
-      "Yes. Data science programmes typically include practical projects, datasets, analytical exercises, machine learning applications, and capstone-based learning.",
+      "SSBM University offers recorded lectures, live sessions, case studies, research supervision, and continuous academic support for online learners.",
   },
   {
-    question:
-      "Is IIM Udaipur artificial intelligence included in the CTO programme?",
+    question: "Does the program include practical industry exposure?",
     answer:
-      "The CTO and AI leadership track includes leadership-focused learning and may involve academic or industry collaboration elements depending on the selected programme structure.",
+      "Yes. The SSBM DBA includes real-world projects, board simulations, research work, and industry interactions to strengthen practical learning.",
   },
 ];
 
@@ -110,18 +108,15 @@ export function ApplyAndFaq() {
   return (
     <>
       {/* How To Apply Section */}
-      <section id="how-to-apply" className="bg-white py-14 sm:py-16 lg:py-20">
+      <section id="how-to-apply" className="bg-white py-14 sm:py-16 lg:py-12">
         <Container className="max-w-[1480px]">
           <div className="text-center">
-            <h2 className="text-2xl font-bold leading-tight text-[#1d3d82] sm:text-3xl lg:text-[34px]">
-              How To Apply For IIIT Bangalore University Online Courses
+            <h2 className="text-2xl font-bold leading-tight text-[#c11f28] sm:text-3xl lg:text-[34px]">
+              How to Apply for SSBM University Online Courses
             </h2>
 
-            <p className="mx-auto mt-3 max-w-4xl text-sm leading-6 text-gray-600 sm:text-base">
-              Students can easily enroll in IIIT Bangalore University Online
-              courses. Candidates can conveniently apply by selecting their
-              desired program. Follow these steps to secure admission in the
-              university.
+            <p className="mx-auto mt-4 max-w-4xl text-[14px] leading-6 text-gray-700 sm:text-base">
+              Students can easily enrol in SSBM University Online courses. Candidates can conveniently apply by selecting their desired program. Follow these steps to secure admission in the university.
             </p>
           </div>
 
@@ -140,7 +135,7 @@ export function ApplyAndFaq() {
       >
         <Container>
           <div className="text-center">
-            <h2 className="text-3xl font-extrabold leading-tight text-[#075583] sm:text-4xl">
+            <h2 className="text-3xl font-bold leading-tight text-[#c11f28] sm:text-4xl">
               FAQ-Frequently Asked Question
             </h2>
           </div>
@@ -202,9 +197,8 @@ type FaqAccordionItemProps = {
 function FaqAccordionItem({ faq, isOpen, onToggle }: FaqAccordionItemProps) {
   return (
     <div
-      className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
-        isOpen ? "border-transparent bg-[#f2f2f2]" : "border-gray-300 bg-white"
-      }`}
+      className={`overflow-hidden rounded-2xl border transition-all duration-300 ${isOpen ? "border-transparent bg-[#f2f2f2]" : "border-gray-300 bg-white"
+        }`}
     >
       <button
         type="button"
@@ -212,7 +206,7 @@ function FaqAccordionItem({ faq, isOpen, onToggle }: FaqAccordionItemProps) {
         aria-expanded={isOpen}
         className="flex w-full items-center gap-4 px-5 py-4 text-left sm:px-6"
       >
-        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-[#075583] text-white">
+        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-[#c11f28] text-white">
           {isOpen ? (
             <Minus size={14} strokeWidth={3} />
           ) : (
@@ -220,15 +214,14 @@ function FaqAccordionItem({ faq, isOpen, onToggle }: FaqAccordionItemProps) {
           )}
         </span>
 
-        <span className="text-sm font-bold text-[#075583] sm:text-base">
+        <span className="text-sm font-bold text-black/80 sm:text-base">
           {faq.question}
         </span>
       </button>
 
       <div
-        className={`grid transition-all duration-300 ${
-          isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-        }`}
+        className={`grid transition-all duration-300 ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+          }`}
       >
         <div className="overflow-hidden">
           <p className="px-5 pb-6 pl-14 text-sm leading-6 text-gray-600 sm:px-6 sm:pb-7 sm:pl-16 sm:text-base">

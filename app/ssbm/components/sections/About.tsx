@@ -2,51 +2,13 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
-import { X } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
 import FormWrapper from "@/components/forms/FormWrapper";
-
-import AboutIIITBImage from "../../assets/img/iiit-b-about-image.webp";
+import { getAssetPath } from "@/lib/utils";
+import { SSBM_COURSE_OPTIONS } from "../../constants";
 
 type AboutFormType = "counselling" | null;
-
-const IIITB_COURSES = [
-  {
-    value: "Executive Programme in Generative AI for Leaders",
-    label: "Executive Programme in Generative AI for Leaders",
-  },
-  {
-    value: "Executive Post Graduate Certificate Programme in Data Science & AI",
-    label: "Executive Post Graduate Certificate Programme in Data Science & AI",
-  },
-  {
-    value:
-      "Professional Certificate Programme in Data Science with Generative AI",
-    label:
-      "Professional Certificate Programme in Data Science with Generative AI",
-  },
-  {
-    value: "Executive Post Graduate Programme in Applied AI and Agentic AI",
-    label: "Executive Post Graduate Programme in Applied AI and Agentic AI",
-  },
-  {
-    value: "Executive Diploma in Machine Learning & Artificial Intelligence",
-    label: "Executive Diploma in Machine Learning & Artificial Intelligence",
-  },
-  {
-    value: "Chief Technology Officer & AI Leadership Programme",
-    label: "Chief Technology Officer & AI Leadership Programme",
-  },
-  {
-    value: "Master of Science in Machine Learning & Artificial Intelligence",
-    label: "Master of Science in Machine Learning & Artificial Intelligence",
-  },
-  {
-    value: "Master of Science in Data Science with Generative AI",
-    label: "Master of Science in Data Science with Generative AI",
-  },
-];
 
 export function About() {
   const [activeForm, setActiveForm] = useState<AboutFormType>(null);
@@ -95,121 +57,91 @@ export function About() {
     <>
       <section
         id="about"
-        className="relative overflow-hidden bg-[#171717] py-14 text-white sm:py-16 lg:py-[78px]"
+        className="relative overflow-hidden py-14 text-white sm:py-16 lg:py-[50px] px-6 md:px-0"
       >
         {/* Background Campus Image */}
-        <div className="absolute inset-x-0 bottom-0 h-[72%] opacity-20">
-          <Image
-            src={AboutIIITBImage}
-            alt=""
-            fill
-            aria-hidden="true"
-            sizes="100vw"
-            className="object-cover object-center grayscale"
-          />
+        <Image
+          src={getAssetPath("/ssbm/assets/img/About-pic.webp")}
+          alt="SSBM University campus"
+          fill
+          sizes="100vw"
+          className="object-cover object-center"
+        />
 
-          {/* Dark background overlay */}
-          <div className="absolute inset-0 bg-black/65" />
+        {/* Screenshot-style dark overlay */}
+        <div className="absolute inset-0" />
 
-          {/* Top blend */}
-          <div className="absolute inset-0 bg-linear-to-b from-[#171717] via-[#171717]/60 to-black/20" />
-        </div>
+        <Container className="relative z-10 p-0 max-w-8xl lg:px-20">
+          <div className="flex items-center md:px-0">
+            <div className="w-full max-w-[1020px]">
+              <h2 className="text-[31px] font-black uppercase leading-tight tracking-[-0.025em] text-white sm:text-[34px]">
+                About Online SSBM
+              </h2>
 
-        <Container className="relative z-10">
-          {/* Heading */}
-          <div className="mx-auto max-w-[850px] text-center">
-            <h2 className="text-[29px] font-extrabold leading-tight text-white sm:text-[34px] lg:text-[36px]">
-              About IIIT Bangalore Online
-            </h2>
+              <p className="mt-5 max-w-[660px] text-[14px] font-medium leading-[1.65] text-gray-200 sm:text-[13px]">
+                SSBM University, located in Switzerland, offer morden industry-accredited management courses. The institution helps students get a flexible higher education in online mode, which is specifically made for working professionals across the globe. Their digital learning curriculum offers interactive classes, real business case studies, international faculty access, and a properly structured research environment. Students looking to take admission in SSBM DBA can develop practical knowledge, apply research and leadership skills that match the global business standards. As a globally known university who are offering executive and doctoral education support learners through personalised academic guidance, dedicated mentorship, and international networking opportunities.
+              </p>
 
-            <div className="mx-auto mt-2 h-px w-full max-w-[555px] bg-white/80" />
-
-            <p className="mt-5 text-[14px] leading-[1.4] text-white/85 sm:text-[15px]">
-              IIIT Bangalore is a premier technology institute established in
-              1998, known for industry-focused education and strong academic
-              depth. Its IIIT Bangalore online courses are designed for working
-              professionals, combining academic rigour with real-world
-              application. The institute offers carefully structured
-              certification courses in emerging technology domains, supported by
-              expert faculty and industry mentors. Learners gain practical
-              exposure through projects, case studies, and capstones that align
-              skills with current business and technology needs.
-            </p>
-          </div>
-
-          {/* Campus Image */}
-          <div className="relative mx-auto mt-8 max-w-[900px] pb-7 sm:mt-9">
-            <div className="relative h-[245px] overflow-hidden rounded-[34px] shadow-[0_20px_45px_rgba(0,0,0,0.45)] sm:h-[315px] lg:h-[300px]">
-              <Image
-                src={AboutIIITBImage}
-                alt="IIIT Bangalore campus"
-                fill
-                sizes="(max-width: 1024px) 100vw, 900px"
-                className="object-cover object-center"
-              />
+              <button
+                type="button"
+                onClick={() => setActiveForm("counselling")}
+                className="mt-7 inline-flex min-h-[42px] items-center justify-center rounded-[5px] bg-[#c11f28] px-6 py-2.5 text-[15px] font-bold text-white transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-[#a8141c] hover:shadow-lg"
+              >
+                Request Call Back
+              </button>
             </div>
-
-            {/* Overlapping Counselling Button */}
-            <button
-              type="button"
-              onClick={() => setActiveForm("counselling")}
-              className="absolute bottom-0 left-1/2 flex min-h-[54px] w-[calc(100%-40px)] max-w-[345px] -translate-x-1/2 items-center justify-center rounded-[13px] bg-[#d32308] px-6 py-3 text-center text-[16px] font-extrabold text-white shadow-[0_8px_18px_rgba(0,0,0,0.3)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#b91f07] sm:text-[18px]"
-            >
-              Get FREE Career Counseling
-            </button>
           </div>
         </Container>
       </section>
 
-      {/* Counselling Modal */}
+      {/* Counselling Form Modal */}
       {activeForm === "counselling" && (
-        <AboutFormModal title="Get Free Career Counseling" onClose={closeForm}>
+        <CustomFormModal title="Request SSBM Call Back" onClose={closeForm}>
           <FormWrapper
-            title="Get FREE Career Counseling"
-            subtitle="Our academic experts will guide you step by step"
+            title="Request Call Back"
+            subtitle="Our academic expert will connect with you shortly"
             onClose={closeForm}
-            courseOptions={IIITB_COURSES}
-            formNameOverride="IIITB About Free Counselling Form"
-            sourceOverride="IIITB About Counselling"
-            utmSourceFallback="IIITB Organic"
-            utmMediumFallback="IIITB About Counselling Button"
-            submitButtonText="Get Free Counselling"
+            courseOptions={SSBM_COURSE_OPTIONS}
+            defaultCourse=""
+            formNameOverride="SSBM About Callback Form"
+            sourceOverride="SSBM LP"
+            utmSourceFallback="Organic"
+            utmMediumFallback="SSBM_Organic"
+            submitButtonText="Request Call Back"
+            redirectUrl="/thank-you"
           />
-        </AboutFormModal>
+        </CustomFormModal>
       )}
     </>
   );
 }
 
-type AboutFormModalProps = {
+/*
+|--------------------------------------------------------------------------
+| Form Modal
+|--------------------------------------------------------------------------
+*/
+
+type CustomFormModalProps = {
   title: string;
   children: ReactNode;
   onClose: () => void;
 };
 
-function AboutFormModal({ title, children, onClose }: AboutFormModalProps) {
+function CustomFormModal({ title, children, onClose }: CustomFormModalProps) {
   return (
     <div
       role="presentation"
       onMouseDown={onClose}
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/65 px-4 py-6 backdrop-blur-sm"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 px-4 py-6 backdrop-blur-sm"
     >
       <div
         role="dialog"
         aria-modal="true"
         aria-label={title}
         onMouseDown={(event) => event.stopPropagation()}
-        className="relative max-h-[92vh] w-full max-w-[420px] overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-7"
+        className="relative max-h-[92vh] w-full max-w-[420px] overflow-y-auto rounded-xl bg-white p-5 shadow-2xl sm:p-7"
       >
-        <button
-          type="button"
-          aria-label="Close counselling form"
-          onClick={onClose}
-          className="absolute right-3 top-3 z-20 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-[#fff0ed] text-[#c9230c] transition hover:bg-[#ffe2dc]"
-        >
-          <X size={20} />
-        </button>
-
         {children}
       </div>
     </div>
