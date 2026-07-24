@@ -17,7 +17,7 @@ const accreditationItems: AccreditationItem[] = [
     title: "French Ministry of Higher Education",
     description:
       "Recognizes ESGCI for meeting high-quality standards in French higher education.",
-    image: "/assets/img/french-ministry-logo.webp",
+    image: "/esgci/assets/img/REPUBLIQUE.webp",
     imageAlt: "French Ministry of Higher Education",
   },
   {
@@ -25,7 +25,7 @@ const accreditationItems: AccreditationItem[] = [
     title: "QUALIOPI",
     description:
       "Certification ensuring training programs in France adhere to recognized quality standards.",
-    image: "/assets/img/qualiopi-logo.webp",
+    image: "/esgci/assets/img/QUALIOPI.webp",
     imageAlt: "Qualiopi certification",
   },
   {
@@ -33,7 +33,7 @@ const accreditationItems: AccreditationItem[] = [
     title: "ACBSP",
     description:
       "Global accreditation validating the quality and standards of business education.",
-    image: "/assets/img/acbsp-logo.webp",
+    image: "/esgci/assets/img/ACBSP.webp",
     imageAlt: "ACBSP accreditation",
   },
   {
@@ -41,7 +41,7 @@ const accreditationItems: AccreditationItem[] = [
     title: "IACBE",
     description:
       "Ensures institutions maintain accountability and continuously improve business education quality.",
-    image: "/assets/img/iacbe-logo.webp",
+    image: "/esgci/assets/img/IACBE.webp",
     imageAlt: "IACBE accreditation",
   },
 ];
@@ -49,13 +49,13 @@ const accreditationItems: AccreditationItem[] = [
 export function Accreditations() {
   return (
     <section
-      id="accreditations"
-      className="bg-white py-12 sm:py-14 lg:py-[72px]"
+      id="certification"
+      className="bg-white py-12 sm:py-14 sm:pt-5"
     >
       <Container>
         {/* Heading */}
         <div className="text-center">
-          <h2 className="text-[28px] font-black uppercase leading-tight tracking-[-0.02em] text-black sm:text-[34px] lg:text-[38px]">
+          <h2 className="text-[28px] font-bold uppercase leading-tight tracking-[-0.02em] text-[#009c43] sm:text-[34px] lg:text-[38px]">
             Approvals and Accreditation
           </h2>
         </div>
@@ -77,7 +77,7 @@ type AccreditationCardProps = {
 
 function AccreditationCard({ item }: AccreditationCardProps) {
   return (
-    <article className="flex h-full flex-col items-center text-center">
+    <article className="flex h-full flex-col items-center text-center shadow-[0_3px_12px_rgba(0,0,0,0.24)] p-4 rounded-xl">
       {/* Logo */}
       <div className="relative flex h-[86px] w-full items-center justify-center sm:h-[95px]">
         <Image
@@ -90,12 +90,12 @@ function AccreditationCard({ item }: AccreditationCardProps) {
       </div>
 
       {/* Title */}
-      <h3 className="mt-4 text-[17px] font-black leading-[1.2] text-[#009844] sm:text-[18px]">
+      <h3 className="mt-4 text-[17px] font-bold leading-[1.2] text-[#009c43] sm:text-[14px]">
         {item.title}
       </h3>
 
       {/* Description */}
-      <p className="mx-auto mt-2 max-w-[260px] text-[13px] font-medium leading-[1.35] text-[#333333] sm:text-[14px]">
+      <p className="mx-auto mt-2 max-w-[260px] text-[13px] font-medium leading-[1.35] text-[#333333] sm:text-[13px]">
         {item.description}
       </p>
     </article>

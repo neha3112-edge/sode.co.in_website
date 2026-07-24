@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { X } from "lucide-react";
 
-import ArrowGif from "../../assets/img/arrow.gif";
+import { getAssetPath } from "@/lib/utils";
 import DesLogo from "../../assets/img/new-des-logo.webp";
 
 type ModalType = "disclaimer" | "terms" | "privacy" | null;
@@ -79,12 +79,12 @@ export default function Footer() {
         ========================================================== */}
 
         <section className="px-4 sm:px-8 lg:px-[60px]">
-          <div className="relative mx-auto max-w-[1800px] rounded-[20px] bg-[#00ad4e] px-5 pb-[88px] pt-12 text-center text-white sm:px-8 sm:pb-[92px] sm:pt-14 lg:min-h-[218px] lg:px-10 lg:pb-[82px] lg:pt-[48px]">
-            <h2 className="text-[26px] font-black leading-tight tracking-[-0.03em] sm:text-[30px] lg:text-[36px]">
+          <div className="relative mx-auto max-w-[1800px] rounded-[20px] bg-[#00ad4e] px-5 pb-[48px] pt-12 text-center text-white sm:px-8 sm:pb-[40px] sm:pt-14 lg:min-h-[150px] lg:px-10 lg:pb-[40px] lg:pt-[48px]">
+            <h2 className="text-[26px] font-extrabold sm:text-[30px] lg:text-[34px]">
               Still Confused?
             </h2>
 
-            <p className="mx-auto mt-4 max-w-[900px] text-[13px] font-extrabold leading-6 sm:text-[15px] lg:text-[16px]">
+            <p className="mx-auto mt-4 max-w-[900px] text-[14px] font-semibold leading-6 sm:text-[15px] lg:text-[16px]">
               Compare ESGCI Online University with Top World Renowned
               Universities
             </p>
@@ -94,15 +94,15 @@ export default function Footer() {
               type="button"
               onClick={openComparePage}
               aria-label="Compare universities"
-              className="absolute -bottom-[38px] left-1/2 flex h-[76px] w-[76px] -translate-x-1/2 cursor-pointer items-center justify-center rounded-full border-[8px] border-white bg-white shadow-[0_3px_12px_rgba(0,0,0,0.12)] transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#00ad4e]/30 sm:-bottom-[40px] sm:h-[80px] sm:w-[80px]"
+              className="absolute -bottom-[38px] left-1/2 flex h-[70px] w-[70px] -translate-x-1/2 cursor-pointer items-center justify-center rounded-full border-white bg-white shadow-[0_3px_12px_rgba(0,0,0,0.12)] transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-[#00ad4e]/30 sm:-bottom-[40px]"
             >
               <Image
-                src={ArrowGif}
+                src={getAssetPath("/esgci/assets/img/arrow.gif")}
                 alt="Open university comparison"
                 width={58}
                 height={58}
                 unoptimized
-                className="h-[58px] w-[58px] object-contain sm:h-[62px] sm:w-[62px]"
+                className="h-[58px] w-[58px] object-contain sm:h-[70px] sm:w-[70px] rounded-full"
               />
             </button>
           </div>
@@ -117,7 +117,7 @@ export default function Footer() {
             type="button"
             onClick={openComparePage}
             aria-label="Open university comparison page"
-            className="mx-auto block w-full max-w-[980px] cursor-pointer transition-transform duration-300 hover:scale-[1.01]"
+            className="mx-auto block w-full max-w-[800px] cursor-pointer"
           >
             <Image
               src={DesLogo}

@@ -2,13 +2,12 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
-import { Download, X } from "lucide-react";
+import { Download } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
-import FormWrapper, {
-  type FormCourseOption,
-} from "@/components/forms/FormWrapper";
+import FormWrapper from "@/components/forms/FormWrapper";
 import { getAssetPath } from "@/lib/utils";
+import { ESGCI_COURSE_OPTIONS } from "../../constants";
 
 /*
 |--------------------------------------------------------------------------
@@ -27,19 +26,6 @@ type FormType = "apply" | "curriculum" | null;
 
 /*
 |--------------------------------------------------------------------------
-| Course Options
-|--------------------------------------------------------------------------
-*/
-
-const ESGCI_COURSE_OPTIONS: FormCourseOption[] = [
-  {
-    value: "ESGCI Online Doctor of Business Administration",
-    label: "ESGCI Online Doctor of Business Administration",
-  },
-];
-
-/*
-|--------------------------------------------------------------------------
 | Applicant Cards
 |--------------------------------------------------------------------------
 */
@@ -50,21 +36,21 @@ const applicantCards: ApplicantCard[] = [
     title: "Experienced Professionals",
     description:
       "Professionals holding a Master’s degree with relevant work experience can pursue the ESGCI Online DBA to gain advanced business knowledge and develop leadership skills.",
-    image: "/assets/img/esgci-experienced-professionals.webp",
+    image: "/esgci/assets/img/experienced-professionals.webp",
   },
   {
     id: 2,
     title: "Bachelor’s Degree Holders",
     description:
       "Candidates with a Bachelor’s degree and at least three years of professional experience are eligible, providing an opportunity to enhance expertise and advance their careers.",
-    image: "/assets/img/esgci-bachelors-degree-holders.webp",
+    image: "/esgci/assets/img/bachelors-degree-holders.webp",
   },
   {
     id: 3,
     title: "Aspiring Researchers and Educators",
     description:
       "Individuals aiming to teach, publish research, or take on high-level consulting and executive roles can benefit from the globally recognized ESGCI Online DBA program.",
-    image: "/assets/img/esgci-researchers-educators.webp",
+    image: "/esgci/assets/img/aspiring-researchers-and-educators.webp",
   },
 ];
 
@@ -150,21 +136,21 @@ export function OverviewAndEligibility() {
 
   return (
     <>
-      <section id="about" className="bg-white py-10 sm:py-12 lg:py-[38px]">
+      <section id="overview" className="bg-white py-10 sm:py-12 lg:py-[38px]">
         <Container>
           {/* ========================================================
               Program Overview
           ======================================================== */}
 
           <div className="mx-auto max-w-[1160px] text-center">
-            <h2 className="text-[27px] font-black leading-[1.15] tracking-[-0.025em] text-black sm:text-[32px] lg:text-[36px]">
+            <h2 className="text-[27px] font-extrabold leading-[1.15] tracking-[-0.025em] text-black sm:text-[32px] lg:text-[32px]">
               Overview of{" "}
-              <span className="bg-[#eef8f1] px-1 text-[#009844]">
-                ESGCI Online DBA Program
+              <span className="text-[#009844]">
+                ESCGI Online DBA Program
               </span>
             </h2>
 
-            <p className="mx-auto mt-5 max-w-[1130px] text-[13px] font-medium leading-[1.5] text-black sm:text-[14px] lg:text-[14px]">
+            <p className="mx-auto mt-5 max-w-[1130px] text-[13px] font-medium leading-[1.5] text-black sm:text-[14px] lg:text-[13px]">
               The ESGCI Online DBA helps professionals gain advanced skills in
               business and management. The 36-month program includes foundation,
               leadership, and dissertation phases, giving a clear path for
@@ -181,7 +167,7 @@ export function OverviewAndEligibility() {
             <button
               type="button"
               onClick={openCurriculumForm}
-              className="mt-5 inline-flex min-h-[42px] items-center justify-center gap-2 rounded-[6px] bg-[#ffe500] px-5 py-2.5 text-[15px] font-bold text-black transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#f2d900] hover:shadow-md"
+              className="mt-5 inline-flex items-center justify-center gap-2 rounded-[6px] bg-[#ffe500] px-5 py-2.5 text-[15px] font-bold text-black transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-[#f2d900] hover:shadow-md"
             >
               Get Curriculum
               <Download size={18} strokeWidth={3} />
@@ -193,9 +179,9 @@ export function OverviewAndEligibility() {
           ======================================================== */}
 
           <div className="mt-12 sm:mt-14 lg:mt-[46px]">
-            <h2 className="text-center text-[28px] font-black leading-[1.15] tracking-[-0.025em] text-black sm:text-[33px] lg:text-[36px]">
+            <h2 className="text-center text-[28px] font-extrabold leading-[1.15] tracking-[-0.025em] text-black sm:text-[33px] lg:text-[32px]">
               Who Can Apply for the{" "}
-              <span className="bg-[#eef8f1] px-1 text-[#009844]">
+              <span className="text-[#009844]">
                 ESGCI Online DBA
               </span>
             </h2>
@@ -224,13 +210,13 @@ export function OverviewAndEligibility() {
             subtitle="Start your ESGCI Online DBA application"
             onClose={closeForm}
             courseOptions={ESGCI_COURSE_OPTIONS}
-            defaultCourse="ESGCI Online Doctor of Business Administration"
-            hideCourseField
+            defaultCourse=""
             formNameOverride={`ESGCI Apply Form - ${selectedApplicant.title}`}
-            sourceOverride="ESGCI Eligibility Section"
-            utmSourceFallback="ESGCI Organic"
-            utmMediumFallback="ESGCI Apply Now"
+            sourceOverride="ESGCI LP"
+            utmSourceFallback="Organic"
+            utmMediumFallback="ESGCI_Organic"
             submitButtonText="Submit Application"
+            redirectUrl="/thank-you"
           />
         </FormModal>
       )}
@@ -243,16 +229,18 @@ export function OverviewAndEligibility() {
         <FormModal title="Get Curriculum" onClose={closeForm}>
           <FormWrapper
             title="Get Curriculum"
-            subtitle="Fill your details to receive the ESGCI Online DBA curriculum"
+            subtitle="Please enter your details to download the curriculum:"
             onClose={closeForm}
             courseOptions={ESGCI_COURSE_OPTIONS}
-            defaultCourse="ESGCI Online Doctor of Business Administration"
-            hideCourseField
-            formNameOverride="ESGCI Curriculum Download Form"
-            sourceOverride="ESGCI Curriculum"
-            utmSourceFallback="ESGCI Organic"
-            utmMediumFallback="ESGCI Curriculum Form"
-            submitButtonText="Get Curriculum"
+            defaultCourse=""
+            formNameOverride="ESGCI Get Curriculum Form"
+            sourceOverride="ESGCI LP"
+            utmSourceFallback="Organic"
+            utmMediumFallback="ESGCI_Organic"
+            submitButtonText="Submit"
+            isBrochureForm
+            brochureUrl="/esgci/assets/brochures/main_brochure.pdf"
+            redirectUrl="/thank-you"
           />
         </FormModal>
       )}
@@ -262,7 +250,7 @@ export function OverviewAndEligibility() {
 
 /*
 |--------------------------------------------------------------------------
-| Applicant Card
+| Applicant Card Item
 |--------------------------------------------------------------------------
 */
 
@@ -273,33 +261,33 @@ type ApplicantCardItemProps = {
 
 function ApplicantCardItem({ applicant, onApply }: ApplicantCardItemProps) {
   return (
-    <article className="flex h-full flex-col overflow-hidden bg-[#eeeeee]">
-      {/* Applicant Image */}
-      <div className="relative h-[188px] w-full overflow-hidden sm:h-[210px] lg:h-[188px]">
+    <article className="group flex flex-col overflow-hidden rounded-[16px] bg-[#f8fafc] border border-gray-300 shadow-sm transition-shadow duration-300 hover:shadow-md">
+      {/* Image */}
+      <div className="relative h-[184px] w-full shrink-0 overflow-hidden bg-gray-200">
         <Image
           src={getAssetPath(applicant.image)}
           alt={applicant.title}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover object-center transition-transform duration-500 hover:scale-105"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className="object-cover object-center transition-transform duration-500 ease-in-out group-hover:scale-105"
         />
       </div>
 
-      {/* Card Content */}
-      <div className="flex flex-1 flex-col px-5 pb-5 pt-4">
-        <h3 className="text-[18px] font-black leading-[1.2] text-black lg:text-[18px]">
+      {/* Content */}
+      <div className="flex flex-1 flex-col px-6 py-5">
+        <h3 className="text-[17px] font-bold leading-tight text-black sm:text-[16px]">
           {applicant.title}
         </h3>
 
-        <p className="mt-3 text-[13px] font-medium leading-[1.45] text-black sm:text-[14px]">
+        <p className="mt-3 flex-1 text-[13px] font-medium leading-[1.48] text-gray-700 sm:text-[13px]">
           {applicant.description}
         </p>
 
-        <div className="mt-auto border-t border-[#9d9d9d] pt-3">
+        <div className="mt-5 border-t border-gray-200 pt-4">
           <button
             type="button"
             onClick={onApply}
-            className="inline-flex min-h-[38px] items-center justify-center rounded-[5px] bg-[#009844] px-5 py-2 text-[15px] font-bold text-white transition-all duration-200 hover:bg-[#007f39] hover:shadow-md"
+            className="inline-flex items-center justify-center rounded-[5px] bg-[#009844] px-5 py-2 text-[15px] font-bold text-white transition-all duration-300 ease-in-out hover:bg-[#007f39] hover:shadow-md"
           >
             Apply Now
           </button>
@@ -335,15 +323,6 @@ function FormModal({ title, children, onClose }: FormModalProps) {
         onMouseDown={(event) => event.stopPropagation()}
         className="relative max-h-[92vh] w-full max-w-[420px] overflow-y-auto rounded-xl bg-white p-5 shadow-2xl sm:p-7"
       >
-        <button
-          type="button"
-          aria-label="Close form"
-          onClick={onClose}
-          className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-[#eaf8f0] text-[#009844] transition-colors hover:bg-[#d5f1e1]"
-        >
-          <X size={20} />
-        </button>
-
         {children}
       </div>
     </div>

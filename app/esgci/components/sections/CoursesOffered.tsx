@@ -2,13 +2,7 @@
 
 import Image from "next/image";
 import Autoplay from "embla-carousel-autoplay";
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  type ReactNode,
-} from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { X } from "lucide-react";
 
 import { Container } from "@/components/ui/Container";
@@ -18,10 +12,9 @@ import {
   CarouselItem,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import FormWrapper, {
-  type FormCourseOption,
-} from "@/components/forms/FormWrapper";
+import FormWrapper from "@/components/forms/FormWrapper";
 import { getAssetPath } from "@/lib/utils";
+import { ESGCI_COURSE_OPTIONS } from "../../constants";
 
 /*
 |--------------------------------------------------------------------------
@@ -40,19 +33,6 @@ type ActiveForm = "apply" | null;
 
 /*
 |--------------------------------------------------------------------------
-| ESGCI Course Options
-|--------------------------------------------------------------------------
-*/
-
-const ESGCI_COURSE_OPTIONS: FormCourseOption[] = [
-  {
-    value: "ESGCI Online Doctor of Business Administration",
-    label: "ESGCI Online Doctor of Business Administration",
-  },
-];
-
-/*
-|--------------------------------------------------------------------------
 | Why Choose Cards
 |--------------------------------------------------------------------------
 */
@@ -60,45 +40,45 @@ const ESGCI_COURSE_OPTIONS: FormCourseOption[] = [
 const whyChooseItems: WhyChooseItem[] = [
   {
     id: 1,
-    title: "Global Exposure in Paris",
+    title: "Widely Accepted Credit System",
     description:
-      "Take part in an optional five-day Paris immersion, learning international business practices and connecting with renowned faculty and peers.",
-    image: "/assets/img/esgci-global-exposure-paris.webp",
+      "Earn 180 ECTS credits recognized across Europe and globally, giving your online DBA degree strong academic and professional credibility.",
+    image: "/esgci/assets/img/widely-accepted-credit-system.webp",
   },
   {
     id: 2,
-    title: "Fully Flexible Online Format",
+    title: "Global Exposure in Paris",
     description:
-      "Pursue your doctorate entirely online, allowing self-paced, focused research-based learning while continuing full-time work without career disruption.",
-    image: "/assets/img/esgci-flexible-online-format.webp",
+      "Take part in an optional five-day Paris immersion, learning international business practices and connecting with renowned faculty and peers.",
+    image: "/esgci/assets/img/global-exposure-in-paris.webp",
   },
   {
     id: 3,
-    title: "Cost-Effective and Flexible Payments",
+    title: "Fully Flexible Online Format",
     description:
-      "The programme offers transparent pricing and flexible instalment options designed to support learners from different financial situations.",
-    image: "/assets/img/esgci-flexible-payment.webp",
+      "Pursue your doctorate entirely online, allowing self-paced, focused research based learning while continuing full-time work without career disruption.",
+    image: "/esgci/assets/img/fully-flexible-online-format.webp",
   },
   {
     id: 4,
-    title: "Internationally Recognized Degree",
+    title: "Cost-Effective and Flexible Payment",
     description:
-      "Earn a globally recognized European doctoral qualification supported by ESGCI's established academic reputation and French recognition.",
-    image: "/assets/img/esgci-recognized-degree.webp",
+      "The program costs INR 8,50,000 with competitive pricing and offers flexible installment options to suit various financial situations.",
+    image: "/esgci/assets/img/cost-effective-and-flexible-payment.webp",
   },
   {
     id: 5,
-    title: "Learn From Experienced Faculty",
+    title: "Research-Oriented Learning",
     description:
-      "Receive guidance from experienced academic faculty and business professionals throughout coursework, research, and dissertation development.",
-    image: "/assets/img/esgci-expert-faculty.webp",
+      "Gain access to advanced tools like CliftonStrengths™ and conduct practical research addressing real-world business challenges to enhance leadership skills.",
+    image: "/esgci/assets/img/research-oriented-learning-resources.webp",
   },
   {
     id: 6,
-    title: "Career Growth and Leadership",
+    title: "Experienced and Diverse Cohort",
     description:
-      "Strengthen strategic leadership, business research, consulting, and decision-making skills for senior management and executive opportunities.",
-    image: "/assets/img/esgci-career-growth.webp",
+      "Collaborate with seasoned professionals from multiple industries, sharing real-world insights and expanding your global professional network effectively.",
+    image: "/esgci/assets/img/Diverse-cohort.webp",
   },
 ];
 
@@ -209,12 +189,12 @@ export function WhyChooseESGCI() {
 
   return (
     <>
-      <section id="why-choose" className="bg-white py-10 sm:py-12 lg:py-[42px]">
+      <section id="why-choose" className="bg-[#f8fafc] py-10 sm:py-12 lg:py-[50px] border-t border-b border-gray-100">
         <Container>
           <div className="mx-auto max-w-[1140px]">
             {/* Heading */}
-            <div className="mb-6 text-center sm:mb-7">
-              <h2 className="text-[27px] font-black leading-tight tracking-[-0.03em] text-black sm:text-[33px] lg:text-[36px]">
+            <div className="mb-8 text-center">
+              <h2 className="text-[27px] font-extrabold leading-tight tracking-[-0.03em] text-[#009c43] sm:text-[33px] lg:text-[32px]">
                 Why Choose ESGCI Online DBA Program
               </h2>
             </div>
@@ -253,7 +233,7 @@ export function WhyChooseESGCI() {
             </div>
 
             {/* Carousel Dots */}
-            <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
               {Array.from({
                 length: slideCount,
               }).map((_, index) => (
@@ -262,11 +242,10 @@ export function WhyChooseESGCI() {
                   type="button"
                   aria-label={`Go to slide ${index + 1}`}
                   onClick={() => carouselApi?.scrollTo(index)}
-                  className={`h-[9px] rounded-full transition-all duration-200 ${
-                    selectedIndex === index
-                      ? "w-[24px] bg-[#009844]"
-                      : "w-[9px] bg-[#c8c8c8] hover:bg-[#8d8d8d]"
-                  }`}
+                  className={`h-[9px] rounded-full transition-all duration-300 ease-in-out ${selectedIndex === index
+                    ? "w-[24px] bg-[#009844]"
+                    : "w-[9px] bg-[#c8c8c8] hover:bg-[#8d8d8d]"
+                    }`}
                 />
               ))}
             </div>
@@ -274,24 +253,21 @@ export function WhyChooseESGCI() {
         </Container>
       </section>
 
-      {/* Apply Form Modal */}
+      {/* Apply Form Modal Overlay */}
       {activeForm === "apply" && selectedItem && (
-        <WhyChooseFormModal
-          title={`Apply for ${selectedItem.title}`}
-          onClose={closeForm}
-        >
+        <WhyChooseFormModal title="Apply Now" onClose={closeForm}>
           <FormWrapper
-            title="Apply Now"
-            subtitle="Start your ESGCI Online DBA application"
+            title="Admission Open"
+            subtitle="Academic Experts will assist you!"
             onClose={closeForm}
             courseOptions={ESGCI_COURSE_OPTIONS}
-            defaultCourse="ESGCI Online Doctor of Business Administration"
-            hideCourseField
+            defaultCourse=""
             formNameOverride={`ESGCI Why Choose Apply Form - ${selectedItem.title}`}
-            sourceOverride="ESGCI Why Choose Section"
-            utmSourceFallback="ESGCI Organic"
-            utmMediumFallback={selectedItem.title}
-            submitButtonText="Submit Application"
+            sourceOverride="ESGCI LP"
+            utmSourceFallback="Organic"
+            utmMediumFallback="ESGCI_Organic"
+            submitButtonText="Submit"
+            redirectUrl="/thank-you"
           />
         </WhyChooseFormModal>
       )}
@@ -312,35 +288,35 @@ type WhyChooseCardProps = {
 
 function WhyChooseCard({ item, onApply }: WhyChooseCardProps) {
   return (
-    <article className="group flex h-[360px] w-full flex-col overflow-hidden bg-[#eeeeee]">
+    <article className="group flex h-[380px] lg:h-[360px] w-full flex-col overflow-hidden bg-white border border-gray-400 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300">
       {/* Image */}
-      <div className="relative h-[188px] w-full shrink-0 overflow-hidden bg-gray-200">
+      <div className="relative h-[188px] w-full shrink-0 overflow-hidden bg-gray-150">
         <Image
           src={getAssetPath(item.image)}
           alt={item.title}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+          className="object-cover object-center transition-transform duration-500 ease-in-out group-hover:scale-105"
         />
       </div>
 
       {/* Content */}
-      <div className="flex min-h-0 flex-1 flex-col px-5 pb-5 pt-3">
-        <h3 className="line-clamp-2 text-[17px] font-black leading-[1.25] text-black sm:text-[18px]">
+      <div className="flex min-h-0 flex-1 flex-col px-5 pb-5 pt-4">
+        <h3 className="line-clamp-2 text-[17px] font-bold leading-[1.25] text-black sm:text-[16px]">
           {item.title}
         </h3>
 
-        <p className="mt-2 line-clamp-3 text-[13px] font-medium leading-[1.45] text-black sm:text-[14px]">
+        <p className="mt-2 line-clamp-3 text-[13px] font-medium leading-[1.45] text-gray-700 sm:text-[13px]">
           {item.description}
         </p>
 
         <div className="mt-auto">
-          <div className="mb-3 h-px w-full bg-[#a7a7a7]" />
+          <div className="mb-3 h-px w-full bg-gray-200" />
 
           <button
             type="button"
             onClick={onApply}
-            className="inline-flex min-h-[38px] items-center justify-center rounded-[5px] bg-[#009844] px-5 py-2 text-[14px] font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#007d38] hover:shadow-md"
+            className="inline-fle items-center justify-center rounded-[5px] bg-[#009844] px-5 py-2 text-[14px] font-bold text-white transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:bg-[#007d38] hover:shadow-md"
           >
             Apply Now
           </button>
@@ -380,15 +356,6 @@ function WhyChooseFormModal({
         onMouseDown={(event) => event.stopPropagation()}
         className="relative max-h-[92vh] w-full max-w-[420px] overflow-y-auto rounded-xl bg-white p-5 shadow-2xl sm:p-7"
       >
-        <button
-          type="button"
-          aria-label="Close form"
-          onClick={onClose}
-          className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-[#e9f8ef] text-[#009844] transition-colors hover:bg-[#d4f0df]"
-        >
-          <X size={20} />
-        </button>
-
         {children}
       </div>
     </div>

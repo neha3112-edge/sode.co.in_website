@@ -72,31 +72,29 @@ const applySteps: ApplyStep[] = [
 
 const faqs: FaqItem[] = [
   {
-    question: "What are the IIIT Bangalore online courses?",
+    question: "Is the ESGCI Online DBA recognized internationally?",
     answer:
-      "They are industry-focused online programmes from IIIT Bangalore, designed for working professionals with flexible learning, projects, and recognised certification.",
+      "Yes, ESGCI is recognized by the French government and is part of Galileo Global Education, making its DBA globally respected.",
   },
   {
-    question: "Do IIIT Bangalore certification courses help in career growth?",
+    question: "Who is eligible for the ESGCI Online DBA?",
     answer:
-      "Yes. These programmes are designed to strengthen practical skills, improve professional credibility, and help learners prepare for career advancement in emerging technology and leadership roles.",
+      "Candidates must have a master’s degree or an MBA and relevant professional experience in management or business.",
   },
   {
-    question:
-      "Is IIIT Bangalore artificial intelligence taught with practical training?",
+    question: "Can working professionals enroll in the ESGCI Online DBA?",
     answer:
-      "Yes. The artificial intelligence programmes include hands-on projects, assignments, case studies, tools, and real-world applications so learners can build practical experience.",
+      "Yes, the program is designed for professionals who want to advance their career while continuing to work.",
   },
   {
-    question: "Do IIIT Bangalore data science programmes include projects?",
+    question: "Can I study ESGCI Online DBA from anywhere in the world?",
     answer:
-      "Yes. Data science programmes typically include practical projects, datasets, analytical exercises, machine learning applications, and capstone-based learning.",
+      "Yes, the program is fully online, allowing students to learn and submit research from anywhere globally.",
   },
   {
-    question:
-      "Is IIM Udaipur artificial intelligence included in the CTO programme?",
+    question: "What career benefits does a DBA from ESGCI provide?",
     answer:
-      "The CTO and AI leadership track includes leadership-focused learning and may involve academic or industry collaboration elements depending on the selected programme structure.",
+      "Graduates can pursue consulting, university teaching, research publication, board advisory roles, and executive leadership positions. The DBA is a rare qualification, giving an edge over the 250,000 annual MBA graduates globally.",
   },
 ];
 
@@ -110,15 +108,15 @@ export function ApplyAndFaq() {
   return (
     <>
       {/* How To Apply Section */}
-      <section id="how-to-apply" className="bg-white py-14 sm:py-16 lg:py-20">
+      <section id="how-to-apply" className="bg-white py-14 sm:py-16">
         <Container className="max-w-[1480px]">
           <div className="text-center">
-            <h2 className="text-2xl font-bold leading-tight text-[#1d3d82] sm:text-3xl lg:text-[34px]">
-              How To Apply For IIIT Bangalore University Online Courses
+            <h2 className="text-2xl font-bold leading-tight text-[#009c43] sm:text-3xl lg:text-[34px]">
+              How to Apply for ESCGI Online University Online Courses
             </h2>
 
             <p className="mx-auto mt-3 max-w-4xl text-sm leading-6 text-gray-600 sm:text-base">
-              Students can easily enroll in IIIT Bangalore University Online
+              Students can easily enroll in ESCGI Online University Online
               courses. Candidates can conveniently apply by selecting their
               desired program. Follow these steps to secure admission in the
               university.
@@ -135,13 +133,13 @@ export function ApplyAndFaq() {
 
       {/* FAQ Section */}
       <section
-        id="faq"
+        id="faqs"
         className="bg-white pb-16 pt-8 sm:pb-20 sm:pt-10 lg:pb-24"
       >
         <Container>
           <div className="text-center">
-            <h2 className="text-3xl font-extrabold leading-tight text-[#075583] sm:text-4xl">
-              FAQ-Frequently Asked Question
+            <h2 className="text-2xl font-extrabold leading-tight text-[#009c43] sm:text-4xl">
+              FAQ-Frequently Asked Questions
             </h2>
           </div>
 
@@ -202,17 +200,16 @@ type FaqAccordionItemProps = {
 function FaqAccordionItem({ faq, isOpen, onToggle }: FaqAccordionItemProps) {
   return (
     <div
-      className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
-        isOpen ? "border-transparent bg-[#f2f2f2]" : "border-gray-300 bg-white"
-      }`}
+      className={`overflow-hidden rounded-2xl border transition-all duration-300 ease-in-out ${isOpen ? "border-transparent bg-[#f2f2f2]" : "border-gray-300 bg-white"
+        }`}
     >
       <button
         type="button"
         onClick={onToggle}
         aria-expanded={isOpen}
-        className="flex w-full items-center gap-4 px-5 py-4 text-left sm:px-6"
+        className="flex w-full items-center gap-4 px-5 py-4 text-left sm:px-6 cursor-pointer"
       >
-        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-[#075583] text-white">
+        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-[#009c43] text-white">
           {isOpen ? (
             <Minus size={14} strokeWidth={3} />
           ) : (
@@ -220,15 +217,14 @@ function FaqAccordionItem({ faq, isOpen, onToggle }: FaqAccordionItemProps) {
           )}
         </span>
 
-        <span className="text-sm font-bold text-[#075583] sm:text-base">
+        <span className="text-sm font-bold text-black/80 sm:text-base">
           {faq.question}
         </span>
       </button>
 
       <div
-        className={`grid transition-all duration-300 ${
-          isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-        }`}
+        className={`grid transition-all duration-300 ease-in-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+          }`}
       >
         <div className="overflow-hidden">
           <p className="px-5 pb-6 pl-14 text-sm leading-6 text-gray-600 sm:px-6 sm:pb-7 sm:pl-16 sm:text-base">
