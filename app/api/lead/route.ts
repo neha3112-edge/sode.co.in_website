@@ -445,53 +445,6 @@ export async function POST(req: Request) {
 
     /*
     |--------------------------------------------------------------------------
-    | 4. Submit selected leads to Google Sheets
-    |--------------------------------------------------------------------------
-    */
-
-    const shouldSubmitToGoogleSheets =
-      finalPayload.source === "IIITB LP" ||
-      finalPayload.form_name.includes("IIITB") ||
-      finalPayload.form_name.includes("Coupon Form") ||
-      finalPayload.form_name.includes("Compare University Form");
-
-    if (shouldSubmitToGoogleSheets) {
-      try {
-        console.log("Submitting lead to IIITB Google Sheets...");
-
-        const googleSheetsResponse = await fetch(
-          "https://script.google.com/macros/s/AKfycbwCXWFhWQAxt0tR-JOK-6cGBK4MjkiDGSYsxUlcVWjlpJeqJKv5V6a0fm7i9EZFeTV7hw/exec",
-          {
-            method: "POST",
-
-            headers: {
-              "Content-Type": "application/json",
-            },
-
-            body: JSON.stringify(finalPayload),
-
-            cache: "no-store",
-          },
-        );
-
-        if (!googleSheetsResponse.ok) {
-          console.error(
-            "Google Sheets error:",
-            await googleSheetsResponse.text(),
-          );
-        } else {
-          console.log("Lead successfully submitted to Google Sheets");
-        }
-      } catch (googleSheetsError) {
-        console.error(
-          "Failed to send lead to Google Sheets:",
-          googleSheetsError,
-        );
-      }
-    }
-
-    /*
-    |--------------------------------------------------------------------------
     | Success response
     |--------------------------------------------------------------------------
     */
