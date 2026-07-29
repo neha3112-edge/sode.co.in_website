@@ -1,5 +1,3 @@
-// app/layout.tsx
-
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Newsreader, Playfair_Display, Poppins } from "next/font/google";
@@ -29,15 +27,18 @@ const ORGANIZATION_LOGO = `${SITE_URL}/assets/img/sode_header_logo.png`;
 const FAVICON_PATH = "/assets/img/favicon.ico";
 
 /*
-  Existing GTM ko preserve kiya gaya hai.
+   Existing GTM ko preserve kiya gaya hai.
 */
 const GTM_ID = "GTM-567GP8S9";
 
 /*
-  Existing dono Google Ads IDs preserve kiye hain.
-  User ke provided code ka AW-17946162864 bhi included hai.
+   Sabhi Google Ads IDs (Dono purani + Nayi AW-18357489498) preserve ki hain.
 */
-const GOOGLE_ADS_IDS = ["AW-17917271919", "AW-17946162864"];
+const GOOGLE_ADS_IDS = [
+  "AW-17917271919",
+  "AW-17946162864",
+  "AW-18357489498",
+];
 
 /* =========================================================
    GOOGLE FONTS
@@ -488,7 +489,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
         <Script
           id="google-gtag-loader"
-          src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_IDS[1]}`}
+          src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_IDS[2]}`}
           strategy="afterInteractive"
         />
 
@@ -510,8 +511,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
               gtag('js', new Date());
 
               ${GOOGLE_ADS_IDS.map(
-              (googleAdsId) => `gtag('config', '${googleAdsId}');`,
-            ).join("\n")}
+                (googleAdsId) => `gtag('config', '${googleAdsId}');`,
+              ).join("\n")}
             `,
           }}
         />
