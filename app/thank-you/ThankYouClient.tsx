@@ -51,15 +51,18 @@ declare global {
    SODE IIIT Bangalore conversion
 
    lp:
-   SODE main landing-page conversion
+   SODE main landing-page conversion (Updated with AW-18357489498)
 ========================================================= */
 
-const GOOGLE_ADS_ID = "AW-17946162864";
+const GOOGLE_ADS_ID = "AW-18357489498";
 
-const GOOGLE_ADS_CONVERSION_LABELS: Record<ConversionSource, string> = {
-  iimk: "AW-17946162864/M_ZICKbCrNAcELDtsu1C",
-  iiitb: "AW-17946162864/j5BSCL-P3sgcELDtsu1C",
-  lp: "AW-17946162864/sLquCMiuu8YcELDtsu1C",
+const GOOGLE_ADS_CONVERSION_LABELS: Record<ConversionSource, string[]> = {
+  iimk: ["AW-17946162864/M_ZICKbCrNAcELDtsu1C"],
+  iiitb: ["AW-17946162864/j5BSCL-P3sgcELDtsu1C"],
+  lp: [
+    "AW-17946162864/sLquCMiuu8YcELDtsu1C",
+    "AW-18357489498/pEA0COaEpNgcENqexLFE",
+  ],
 };
 
 /* =========================================================
@@ -75,7 +78,8 @@ export default function ThankYouClient({
   const [brochureOpened, setBrochureOpened] = useState(false);
   const [isClientReady, setIsClientReady] = useState(false);
   const [brochureUrl, setBrochureUrl] = useState<string>("");
-  const [resolvedConversionSource, setResolvedConversionSource] = useState<ConversionSource>(conversionSource);
+  const [resolvedConversionSource, setResolvedConversionSource] =
+    useState<ConversionSource>(conversionSource);
 
   /*
    * React Strict Mode development me effects ko dobara run kar sakta hai.
@@ -108,9 +112,13 @@ export default function ThankYouClient({
       }
 
       // Read stored conversionSource
-      const storedConversionSource = sessionStorage.getItem("thankYouConversionSource");
+      const storedConversionSource = sessionStorage.getItem(
+        "thankYouConversionSource",
+      );
       if (storedConversionSource) {
-        setResolvedConversionSource(storedConversionSource as ConversionSource);
+        setResolvedConversionSource(
+          storedConversionSource as ConversionSource,
+        );
       }
     } catch (error) {
       console.error("Unable to read brochure session:", error);
@@ -143,7 +151,7 @@ export default function ThankYouClient({
     if (conversionSent.current) {
       return;
     }
-    const sendTo = GOOGLE_ADS_CONVERSION_LABELS[resolvedConversionSource];
+    const sendToLabels = GOOGLE_ADS_CONVERSION_LABELS[resolvedConversionSource];
     const conversionSessionKey = `googleAdsConversionSent:${resolvedConversionSource}`;
     try {
       const alreadySent =
@@ -166,8 +174,10 @@ export default function ThankYouClient({
         window.dataLayer.push(args);
       };
 
-    window.gtag("event", "conversion", {
-      send_to: sendTo,
+    sendToLabels.forEach((sendTo) => {
+      window.gtag!("event", "conversion", {
+        send_to: sendTo,
+      });
     });
 
     try {
