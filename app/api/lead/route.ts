@@ -237,12 +237,12 @@ export async function POST(req: Request) {
     |--------------------------------------------------------------------------
     */
 
-    const secondaryCrmUrl = process.env.SECONDARY_CRM_URL;
+    const secondaryCrmUrl = process.env.PRIMARY_CRM_URL;
 
-    const secondaryCrmApiKey = process.env.SECONDARY_CRM_API_KEY;
+    const secondaryCrmApiKey = process.env.PRIMARY_CRM_API_KEY;
 
     if (!secondaryCrmUrl || !secondaryCrmApiKey) {
-      console.error("SECONDARY_CRM_URL or SECONDARY_CRM_API_KEY is missing");
+      console.error("PRIMARY_CRM_URL or PRIMARY_CRM_API_KEY is missing");
 
       return NextResponse.json(
         {
